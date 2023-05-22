@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Dtos\" />
+    <Folder Include="IServices\AdminServices\UserServices\Commands\" />
+    <Folder Include="IServices\AdminServices\UserServices\Queries\" />
+    <Folder Include="Services\AdminServices\UserServices\Commands\" />
+    <Folder Include="Services\AdminServices\UserServices\Queries\" />
+  </ItemGroup>
+
+</Project>
