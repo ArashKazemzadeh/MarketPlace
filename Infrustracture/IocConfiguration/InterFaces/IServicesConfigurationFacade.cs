@@ -24,7 +24,7 @@ using Application.IServices.SellerServices.ProductServices.Queries;
 using Application.IServices.SellerServices.ProfileServices.Commands;
 using Application.IServices.SellerServices.ProfileServices.Queries;
 
-namespace Infrustracture.FacadePatternIOC;
+namespace Infrustracture.IocConfiguration.IInterFaces;
 
 public interface IServicesConfigurationFacade
 {

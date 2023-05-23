@@ -1,9 +1,8 @@
 using Common.Mappers;
 using Infrastructure.IdentityConfigs;
-using Infrustracture.FacadePatternIOC;
 using Infrustracture.IdentityConfiguration;
-
-
+using Infrustracture.IocConfiguration.IInterFaces;
+using Infrustracture.IocConfiguration.Implimented;
 
 var builder = WebApplication.CreateBuilder(args);
 
