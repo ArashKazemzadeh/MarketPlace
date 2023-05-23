@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Application.Dtos;
 
 namespace Application.IServices.AdminServices.BoothServices.Commands
 {
     public interface IDeleteBoothAdminService
     {
+        GeneralDto Execute(int id);
     }
 }

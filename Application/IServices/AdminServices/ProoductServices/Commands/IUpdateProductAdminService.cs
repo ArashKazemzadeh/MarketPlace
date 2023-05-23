@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using ConsoleApp.Models;
 
 namespace Application.IServices.AdminServices.ProoductServices.Commands
 {
     public interface IUpdateProductAdminService
     {
+        ProductDto Execute(int id);
+
     }
 }

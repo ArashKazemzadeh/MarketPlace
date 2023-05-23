@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Application.Dtos;
+using ConsoleApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,7 @@ namespace Application.IServices.SellerServices.ProductServices.Commands
 {
     public interface IAddProductSellerService
     {
+        GeneralDto<ProductDto> Execute(ProductDto productDto,int boothId);
+
     }
 }

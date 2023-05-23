@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using Application.Dtos;
+using ConsoleApp.Models;
 
 namespace Application.IServices.CustomerServices.BoothServices.Commands
 {
     public interface IGetBoothWithSellerId
     {
+        GeneralDto<BoothDto> Execute(int id);
+
     }
 }

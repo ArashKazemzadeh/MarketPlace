@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\" />
     <Folder Include="IServices\AdminServices\UserServices\Commands\" />
     <Folder Include="IServices\AdminServices\UserServices\Queries\" />
     <Folder Include="Services\AdminServices\UserServices\Commands\" />

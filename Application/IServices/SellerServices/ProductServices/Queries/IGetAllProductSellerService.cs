@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Dtos;
+using ConsoleApp.Models;
+
 
 namespace Application.IServices.SellerServices.ProductServices.Queries
 {
     public interface IGetAllProductSellerService
     {
+       List<GeneralDto<ProductDto>>  Execute( int sellerId);
+
     }
 }
