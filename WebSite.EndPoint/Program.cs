@@ -1,5 +1,6 @@
 using Common.Mappers;
 using Infrastructure.IdentityConfigs;
+using Infrustracture.FacadePatternIOC;
 using Infrustracture.IdentityConfiguration;
 
 
@@ -26,7 +27,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 #region IOC
 builder.Services.AddScoped(typeof(ICustomMapper<,>), typeof(CustomMapper<,>));
-
+builder.Services.AddScoped<IServicesConfigurationFacade, ServicesConfigurationFacade>();
 #endregion
 var app = builder.Build();
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.IServices.CustomerServices.ProductServices.Commands
 {
-    internal interface IDeleteProductFromCartService
+    public interface IDeleteProductFromCartService
     {
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.IServices.AdminServices.BoothServices.Commands
 {
-    internal interface IDeleteBoothAdminService
+    public interface IDeleteBoothAdminService
     {
     }
 }

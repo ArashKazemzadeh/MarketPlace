@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.IServices.SellerServices.BoothServices.Queries
 {
-    internal interface IGetBoothProfileBySellerId
+    public interface IGetBoothProfileBySellerId
     {
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Application.IServices.AdminServices.CommissionServices.Queries
 {
-    internal interface IGetCommissionBySellerIdService
+    public interface IGetCommissionBySellerIdService
     {
     }
 }

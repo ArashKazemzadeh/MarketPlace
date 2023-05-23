@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.IServices.CustomerServices.BidServices.Commands
 {
-    internal interface IAddBidForAuctionService
+    public interface IAddBidForAuctionService
     {
     }
 }

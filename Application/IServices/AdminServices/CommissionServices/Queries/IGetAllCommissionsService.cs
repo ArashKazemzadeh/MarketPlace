@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.IServices.AdminServices.CommissionServices.Queries
 {
-    internal interface IGetAllCommissionsService
+    public interface IGetAllCommissionsService
     {
     }
 }

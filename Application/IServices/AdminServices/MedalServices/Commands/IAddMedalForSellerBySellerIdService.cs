@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.IServices.AdminServices.MedalServices.Commands
 {
-    internal interface IAddMedalForSellerBySellerIdService
+    public interface IAddMedalForSellerBySellerIdService
     {
     }
 }

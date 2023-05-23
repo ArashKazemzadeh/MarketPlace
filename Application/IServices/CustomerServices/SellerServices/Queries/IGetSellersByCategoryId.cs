@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.IServices.CustomerServices.SellerServices.Queries
 {
-    internal interface IGetSellersByCategoryId
+    public interface IGetSellersByCategoryId
     {
     }
 }

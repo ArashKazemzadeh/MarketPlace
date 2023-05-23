@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.IServices.CustomerServices.AuctionServices.Queries
 {
-    internal interface IGetAllAuctionsService
+    public interface IGetAllAuctionsService
     {
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.IServices.SellerServices.BoothServices.Commands
 {
-    internal interface IUpdateBoothSellerService
+    public interface IUpdateBoothSellerService
     {
     }
 }

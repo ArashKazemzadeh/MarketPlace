@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.IServices.SellerServices.ImageServices.Commands
 {
-    internal interface IAddImageForProductService
+    public interface IAddImageForProductService
     {
     }
 }

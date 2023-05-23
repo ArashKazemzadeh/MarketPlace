@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.IServices.AdminServices.ConfirmServices
 {
-    internal interface IConfirmForAddCommentService
+    public interface IConfirmForAddCommentService
     {
     }
 }

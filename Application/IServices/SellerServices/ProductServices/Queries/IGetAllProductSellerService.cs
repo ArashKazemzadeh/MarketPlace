@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.IServices.SellerServices.ProductServices.Queries
 {
-    internal interface IGetAllProductSellerService
+    public interface IGetAllProductSellerService
     {
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.IServices.AdminServices.ProoductServices.Commands
 {
-    internal interface IUpdateProductAdminService
+    public interface IUpdateProductAdminService
     {
     }
 }

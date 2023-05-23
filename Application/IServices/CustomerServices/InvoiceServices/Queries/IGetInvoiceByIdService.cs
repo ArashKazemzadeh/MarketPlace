@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.IServices.CustomerServices.InvoiceServices.Queries
 {
-    internal interface IGetInvoiceByIdService
+    public interface IGetInvoiceByIdService
     {
     }
 }

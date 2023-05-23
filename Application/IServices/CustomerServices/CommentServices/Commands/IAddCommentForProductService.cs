@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.IServices.CustomerServices.CommentServices.Commands
 {
-    internal interface IAddCommentForProductService
+    public interface IAddCommentForProductService
     {
     }
 }

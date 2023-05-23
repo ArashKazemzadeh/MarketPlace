@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.IServices.CustomerServices.ProfileServices.Commands
 {
-    internal interface IUpdateCustomerByIdService
+    public interface IUpdateCustomerByIdService
     {
     }
 }

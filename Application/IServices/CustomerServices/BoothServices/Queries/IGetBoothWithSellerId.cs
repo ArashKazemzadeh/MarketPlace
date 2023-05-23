@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.IServices.CustomerServices.BoothServices.Commands
 {
-    internal interface IGetBoothWithSellerId
+    public interface IGetBoothWithSellerId
     {
     }
 }

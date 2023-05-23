@@ -2,7 +2,7 @@
 
 namespace Application.IServices.SellerServices.ProductServices.Queries
 {
-    internal interface IFindByIdProductSellerService
+    public interface IFindByIdProductSellerService
     {
     }
 }
