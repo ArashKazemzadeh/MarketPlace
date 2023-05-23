@@ -1,13 +1,14 @@
-
+using Common.Mappers;
 using Infrastructure.IdentityConfigs;
 using Infrustracture.IdentityConfiguration;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-#region Context
+#region ContextAndIdentity
 builder.Services.AddDbContextService(builder.Configuration);
 builder.Services.AddIdentityService(builder.Configuration);
 //builder.Services.ConfigureApplicationCookie(option =>
@@ -19,7 +20,14 @@ builder.Services.AddIdentityService(builder.Configuration);
 //});
 #endregion
 
+#region AutoMapper
+builder.Services.AddAutoMapper(typeof(Program));
+#endregion
 
+#region IOC
+builder.Services.AddScoped(typeof(ICustomMapper<,>), typeof(CustomMapper<,>));
+
+#endregion
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
