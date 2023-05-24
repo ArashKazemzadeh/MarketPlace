@@ -1,8 +1,8 @@
 using Common.Mappers;
 using Infrastructure.IdentityConfigs;
 using Infrustracture.IdentityConfiguration;
-using Infrustracture.IocConfiguration.IInterFaces;
-using Infrustracture.IocConfiguration.Implimented;
+using Persistence.Repositories.FacadeRepository;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,13 +11,13 @@ builder.Services.AddControllersWithViews();
 #region ContextAndIdentity
 builder.Services.AddDbContextService(builder.Configuration);
 builder.Services.AddIdentityService(builder.Configuration);
-//builder.Services.ConfigureApplicationCookie(option =>
-//{
-//    option.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-//    option.LoginPath = "/account/login";
-//    option.AccessDeniedPath = "/Account/AccessDenied";
-//    option.SlidingExpiration = true;
-//});
+builder.Services.ConfigureApplicationCookie(option =>
+{
+    option.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+    option.LoginPath = "/account/login";
+    option.AccessDeniedPath = "/Account/AccessDenied";
+    option.SlidingExpiration = true;
+});
 #endregion
 
 #region AutoMapper
@@ -26,7 +26,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 #region IOC
 builder.Services.AddScoped(typeof(ICustomMapper<,>), typeof(CustomMapper<,>));
-builder.Services.AddScoped<IServicesConfigurationFacade, ServicesConfigurationFacade>();
+builder.Services.AddScoped<IGeneralRepository, GeneralRepository>();
 #endregion
 var app = builder.Build();
 

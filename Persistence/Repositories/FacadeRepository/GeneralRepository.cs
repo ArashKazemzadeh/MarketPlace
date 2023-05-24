@@ -1,4 +1,5 @@
-﻿using Persistence.Repositories.Optionals;
+﻿using Persistence.Contexts.SqlServer;
+using Persistence.Repositories.Optionals;
 using Persistence.Repositories.Orders;
 using Persistence.Repositories.Users;
 
@@ -6,83 +7,143 @@ namespace Persistence.Repositories.FacadeRepository
 {
     public class GeneralRepository : IGeneralRepository
     {
-        private readonly IAddressRepository _AddressRepository;
-        private readonly ISellerRepository _SellerRepository;
-        private readonly ICustomerRepository _CustomerRepository;
-        private readonly IProductsCartRepository _ProductsCartRepository;
-        private readonly IProductRepository _ProductRepository;
-        private readonly IInvoiceRepository _InvoiceRepository;
-        private readonly ICategoryRepository _CategoryRepository;
-        private readonly ICartRepository _CartRepository;
-        private readonly IBoothRepository _BoothRepository;
-        private readonly IBidRepository _BidRepository;
-        private readonly IAuctionRepository _AuctionRepository;
-        private readonly IMedalRepository _MedalRepository;
-        private readonly ICommentRepository _CommentRepository;
-        private readonly IFileForUserRepository _FileForUserRepository;
-        private readonly IImageForProductRepository _ImageForProductRepository;
+        private readonly DatabaseContext _context;
+       
 
-        public GeneralRepository(IAddressRepository addressRepository,
-            ISellerRepository sellerRepository,
-        ICustomerRepository customerRepository,
-        IProductsCartRepository productsCartRepository,
-        IProductRepository productRepository,
-        IInvoiceRepository invoiceRepository,
-        ICategoryRepository categoryRepository,
-        ICartRepository cartRepository,
-        IBoothRepository boothRepository,
-        IBidRepository bidRepository,
-        IAuctionRepository auctionRepository,
-        IMedalRepository medalRepository,
-        ICommentRepository commentRepository,
-        IFileForUserRepository fileForUserRepository,
-        IImageForProductRepository imageForProductRepository)
+        public GeneralRepository(DatabaseContext context)
         {
-            _AddressRepository = addressRepository;
-            _SellerRepository = sellerRepository;
-            _CustomerRepository = customerRepository;
-            _ProductsCartRepository = productsCartRepository;
-            _ProductRepository = productRepository;
-            _InvoiceRepository = invoiceRepository;
-            _CategoryRepository = categoryRepository;
-            _CartRepository = cartRepository;
-            _BoothRepository = boothRepository;
-            _BidRepository = bidRepository;
-            _AuctionRepository = auctionRepository;
-            _MedalRepository = medalRepository;
-            _CommentRepository = commentRepository;
-            _FileForUserRepository = fileForUserRepository;
-            _ImageForProductRepository = imageForProductRepository;
+            _context = context;
         }
 
-        public IAddressRepository AddressRepository => _AddressRepository;
+        public IAddressRepository  _AddressRepository;
 
-        public ICommentRepository CommentRepository => _CommentRepository;
+        public IAddressRepository AddressRepository
+        {
+            get
+            {
+                return _AddressRepository = _AddressRepository ?? new AddressRepository(_context);
+            }
+        }
+        public ICommentRepository _CommentRepository;
+        public ICommentRepository CommentRepository
+        {
+            get
+            {
+                return _CommentRepository = _CommentRepository ?? new CommentRepository(_context);
+            }
+        }
 
-        public IFileForUserRepository FileForUserRepository => _FileForUserRepository;
+        public IFileForUserRepository  _FileForUserRepository;
+        public IFileForUserRepository FileForUserRepository
+        {
+            get
+            {
+                return _FileForUserRepository = _FileForUserRepository ?? new FileForUserRepository(_context);
+            }
+        }
 
-        public IImageForProductRepository ImageForProductRepository => _ImageForProductRepository;
+        public IImageForProductRepository  _ImageForProductRepository;
+        public IImageForProductRepository ImageForProductRepository
+        {
+            get
+            {
+                return _ImageForProductRepository = _ImageForProductRepository ?? new ImageForProductRepository(_context);
+            }
+        }
 
-        public IMedalRepository MedalRepository => _MedalRepository;
+        public IMedalRepository   _MedalRepository;
+        public IMedalRepository MedalRepository
+        {
+            get
+            {
+                return _MedalRepository = _MedalRepository ?? new MedalRepository(_context);
+            }
+        }
 
-        public IAuctionRepository AuctionRepository => _AuctionRepository;
+        public IAuctionRepository   _AuctionRepository;
+        public IAuctionRepository AuctionRepository
+        {
+            get
+            {
+                return _AuctionRepository = _AuctionRepository ?? new AuctionRepository(_context);
+            }
+        }
 
-        public IBidRepository BidRepository => _BidRepository;
+        public IBidRepository   _BidRepository;
+        public IBidRepository BidRepository
+        {
+            get
+            {
+                return _BidRepository = _BidRepository ?? new BidRepository(_context);
+            }
+        }
 
-        public IBoothRepository BoothRepository => _BoothRepository;
+        public IBoothRepository   _BoothRepository;
+        public IBoothRepository BoothRepository
+        {
+            get
+            {
+                return _BoothRepository = _BoothRepository ?? new BoothRepository(_context);
+            }
+        }
 
-        public ICartRepository CartRepository => _CartRepository;
+        public ICartRepository   _CartRepository;
+        public ICartRepository CartRepository
+        {
+            get
+            {
+                return _CartRepository = _CartRepository ?? new CartRepository(_context);
+            }
+        }
+        public ICategoryRepository   _CategoryRepository;
+        public ICategoryRepository CategoryRepository
+        {
+            get
+            {
+                return _CategoryRepository = _CategoryRepository ?? new CategoryRepository(_context);
+            }
+        }
+        public IInvoiceRepository   _InvoiceRepository;
+        public IInvoiceRepository InvoiceRepository
+        {
+            get
+            {
+                return _InvoiceRepository = _InvoiceRepository ?? new InvoiceRepository(_context);
+            }
+        }
+        public IProductRepository   _ProductRepository;
+        public IProductRepository ProductRepository
+        {
+            get
+            {
+                return _ProductRepository = _ProductRepository ?? new ProductRepository(_context);
+            }
+        }
 
-        public ICategoryRepository CategoryRepository => _CategoryRepository;
+        public IProductsCartRepository  _ProductsCartRepository;
+        public IProductsCartRepository ProductsCartRepository
+        {
+            get
+            {
+                return _ProductsCartRepository = _ProductsCartRepository ?? new ProductsCartRepository(_context);
+            }
+        }
 
-        public IInvoiceRepository InvoiceRepository => _InvoiceRepository;
-
-        public IProductRepository ProductRepository => _ProductRepository;
-
-        public IProductsCartRepository ProductsCartRepository => _ProductsCartRepository;
-
-        public ICustomerRepository CustomerRepository => _CustomerRepository;
-
-        public ISellerRepository SellerRepository => _SellerRepository;
+        public ICustomerRepository   _CustomerRepository;
+        public ICustomerRepository CustomerRepository
+        {
+            get
+            {
+                return _CustomerRepository = _CustomerRepository ?? new CustomerRepository(_context);
+            }
+        }
+        public ISellerRepository   _SellerRepository;
+        public ISellerRepository SellerRepository
+        {
+            get
+            {
+                return _SellerRepository = _SellerRepository ?? new SellerRepository(_context);
+            }
+        }
     }
 }
