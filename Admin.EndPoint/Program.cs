@@ -1,7 +1,14 @@
+﻿using Application.Interfaces.Contexts;
+using Application.IServices.Visitors;
+using Application.Services.Visitors.SaveVisitorInfo;
+using Persistence.Contexts.MongoContext;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddTransient<IGetToDayReportService, GetToDayReportService>(); //دریافت گذارش های روزانه
+builder.Services.AddTransient(typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
 
 var app = builder.Build();
 

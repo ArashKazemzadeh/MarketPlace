@@ -42,7 +42,8 @@ namespace Application.Visitors.SaveVisitorInfo
                 },
                 PhysicalPath = request.PhysicalPath,
                 Protocol = request.Protocol,
-                ReferrerLink = request.ReferrerLink
+                ReferrerLink = request.ReferrerLink,
+                Time = DateTime.Now
             });
         }
     }
