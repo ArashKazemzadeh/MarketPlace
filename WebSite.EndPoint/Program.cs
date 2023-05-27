@@ -1,7 +1,12 @@
+using Application.Interfaces.Contexts;
+using Application.IServices.Visitors;
+using Application.Visitors.SaveVisitorInfo;
 using Common.Mappers;
 using Infrastructure.IdentityConfigs;
 using Infrustracture.IdentityConfiguration;
+using Persistence.Contexts.MongoContext;
 using Persistence.Repositories.FacadeRepository;
+using WebSite.EndPoint.Utilities.Filters;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,8 +30,11 @@ builder.Services.AddAutoMapper(typeof(Program));
 #endregion
 
 #region IOC
-builder.Services.AddScoped(typeof(ICustomMapper<,>), typeof(CustomMapper<,>));
+builder.Services.AddTransient(typeof(ICustomMapper<,>), typeof(CustomMapper<,>));
 builder.Services.AddScoped<IGeneralRepository, GeneralRepository>();
+builder.Services.AddTransient  (typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
+builder.Services.AddScoped<ISaveVisitorInfoService, SaveVisitorInfoService>();
+builder.Services.AddScoped<SaveVisitorFilter>();
 #endregion
 var app = builder.Build();
 
