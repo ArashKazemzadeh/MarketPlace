@@ -9,10 +9,6 @@ public class Customer
 {
     public int Id { get; set; }
 
-    public string? FirstName { get; set; }
-
-    public string? LastName { get; set; }
-
     public virtual ICollection<Address> Addresses { get; set; } = new List<Address>();
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 

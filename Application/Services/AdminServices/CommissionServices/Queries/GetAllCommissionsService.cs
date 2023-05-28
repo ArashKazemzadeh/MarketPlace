@@ -1,15 +1,22 @@
-﻿
+﻿using Application.IServices.AdminServices.CommissionServices.Queries;
+using Domin.IRepositories.IseparationRepository;
+namespace Application.Services.AdminServices.CommissionServices.Queries;
 
-using Application.IServices.AdminServices.CommissionServices.Queries;
-using Domin.Entitiess.Users;
-
-namespace Application.Services.AdminServices.CommissionServices.Queries
+public class GetAllCommissionsService : IGetAllCommissionsService
 {
-    public class GetAllCommissionsService : IGetAllCommissionsService
+    private readonly ISellerRepository _sellerRepository;
+
+    public GetAllCommissionsService(ISellerRepository sellerRepository)
     {
-        public List<AdminDto> Execute()
-        {
-            throw new NotImplementedException();
-        }
+        _sellerRepository = sellerRepository;
+    }
+
+    public async Task<int> Execute()
+    {
+        var sellers = await _sellerRepository.GetAllAsync();
+        int totalCommissionsAmount = sellers.Sum(seller => seller.CommissionsAmount.GetValueOrDefault());
+        return totalCommissionsAmount;
     }
 }
+
+

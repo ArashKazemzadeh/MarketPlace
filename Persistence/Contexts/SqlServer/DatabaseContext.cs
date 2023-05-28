@@ -2,16 +2,17 @@
 using Domin.Attributes;
 using Domin.Entities.Users;
 using Infrustracture.EntitiesConfiguration;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Contexts.SqlServer
 {
-    public class DatabaseContext:DbContext
+    public class DatabaseContext: IdentityDbContext<User>
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options):base(options)
         {
         }
-
+        public DbSet<User> Users { get; set; }
         #region Tables
 
         public virtual DbSet<Address> Addresses { get; set; }
@@ -77,7 +78,6 @@ namespace Persistence.Contexts.SqlServer
             modelBuilder.ApplyConfiguration(new CustomerConfig());
             modelBuilder.ApplyConfiguration(new ImageConfig());
             modelBuilder.ApplyConfiguration(new InvoiceConfig());
-            modelBuilder.ApplyConfiguration(new MedalConfig());
             modelBuilder.ApplyConfiguration(new ProductsCartConfig());
             modelBuilder.ApplyConfiguration(new ProductConfig());
             modelBuilder.ApplyConfiguration(new InvoiceConfig());

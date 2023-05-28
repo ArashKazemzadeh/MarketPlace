@@ -11,11 +11,11 @@ namespace Infrastructure.IdentityConfigs
     {
         public static IServiceCollection AddIdentityService(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<IdentityDataBaseContext>(option =>
+            services.AddDbContext<DatabaseContext>(option =>
                 option.UseSqlServer(configuration.GetConnectionString("sqlserver")));
 
             services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<IdentityDataBaseContext>()
+                .AddEntityFrameworkStores<DatabaseContext>()
                 .AddDefaultTokenProviders()
                 .AddRoles<IdentityRole>()
                 .AddErrorDescriber<CustomIdentityError>();

@@ -1,6 +1,4 @@
-﻿using Persistence.Repositories.Optionals;
-using Persistence.Repositories.Orders;
-using Persistence.Repositories.Users;
+﻿using Domin.IRepositories.IseparationRepository;
 
 namespace Persistence.Repositories.FacadeRepository;
 

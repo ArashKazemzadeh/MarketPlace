@@ -1,5 +1,7 @@
 ﻿using ConsoleApp1.Models;
+using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace Persistence.Repositories.Users
 {
@@ -13,11 +15,11 @@ namespace Persistence.Repositories.Users
             _context = context;
             _dbSet = _context.Set<Seller>();
         }
-
         public async Task<Seller> GetByIdAsync(int id)
         {
-            return await _dbSet.FindAsync(id);
+            return await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
         }
+
 
         public async Task<List<Seller>> GetAllAsync()
         {

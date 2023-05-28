@@ -18,6 +18,8 @@ public class GetToDayReportService : IGetToDayReportService
     }
     public ResultTodayReportDto Execute()
     {
+      
+
         DateTime start = DateTime.Now.Date;
         DateTime end = DateTime.Now.AddDays(1);
 
@@ -35,21 +37,7 @@ public class GetToDayReportService : IGetToDayReportService
         VisitCountDto visitPerDay = GetVisitPerDay();
 
 
-        var visitors = visitorMongoCollection.AsQueryable()
-            .OrderByDescending(p => p.Time)
-            .Take(10)
-            .Select(p => new VisitorsDto
-            {
-                Id = p.Id,
-                Browser = p.Browser.Family,
-                CurrentLink = p.CurrentLink,
-                Ip = p.Ip,
-                OperationSystem = p.OperationSystem.Family,
-                IsSpider = p.Device.IsSpider,
-                ReferrerLink = p.ReferrerLink,
-                Time = p.Time,
-                VisitorId = p.VisitorId
-            }).ToList();
+        var visitors = GetVisitors();
         return new ResultTodayReportDto
         {
             GeneralState = new GeneralStateDto
@@ -69,7 +57,25 @@ public class GetToDayReportService : IGetToDayReportService
             Visitors = visitors,
         };
     }
-
+    private List<VisitorsDto> GetVisitors()
+    {
+        var visitorsDtos = visitorMongoCollection.AsQueryable()
+            .OrderByDescending(p => p.Time)
+            .Take(10)
+            .Select(p => new VisitorsDto
+            {
+                Id = p.Id,
+                Browser = p.Browser.Family,
+                CurrentLink = p.CurrentLink,
+                Ip = p.Ip,
+                OperationSystem = p.OperationSystem.Family,
+                IsSpider = p.Device.IsSpider,
+                ReferrerLink = p.ReferrerLink,
+                Time = p.Time,
+                VisitorId = p.VisitorId
+            }).ToList();
+        return visitorsDtos;
+    }
     private VisitCountDto GTetVisitPerHour(DateTime start, DateTime end)
     {
         var TodayPageViewList = visitorMongoCollection.AsQueryable().Where(

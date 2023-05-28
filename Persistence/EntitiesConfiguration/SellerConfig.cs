@@ -19,8 +19,7 @@ namespace Infrustracture.EntitiesConfiguration
           
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.CompanyName).HasMaxLength(100);
-            entity.Property(e => e.FirstName).HasMaxLength(100);
-            entity.Property(e => e.LastName).HasMaxLength(100);
+        
         }
     }
 }

@@ -7,7 +7,6 @@ using WebSite.EndPoint.Utilities.Filters;
 namespace WebSite.EndPoint.Controllers
 {
     [ServiceFilter(typeof(SaveVisitorFilter))]
-
     public class AccountController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -22,11 +21,11 @@ namespace WebSite.EndPoint.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Register(RegisterViewModel model)
+        public  IActionResult Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return  View(model);
             }
 
             User newUser = new User
@@ -34,11 +33,13 @@ namespace WebSite.EndPoint.Controllers
                 Email = model.Email,
                 UserName = model.Email,
                 FullName = model.FullName,
-                PhoneNumber = model.PhoneNumber
+                PhoneNumber = model.PhoneNumber,
             };
             var result =_userManager.CreateAsync(newUser, model.Password);
+           
             if (result.Result.Succeeded)
             {
+                _userManager.AddToRoleAsync(newUser, "Customer");
                 return RedirectToAction(nameof(Profile));
             }
 
@@ -61,7 +62,6 @@ namespace WebSite.EndPoint.Controllers
                 ReturnUrl = returnUrl,
             });
         }
-
         [HttpPost]
         public IActionResult Login(LoginViewModel model)
         {
@@ -78,17 +78,12 @@ namespace WebSite.EndPoint.Controllers
             }
             _signInManager.SignOutAsync();
             var result = _signInManager.PasswordSignInAsync(user, model.Password
-                , model.IsPersistent, true).Result;
+                , model.IsPersistent, true);
 
-            if (result.Succeeded)
+            if (result.Result.Succeeded)
             {
                 return Redirect(model.ReturnUrl);
             }
-            //if (result.RequiresTwoFactor)
-            //{
-            //    //لاگین دو مرحله ای
-            //}
-
             return View(model);
         }
 

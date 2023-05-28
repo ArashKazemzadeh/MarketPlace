@@ -17,11 +17,11 @@ GetInvoices*
 UpdateCustomer*
 -----------------
 Admin:
-ConfirmForAddProduct*
-ConfirmForAddComment*
-GetAllCommissions*
-GetCommissionBySellerId*
-AddMedalForSeller*
+ConfirmForAddProduct*+
+ConfirmForAddComment*+
+GetAllCommissions*+
+GetCommissionBySellerId*+
+AddMedalForSeller*+
 (RUD)Product*
 (RUD)Booth*
 (RUD)User?

@@ -3,6 +3,8 @@
     public class GeneralDto
     {
         public string message { get; set; }
+        public int? Amount { get; set; }
+
     }
     public class GeneralDto<T>
     {

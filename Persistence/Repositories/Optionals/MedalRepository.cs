@@ -1,4 +1,6 @@
 ﻿using ConsoleApp1.Models;
+using Domin.Enums;
+using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,6 +25,12 @@ namespace Persistence.Repositories.Optionals
         {
             return await _dbSet.FindAsync(id);
         }
+
+        public async Task<Medal> GetMedalByTypeAsync(MedalEnum medalType)
+        {
+            return await _dbSet.FirstOrDefaultAsync(m => m.Type == medalType);
+        }
+
 
         public async Task<List<Medal>> GetAllAsync()
         {

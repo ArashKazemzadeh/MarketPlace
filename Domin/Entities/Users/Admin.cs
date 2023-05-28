@@ -12,6 +12,6 @@ namespace Domin.Entities.Users
     public class Admin
     {
         public int Id { get; set; }    
-        public int TotalSiteCommissionAmounts { get; set; }
+        public int? TotalSiteCommissionAmounts { get; set; }
     }
 }

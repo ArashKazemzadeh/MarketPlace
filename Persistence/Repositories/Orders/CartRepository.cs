@@ -1,4 +1,5 @@
 ﻿using ConsoleApp1.Models;
+using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
 
 

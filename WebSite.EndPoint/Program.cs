@@ -1,9 +1,11 @@
-using Application.Interfaces.Contexts;
+﻿using Application.Interfaces.Contexts;
 using Application.IServices.Visitors;
+using Application.Services.Visitors.SaveVisitorInfo;
 using Application.Visitors.SaveVisitorInfo;
 using Common.Mappers;
 using Infrastructure.IdentityConfigs;
 using Infrustracture.IdentityConfiguration;
+using Microsoft.AspNetCore.Builder;
 using Persistence.Contexts.MongoContext;
 using Persistence.Repositories.FacadeRepository;
 using WebSite.EndPoint.Utilities.Filters;
@@ -30,11 +32,18 @@ builder.Services.AddAutoMapper(typeof(Program));
 #endregion
 
 #region IOC
+//-------------------------------Web Site----------------------------------
+
 builder.Services.AddTransient(typeof(ICustomMapper<,>), typeof(CustomMapper<,>));
 builder.Services.AddScoped<IGeneralRepository, GeneralRepository>();
-builder.Services.AddTransient  (typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
+builder.Services.AddTransient(typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
 builder.Services.AddScoped<ISaveVisitorInfoService, SaveVisitorInfoService>();
 builder.Services.AddScoped<SaveVisitorFilter>();
+//-------------------------------Admin Area----------------------------------
+builder.Services.AddTransient<IGetToDayReportService, GetToDayReportService>(); //دریافت گذارش های روزانه
+builder.Services.AddTransient(typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
+//---------------------------------------------------------------------------
+
 #endregion
 var app = builder.Build();
 
@@ -56,5 +65,9 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+app.MapAreaControllerRoute(
+    areaName: "Admin",
+    name: "areas",
+    pattern: "{area:exists}/{controller=ForVisitor}/{action=Index}/{id?}"
+);
 app.Run();

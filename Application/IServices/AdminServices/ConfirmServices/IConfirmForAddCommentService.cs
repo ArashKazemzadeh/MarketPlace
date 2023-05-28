@@ -6,7 +6,7 @@ namespace Application.IServices.AdminServices.ConfirmServices
 {
     public interface IConfirmForAddCommentService
     {
-        GeneralDto<CommentDto> Execute(int id);
+        GeneralDto Execute(int id);
 
     }
 }

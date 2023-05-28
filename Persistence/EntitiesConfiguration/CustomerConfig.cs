@@ -12,8 +12,7 @@ namespace Infrustracture.EntitiesConfiguration
             entity.HasKey(e => e.Id).HasName("PK__Buyer__4B81C1CA60F39982");
             entity.ToTable("Customer");
             entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.FirstName).HasMaxLength(100);
-            entity.Property(e => e.LastName).HasMaxLength(20);
+          
         }
     }
 }
