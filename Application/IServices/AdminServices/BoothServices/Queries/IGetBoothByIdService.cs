@@ -1,10 +1,10 @@
-﻿using ConsoleApp.Models;
+﻿using Application.Dtos;
+using ConsoleApp.Models;
 
 namespace Application.IServices.AdminServices.BoothServices.Queries
 {
     public interface IGetBoothByIdService
     {
-        BoothDto Execute(int id);
-
+        Task<GeneralDto<BoothDto>> Execute(int id);
     }
 }

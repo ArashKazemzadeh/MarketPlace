@@ -14,10 +14,10 @@ namespace Infrastructure.IdentityConfigs
             services.AddDbContext<DatabaseContext>(option =>
                 option.UseSqlServer(configuration.GetConnectionString("sqlserver")));
 
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole<int>>()
                 .AddEntityFrameworkStores<DatabaseContext>()
                 .AddDefaultTokenProviders()
-                .AddRoles<IdentityRole>()
+                .AddRoles<IdentityRole<int>>()
                 .AddErrorDescriber<CustomIdentityError>();
 
 
@@ -35,7 +35,7 @@ namespace Infrastructure.IdentityConfigs
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
             });
 
-            return null;
+            return services;
         }
     }
 }

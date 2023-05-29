@@ -5,6 +5,6 @@ namespace Application.IServices.AdminServices.BoothServices.Commands
 {
     public interface IUpdateBoothAdminService
     {
-        GeneralDto Execute(BoothDto booth);
+        Task<GeneralDto> Execute(BoothDto booth);
     }
 }

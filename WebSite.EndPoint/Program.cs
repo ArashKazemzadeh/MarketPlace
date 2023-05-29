@@ -1,13 +1,21 @@
 ﻿using Application.Interfaces.Contexts;
+using Application.IServices.AdminServices.ConfirmServices;
+using Application.IServices.AdminServices.ProoductServices.Queries;
 using Application.IServices.Visitors;
+using Application.Services.AdminServices.CommentService.Command;
+using Application.Services.AdminServices.CommentService.Query;
+using Application.Services.AdminServices.ProoductServices.Commands;
+using Application.Services.AdminServices.ProoductServices.Queries;
 using Application.Services.Visitors.SaveVisitorInfo;
 using Application.Visitors.SaveVisitorInfo;
 using Common.Mappers;
+using Domin.IRepositories.IseparationRepository;
 using Infrastructure.IdentityConfigs;
 using Infrustracture.IdentityConfiguration;
-using Microsoft.AspNetCore.Builder;
 using Persistence.Contexts.MongoContext;
 using Persistence.Repositories.FacadeRepository;
+using Persistence.Repositories.Optionals;
+using Persistence.Repositories.Orders;
 using WebSite.EndPoint.Utilities.Filters;
 
 
@@ -16,7 +24,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 #region ContextAndIdentity
-builder.Services.AddDbContextService(builder.Configuration);
 builder.Services.AddIdentityService(builder.Configuration);
 builder.Services.ConfigureApplicationCookie(option =>
 {
@@ -42,6 +49,14 @@ builder.Services.AddScoped<SaveVisitorFilter>();
 //-------------------------------Admin Area----------------------------------
 builder.Services.AddTransient<IGetToDayReportService, GetToDayReportService>(); //دریافت گذارش های روزانه
 builder.Services.AddTransient(typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IConfirmForAddProductService, ConfirmForAddProductService>();
+builder.Services.AddScoped<IGetProductsWithSellerNameAsyncService, GetProductsWithSellerNameAsyncService>();
+builder.Services.AddScoped<IGeAllCommentsByFalseConFirmService, GeAllCommentsByFalseConFirmService>();
+builder.Services.AddScoped<IConfirmForAddCommentService, ConfirmForAddCommentService>();
+builder.Services.AddScoped<ICommentRepository,CommentRepository>();
+//builder.Services.AddScoped<>();
+
 //---------------------------------------------------------------------------
 
 #endregion

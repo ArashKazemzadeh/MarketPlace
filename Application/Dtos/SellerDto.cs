@@ -5,7 +5,7 @@ namespace ConsoleApp.Models;
 
 public class SellerDto
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
 
     public string? FirstName { get; set; }
     public string LastName { get; set; } = null!;

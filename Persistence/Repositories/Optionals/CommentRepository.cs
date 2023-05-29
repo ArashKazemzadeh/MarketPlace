@@ -1,20 +1,16 @@
 ﻿using ConsoleApp1.Models;
 using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Persistence.Contexts.SqlServer;
 
 namespace Persistence.Repositories.Optionals
 {
     public class CommentRepository : ICommentRepository
     {
-        private readonly DbContext _context;
+        private readonly DatabaseContext _context;
         private readonly DbSet<Comment> _dbSet;
 
-        public CommentRepository(DbContext context)
+        public CommentRepository(DatabaseContext context)
         {
             _context = context;
             _dbSet = _context.Set<Comment>();
@@ -29,7 +25,16 @@ namespace Persistence.Repositories.Optionals
         {
             return await _dbSet.ToListAsync();
         }
-
+        public async Task<List<Comment>> GetAllCommentsWithSellerNameConfirmAsync()
+        {
+            var comments = await _dbSet.Where(x => x.IsConfirm == false || x.IsConfirm == null)
+                .Include(c => c.Product)
+                .ThenInclude(p => p.Booth)
+                .ThenInclude(b => b.Seller).Where(x=>x.IsConfirm==false || x.IsConfirm==null)
+                .ToListAsync();
+           
+            return comments;
+        }
         public async Task AddAsync(Comment comment)
         {
             await _dbSet.AddAsync(comment);

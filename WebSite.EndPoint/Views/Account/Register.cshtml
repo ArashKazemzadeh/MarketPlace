@@ -2,51 +2,163 @@
 
 @{
     ViewData["Title"] = "Register";
+    Layout = null;
 }
 
-<h1>Register</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<h4>RegisterViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Register">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FullName" class="control-label"></label>
-                <input asp-for="FullName" class="form-control" />
-                <span asp-validation-for="FullName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RePassword" class="control-label"></label>
-                <input asp-for="RePassword" class="form-control" />
-                <span asp-validation-for="RePassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت نام | HAMTA - Ecommerce HTML Template</title>
 
-@section Scripts {
+    <link rel="stylesheet" href="~/themesite/assets/css/font-awesome.min.css">
+    <!-- Bootstrap 4.5.3 -->
+    <link rel="stylesheet" href="~/themesite/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/themesite/assets/css/theme.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .page-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            overflow: auto;
+        }
+    </style>
+
+</head>
+
+<body>
+<!-- Page Content -->
+        <main class="page-content ">
+            <div class="container">
+                <div class="auth-wrapper">
+                    <div class="auth-form shadow-around">
+                        <div class="site-logo">
+                           
+                                <img src="~/themesite/assets/images/logo.png" style="width: 20%" alt="logo">
+                           
+                        </div>
+                        <div class="auth-form-title">
+                            ثبت نام مشتری
+                        </div>
+                        <form asp-action="register" asp-controller="account" method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="form-element-row">
+                                <label asp-for="FullName" class="label-element"> </label>
+                                <div class="form-element-with-icon">
+                                    <input asp-for="FullName" class="input-element">
+                                    <i class="fad fa-user"></i>
+                                </div>
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-element-row">
+                                <label asp-for="Email" class="label-element"> </label>
+                                <div class="form-element-with-icon">
+                                    <input asp-for="Email" class="input-element">
+                                    <i class="fad fa-mailbox"></i>
+                                </div>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-element-row">
+                                <label asp-for="Password" class="label-element"> </label>
+                                <div class="form-element-with-icon">
+                                    <input asp-for="Password" class="input-element">
+                                    <i class="fad fa-key"></i>
+                                </div>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-element-row">
+                                <label asp-for="RePassword" class="label-element"> </label>
+                                <div class="form-element-with-icon">
+                                    <input asp-for="RePassword" class="input-element">
+                                    <i class="fad fa-key"></i>
+                                </div>
+                                <span asp-validation-for="RePassword" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-element-row">
+                                <label asp-for="PhoneNumber" class="label-element"> </label>
+                                <div class="form-element-with-icon">
+                                    <input asp-for="PhoneNumber" class="input-element">
+                                    <i class="fad fa-mobile-alt"></i>
+                                </div>
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+                            </div>
+
+                            <div class="form-element-row">
+                                <label class="container-checkbox">
+                                    <a href="#" class="link--with-border-bottom">حریم خصوصی</a> و <a href="#"
+                                                                                                     class="link--with-border-bottom">شرایط و قوانین</a> استفاده از سرویس های سایت
+                                    سایت  را مطالعه نموده
+                                    و با کلیه موارد آن موافقم.
+                                    <input type="checkbox" checked="checked">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="form-element-row text-left">
+                                <button class="btn-element btn-success-element">
+                                    <i class="fad fa-user-edit"></i>
+                                    ثبت نام در  سایت
+                                </button>
+                            </div>
+
+                        </form>
+                        <div class="auth-form-footer">
+                            <span>قبلا در  سایت  ثبت‌نام کرده‌اید؟</span>
+                            <a href="#" class="link--with-border-bottom">وارد شوید</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- end Page Content -->
+        <!-- Page mini-Footer -->
+       @* <footer class="mini-footer">
+            <div class="container main-container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="mini-footer-menu">
+                            <li><a href="#">درباره ما</a></li>
+                            <li><a href="#">فرصت های شغلی</a></li>
+                            <li><a href="#">تماس با ما</a></li>
+                            <li><a href="#">همکاری با سازمان ها</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 mt-2 mb-3">
+                        <div class="footer-light-text">
+                            استفاده از مطالب فروشگاه اینترنتی  باروک  فقط برای مقاصد غیرتجاری و با ذکر منبع بلامانع است..
+                        </div>
+                    </div>
+                    <div class="col-12 text-center">
+                        <div class="copy-right-mini-footer">
+                            © All rights reserved. Designed by BahramiiiRad
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+      @*  </footer>*@
+        <!-- end Page mini-Footer -->
+
+   
+
+    <script src="~/themesite/assets/js/jquery-3.5.1.min.js"></script>
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}
+</body>
+</html>
+
 

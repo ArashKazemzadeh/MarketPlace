@@ -17,8 +17,7 @@ namespace Infrustracture.EntitiesConfiguration
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
 
-
-
+          
 
         }
     }

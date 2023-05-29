@@ -2,12 +2,13 @@
 using Domin.Attributes;
 using Domin.Entities.Users;
 using Infrustracture.EntitiesConfiguration;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Contexts.SqlServer
 {
-    public class DatabaseContext: IdentityDbContext<User>
+    public class DatabaseContext: IdentityDbContext<User, IdentityRole<int>, int>
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options):base(options)
         {

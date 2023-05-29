@@ -1,43 +1,118 @@
 ﻿@model WebSite.EndPoint.Models.ViewModels.Users.LoginViewModel
-
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "ورود به حساب";
+    Layout = null;
 }
 
-<h1>Login</h1>
 
-<h4>LoginViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Login">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input asp-for="ReturnUrl" type="hidden"/>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود  </title>
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="~/themesite/assets/css/font-awesome.min.css">
+    <!-- Bootstrap 4.5.3 -->
+    <link rel="stylesheet" href="~/themesite/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/themesite/assets/css/theme.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .auth-page-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            overflow: auto;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="page-wrapper auth-page-wrapper">
+
+        <!-- Page Content -->
+        <main class="page-content">
+            <div class="container">
+                <div class="auth-wrapper">
+                    <div class="auth-form shadow-around">
+                        <div class="site-logo">
+                           
+                                <img src="~/themesite/assets/images/logo.png" style="width: 50%" alt="logo">
+                           
+                        </div>
+                        <div class="auth-form-title">
+                            ورود به باگتو
+                        </div>
+
+                        <form asp-action="Login">
+
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-element-row">
+                                <label asp-for="Email" class="label-element"></label>
+
+                                <div class="form-element-with-icon">
+                                    <input asp-for="Email" class="input-element" />
+                                    <i class="fad fa-user"></i>
+                                </div>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-element-row">
+                                <label asp-for="Password" class="label-element">
+                                    <span class="d-flex justify-content-between">
+                                        <span>کلمه عبور</span>
+                                      @*  <a href="#" class="link--with-border-bottom">رمز عبور خود را فراموش کرده‌ام</a>*@
+                                    </span>
+                                </label>
+                                <div class="form-element-with-icon">
+                                    <input class="input-element" asp-for="Password">
+                                    <i class="fad fa-key-skeleton"></i>
+                                </div>
+                            </div>
+                            <div class="form-element-row">
+                                <label class="container-checkbox">
+                                    مرا به خاطر داشته باش
+                                    <input type="checkbox" checked="checked">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="form-element-row text-left">
+                                <button class="btn-element btn-info-element">
+                                    <i class="fad fa-sign-in-alt"></i>
+                                    ورود به فروشگاه
+                                </button>
+                            </div>
+                            <input type="hidden" asp-for="ReturnUrl" />
+                        </form>
+                        <div class="auth-form-footer">
+                            <span>کاربر جدید هستید؟</span>
+                            <a href="~/account/register" class="link--with-border-bottom">ثبت نام در فروشگاه</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsPersistent" /> @Html.DisplayNameFor(model => model.IsPersistent)
-                </label>
-            </div>
-         
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </main>
+        <!-- end Page Content -->
+     
+
     </div>
-</div>
-@section Scripts {
+
+
+    <script src="~/themesite/assets/js/jquery-3.5.1.min.js"></script>
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}
+</body>
+
+</html>
 

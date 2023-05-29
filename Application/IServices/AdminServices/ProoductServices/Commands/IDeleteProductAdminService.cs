@@ -7,7 +7,7 @@ namespace Application.IServices.AdminServices.ProoductServices.Commands
 {
     public interface IDeleteProductAdminService
     {
-        GeneralDto Execute(int id);
+       Task< GeneralDto> Execute(int id);
 
     }
 }

@@ -1,15 +1,38 @@
-﻿
-using Application.Dtos;
+﻿using Application.Dtos;
 using Application.IServices.AdminServices.BoothServices.Commands;
+using AutoMapper;
 using ConsoleApp.Models;
+using Domin.IRepositories.IseparationRepository;
 
 namespace Application.Services.AdminServices.BoothServices.Commands
 {
     public class UpdateBoothAdminService : IUpdateBoothAdminService
     {
-        public GeneralDto Execute(BoothDto booth)
+        private readonly IBoothRepository _boothRepository;
+        private readonly IMapper _mapper;
+
+        public UpdateBoothAdminService(IBoothRepository boothRepository, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _boothRepository = boothRepository;
+            _mapper = mapper;
         }
+        public async Task<GeneralDto> Execute(BoothDto booth)
+        {
+            var existingBooth = await _boothRepository.GetByIdAsync(booth.Id);
+            if (existingBooth == null)
+                return new GeneralDto
+                {
+                    message = "غرفه یافت نشد."
+                };
+            existingBooth.Name = booth.Name;
+            existingBooth.Description = booth.Description;
+            await _boothRepository.UpdateAsync(existingBooth);
+
+            return new GeneralDto
+            {
+                message = "به روز رسانی انجام شد."
+            };
+        }
+
     }
 }

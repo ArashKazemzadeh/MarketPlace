@@ -2,10 +2,13 @@
 using ConsoleApp.Models;
 
 namespace Application.IServices.AdminServices.ConfirmServices
-{
+{   
+    /// <summary>
+    /// کالاهای تایید نشده یا در انتظار تایید را تایید می کند
+    /// </summary>
     public interface IConfirmForAddProductService
     {
-        GeneralDto Execute(int id);
+        Task<GeneralDto> Execute(int id);
 
     }
 }

@@ -1,20 +1,17 @@
 ﻿using ConsoleApp1.Models;
 using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Persistence.Contexts.SqlServer;
+
 
 namespace Persistence.Repositories.Orders
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly DbContext _context;
+        private readonly DatabaseContext _context;
         private readonly DbSet<Product> _dbSet;
 
-        public ProductRepository(DbContext context)
+        public ProductRepository(DatabaseContext context)
         {
             _context = context;
             _dbSet = _context.Set<Product>();
@@ -24,7 +21,17 @@ namespace Persistence.Repositories.Orders
         {
             return await _dbSet.FindAsync(id);
         }
+        
 
+        public async Task<List<Product>> GetProductsWithSellerNameConfirmAsync()
+        {
+            var products = await _dbSet
+                .Include(p => p.Booth)
+                .ThenInclude(b => b.Seller).Where(x => x.IsConfirm == false || x.IsConfirm == null).ToListAsync();
+               
+
+            return products;
+        }
         public async Task<List<Product>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();

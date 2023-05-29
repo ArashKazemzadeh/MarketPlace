@@ -22,6 +22,7 @@ ConfirmForAddComment*+
 GetAllCommissions*+
 GetCommissionBySellerId*+
 AddMedalForSeller*+
-(RUD)Product*
-(RUD)Booth*
-(RUD)User?
+(RUD)Product*+
+(RUD)Booth*+
+GeAlltProductsByConFirmStatus*+
+(RUD)User+

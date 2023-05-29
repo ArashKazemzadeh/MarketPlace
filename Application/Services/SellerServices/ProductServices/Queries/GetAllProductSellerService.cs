@@ -4,7 +4,7 @@ using ConsoleApp.Models;
 
 namespace Application.Services.SellerServices.ProductServices.Queries
 {
-    internal class GetAllProductSellerService : IGetAllProductSellerService
+    public class GetAllProductSellerService : IGetAllProductSellerService
     {
         public List<GeneralDto<ProductDto>> Execute(int sellerId)
         {
