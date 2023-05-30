@@ -9,12 +9,12 @@ namespace Application.Services.AdminServices.BoothServices.Queries
     public class GetBoothByIdService : IGetBoothByIdService
     {
         private readonly IBoothRepository _boothRepository;
-        private readonly IMapper _mapper;
+        //private readonly IMapper _mapper;
 
         public GetBoothByIdService(IBoothRepository boothRepository, IMapper mapper)
         {
             _boothRepository = boothRepository;
-            _mapper = mapper;
+            //_mapper = mapper;
         }
         public async Task<GeneralDto<BoothDto>> Execute(int id)
         {
@@ -27,7 +27,13 @@ namespace Application.Services.AdminServices.BoothServices.Queries
                 };
             }
 
-            var boothDto = _mapper.Map<BoothDto>(booth);
+            var boothDto = new BoothDto
+            {
+                Id = booth.Id,
+                Name = booth.Name,
+                Description = booth.Description
+            };
+
             return new GeneralDto<BoothDto>
             {
                 Data = boothDto,

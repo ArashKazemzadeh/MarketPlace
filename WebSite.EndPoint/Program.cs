@@ -1,8 +1,12 @@
 ﻿using Application.Interfaces.Contexts;
+using Application.IServices.AdminServices.BoothServices.Commands;
+using Application.IServices.AdminServices.BoothServices.Queries;
 using Application.IServices.AdminServices.ConfirmServices;
 using Application.IServices.AdminServices.ProoductServices.Commands;
 using Application.IServices.AdminServices.ProoductServices.Queries;
 using Application.IServices.Visitors;
+using Application.Services.AdminServices.BoothServices.Commands;
+using Application.Services.AdminServices.BoothServices.Queries;
 using Application.Services.AdminServices.CommentService.Command;
 using Application.Services.AdminServices.CommentService.Query;
 using Application.Services.AdminServices.ProoductServices.Commands;
@@ -58,11 +62,16 @@ builder.Services.AddScoped<IConfirmForAddProductService, ConfirmForAddProductSer
 builder.Services.AddScoped<IGetProductsWithSellerNameAsyncService, GetProductsWithSellerNameAsyncService>();
 builder.Services.AddScoped<IGeAllCommentsByFalseConFirmService, GeAllCommentsByFalseConFirmService>();
 builder.Services.AddScoped<IConfirmForAddCommentService, ConfirmForAddCommentService>();
-builder.Services.AddScoped<ICommentRepository,CommentRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IGetAllSellerService, GetAllSellerService>();
 builder.Services.AddScoped<IUpdateProductAdminService, UpdateProductAdminService>();
-builder.Services.AddScoped < IDeleteProductAdminService,DeleteProductAdminService>();
-builder.Services.AddScoped < IGetProductByIdService, GetProductByIdService>();
+builder.Services.AddScoped<IDeleteProductAdminService, DeleteProductAdminService>();
+builder.Services.AddScoped<IGetProductByIdService, GetProductByIdService>();
+builder.Services.AddScoped<IGetAllBoothAdminService, GetAllBoothAdminService>();
+builder.Services.AddScoped<IBoothRepository, BoothRepository>();
+builder.Services.AddScoped<IGetBoothByIdService, GetBoothByIdService>();
+builder.Services.AddScoped<IDeleteBoothAdminService, DeleteBoothAdminService>();
+builder.Services.AddScoped<IUpdateBoothAdminService, UpdateBoothAdminService>();
 //---------------------------------------------------------------------------
 
 #endregion
@@ -82,13 +91,26 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapAreaControllerRoute(
-    areaName: "Admin",
-    name: "areas",
-    pattern: "{area:exists}/{controller=ForVisitor}/{action=Index}/{id?}"
-);
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "AdminArea",
+        pattern: "{area:exists}/{controller=ForVisitor}/{action=Index}/{id?}"
+    );
+
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}"
+    );
+});
+
+//app.MapAreaControllerRoute(
+//    areaName: "Admin",
+//    name: "areas",
+//    pattern: "{area:exists}/{controller=ForVisitor}/{action=Index}/{id?}"
+//);
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

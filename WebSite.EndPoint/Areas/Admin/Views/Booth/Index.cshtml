@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ConsoleApp.Models.BoothDto>
+@{
+    ViewData["Title"] = "Index";
+}
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th>
+               شرکت/برند
+            </th>
+            <th>
+                توضیحات
+            </th>
+            <th>
+                عملیات
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-action="Delete" asp-route-Id="@item.Id">حذف غرفه</a>
+                <a class="btn btn-primary" asp-action="Edit" asp-route-Id="@item.Id">ویرایش غرفه</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
