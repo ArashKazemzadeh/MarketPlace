@@ -9,7 +9,7 @@ public class Product
     public string? Name { get; set; }
     public int? BasePrice { get; set; }
     public bool IsAuction { get; set; } = false;
-    public bool? IsConfirm { get; set; } = false;
+    public bool IsConfirm { get; set; } = false;
     public int? Availability { get; set; }
     public string? Description { get; set; }
     public bool IsActive { get; set; } = true;

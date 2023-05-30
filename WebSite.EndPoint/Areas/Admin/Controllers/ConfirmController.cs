@@ -2,9 +2,6 @@
 using Application.IServices.AdminServices.ProoductServices.Queries;
 using Microsoft.AspNetCore.Mvc;
 namespace WebSite.EndPoint.Areas.Admin.Controllers;
-
-
-
 [Area("Admin")]
 public class ConfirmController : Controller
 {
@@ -23,32 +20,28 @@ public class ConfirmController : Controller
         _confirmForAddCommentService = confirmForAddCommentService;
         _allCommentsByFalseConFirmService = allCommentsByFalseConFirmService;
     }
-    [HttpGet]
+ 
     public async Task<IActionResult> InConfirmProducts()
     {
         var noConfirmProduct = await _getProductsWithSellerNameAsyncService.Execute();
-
         return View(noConfirmProduct);
     }
-    [HttpPost]
+  
     public async Task<IActionResult> ToConfirmingProduct(int porductId)
     {
-
-       var result=await _confirmForAddProductService.Execute(porductId);
-       ViewBag.Message = result.message;
+        var result=await _confirmForAddProductService.Execute(porductId);
         return RedirectToAction("InConfirmProducts");
     }
-    [HttpGet]
+ 
     public async Task<IActionResult> InConfirmComments()
     {
         var noConfirmComment = await _allCommentsByFalseConFirmService.Execute();
         return View(noConfirmComment);
     }
-    [HttpPost]
+   
     public async Task<IActionResult> ToConfirmingComment(int commentId)
     {
         var result = await _confirmForAddCommentService.Execute(commentId);
-        ViewBag.Message = result.message;
         return RedirectToAction("InConfirmComments");
     }
 }

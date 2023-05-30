@@ -5,15 +5,14 @@ namespace ConsoleApp.Models;
 
 public class SellerDto
 {
-    public string Id { get; set; }
+    public int? Id { get; set; }
 
-    public string? FirstName { get; set; }
-    public string LastName { get; set; } = null!;
+    public string? FullName { get; set; }
 
     public string? CompanyName { get; set; }
 
-    public bool IsActive { get; set; }
-    public double CommissionPercentage { get; set; }
+    public bool? IsActive { get; set; }
+    public double? CommissionPercentage { get; set; }
 
     public int? CommissionsAmount { get; set; }
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts.SqlServer;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts.SqlServer;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230530100748_pro")]
+    partial class pro
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,6 +78,9 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("InsertTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsRemove")
+                        .HasColumnType("bit");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -112,6 +118,9 @@ namespace Persistence.Migrations
                     b.Property<bool?>("IsAccepted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsRemove")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("Price")
                         .HasColumnType("int");
 
@@ -144,6 +153,9 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("InsertTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemove")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasMaxLength(100)
@@ -182,6 +194,9 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("InsertTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsRemove")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -217,6 +232,9 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("InsertTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemove")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasMaxLength(100)
@@ -257,6 +275,9 @@ namespace Persistence.Migrations
                     b.Property<bool>("IsConfirm")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsRemove")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
@@ -290,6 +311,9 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("InsertTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsRemove")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -316,6 +340,9 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("InsertTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemove")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasMaxLength(50)
@@ -350,6 +377,9 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("InsertTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemove")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
@@ -388,6 +418,9 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("InsertTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsRemove")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("OrderDate")
                         .HasColumnType("datetime");
 
@@ -425,6 +458,9 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("InsertTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemove")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("RemoveTime")
                         .HasColumnType("datetime2");
@@ -480,6 +516,9 @@ namespace Persistence.Migrations
                     b.Property<bool>("IsConfirm")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsRemove")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -508,6 +547,9 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("InsertTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemove")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("Quantity")
                         .HasColumnType("int");
@@ -546,6 +588,9 @@ namespace Persistence.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsRemove")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -571,6 +616,9 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("InsertTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemove")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("RemoveTime")
                         .HasColumnType("datetime2");
@@ -614,6 +662,9 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("InsertTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemove")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");

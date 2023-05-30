@@ -26,6 +26,7 @@ namespace Application.Services.AdminServices.ProoductServices.Commands
             if (product.IsConfirm == null || product.IsConfirm == false)
             {
                 product.IsConfirm = true;
+                _productRepository.UpdateAsync(product);
                 return new GeneralDto
                 {
                     message = "کالا با موفقیت تایید شد."
@@ -34,12 +35,12 @@ namespace Application.Services.AdminServices.ProoductServices.Commands
             else
             {
                 product.IsConfirm = false;
+                _productRepository.UpdateAsync(product);
                 return new GeneralDto
                 {
                     message = "تاییدیه کالا جهت نمایش و فروش لغو شد."
                 };
             }
-
         }
     }
 }

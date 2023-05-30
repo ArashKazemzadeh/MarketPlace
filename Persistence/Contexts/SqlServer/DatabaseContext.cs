@@ -41,9 +41,7 @@ namespace Persistence.Contexts.SqlServer
         public virtual DbSet<Medal> Medals { get; set; }
 
         public virtual DbSet<Product> Products { get; set; }
-
         public virtual DbSet<ProductsCart> ProductsCarts { get; set; }
-
         public virtual DbSet<Seller> Sellers { get; set; }
         public virtual DbSet<Admin> Admins { get; set; }
 
@@ -61,7 +59,7 @@ namespace Persistence.Contexts.SqlServer
                     modelBuilder.Entity(entityType.Name).Property<DateTime>("InsertTime");
                     modelBuilder.Entity(entityType.Name).Property<DateTime>("UpdateTime");
                     modelBuilder.Entity(entityType.Name).Property<DateTime>("RemoveTime");
-                    modelBuilder.Entity(entityType.Name).Property<bool>("IsRemove");
+                    //modelBuilder.Entity(entityType.Name).Property<bool>("IsRemove");
                 }
             }
 
@@ -105,7 +103,7 @@ namespace Persistence.Contexts.SqlServer
                 var inserted = entityType.FindProperty("InsertTime");
                 var updated = entityType.FindProperty("UpdateTime");
                 var removed = entityType.FindProperty("RemoveTime");
-                var isRemoved = entityType.FindProperty("IsRemove");
+                //var isRemoved = entityType.FindProperty("IsRemove");
                 if (item.State == EntityState.Added && inserted != null)
                 {
                     item.Property("InsertTime").CurrentValue = DateTime.Now;
@@ -117,7 +115,7 @@ namespace Persistence.Contexts.SqlServer
                 if (item.State == EntityState.Added && inserted != null)
                 {
                     item.Property("RemoveTime").CurrentValue = DateTime.Now;
-                    item.Property("IsRemove").CurrentValue = true;
+                    //item.Property("IsRemove").CurrentValue = true;
                 }
             }
 

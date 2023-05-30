@@ -3,6 +3,8 @@ using Application.IServices.AdminServices.ProoductServices.Queries;
 using AutoMapper;
 using ConsoleApp.Models;
 using Domin.IRepositories.IseparationRepository;
+using System.Xml.Linq;
+
 namespace Application.Services.AdminServices.ProoductServices.Queries;
 public class GetProductByIdService : IGetProductByIdService
 {
@@ -12,6 +14,7 @@ public class GetProductByIdService : IGetProductByIdService
     {
         _productRepository = productRepository;
         _mapper = mapper;
+
     }
     public async Task<GeneralDto<ProductDto>> Execute(int id)
     {
@@ -21,19 +24,24 @@ public class GetProductByIdService : IGetProductByIdService
             {
                 message = "کالا یافت نشد"
             };
-        var productDto = _mapper.Map<ProductDto>(product);
+
         return new GeneralDto<ProductDto>
         {
-            Data = productDto
+            Data = new ProductDto
+            {
+                Id = id,
+                Name = product.Name,
+                Availability = product.Availability,
+                BasePrice = product.BasePrice,
+                Description = product.Description,
+                IsAuction = product.IsAuction,
+                IsConfirm = product.IsConfirm,
+                IsActive = product.IsActive
+
+            }
+
         };
     }
 }
-
-
-
-
-
-
-
 
 

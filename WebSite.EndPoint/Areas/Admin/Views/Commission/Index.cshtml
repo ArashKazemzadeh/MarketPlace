@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ConsoleApp.Models.SellerDto>
+@{
+    ViewData["Title"] = "Index";
+}
+<table class="table table-bordered m-2">
+    <thead>
+        <tr>
+            
+           
+            <th>
+                نام شرکت/برند
+            </th>
+            <th>
+               درصد کمیسیون
+            </th>
+            <th>
+                مبلغ کمیسیون دریافتی از فروشنده
+            </th>
+            <th>
+              جمع کل فروش 
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommissionPercentage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommissionsAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalesAmount)
+            </td>
+           @* <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>*@
+        </tr>
+}
+    </tbody>
+</table>

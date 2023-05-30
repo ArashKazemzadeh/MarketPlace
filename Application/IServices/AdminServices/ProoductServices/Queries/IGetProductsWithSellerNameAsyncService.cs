@@ -12,5 +12,6 @@ namespace Application.IServices.AdminServices.ProoductServices.Queries
     public interface IGetProductsWithSellerNameAsyncService
     {
         Task<List<ProductDto>> Execute();
+        Task<List<ProductDto>> ExecuteAll();
     }
 }

@@ -4,82 +4,57 @@
     ViewData["Title"] = "ConfirmProducts";
 }
 
-<h1>ConfirmProducts</h1>
 
 
-<table class="table">
+
+<table class="table table-bordered m-2">
     <thead>
         <tr>
+            
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+               عنوان کالا
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+              قیمت پایه
+            </th>
+
+            <th>
+               تعداد قابل فروش
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BasePrice)
+               توضیحات
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsAuction)
+               نام فروشنده
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsConfirm)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Availability)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SellerName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BidId)
-            </th>
-            <th></th>
+        
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+           
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+                @item.Name
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @item.BasePrice
+            </td>
+            
+           
+            <td>
+                @item.Availability
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BasePrice)
+                @item.Description
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsAuction)
+                @item.SellerName
             </td>
+            
             <td>
-                @Html.DisplayFor(modelItem => item.IsConfirm)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Availability)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SellerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BidId)
-            </td>
-            <td>
-                    @Html.ActionLink("تایید کتاب", "ToConfirmingProduct", new { id=item.Id }) |
-                    @*@Html.ActionLink("عدم تایید کتاب", "Details", new { /* id=item.PrimaryKey */ }) |*@
-             
+
+                    <a class="btn btn-primary" asp-action="ToConfirmingProduct" asp-route-porductId="@item.Id">تایید کالا</a>
             </td>
         </tr>
 }

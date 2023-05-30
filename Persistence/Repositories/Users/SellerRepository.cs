@@ -1,16 +1,17 @@
 ﻿using ConsoleApp1.Models;
 using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
+using Persistence.Contexts.SqlServer;
 
 
 namespace Persistence.Repositories.Users
 {
     public class SellerRepository : ISellerRepository
     {
-        private readonly DbContext _context;
+        private readonly DatabaseContext _context;
         private readonly DbSet<Seller> _dbSet;
 
-        public SellerRepository(DbContext context)
+        public SellerRepository(DatabaseContext context)
         {
             _context = context;
             _dbSet = _context.Set<Seller>();

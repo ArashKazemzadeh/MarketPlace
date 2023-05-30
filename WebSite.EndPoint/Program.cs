@@ -1,11 +1,13 @@
 ﻿using Application.Interfaces.Contexts;
 using Application.IServices.AdminServices.ConfirmServices;
+using Application.IServices.AdminServices.ProoductServices.Commands;
 using Application.IServices.AdminServices.ProoductServices.Queries;
 using Application.IServices.Visitors;
 using Application.Services.AdminServices.CommentService.Command;
 using Application.Services.AdminServices.CommentService.Query;
 using Application.Services.AdminServices.ProoductServices.Commands;
 using Application.Services.AdminServices.ProoductServices.Queries;
+using Application.Services.AdminServices.UserServices.Queries;
 using Application.Services.Visitors.SaveVisitorInfo;
 using Application.Visitors.SaveVisitorInfo;
 using Common.Mappers;
@@ -16,6 +18,7 @@ using Persistence.Contexts.MongoContext;
 using Persistence.Repositories.FacadeRepository;
 using Persistence.Repositories.Optionals;
 using Persistence.Repositories.Orders;
+using Persistence.Repositories.Users;
 using WebSite.EndPoint.Utilities.Filters;
 
 
@@ -50,13 +53,16 @@ builder.Services.AddScoped<SaveVisitorFilter>();
 builder.Services.AddTransient<IGetToDayReportService, GetToDayReportService>(); //دریافت گذارش های روزانه
 builder.Services.AddTransient(typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ISellerRepository, SellerRepository>();
 builder.Services.AddScoped<IConfirmForAddProductService, ConfirmForAddProductService>();
 builder.Services.AddScoped<IGetProductsWithSellerNameAsyncService, GetProductsWithSellerNameAsyncService>();
 builder.Services.AddScoped<IGeAllCommentsByFalseConFirmService, GeAllCommentsByFalseConFirmService>();
 builder.Services.AddScoped<IConfirmForAddCommentService, ConfirmForAddCommentService>();
 builder.Services.AddScoped<ICommentRepository,CommentRepository>();
-//builder.Services.AddScoped<>();
-
+builder.Services.AddScoped<IGetAllSellerService, GetAllSellerService>();
+builder.Services.AddScoped<IUpdateProductAdminService, UpdateProductAdminService>();
+builder.Services.AddScoped < IDeleteProductAdminService,DeleteProductAdminService>();
+builder.Services.AddScoped < IGetProductByIdService, GetProductByIdService>();
 //---------------------------------------------------------------------------
 
 #endregion
@@ -76,13 +82,13 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapAreaControllerRoute(
     areaName: "Admin",
     name: "areas",
     pattern: "{area:exists}/{controller=ForVisitor}/{action=Index}/{id?}"
 );
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.Run();

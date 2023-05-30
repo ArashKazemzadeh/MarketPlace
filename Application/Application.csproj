@@ -16,7 +16,6 @@
     <Folder Include="IServices\AdminServices\UserServices\Commands\" />
     <Folder Include="IServices\AdminServices\UserServices\Queries\" />
     <Folder Include="Services\AdminServices\UserServices\Commands\" />
-    <Folder Include="Services\AdminServices\UserServices\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
