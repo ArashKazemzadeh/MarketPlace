@@ -26,7 +26,7 @@ namespace Application.Services.AdminServices.CommentService.Command
             if (comment.IsConfirm == null || comment.IsConfirm == false)
             {
                 comment.IsConfirm = true;
-                _commentRepository.UpdateAsync(comment);
+            await    _commentRepository.UpdateAsync(comment);
                 return new GeneralDto
                 {
                     message = "تایید کامنت انجام شد."
@@ -35,7 +35,7 @@ namespace Application.Services.AdminServices.CommentService.Command
             else
             {
                 comment.IsConfirm = false;
-                _commentRepository.UpdateAsync(comment);
+            await    _commentRepository.UpdateAsync(comment);
                 return new GeneralDto
                 {
                     message = "عدم تایید کامنت انجام شد."

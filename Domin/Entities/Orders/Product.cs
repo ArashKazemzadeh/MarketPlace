@@ -13,7 +13,7 @@ public class Product
     public int? Availability { get; set; }
     public string? Description { get; set; }
     public bool IsActive { get; set; } = true;
-    public int BidId { get; set; }
+    public int? BidId { get; set; }
     public virtual Auction? Auction { get; set; }
     public int? BoothId { get; set; }
     public virtual Booth? Booth { get; set; }

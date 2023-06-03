@@ -13,5 +13,5 @@ public class ProductDto
     public string? Description { get; set; }
     public string? SellerName { get; set; }
     public bool IsActive { get; set; }
-    public int BidId { get; set; }
+    public int? BidId { get; set; }
 }

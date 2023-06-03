@@ -21,7 +21,7 @@ namespace Application.Services.AdminServices.BoothServices.Commands
                 return new GeneralDto { message = "غرفه مورد نظر یافت نشد." };
             }
 
-            _boothRepository.DeleteAsync(existingBooth);
+         await   _boothRepository.DeleteAsync(existingBooth);
             return new GeneralDto { message = "غرفه با موفقیت حذف شد." };
         }
 

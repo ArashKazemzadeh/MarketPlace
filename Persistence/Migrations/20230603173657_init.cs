@@ -1,11 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
+
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class edit : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,10 +20,9 @@ namespace Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TotalSiteCommissionAmounts = table.Column<int>(type: "int", nullable: true),
-                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRemove = table.Column<bool>(type: "bit", nullable: false),
-                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -49,10 +51,9 @@ namespace Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRemove = table.Column<bool>(type: "bit", nullable: false),
-                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -81,10 +82,9 @@ namespace Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRemove = table.Column<bool>(type: "bit", nullable: false),
-                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -96,10 +96,9 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
-                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRemove = table.Column<bool>(type: "bit", nullable: false),
-                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -116,10 +115,9 @@ namespace Persistence.Migrations
                     CommissionPercentage = table.Column<double>(type: "float", nullable: false),
                     CommissionsAmount = table.Column<int>(type: "int", nullable: true),
                     SalesAmount = table.Column<int>(type: "int", nullable: true),
-                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRemove = table.Column<bool>(type: "bit", nullable: false),
-                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -268,10 +266,9 @@ namespace Persistence.Migrations
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SellerId = table.Column<int>(type: "int", nullable: true),
-                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRemove = table.Column<bool>(type: "bit", nullable: false),
-                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -292,10 +289,9 @@ namespace Persistence.Migrations
                     TotalPrices = table.Column<int>(type: "int", nullable: true),
                     CustomerId = table.Column<int>(type: "int", nullable: true),
                     SellerId = table.Column<int>(type: "int", nullable: true),
-                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRemove = table.Column<bool>(type: "bit", nullable: false),
-                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -322,10 +318,9 @@ namespace Persistence.Migrations
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     FileData = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     SellerId = table.Column<int>(type: "int", nullable: true),
-                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRemove = table.Column<bool>(type: "bit", nullable: false),
-                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -345,10 +340,9 @@ namespace Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Type = table.Column<int>(type: "int", nullable: true),
                     SellerId = table.Column<int>(type: "int", nullable: true),
-                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRemove = table.Column<bool>(type: "bit", nullable: false),
-                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -369,16 +363,15 @@ namespace Persistence.Migrations
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     BasePrice = table.Column<int>(type: "int", nullable: true),
                     IsAuction = table.Column<bool>(type: "bit", nullable: false),
-                    IsConfirm = table.Column<bool>(type: "bit", nullable: true),
+                    IsConfirm = table.Column<bool>(type: "bit", nullable: false),
                     Availability = table.Column<int>(type: "int", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    BidId = table.Column<int>(type: "int", nullable: false),
+                    BidId = table.Column<int>(type: "int", nullable: true),
                     BoothId = table.Column<int>(type: "int", nullable: true),
-                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRemove = table.Column<bool>(type: "bit", nullable: false),
-                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -402,10 +395,9 @@ namespace Persistence.Migrations
                     PaymentStatus = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     OrderDate = table.Column<DateTime>(type: "datetime", nullable: true),
                     DeliveryDate = table.Column<DateTime>(type: "datetime", nullable: true),
-                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRemove = table.Column<bool>(type: "bit", nullable: false),
-                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -427,10 +419,9 @@ namespace Persistence.Migrations
                     EndDeadTime = table.Column<DateTime>(type: "datetime", nullable: true),
                     HighestPrice = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRemove = table.Column<bool>(type: "bit", nullable: false),
-                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -455,10 +446,9 @@ namespace Persistence.Migrations
                     ProductId = table.Column<int>(type: "int", nullable: true),
                     CustomertId = table.Column<int>(type: "int", nullable: true),
                     CustomerId = table.Column<int>(type: "int", nullable: true),
-                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRemove = table.Column<bool>(type: "bit", nullable: false),
-                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -483,10 +473,9 @@ namespace Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProductId = table.Column<int>(type: "int", nullable: true),
-                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRemove = table.Column<bool>(type: "bit", nullable: false),
-                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -505,10 +494,9 @@ namespace Persistence.Migrations
                     CartId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: true),
-                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRemove = table.Column<bool>(type: "bit", nullable: false),
-                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -557,10 +545,9 @@ namespace Persistence.Migrations
                     RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsAccepted = table.Column<bool>(type: "bit", nullable: true),
                     AuctionId = table.Column<int>(type: "int", nullable: true),
-                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRemove = table.Column<bool>(type: "bit", nullable: false),
-                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -576,6 +563,45 @@ namespace Persistence.Migrations
                         principalTable: "Customer",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.InsertData(
+                table: "Admins",
+                columns: new[] { "Id", "InsertTime", "RemoveTime", "TotalSiteCommissionAmounts", "UpdateTime" },
+                values: new object[] { 3, null, null, null, null });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "InsertTime", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RemoveTime", "SecurityStamp", "TwoFactorEnabled", "UpdateTime", "UserName" },
+                values: new object[,]
+                {
+                    { 1, 0, "a2c3353e-a7c5-4858-bd42-c38d6eda0b91", null, false, "حسن", null, false, null, null, null, null, null, false, null, null, false, null, null },
+                    { 2, 0, "da6c3d64-c1f4-4772-b8aa-430e2206ad6c", null, false, "جعفرقلی", null, false, null, null, null, null, null, false, null, null, false, null, null },
+                    { 3, 0, "cf98734d-7e63-453a-a1bf-36f4728477d9", null, false, "ساسان", null, false, null, null, null, null, null, false, null, null, false, null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Customer",
+                columns: new[] { "Id", "InsertTime", "RemoveTime", "UpdateTime" },
+                values: new object[,]
+                {
+                    { 1, null, null, null },
+                    { 2, null, null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "Id", "Availability", "BasePrice", "BidId", "BoothId", "Description", "InsertTime", "IsActive", "IsAuction", "IsConfirm", "Name", "RemoveTime", "UpdateTime" },
+                values: new object[,]
+                {
+                    { 1, 10, 5000000, null, null, "لپ تاپ جدید و بسیار کارآمد", null, true, false, false, "لپ تاپ", null, null },
+                    { 2, 5, 2000000, null, null, "گوشی هوشمند با قابلیت‌های فراوان", null, true, false, false, "گوشی هوشمند", null, null },
+                    { 20, 50, 100000, null, null, "بهترین کتاب برای یادگیری برنامه‌نویسی", null, true, false, false, "کتاب برنامه نویسی", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Sellers",
+                columns: new[] { "Id", "CommissionPercentage", "CommissionsAmount", "CompanyName", "InsertTime", "IsActive", "RemoveTime", "SalesAmount", "UpdateTime" },
+                values: new object[] { 1, 10.5, 500, "شرکت نمونه", null, true, null, 10000, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_CustomerId",

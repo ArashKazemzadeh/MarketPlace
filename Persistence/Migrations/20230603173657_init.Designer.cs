@@ -12,8 +12,8 @@ using Persistence.Contexts.SqlServer;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230530115458_deleteing")]
-    partial class deleteing
+    [Migration("20230603173657_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,19 +75,19 @@ namespace Persistence.Migrations
                     b.Property<int>("HighestPrice")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("InsertTime")
+                    b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("StartDeadTime")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("UpdateTime")
+                    b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -109,7 +109,7 @@ namespace Persistence.Migrations
                     b.Property<int?>("AuctionId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("InsertTime")
+                    b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("IsAccepted")
@@ -121,10 +121,10 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("RegisterDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("UpdateTime")
+                    b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -145,20 +145,20 @@ namespace Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("InsertTime")
+                    b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("SellerId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdateTime")
+                    b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id")
@@ -182,10 +182,10 @@ namespace Persistence.Migrations
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("InsertTime")
+                    b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("SellerId")
@@ -194,7 +194,7 @@ namespace Persistence.Migrations
                     b.Property<int?>("TotalPrices")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdateTime")
+                    b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id")
@@ -218,17 +218,17 @@ namespace Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("InsertTime")
+                    b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("UpdateTime")
+                    b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id")
@@ -254,7 +254,7 @@ namespace Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("InsertTime")
+                    b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsConfirm")
@@ -266,14 +266,14 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("RegisterDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime>("UpdateTime")
+                    b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -290,19 +290,29 @@ namespace Persistence.Migrations
                     b.Property<int>("Id")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("InsertTime")
+                    b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("UpdateTime")
+                    b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id")
                         .HasName("PK__Buyer__4B81C1CA60F39982");
 
                     b.ToTable("Customer", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1
+                        },
+                        new
+                        {
+                            Id = 2
+                        });
                 });
 
             modelBuilder.Entity("ConsoleApp1.Models.FileForUser", b =>
@@ -317,20 +327,20 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<DateTime>("InsertTime")
+                    b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("SellerId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdateTime")
+                    b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Url")
@@ -351,16 +361,16 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("InsertTime")
+                    b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("UpdateTime")
+                    b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Url")
@@ -388,7 +398,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("DeliveryDate")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("InsertTime")
+                    b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("OrderDate")
@@ -401,13 +411,13 @@ namespace Persistence.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("TotalPrices")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdateTime")
+                    b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id")
@@ -426,10 +436,10 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("InsertTime")
+                    b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("SellerId")
@@ -438,7 +448,7 @@ namespace Persistence.Migrations
                     b.Property<int?>("Type")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdateTime")
+                    b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -462,7 +472,7 @@ namespace Persistence.Migrations
                     b.Property<int?>("BasePrice")
                         .HasColumnType("int");
 
-                    b.Property<int>("BidId")
+                    b.Property<int?>("BidId")
                         .HasColumnType("int");
 
                     b.Property<int?>("BoothId")
@@ -471,7 +481,7 @@ namespace Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("InsertTime")
+                    b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
@@ -487,10 +497,10 @@ namespace Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("UpdateTime")
+                    b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id")
@@ -499,6 +509,41 @@ namespace Persistence.Migrations
                     b.HasIndex("BoothId");
 
                     b.ToTable("Product", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Availability = 10,
+                            BasePrice = 5000000,
+                            Description = "لپ تاپ جدید و بسیار کارآمد",
+                            IsActive = true,
+                            IsAuction = false,
+                            IsConfirm = false,
+                            Name = "لپ تاپ"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Availability = 5,
+                            BasePrice = 2000000,
+                            Description = "گوشی هوشمند با قابلیت‌های فراوان",
+                            IsActive = true,
+                            IsAuction = false,
+                            IsConfirm = false,
+                            Name = "گوشی هوشمند"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Availability = 50,
+                            BasePrice = 100000,
+                            Description = "بهترین کتاب برای یادگیری برنامه‌نویسی",
+                            IsActive = true,
+                            IsAuction = false,
+                            IsConfirm = false,
+                            Name = "کتاب برنامه نویسی"
+                        });
                 });
 
             modelBuilder.Entity("ConsoleApp1.Models.ProductsCart", b =>
@@ -509,16 +554,16 @@ namespace Persistence.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("InsertTime")
+                    b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("UpdateTime")
+                    b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("CartId", "ProductId");
@@ -543,25 +588,36 @@ namespace Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime>("InsertTime")
+                    b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("SalesAmount")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdateTime")
+                    b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id")
                         .HasName("PK__Seller__7FE3DBA13EC0B8EB");
 
                     b.ToTable("Sellers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CommissionPercentage = 10.5,
+                            CommissionsAmount = 500,
+                            CompanyName = "شرکت نمونه",
+                            IsActive = true,
+                            SalesAmount = 10000
+                        });
                 });
 
             modelBuilder.Entity("Domin.Entities.Users.Admin", b =>
@@ -572,21 +628,27 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("InsertTime")
+                    b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("TotalSiteCommissionAmounts")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdateTime")
+                    b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.ToTable("Admins");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 3
+                        });
                 });
 
             modelBuilder.Entity("Domin.Entities.Users.User", b =>
@@ -615,7 +677,7 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("InsertTime")
+                    b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("LockoutEnabled")
@@ -641,7 +703,7 @@ namespace Persistence.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("RemoveTime")
+                    b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("SecurityStamp")
@@ -650,7 +712,7 @@ namespace Persistence.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("UpdateTime")
+                    b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserName")
@@ -668,6 +730,41 @@ namespace Persistence.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a2c3353e-a7c5-4858-bd42-c38d6eda0b91",
+                            EmailConfirmed = false,
+                            FullName = "حسن",
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "da6c3d64-c1f4-4772-b8aa-430e2206ad6c",
+                            EmailConfirmed = false,
+                            FullName = "جعفرقلی",
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "cf98734d-7e63-453a-a1bf-36f4728477d9",
+                            EmailConfirmed = false,
+                            FullName = "ساسان",
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>

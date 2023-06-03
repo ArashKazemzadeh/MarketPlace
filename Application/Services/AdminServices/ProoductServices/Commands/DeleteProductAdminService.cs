@@ -18,7 +18,7 @@ namespace Application.Services.AdminServices.ProoductServices.Commands
             if (existingProduct == null)
                 return new GeneralDto { message = "محصول مورد نظر یافت نشد." };
 
-            _productRepository.DeleteAsync(existingProduct);
+       await     _productRepository.DeleteAsync(existingProduct);
             return new GeneralDto { message = "محصول با موفقیت حذف شد." };
         }
     }

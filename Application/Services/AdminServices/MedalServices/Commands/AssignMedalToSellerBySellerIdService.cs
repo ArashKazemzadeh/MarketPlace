@@ -39,7 +39,7 @@ public class AssignMedalToSellerBySellerIdService : IAssignMedalToSellerBySeller
             }
             else
             {
-                _medalRepository.AddAsync(new Medal { Type = MedalEnum.Bronze });
+             await   _medalRepository.AddAsync(new Medal { Type = MedalEnum.Bronze });
                 seller.Medals.Add(bronzeMedal);
 
             }
@@ -51,12 +51,12 @@ public class AssignMedalToSellerBySellerIdService : IAssignMedalToSellerBySeller
             var silverMedal = await _medalRepository.GetMedalByTypeAsync(MedalEnum.Silver);
             if (silverMedal != null)
             {
-                seller.Medals.Add(silverMedal);
+             seller.Medals.Add(silverMedal);
                
             }
             else
             {
-                _medalRepository.AddAsync(new Medal { Type = MedalEnum.Silver });
+             await   _medalRepository.AddAsync(new Medal { Type = MedalEnum.Silver });
                 seller.Medals.Add(silverMedal);
 
             }
@@ -72,7 +72,7 @@ public class AssignMedalToSellerBySellerIdService : IAssignMedalToSellerBySeller
             }
             else
             {
-                _medalRepository.AddAsync(new Medal { Type = MedalEnum.Gold });
+           await     _medalRepository.AddAsync(new Medal { Type = MedalEnum.Gold });
                 seller.Medals.Add(goldMedal);
 
             }
