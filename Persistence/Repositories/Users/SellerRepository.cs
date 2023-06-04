@@ -1,4 +1,5 @@
 ﻿using ConsoleApp1.Models;
+using Domin.IRepositories.Dtos;
 using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contexts.SqlServer;
@@ -24,7 +25,7 @@ namespace Persistence.Repositories.Users
 
         public async Task<List<Seller>> GetAllAsync()
         {
-            return await _dbSet.ToListAsync();
+            return await _dbSet.Where(x => x.IsRemoved == false).ToListAsync();
         }
 
         public async Task AddAsync(Seller seller)
@@ -33,15 +34,29 @@ namespace Persistence.Repositories.Users
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Seller seller)
+        public async Task<bool> UpdateAsync(SellerUpdateRepositoryDto sellerDto)
         {
-            _context.Entry(seller).State = EntityState.Modified;
+            var seller = await _dbSet.FirstOrDefaultAsync(x => x.Id == sellerDto.Id);
+            if (seller == null)
+            {
+                return false;
+            }
+            seller.IsRemoved = sellerDto.IsRemoved;
+            seller.CompanyName = sellerDto.CompanyName;
+            seller.IsActive = sellerDto.IsActive;
+            seller.CommissionPercentage = sellerDto.CommissionPercentage;
+           _context.Entry(seller).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            return true;
         }
 
-        public async Task DeleteAsync(Seller seller)
+        public async Task DeleteAsync(int id)
         {
-            _dbSet.Remove(seller);
+            var seller = await _dbSet.FirstOrDefaultAsync(s => s.Id == id);
+            if (seller != null)
+            {
+                seller.IsRemoved = true;
+            }
             await _context.SaveChangesAsync();
         }
     }

@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Contexts.SqlServer
 {
-    public class DatabaseContext: IdentityDbContext<User, IdentityRole<int>, int>
+    public class DatabaseContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
-        public DatabaseContext(DbContextOptions<DatabaseContext> options):base(options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
         }
         public DbSet<User> Users { get; set; }
@@ -59,7 +59,7 @@ namespace Persistence.Contexts.SqlServer
                     modelBuilder.Entity(entityType.Name).Property<DateTime?>("InsertTime");
                     modelBuilder.Entity(entityType.Name).Property<DateTime?>("UpdateTime");
                     modelBuilder.Entity(entityType.Name).Property<DateTime?>("RemoveTime");
-            
+
                 }
             }
 
@@ -123,10 +123,10 @@ namespace Persistence.Contexts.SqlServer
                         FullName = "جعفرقلی"
                     },
                 new User
-                    {
-                        Id = 3,
-                        FullName = "ساسان"
-                    }
+                {
+                    Id = 3,
+                    FullName = "ساسان"
+                }
                 );
             });
             modelBuilder.Entity<Seller>(entity =>
@@ -140,7 +140,7 @@ namespace Persistence.Contexts.SqlServer
                         CommissionPercentage = 10.5,
                         CommissionsAmount = 500,
                         SalesAmount = 10000,
-                        
+
                     }
                 );
             });
@@ -155,6 +155,7 @@ namespace Persistence.Contexts.SqlServer
                     Availability = 10,
                     Description = "لپ تاپ جدید و بسیار کارآمد",
                     IsActive = true,
+
                 },
                 new Product
                 {
@@ -166,8 +167,9 @@ namespace Persistence.Contexts.SqlServer
                     Availability = 5,
                     Description = "گوشی هوشمند با قابلیت‌های فراوان",
                     IsActive = true,
+
                 },
-           
+
                 new Product
                 {
                     Id = 20,
@@ -178,6 +180,7 @@ namespace Persistence.Contexts.SqlServer
                     Availability = 50,
                     Description = "بهترین کتاب برای یادگیری برنامه‌نویسی",
                     IsActive = true,
+
                 }
             );
 
@@ -186,9 +189,10 @@ namespace Persistence.Contexts.SqlServer
                 {
                     Id = 1,
                     Title = "عالی",
-                    IsConfirm = true,
+                    IsConfirm = false,
                     Description = "این محصول عالی است.",
-                    ProductId = 1
+                    ProductId = 1,
+                    CustomertId = 1
                 },
                 new Comment
                 {
@@ -196,16 +200,18 @@ namespace Persistence.Contexts.SqlServer
                     Title = "بد",
                     IsConfirm = false,
                     Description = "این محصول بد است.",
-                    ProductId = 1
+                    ProductId = 1,
+                    CustomertId = 2
                 },
-   
+
                 new Comment
                 {
                     Id = 20,
                     Title = "خوب",
-                    IsConfirm = true,
+                    IsConfirm = false,
                     Description = "این محصول خوب است.",
-                    ProductId = 2
+                    ProductId = 2,
+                    CustomertId = 2
                 }
             );
             modelBuilder.Entity<Booth>().HasData(
@@ -215,10 +221,10 @@ namespace Persistence.Contexts.SqlServer
                     Name = "غذایی",
                     Description = "فروشگاه غذایی",
                     SellerId = 1
-                } 
+                }
             );
 
-           
+
 
         }
         public override int SaveChanges()
@@ -248,7 +254,7 @@ namespace Persistence.Contexts.SqlServer
                 if (item.State == EntityState.Added && inserted != null)
                 {
                     item.Property("RemoveTime").CurrentValue = DateTime.Now;
-  
+
                 }
             }
 

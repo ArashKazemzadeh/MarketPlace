@@ -4,17 +4,16 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Persistence.Contexts.SqlServer;
 
 namespace Persistence.Repositories.Users
 {
     public class CustomerRepository : ICustomerRepository
     {
-        private readonly DbContext _context;
+        private readonly DatabaseContext _context;
         private readonly DbSet<Customer> _dbSet;
 
-        public CustomerRepository(DbContext context)
+        public CustomerRepository(DatabaseContext context)
         {
             _context = context;
             _dbSet = _context.Set<Customer>();
@@ -24,7 +23,7 @@ namespace Persistence.Repositories.Users
         {
             return await _dbSet.FindAsync(id);
         }
-
+       
         public async Task<List<Customer>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();

@@ -4,6 +4,8 @@ using Application.IServices.AdminServices.BoothServices.Queries;
 using Application.IServices.AdminServices.ConfirmServices;
 using Application.IServices.AdminServices.ProoductServices.Commands;
 using Application.IServices.AdminServices.ProoductServices.Queries;
+using Application.IServices.AdminServices.UserService.Commands;
+using Application.IServices.AdminServices.UserService.Queries;
 using Application.IServices.Visitors;
 using Application.Services.AdminServices.BoothServices.Commands;
 using Application.Services.AdminServices.BoothServices.Queries;
@@ -11,6 +13,7 @@ using Application.Services.AdminServices.CommentService.Command;
 using Application.Services.AdminServices.CommentService.Query;
 using Application.Services.AdminServices.ProoductServices.Commands;
 using Application.Services.AdminServices.ProoductServices.Queries;
+using Application.Services.AdminServices.UserServices.Commands;
 using Application.Services.AdminServices.UserServices.Queries;
 using Application.Services.Visitors.SaveVisitorInfo;
 using Application.Visitors.SaveVisitorInfo;
@@ -63,7 +66,7 @@ builder.Services.AddScoped<IGetProductsWithSellerNameAsyncService, GetProductsWi
 builder.Services.AddScoped<IGeAllCommentsByFalseConFirmService, GeAllCommentsByFalseConFirmService>();
 builder.Services.AddScoped<IConfirmForAddCommentService, ConfirmForAddCommentService>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
-builder.Services.AddScoped<IGetAllSellerService, GetAllSellerService>();
+builder.Services.AddScoped<IGetAllSellerAdminService, GetAllSellerAdminService>();
 builder.Services.AddScoped<IUpdateProductAdminService, UpdateProductAdminService>();
 builder.Services.AddScoped<IDeleteProductAdminService, DeleteProductAdminService>();
 builder.Services.AddScoped<IGetProductByIdService, GetProductByIdService>();
@@ -72,6 +75,10 @@ builder.Services.AddScoped<IBoothRepository, BoothRepository>();
 builder.Services.AddScoped<IGetBoothByIdService, GetBoothByIdService>();
 builder.Services.AddScoped<IDeleteBoothAdminService, DeleteBoothAdminService>();
 builder.Services.AddScoped<IUpdateBoothAdminService, UpdateBoothAdminService>();
+builder.Services.AddScoped<IDeleteSellerByIdAdminService, DeleteSellerByIdAdminService>();
+builder.Services.AddScoped<IUpdateSellerAdminService, UpdateSellerAdminService>();
+builder.Services.AddScoped<IGetSellerByIdAdminService, GetSellerByIdAdminService>(); 
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 //---------------------------------------------------------------------------
 
 #endregion

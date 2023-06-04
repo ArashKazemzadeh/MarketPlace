@@ -1,6 +1,8 @@
 ﻿using Application.IServices.AdminServices.ConfirmServices;
 using Application.IServices.AdminServices.ProoductServices.Queries;
 using Microsoft.AspNetCore.Mvc;
+using WebSite.EndPoint.Areas.Admin.Models;
+
 namespace WebSite.EndPoint.Areas.Admin.Controllers;
 [Area("Admin")]
 public class ConfirmController : Controller
@@ -24,18 +26,33 @@ public class ConfirmController : Controller
     public async Task<IActionResult> InConfirmProducts()
     {
         var noConfirmProduct = await _getProductsWithSellerNameAsyncService.Execute();
-        return View(noConfirmProduct);
+        var viewModels = noConfirmProduct.Select(p => new ProductForConfirmVM
+        {   
+            Id=p.Id,
+            Name = p.Name,
+            Description = p.Description,
+            BasePrice = p.BasePrice,
+            Availability = p.Availability,
+            SellerName = p.SellerName,
+            IsConfirm = p.IsConfirm
+
+        }).ToList();
+        return View(viewModels);
     }
   
     public async Task<IActionResult> ToConfirmingProduct(int porductId)
     {
         var result=await _confirmForAddProductService.Execute(porductId);
+        var noConfirmProduct = await _getProductsWithSellerNameAsyncService.Execute();
+
+       
         return RedirectToAction("InConfirmProducts");
     }
  
     public async Task<IActionResult> InConfirmComments()
     {
         var noConfirmComment = await _allCommentsByFalseConFirmService.Execute();
+     
         return View(noConfirmComment);
     }
    

@@ -1,4 +1,6 @@
-﻿using ConsoleApp1.Models;
+﻿using ConsoleApp.Models;
+using ConsoleApp1.Models;
+using Domin.IRepositories.Dtos;
 using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contexts.SqlServer;
@@ -18,9 +20,19 @@ namespace Persistence.Repositories.Orders
         {
             return await _dbSet.FindAsync(id);
         }
-        public async Task<List<Booth>> GetAllAsync()
+        public async Task<List<BoothRepositoryDto>> GetAllAsync()
         {
-            return await _dbSet.ToListAsync();
+           var booth= await _dbSet.AsNoTracking().Include(x=>x.Seller).ToListAsync();
+           var result = booth.Select(b=>new BoothRepositoryDto
+           {
+               Id = b.Id,
+               Name = b.Name,
+               Description = b.Description,
+               Seller = b.Seller,
+               SellerId = b.SellerId,
+               SellerName = b.Seller.CompanyName
+           }).ToList();
+           return result;
         }
         public async Task AddAsync(Booth booth)
         {

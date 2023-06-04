@@ -12,8 +12,8 @@ using Persistence.Contexts.SqlServer;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230603173657_init")]
-    partial class init
+    [Migration("20230604065552_booth")]
+    partial class booth
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -169,6 +169,15 @@ namespace Persistence.Migrations
                         .HasFilter("[SellerId] IS NOT NULL");
 
                     b.ToTable("Booths", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "فروشگاه غذایی",
+                            Name = "غذایی",
+                            SellerId = 1
+                        });
                 });
 
             modelBuilder.Entity("ConsoleApp1.Models.Cart", b =>
@@ -283,6 +292,35 @@ namespace Persistence.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Comments", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "این محصول عالی است.",
+                            IsConfirm = false,
+                            ProductId = 1,
+                            RegisterDate = new DateTime(2023, 6, 4, 10, 25, 52, 111, DateTimeKind.Local).AddTicks(5129),
+                            Title = "عالی"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "این محصول بد است.",
+                            IsConfirm = false,
+                            ProductId = 1,
+                            RegisterDate = new DateTime(2023, 6, 4, 10, 25, 52, 111, DateTimeKind.Local).AddTicks(5182),
+                            Title = "بد"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Description = "این محصول خوب است.",
+                            IsConfirm = false,
+                            ProductId = 2,
+                            RegisterDate = new DateTime(2023, 6, 4, 10, 25, 52, 111, DateTimeKind.Local).AddTicks(5184),
+                            Title = "خوب"
+                        });
                 });
 
             modelBuilder.Entity("ConsoleApp1.Models.Customer", b =>
@@ -736,7 +774,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a2c3353e-a7c5-4858-bd42-c38d6eda0b91",
+                            ConcurrencyStamp = "38c006cc-c128-4469-ae34-bcf8a40d1b13",
                             EmailConfirmed = false,
                             FullName = "حسن",
                             LockoutEnabled = false,
@@ -747,7 +785,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "da6c3d64-c1f4-4772-b8aa-430e2206ad6c",
+                            ConcurrencyStamp = "0e031307-3509-4e0d-8c1d-bfb5b59e005a",
                             EmailConfirmed = false,
                             FullName = "جعفرقلی",
                             LockoutEnabled = false,
@@ -758,7 +796,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cf98734d-7e63-453a-a1bf-36f4728477d9",
+                            ConcurrencyStamp = "65d1e10c-fccd-41ef-b142-2d1f3768ca27",
                             EmailConfirmed = false,
                             FullName = "ساسان",
                             LockoutEnabled = false,
@@ -963,7 +1001,8 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("ConsoleApp1.Models.Seller", "Seller")
                         .WithOne("Booth")
-                        .HasForeignKey("ConsoleApp1.Models.Booth", "SellerId");
+                        .HasForeignKey("ConsoleApp1.Models.Booth", "SellerId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Seller");
                 });
@@ -993,6 +1032,7 @@ namespace Persistence.Migrations
                     b.HasOne("ConsoleApp1.Models.Product", "Product")
                         .WithMany("Comments")
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("FK_Comment_Product");
 
                     b.Navigation("Customer");

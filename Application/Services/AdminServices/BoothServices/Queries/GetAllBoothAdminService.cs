@@ -19,7 +19,9 @@ namespace Application.Services.AdminServices.BoothServices.Queries
             {
                 Id = booth.Id,
                 Name = booth.Name,
-                Description = booth.Description
+                Description = booth.Description,
+                Seller = booth.Seller.CompanyName,
+                SellerId = booth.Seller.Id
             }).ToList();
             return boothDtos;
         }

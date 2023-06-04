@@ -9,12 +9,9 @@ namespace Application.Services.AdminServices.BoothServices.Queries
     public class GetBoothByIdService : IGetBoothByIdService
     {
         private readonly IBoothRepository _boothRepository;
-        //private readonly IMapper _mapper;
-
         public GetBoothByIdService(IBoothRepository boothRepository, IMapper mapper)
         {
             _boothRepository = boothRepository;
-            //_mapper = mapper;
         }
         public async Task<GeneralDto<BoothDto>> Execute(int id)
         {

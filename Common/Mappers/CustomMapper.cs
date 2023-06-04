@@ -2,12 +2,13 @@
 
 namespace Common.Mappers
 {
-    public class CustomMapper<TDto, TEntity>
+    public class CustomMapper<TDto, TEntity> : Profile, ICustomMapper<TDto, TEntity>
     {
         private readonly IMapper _mapper;
 
         public CustomMapper(IMapper mapper)
         {
+            CreateMap<TDto, TEntity>().ReverseMap();
             _mapper = mapper;
         }
 

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class booth : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -277,7 +277,8 @@ namespace Persistence.Migrations
                         name: "FK_Booths_Sellers_SellerId",
                         column: x => x.SellerId,
                         principalTable: "Sellers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -457,7 +458,8 @@ namespace Persistence.Migrations
                         name: "FK_Comment_Product",
                         column: x => x.ProductId,
                         principalTable: "Product",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Comments_Customer_CustomerId",
                         column: x => x.CustomerId,
@@ -574,9 +576,9 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "InsertTime", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RemoveTime", "SecurityStamp", "TwoFactorEnabled", "UpdateTime", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "a2c3353e-a7c5-4858-bd42-c38d6eda0b91", null, false, "حسن", null, false, null, null, null, null, null, false, null, null, false, null, null },
-                    { 2, 0, "da6c3d64-c1f4-4772-b8aa-430e2206ad6c", null, false, "جعفرقلی", null, false, null, null, null, null, null, false, null, null, false, null, null },
-                    { 3, 0, "cf98734d-7e63-453a-a1bf-36f4728477d9", null, false, "ساسان", null, false, null, null, null, null, null, false, null, null, false, null, null }
+                    { 1, 0, "38c006cc-c128-4469-ae34-bcf8a40d1b13", null, false, "حسن", null, false, null, null, null, null, null, false, null, null, false, null, null },
+                    { 2, 0, "0e031307-3509-4e0d-8c1d-bfb5b59e005a", null, false, "جعفرقلی", null, false, null, null, null, null, null, false, null, null, false, null, null },
+                    { 3, 0, "65d1e10c-fccd-41ef-b142-2d1f3768ca27", null, false, "ساسان", null, false, null, null, null, null, null, false, null, null, false, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -602,6 +604,21 @@ namespace Persistence.Migrations
                 table: "Sellers",
                 columns: new[] { "Id", "CommissionPercentage", "CommissionsAmount", "CompanyName", "InsertTime", "IsActive", "RemoveTime", "SalesAmount", "UpdateTime" },
                 values: new object[] { 1, 10.5, 500, "شرکت نمونه", null, true, null, 10000, null });
+
+            migrationBuilder.InsertData(
+                table: "Booths",
+                columns: new[] { "Id", "Description", "InsertTime", "Name", "RemoveTime", "SellerId", "UpdateTime" },
+                values: new object[] { 1, "فروشگاه غذایی", null, "غذایی", null, 1, null });
+
+            migrationBuilder.InsertData(
+                table: "Comments",
+                columns: new[] { "Id", "CustomerId", "CustomertId", "Description", "InsertTime", "IsConfirm", "ProductId", "RegisterDate", "RemoveTime", "Title", "UpdateTime" },
+                values: new object[,]
+                {
+                    { 1, null, null, "این محصول عالی است.", null, false, 1, new DateTime(2023, 6, 4, 10, 25, 52, 111, DateTimeKind.Local).AddTicks(5129), null, "عالی", null },
+                    { 2, null, null, "این محصول بد است.", null, false, 1, new DateTime(2023, 6, 4, 10, 25, 52, 111, DateTimeKind.Local).AddTicks(5182), null, "بد", null },
+                    { 20, null, null, "این محصول خوب است.", null, false, 2, new DateTime(2023, 6, 4, 10, 25, 52, 111, DateTimeKind.Local).AddTicks(5184), null, "خوب", null }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_CustomerId",

@@ -38,11 +38,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.SalesAmount)
             </td>
-           @* <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>*@
+            <td>
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">ویرایش فروشنده</a>
+                <a class="btn btn-primary" asp-action="Delete" asp-route-id="@item.Id">حذف فروشنده</a>
+            </td>
         </tr>
 }
     </tbody>

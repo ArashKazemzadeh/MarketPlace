@@ -19,7 +19,7 @@ namespace Infrustracture.EntitiesConfiguration
 
             entity.HasOne(d => d.Seller).WithOne(p => p.Booth)
                 .HasForeignKey<Booth>(d => d.SellerId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.SetNull);
 
         }
     }

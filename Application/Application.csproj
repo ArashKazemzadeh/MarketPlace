@@ -8,14 +8,11 @@
 
   <ItemGroup>
     <Compile Remove="IRepositories\**" />
+    <Compile Remove="IServices\AdminServices\UserServices\**" />
     <EmbeddedResource Remove="IRepositories\**" />
+    <EmbeddedResource Remove="IServices\AdminServices\UserServices\**" />
     <None Remove="IRepositories\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="IServices\AdminServices\UserServices\Commands\" />
-    <Folder Include="IServices\AdminServices\UserServices\Queries\" />
-    <Folder Include="Services\AdminServices\UserServices\Commands\" />
+    <None Remove="IServices\AdminServices\UserServices\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\Domin\Domin.csproj" />
   </ItemGroup>
 

@@ -6,108 +6,116 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class init4 : Migration
+    public partial class _1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AddColumn<bool>(
+                name: "IsRemoved",
+                table: "Sellers",
+                type: "bit",
+                nullable: false,
+                defaultValue: false);
+
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "ConcurrencyStamp",
-                value: "aba44d0f-29e8-4ec2-9957-2067dfdf7adc");
+                value: "f9558069-d498-447c-9ef2-1d3eb3e4fb82");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "ConcurrencyStamp",
-                value: "00e61bb9-a1a4-4655-a4da-c92b8fe5ee85");
+                value: "f4dcd4b7-0c55-47c2-8ce9-71cc0bb25760");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "ConcurrencyStamp",
-                value: "9ad8f339-3c6b-411b-9b49-ebb7f21811c8");
-
-            migrationBuilder.InsertData(
-                table: "Booths",
-                columns: new[] { "Id", "Description", "InsertTime", "Name", "RemoveTime", "SellerId", "UpdateTime" },
-                values: new object[] { 1, "فروشگاه غذایی", null, "غذایی", null, 1, null });
+                value: "f0db0a75-0a17-4fc3-902f-2fa538e0a5ac");
 
             migrationBuilder.UpdateData(
                 table: "Comments",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "RegisterDate",
-                value: new DateTime(2023, 6, 3, 21, 14, 56, 994, DateTimeKind.Local).AddTicks(1711));
+                value: new DateTime(2023, 6, 4, 11, 56, 15, 177, DateTimeKind.Local).AddTicks(8226));
 
             migrationBuilder.UpdateData(
                 table: "Comments",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "RegisterDate",
-                value: new DateTime(2023, 6, 3, 21, 14, 56, 994, DateTimeKind.Local).AddTicks(1732));
+                value: new DateTime(2023, 6, 4, 11, 56, 15, 177, DateTimeKind.Local).AddTicks(8242));
 
             migrationBuilder.UpdateData(
                 table: "Comments",
                 keyColumn: "Id",
                 keyValue: 20,
                 column: "RegisterDate",
-                value: new DateTime(2023, 6, 3, 21, 14, 56, 994, DateTimeKind.Local).AddTicks(1733));
+                value: new DateTime(2023, 6, 4, 11, 56, 15, 177, DateTimeKind.Local).AddTicks(8244));
+
+            migrationBuilder.UpdateData(
+                table: "Sellers",
+                keyColumn: "Id",
+                keyValue: 1,
+                column: "IsRemoved",
+                value: false);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData(
-                table: "Booths",
-                keyColumn: "Id",
-                keyValue: 1);
+            migrationBuilder.DropColumn(
+                name: "IsRemoved",
+                table: "Sellers");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "ConcurrencyStamp",
-                value: "5e2be3fa-0b1c-4266-97a5-51150751306a");
+                value: "38c006cc-c128-4469-ae34-bcf8a40d1b13");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "ConcurrencyStamp",
-                value: "66bf9df3-bac0-4047-b5c7-2488748eae11");
+                value: "0e031307-3509-4e0d-8c1d-bfb5b59e005a");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "ConcurrencyStamp",
-                value: "0f0b70c3-03e6-478b-8ef8-b9e13768d892");
+                value: "65d1e10c-fccd-41ef-b142-2d1f3768ca27");
 
             migrationBuilder.UpdateData(
                 table: "Comments",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "RegisterDate",
-                value: new DateTime(2023, 6, 3, 21, 10, 37, 636, DateTimeKind.Local).AddTicks(2531));
+                value: new DateTime(2023, 6, 4, 10, 25, 52, 111, DateTimeKind.Local).AddTicks(5129));
 
             migrationBuilder.UpdateData(
                 table: "Comments",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "RegisterDate",
-                value: new DateTime(2023, 6, 3, 21, 10, 37, 636, DateTimeKind.Local).AddTicks(2553));
+                value: new DateTime(2023, 6, 4, 10, 25, 52, 111, DateTimeKind.Local).AddTicks(5182));
 
             migrationBuilder.UpdateData(
                 table: "Comments",
                 keyColumn: "Id",
                 keyValue: 20,
                 column: "RegisterDate",
-                value: new DateTime(2023, 6, 3, 21, 10, 37, 636, DateTimeKind.Local).AddTicks(2555));
+                value: new DateTime(2023, 6, 4, 10, 25, 52, 111, DateTimeKind.Local).AddTicks(5184));
         }
     }
 }

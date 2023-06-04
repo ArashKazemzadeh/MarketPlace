@@ -1,4 +1,5 @@
 ﻿using ConsoleApp1.Models;
+using Domin.Entities.Users;
 using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contexts.SqlServer;

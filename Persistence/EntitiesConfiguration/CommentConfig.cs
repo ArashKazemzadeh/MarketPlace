@@ -14,7 +14,7 @@ namespace Infrustracture.EntitiesConfiguration
 
             entity.HasOne(d => d.Product).WithMany(p => p.Comments)
                 .HasForeignKey(d => d.ProductId)
-                .HasConstraintName("FK_Comment_Product");
+                .HasConstraintName("FK_Comment_Product").OnDelete(DeleteBehavior.Cascade);
         }
     }
 

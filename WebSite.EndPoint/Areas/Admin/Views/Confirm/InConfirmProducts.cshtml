@@ -1,47 +1,28 @@
-﻿@model IEnumerable<ConsoleApp.Models.ProductDto>
+﻿@model IEnumerable<WebSite.EndPoint.Areas.Admin.Models.ProductForConfirmVM>
 
 @{
     ViewData["Title"] = "ConfirmProducts";
 }
-
-
-
-
 <table class="table table-bordered m-2">
     <thead>
-        <tr>
-            
-            <th>
-               عنوان کالا
-            </th>
-            <th>
-              قیمت پایه
-            </th>
-
-            <th>
-               تعداد قابل فروش
-            </th>
-            <th>
-               توضیحات
-            </th>
-            <th>
-               نام فروشنده
-            </th>
-        
-        </tr>
+    <tr>
+        <th>نام</th>
+        <th>قیمت</th>
+        <th>موجودی</th>
+        <th>توضیحات</th>
+        <th>نام فروشنده</th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
         <tr>
-           
             <td>
                 @item.Name
             </td>
             <td>
                 @item.BasePrice
             </td>
-            
-           
             <td>
                 @item.Availability
             </td>
@@ -51,12 +32,11 @@
             <td>
                 @item.SellerName
             </td>
-            
             <td>
-
-                    <a class="btn btn-primary" asp-action="ToConfirmingProduct" asp-route-porductId="@item.Id">تایید کالا</a>
+                <a class="btn btn-primary" asp-action="ToConfirmingProduct" asp-route-productId="@item.Id">تایید کالا</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
+

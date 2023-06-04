@@ -28,10 +28,10 @@
                 نام فروشنده
             </th>
             <th>
-                شناسه محصول
+                نام محصول
             </th>
             <th>
-                شناسه مشتری
+                نام خریدار محصول
             </th>
             <th></th>
         </tr>
@@ -56,10 +56,10 @@
                     @item.SellerName
                 </td>
                 <td>
-                    @item.ProductId
+                    @item.ProductName
                 </td>
                 <td>
-                    @item.CustomertId
+                    @item.CustomerName
                 </td>
                 <td>
                     <a class="btn btn-primary" asp-action="ToConfirmingComment" asp-route-commentId="@item.Id">تایید کامنت</a>

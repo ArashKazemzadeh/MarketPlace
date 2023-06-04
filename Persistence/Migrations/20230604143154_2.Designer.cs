@@ -12,8 +12,8 @@ using Persistence.Contexts.SqlServer;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230603174037_init1")]
-    partial class init1
+    [Migration("20230604143154_2")]
+    partial class _2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -169,6 +169,15 @@ namespace Persistence.Migrations
                         .HasFilter("[SellerId] IS NOT NULL");
 
                     b.ToTable("Booths", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "فروشگاه غذایی",
+                            Name = "غذایی",
+                            SellerId = 1
+                        });
                 });
 
             modelBuilder.Entity("ConsoleApp1.Models.Cart", b =>
@@ -248,7 +257,7 @@ namespace Persistence.Migrations
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CustomertId")
+                    b.Property<int>("CustomertId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -288,28 +297,31 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1,
+                            CustomertId = 1,
                             Description = "این محصول عالی است.",
-                            IsConfirm = true,
+                            IsConfirm = false,
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 3, 21, 10, 37, 636, DateTimeKind.Local).AddTicks(2531),
+                            RegisterDate = new DateTime(2023, 6, 4, 18, 1, 54, 411, DateTimeKind.Local).AddTicks(656),
                             Title = "عالی"
                         },
                         new
                         {
                             Id = 2,
+                            CustomertId = 2,
                             Description = "این محصول بد است.",
                             IsConfirm = false,
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 3, 21, 10, 37, 636, DateTimeKind.Local).AddTicks(2553),
+                            RegisterDate = new DateTime(2023, 6, 4, 18, 1, 54, 411, DateTimeKind.Local).AddTicks(676),
                             Title = "بد"
                         },
                         new
                         {
                             Id = 20,
+                            CustomertId = 2,
                             Description = "این محصول خوب است.",
-                            IsConfirm = true,
+                            IsConfirm = false,
                             ProductId = 2,
-                            RegisterDate = new DateTime(2023, 6, 3, 21, 10, 37, 636, DateTimeKind.Local).AddTicks(2555),
+                            RegisterDate = new DateTime(2023, 6, 4, 18, 1, 54, 411, DateTimeKind.Local).AddTicks(678),
                             Title = "خوب"
                         });
                 });
@@ -623,6 +635,9 @@ namespace Persistence.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -645,6 +660,7 @@ namespace Persistence.Migrations
                             CommissionsAmount = 500,
                             CompanyName = "شرکت نمونه",
                             IsActive = true,
+                            IsRemoved = false,
                             SalesAmount = 10000
                         });
                 });
@@ -765,7 +781,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5e2be3fa-0b1c-4266-97a5-51150751306a",
+                            ConcurrencyStamp = "11337733-16b4-4f16-924f-7fcbb481f671",
                             EmailConfirmed = false,
                             FullName = "حسن",
                             LockoutEnabled = false,
@@ -776,7 +792,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "66bf9df3-bac0-4047-b5c7-2488748eae11",
+                            ConcurrencyStamp = "f2a69889-125c-46fd-b171-b78344ee8570",
                             EmailConfirmed = false,
                             FullName = "جعفرقلی",
                             LockoutEnabled = false,
@@ -787,7 +803,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0f0b70c3-03e6-478b-8ef8-b9e13768d892",
+                            ConcurrencyStamp = "5ce96e7c-0372-46fb-9d4b-2ec1523e6575",
                             EmailConfirmed = false,
                             FullName = "ساسان",
                             LockoutEnabled = false,
@@ -992,7 +1008,8 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("ConsoleApp1.Models.Seller", "Seller")
                         .WithOne("Booth")
-                        .HasForeignKey("ConsoleApp1.Models.Booth", "SellerId");
+                        .HasForeignKey("ConsoleApp1.Models.Booth", "SellerId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Seller");
                 });
@@ -1022,6 +1039,7 @@ namespace Persistence.Migrations
                     b.HasOne("ConsoleApp1.Models.Product", "Product")
                         .WithMany("Comments")
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("FK_Comment_Product");
 
                     b.Navigation("Customer");

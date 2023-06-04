@@ -2,6 +2,7 @@
 using Application.IServices.AdminServices.BoothServices.Queries;
 using ConsoleApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using WebSite.EndPoint.Areas.Admin.Models;
 
 namespace WebSite.EndPoint.Areas.Admin.Controllers
 {
@@ -25,7 +26,14 @@ namespace WebSite.EndPoint.Areas.Admin.Controllers
         public async Task< IActionResult> Index()
         {
            var booths=await _allBoothAdminService.Execute();
-            return View(booths);
+           var veiwModel = booths.Select(b => new BoothVM
+           {
+               Id = b.Id,
+               Name = b.Name,
+               Description = b.Description,
+               Seller = b.Seller
+           }).ToList();
+            return View(veiwModel);
         }
         public async Task<IActionResult> Delete(int id)
         {

@@ -16,7 +16,7 @@ public  class Comment
     public int? ProductId { get; set; }
 
     public virtual Product? Product { get; set; }
-    public int? CustomertId { get; set; }
+    public int CustomertId { get; set; }
 
     public virtual Customer? Customer { get; set; }
 }

@@ -254,7 +254,7 @@ namespace Persistence.Migrations
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CustomertId")
+                    b.Property<int>("CustomertId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -294,28 +294,31 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1,
+                            CustomertId = 1,
                             Description = "این محصول عالی است.",
-                            IsConfirm = true,
+                            IsConfirm = false,
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 3, 21, 14, 56, 994, DateTimeKind.Local).AddTicks(1711),
+                            RegisterDate = new DateTime(2023, 6, 4, 18, 1, 54, 411, DateTimeKind.Local).AddTicks(656),
                             Title = "عالی"
                         },
                         new
                         {
                             Id = 2,
+                            CustomertId = 2,
                             Description = "این محصول بد است.",
                             IsConfirm = false,
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 3, 21, 14, 56, 994, DateTimeKind.Local).AddTicks(1732),
+                            RegisterDate = new DateTime(2023, 6, 4, 18, 1, 54, 411, DateTimeKind.Local).AddTicks(676),
                             Title = "بد"
                         },
                         new
                         {
                             Id = 20,
+                            CustomertId = 2,
                             Description = "این محصول خوب است.",
-                            IsConfirm = true,
+                            IsConfirm = false,
                             ProductId = 2,
-                            RegisterDate = new DateTime(2023, 6, 3, 21, 14, 56, 994, DateTimeKind.Local).AddTicks(1733),
+                            RegisterDate = new DateTime(2023, 6, 4, 18, 1, 54, 411, DateTimeKind.Local).AddTicks(678),
                             Title = "خوب"
                         });
                 });
@@ -629,6 +632,9 @@ namespace Persistence.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -651,6 +657,7 @@ namespace Persistence.Migrations
                             CommissionsAmount = 500,
                             CompanyName = "شرکت نمونه",
                             IsActive = true,
+                            IsRemoved = false,
                             SalesAmount = 10000
                         });
                 });
@@ -771,7 +778,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "aba44d0f-29e8-4ec2-9957-2067dfdf7adc",
+                            ConcurrencyStamp = "11337733-16b4-4f16-924f-7fcbb481f671",
                             EmailConfirmed = false,
                             FullName = "حسن",
                             LockoutEnabled = false,
@@ -782,7 +789,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "00e61bb9-a1a4-4655-a4da-c92b8fe5ee85",
+                            ConcurrencyStamp = "f2a69889-125c-46fd-b171-b78344ee8570",
                             EmailConfirmed = false,
                             FullName = "جعفرقلی",
                             LockoutEnabled = false,
@@ -793,7 +800,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9ad8f339-3c6b-411b-9b49-ebb7f21811c8",
+                            ConcurrencyStamp = "5ce96e7c-0372-46fb-9d4b-2ec1523e6575",
                             EmailConfirmed = false,
                             FullName = "ساسان",
                             LockoutEnabled = false,
@@ -998,7 +1005,8 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("ConsoleApp1.Models.Seller", "Seller")
                         .WithOne("Booth")
-                        .HasForeignKey("ConsoleApp1.Models.Booth", "SellerId");
+                        .HasForeignKey("ConsoleApp1.Models.Booth", "SellerId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Seller");
                 });
@@ -1028,6 +1036,7 @@ namespace Persistence.Migrations
                     b.HasOne("ConsoleApp1.Models.Product", "Product")
                         .WithMany("Comments")
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("FK_Comment_Product");
 
                     b.Navigation("Customer");

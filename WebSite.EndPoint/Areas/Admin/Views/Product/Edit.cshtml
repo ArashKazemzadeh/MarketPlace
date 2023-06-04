@@ -24,9 +24,9 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-           
-                <input type="hidden" asp-for="Id" class="form-control" />
-           
+
+            <input type="hidden" asp-for="Id" class="form-control" />
+
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -37,30 +37,35 @@
                 <input asp-for="BasePrice" class="form-control" />
                 <span asp-validation-for="BasePrice" class="text-danger"></span>
             </div>
-          
+
             <div class="form-group">
                 <label asp-for="Availability" class="control-label"></label>
                 <input asp-for="Availability" class="form-control" />
                 <span asp-validation-for="Availability" class="text-danger"></span>
             </div>
-                <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
             <div class="row form-group">
-                    <div class=" form-check col-6 m-1">
-                        <label class="form-check-label">
-                            <input  class="form-check-input" asp-for="IsAuction" /> @Html.DisplayNameFor(model => model.IsAuction)
-                        </label>
-                    </div>
-                    <div class=" form-check col-6 m-1">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="IsConfirm" /> @Html.DisplayNameFor(model => model.IsConfirm)
-                        </label>
-                    </div>
+                <div class=" form-check col-6 m-1">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsAuction" /> @Html.DisplayNameFor(model => model.IsAuction)
+                    </label>
                 </div>
-                
+                <div class=" form-check col-6 m-1">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                    </label>
+                </div>
+                <div class=" form-check col-6 m-1">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsConfirm" /> @Html.DisplayNameFor(model => model.IsConfirm)
+                    </label>
+                </div>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

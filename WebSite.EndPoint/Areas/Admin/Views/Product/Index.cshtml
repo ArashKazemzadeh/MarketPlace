@@ -7,18 +7,11 @@
 <table class="table table-bordered m-2">
     <thead>
         <tr>
-           
             <th>
-               عنوان
+                عنوان
             </th>
             <th>
                 قیمت پایه
-            </th>
-            <th>
-               مزایده
-            </th>
-            <th>
-                تاییدیه
             </th>
             <th>
                 تعداد در انبار
@@ -30,7 +23,13 @@
                 نام شرکت/برند
             </th>
             <th>
-               مجوز خرید
+                تایید/عدم تایید
+            </th>
+            <th>
+                مزایده
+            </th>
+            <th>
+                فعال/غیرفعال
             </th>
             <th>
                 عملیات
@@ -38,37 +37,38 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BasePrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsAuction)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsConfirm)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Availability)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SellerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BasePrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Availability)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SellerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsConfirm)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAuction)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
                     <a class="btn btn-primary" asp-action="Delete" asp-route-Id="@item.Id">حذف کالا</a>
                     <a class="btn btn-primary" asp-action="Edit" asp-route-Id="@item.Id">ویرایش کالا</a>
-            </td>
-        </tr>
-}
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

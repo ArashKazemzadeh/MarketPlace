@@ -9,12 +9,10 @@ namespace Application.Services.AdminServices.BoothServices.Commands
     public class UpdateBoothAdminService : IUpdateBoothAdminService
     {
         private readonly IBoothRepository _boothRepository;
-        private readonly IMapper _mapper;
 
         public UpdateBoothAdminService(IBoothRepository boothRepository, IMapper mapper)
         {
             _boothRepository = boothRepository;
-            _mapper = mapper;
         }
         public async Task<GeneralDto> Execute(BoothDto booth)
         {

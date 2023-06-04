@@ -26,7 +26,7 @@ namespace WebSite.EndPoint.Areas.Admin.Controllers
         public async Task< IActionResult> Index()
        {
            var products = await _allProductsWithSellerNameAsyncService.ExecuteAll();
-
+          
             return View(products);
         }
        public async Task<IActionResult> Delete(int id)
@@ -40,13 +40,13 @@ namespace WebSite.EndPoint.Areas.Admin.Controllers
            var productVM = new ProductVm
            {
                Id = product.Data.Id,
-               Name = product.Data.Name,
-               Availability = product.Data.Availability,
-               BasePrice = product.Data.BasePrice,
-               Description = product.Data.Description,
-               IsAuction = product.Data.IsAuction,
+               Name = product.Data.Name,//
+               Availability = product.Data.Availability,//
+               BasePrice = product.Data.BasePrice,//
+               Description = product.Data.Description,//
+               IsAuction = product.Data.IsAuction,//
                IsConfirm = product.Data.IsConfirm,
-               IsActive = product.Data.IsActive,
+               IsActive = product.Data.IsActive,//
         };
           
            return View(productVM);
