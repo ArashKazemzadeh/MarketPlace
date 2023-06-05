@@ -40,9 +40,9 @@ public class ConfirmController : Controller
         return View(viewModels);
     }
   
-    public async Task<IActionResult> ToConfirmingProduct(int porductId)
+    public async Task<IActionResult> ToConfirmingProduct(int productId)
     {
-        var result=await _confirmForAddProductService.Execute(porductId);
+        var result=await _confirmForAddProductService.Execute(productId);
         var noConfirmProduct = await _getProductsWithSellerNameAsyncService.Execute();
 
        

@@ -2,28 +2,27 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-
-<div class="statbox widget box box-shadow">
-    <div class="widget-header">
-        <div class="row">
-            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                <h4></h4>
+<div class="row">
+    <div class="statbox widget box box-shadow m-5 col-10">
+        <div class="widget-header">
+            <div class="row">
+                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                    <h4></h4>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="widget-content widget-content-area">
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
-                <thead>
+        <div class="widget-content widget-content-area">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+                    <thead>
                     <tr>
                         <th class="">  شرکت/برند/نام</th>
                         <th class="">   توضیحات </th>
                         <th class=""> نام دارنده غرفه</th>
                         <th class="text-center">کارها</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     @foreach (var item in Model)
                     {
                         <tr>
@@ -45,10 +44,14 @@
                             </td>
                         </tr>
                     }
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+    <div class="col-2">.</div>
 </div>
+
+
 
 

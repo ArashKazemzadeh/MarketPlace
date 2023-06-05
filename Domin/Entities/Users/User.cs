@@ -8,4 +8,5 @@ namespace Domin.Entities.Users
     {
         public string FullName { get; set; }
     }
+   
 }

@@ -6,6 +6,7 @@ using Application.IServices.AdminServices.ProoductServices.Commands;
 using Application.IServices.AdminServices.ProoductServices.Queries;
 using Application.IServices.AdminServices.UserService.Commands;
 using Application.IServices.AdminServices.UserService.Queries;
+using Application.IServices.CustomerServices.UserService.Commands;
 using Application.IServices.Visitors;
 using Application.Services.AdminServices.BoothServices.Commands;
 using Application.Services.AdminServices.BoothServices.Queries;
@@ -15,6 +16,7 @@ using Application.Services.AdminServices.ProoductServices.Commands;
 using Application.Services.AdminServices.ProoductServices.Queries;
 using Application.Services.AdminServices.UserServices.Commands;
 using Application.Services.AdminServices.UserServices.Queries;
+using Application.Services.CustomerServices.UserService.Commands;
 using Application.Services.Visitors.SaveVisitorInfo;
 using Application.Visitors.SaveVisitorInfo;
 using Common.Mappers;
@@ -79,8 +81,11 @@ builder.Services.AddScoped<IDeleteSellerByIdAdminService, DeleteSellerByIdAdminS
 builder.Services.AddScoped<IUpdateSellerAdminService, UpdateSellerAdminService>();
 builder.Services.AddScoped<IGetSellerByIdAdminService, GetSellerByIdAdminService>(); 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-//---------------------------------------------------------------------------
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
+builder.Services.AddScoped<IAddUserIdToCustomerForRegisterService, AddUserIdToCustomerForRegisterService>();
+//---------------------------------------------------------------------------
 #endregion
 var app = builder.Build();
 
@@ -111,13 +116,5 @@ app.UseEndpoints(endpoints =>
     );
 });
 
-//app.MapAreaControllerRoute(
-//    areaName: "Admin",
-//    name: "areas",
-//    pattern: "{area:exists}/{controller=ForVisitor}/{action=Index}/{id?}"
-//);
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

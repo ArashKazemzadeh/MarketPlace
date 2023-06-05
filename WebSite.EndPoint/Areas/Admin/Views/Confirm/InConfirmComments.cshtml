@@ -2,69 +2,76 @@
 @{
     ViewData["Title"] = "تایید کامنت‌ها";
 }
-@if (ViewBag.Message!=null)
-{
-    <div class="alert alert-success m-1 p-1">
-        <p>@ViewBag.Message</p>
-    </div>
-}
-
-<table class="table table-bordered m-2">
-    <thead>
-        <tr>
-            <th>
-                شناسه
-            </th>
-            <th>
-                عنوان
-            </th>
-            <th>
-                توضیحات
-            </th>
-            <th>
-                تاریخ ثبت
-            </th>
-            <th>
-                نام فروشنده
-            </th>
-            <th>
-                نام محصول
-            </th>
-            <th>
-                نام خریدار محصول
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="row">
+<div class="table-responsive m-5 col-10">
+    <table class="table table-bordered table-hover table-condensed mb-4">
+        <thead>
             <tr>
-                <td>
-                    @item.Id
-                </td>
-                <td>
-                    @item.Title
-                </td>
-                <td>
-                    @item.Description
-                </td>
-                <td>
-                    @item.RegisterDate
-                </td>
-                <td>
-                    @item.SellerName
-                </td>
-                <td>
-                    @item.ProductName
-                </td>
-                <td>
-                    @item.CustomerName
-                </td>
-                <td>
-                    <a class="btn btn-primary" asp-action="ToConfirmingComment" asp-route-commentId="@item.Id">تایید کامنت</a>
-                </td>
+                <th>
+                    شناسه
+                </th>
+                <th>
+                    عنوان
+                </th>
+                <th>
+                    توضیحات
+                </th>
+                <th>
+                    تاریخ ثبت
+                </th>
+                <th>
+                    نام فروشنده
+                </th>
+                <th>
+                    نام محصول
+                </th>
+                <th>
+                    نام خریدار محصول
+                </th>
+                <th class="text-center">تایید کردن</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Id
+                    </td>
+                    <td>
+                        @item.Title
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        @item.RegisterDate
+                    </td>
+                    <td>
+                        @item.SellerName
+                    </td>
+                    <td>
+                        @item.ProductName
+                    </td>
+                    <td>
+                        @item.CustomerName
+                    </td>
+                    <td class="text-center">
+                        <ul class="table-controls">
+                            <li>
+                                <a asp-action="ToConfirmingComment" asp-route-commentId="@item.Id" data-toggle="tooltip" data-placement="top" title="تایید کردن">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-laughing" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                        <path d="M12.331 9.5a1 1 0 0 1 0 1A4.998 4.998 0 0 1 8 13a4.998 4.998 0 0 1-4.33-2.5A1 1 0 0 1 4.535 9h6.93a1 1 0 0 1 .866.5zM7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5z" />
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+</div>
