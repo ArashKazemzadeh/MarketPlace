@@ -14,7 +14,7 @@ namespace WebSite.EndPoint.Areas.Admin.Models
         [Display(Name = "فعال/غیرفعال")]
         public bool IsActive { get; set; }
         [Display(Name = " تایید/عدم تایید")]
-        public bool IsConfirm { get; set; }
+        public bool? IsConfirm { get; set; }
         [Display(Name = "تعداد در انبار")]
         public int? Availability { get; set; }
         [Display(Name = "جزییات کالا")]

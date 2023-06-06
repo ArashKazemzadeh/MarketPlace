@@ -1,18 +1,16 @@
 ﻿using Application.IServices.AdminServices.ConfirmServices;
 using ConsoleApp.Models;
-using AutoMapper;
 using Domin.IRepositories.IseparationRepository;
-using ConsoleApp1.Models;
 using Persistence.Repositories.Users;
 
 namespace Application.Services.AdminServices.CommentService.Query
 {
-    public class GeAllCommentsByFalseConFirmService : IGeAllCommentsByFalseConFirmService
+    public class GeAllCommentsConFirmService : IGeAllCommentsConFirmService
     {
         private readonly ICommentRepository _commentRepository;
         private readonly IUserRepository _userRepository;
 
-        public GeAllCommentsByFalseConFirmService(ICommentRepository commentRepository,
+        public GeAllCommentsConFirmService(ICommentRepository commentRepository,
             IUserRepository userRepository)
         {
             _commentRepository = commentRepository;
@@ -38,6 +36,7 @@ namespace Application.Services.AdminServices.CommentService.Query
 
                 return commentDtos.ToList();
         }
+
     }
 
 }

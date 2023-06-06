@@ -12,36 +12,59 @@ namespace Application.Services.AdminServices.CommentService.Command
         {
             _commentRepository = commentRepository;
         }
-        public async Task<GeneralDto> Execute(int id)
+
+        public async Task<GeneralDto> ExecuteFalse(int id)
         {
-            var comment =await _commentRepository.GetByIdAsync(id);
+            var comment = await _commentRepository.GetByIdAsync(id);
             if (comment == null)
             {
                 return new GeneralDto
                 {
-                    message = "این کامنت موجود نیست احتمالا خطایی هنگام ثبت به وسیله ی خریدار رخ داده است"
+                    message = "این کامنت موجود نیست احتمالا خطایی هنگام ثبت  رخ داده است"
                 };
             }
 
-            if (comment.IsConfirm == null || comment.IsConfirm == false)
+            if (comment.IsConfirm == null)
+            {
+                comment.IsConfirm = false;
+                await _commentRepository.UpdateAsync(comment);
+                return new GeneralDto
+                {
+                    message = "رد کردن کامنت انجام شد."
+                };
+            }
+
+            return new GeneralDto
+            {
+                message = "عملیات با مشکل مواجه شد."
+            };
+        }
+
+        public async Task<GeneralDto> ExecuteTrue(int id)
+        {
+            var comment = await _commentRepository.GetByIdAsync(id);
+            if (comment == null)
+            {
+                return new GeneralDto
+                {
+                    message = "این کامنت موجود نیست احتمالا خطایی هنگام ثبت  رخ داده است"
+                };
+            }
+
+            if (comment.IsConfirm == null)
             {
                 comment.IsConfirm = true;
-            await    _commentRepository.UpdateAsync(comment);
+                await _commentRepository.UpdateAsync(comment);
                 return new GeneralDto
                 {
                     message = "تایید کامنت انجام شد."
                 };
             }
-            else
+            return new GeneralDto
             {
-                comment.IsConfirm = false;
-            await    _commentRepository.UpdateAsync(comment);
-                return new GeneralDto
-                {
-                    message = "عدم تایید کامنت انجام شد."
-                };
-            }
-
+                message = "عملیات با مشکل مواجه شد."
+            };
         }
+
     }
 }

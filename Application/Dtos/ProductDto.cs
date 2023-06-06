@@ -8,7 +8,7 @@ public class ProductDto
     public string? Name { get; set; }
     public int? BasePrice { get; set; }
     public bool IsAuction { get; set; }
-    public bool IsConfirm { get; set; }
+    public bool? IsConfirm { get; set; }
     public int? Availability { get; set; }
     public string? Description { get; set; }
     public string? SellerName { get; set; }

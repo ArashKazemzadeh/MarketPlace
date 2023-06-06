@@ -12,8 +12,8 @@ using Persistence.Contexts.SqlServer;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230604143154_2")]
-    partial class _2
+    [Migration("20230606073847_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -266,7 +266,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsConfirm")
+                    b.Property<bool?>("IsConfirm")
                         .HasColumnType("bit");
 
                     b.Property<int?>("ProductId")
@@ -299,9 +299,8 @@ namespace Persistence.Migrations
                             Id = 1,
                             CustomertId = 1,
                             Description = "این محصول عالی است.",
-                            IsConfirm = false,
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 4, 18, 1, 54, 411, DateTimeKind.Local).AddTicks(656),
+                            RegisterDate = new DateTime(2023, 6, 6, 11, 8, 46, 715, DateTimeKind.Local).AddTicks(1475),
                             Title = "عالی"
                         },
                         new
@@ -309,9 +308,8 @@ namespace Persistence.Migrations
                             Id = 2,
                             CustomertId = 2,
                             Description = "این محصول بد است.",
-                            IsConfirm = false,
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 4, 18, 1, 54, 411, DateTimeKind.Local).AddTicks(676),
+                            RegisterDate = new DateTime(2023, 6, 6, 11, 8, 46, 715, DateTimeKind.Local).AddTicks(1491),
                             Title = "بد"
                         },
                         new
@@ -319,9 +317,8 @@ namespace Persistence.Migrations
                             Id = 20,
                             CustomertId = 2,
                             Description = "این محصول خوب است.",
-                            IsConfirm = false,
                             ProductId = 2,
-                            RegisterDate = new DateTime(2023, 6, 4, 18, 1, 54, 411, DateTimeKind.Local).AddTicks(678),
+                            RegisterDate = new DateTime(2023, 6, 6, 11, 8, 46, 715, DateTimeKind.Local).AddTicks(1493),
                             Title = "خوب"
                         });
                 });
@@ -531,7 +528,7 @@ namespace Persistence.Migrations
                     b.Property<bool>("IsAuction")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsConfirm")
+                    b.Property<bool?>("IsConfirm")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -560,7 +557,6 @@ namespace Persistence.Migrations
                             Description = "لپ تاپ جدید و بسیار کارآمد",
                             IsActive = true,
                             IsAuction = false,
-                            IsConfirm = false,
                             Name = "لپ تاپ"
                         },
                         new
@@ -571,7 +567,6 @@ namespace Persistence.Migrations
                             Description = "گوشی هوشمند با قابلیت‌های فراوان",
                             IsActive = true,
                             IsAuction = false,
-                            IsConfirm = false,
                             Name = "گوشی هوشمند"
                         },
                         new
@@ -582,7 +577,6 @@ namespace Persistence.Migrations
                             Description = "بهترین کتاب برای یادگیری برنامه‌نویسی",
                             IsActive = true,
                             IsAuction = false,
-                            IsConfirm = false,
                             Name = "کتاب برنامه نویسی"
                         });
                 });
@@ -781,7 +775,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "11337733-16b4-4f16-924f-7fcbb481f671",
+                            ConcurrencyStamp = "7bd1e6b0-cc2e-4dc0-ad88-5f412d7bdead",
                             EmailConfirmed = false,
                             FullName = "حسن",
                             LockoutEnabled = false,
@@ -792,7 +786,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f2a69889-125c-46fd-b171-b78344ee8570",
+                            ConcurrencyStamp = "3ea558dc-a22d-4fdc-ba01-845aaac33ba0",
                             EmailConfirmed = false,
                             FullName = "جعفرقلی",
                             LockoutEnabled = false,
@@ -803,7 +797,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5ce96e7c-0372-46fb-9d4b-2ec1523e6575",
+                            ConcurrencyStamp = "9569f7b1-61d0-4a22-bc4b-bb4968741745",
                             EmailConfirmed = false,
                             FullName = "ساسان",
                             LockoutEnabled = false,

@@ -10,7 +10,7 @@ namespace WebSite.EndPoint.Areas.Admin.Models
         [Display(Name = "قیمت پایه")]
         public int? BasePrice { get; set; }
         [Display(Name = "مجاز جهت نمایش")]
-        public bool IsConfirm { get; set; }
+        public bool? IsConfirm { get; set; }
         [Display(Name = "تعداد در انبار")]
         public int? Availability { get; set; }
         [Display(Name = "جزییات کالا")]

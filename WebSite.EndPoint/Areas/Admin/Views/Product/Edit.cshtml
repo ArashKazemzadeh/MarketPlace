@@ -3,24 +3,9 @@
 @{
     ViewData["Title"] = "Edit";
 }
-<style>
-    body, html {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-    }
 
-    .auth-page-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        overflow: auto;
-    }
-</style>
 
-<div class="row mx-5 p-5 form-group d-flex justify-content-center">
+<div class="row m-5 p-5 form-group d-flex justify-content-center">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -49,25 +34,25 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="row form-group">
-                <div class=" form-check col-6 m-1">
+                <div class=" form-check col-6 ">
                     <label class="form-check-label">
                         <input class="form-check-input" asp-for="IsAuction" /> @Html.DisplayNameFor(model => model.IsAuction)
                     </label>
                 </div>
-                <div class=" form-check col-6 m-1">
+                <div class=" form-check col-6 ">
                     <label class="form-check-label">
                         <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
                     </label>
                 </div>
-                <div class=" form-check col-6 m-1">
+               @* <div class=" form-check col-4 ">
                     <label class="form-check-label">
                         <input class="form-check-input" asp-for="IsConfirm" /> @Html.DisplayNameFor(model => model.IsConfirm)
                     </label>
-                </div>
+                </div>*@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="ذخیره تغییرات" class="btn btn-primary btn-block" />
             </div>
         </form>
     </div>

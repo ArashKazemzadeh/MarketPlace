@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class booth : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -112,6 +112,7 @@ namespace Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false),
                     CompanyName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsRemoved = table.Column<bool>(type: "bit", nullable: false),
                     CommissionPercentage = table.Column<double>(type: "float", nullable: false),
                     CommissionsAmount = table.Column<int>(type: "int", nullable: true),
                     SalesAmount = table.Column<int>(type: "int", nullable: true),
@@ -364,7 +365,7 @@ namespace Persistence.Migrations
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     BasePrice = table.Column<int>(type: "int", nullable: true),
                     IsAuction = table.Column<bool>(type: "bit", nullable: false),
-                    IsConfirm = table.Column<bool>(type: "bit", nullable: false),
+                    IsConfirm = table.Column<bool>(type: "bit", nullable: true),
                     Availability = table.Column<int>(type: "int", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
@@ -441,11 +442,11 @@ namespace Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    IsConfirm = table.Column<bool>(type: "bit", nullable: false),
+                    IsConfirm = table.Column<bool>(type: "bit", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ProductId = table.Column<int>(type: "int", nullable: true),
-                    CustomertId = table.Column<int>(type: "int", nullable: true),
+                    CustomertId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: true),
                     InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -576,9 +577,9 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "InsertTime", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RemoveTime", "SecurityStamp", "TwoFactorEnabled", "UpdateTime", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "38c006cc-c128-4469-ae34-bcf8a40d1b13", null, false, "حسن", null, false, null, null, null, null, null, false, null, null, false, null, null },
-                    { 2, 0, "0e031307-3509-4e0d-8c1d-bfb5b59e005a", null, false, "جعفرقلی", null, false, null, null, null, null, null, false, null, null, false, null, null },
-                    { 3, 0, "65d1e10c-fccd-41ef-b142-2d1f3768ca27", null, false, "ساسان", null, false, null, null, null, null, null, false, null, null, false, null, null }
+                    { 1, 0, "7bd1e6b0-cc2e-4dc0-ad88-5f412d7bdead", null, false, "حسن", null, false, null, null, null, null, null, false, null, null, false, null, null },
+                    { 2, 0, "3ea558dc-a22d-4fdc-ba01-845aaac33ba0", null, false, "جعفرقلی", null, false, null, null, null, null, null, false, null, null, false, null, null },
+                    { 3, 0, "9569f7b1-61d0-4a22-bc4b-bb4968741745", null, false, "ساسان", null, false, null, null, null, null, null, false, null, null, false, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -595,15 +596,15 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "Availability", "BasePrice", "BidId", "BoothId", "Description", "InsertTime", "IsActive", "IsAuction", "IsConfirm", "Name", "RemoveTime", "UpdateTime" },
                 values: new object[,]
                 {
-                    { 1, 10, 5000000, null, null, "لپ تاپ جدید و بسیار کارآمد", null, true, false, false, "لپ تاپ", null, null },
-                    { 2, 5, 2000000, null, null, "گوشی هوشمند با قابلیت‌های فراوان", null, true, false, false, "گوشی هوشمند", null, null },
-                    { 20, 50, 100000, null, null, "بهترین کتاب برای یادگیری برنامه‌نویسی", null, true, false, false, "کتاب برنامه نویسی", null, null }
+                    { 1, 10, 5000000, null, null, "لپ تاپ جدید و بسیار کارآمد", null, true, false, null, "لپ تاپ", null, null },
+                    { 2, 5, 2000000, null, null, "گوشی هوشمند با قابلیت‌های فراوان", null, true, false, null, "گوشی هوشمند", null, null },
+                    { 20, 50, 100000, null, null, "بهترین کتاب برای یادگیری برنامه‌نویسی", null, true, false, null, "کتاب برنامه نویسی", null, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Sellers",
-                columns: new[] { "Id", "CommissionPercentage", "CommissionsAmount", "CompanyName", "InsertTime", "IsActive", "RemoveTime", "SalesAmount", "UpdateTime" },
-                values: new object[] { 1, 10.5, 500, "شرکت نمونه", null, true, null, 10000, null });
+                columns: new[] { "Id", "CommissionPercentage", "CommissionsAmount", "CompanyName", "InsertTime", "IsActive", "IsRemoved", "RemoveTime", "SalesAmount", "UpdateTime" },
+                values: new object[] { 1, 10.5, 500, "شرکت نمونه", null, true, false, null, 10000, null });
 
             migrationBuilder.InsertData(
                 table: "Booths",
@@ -615,9 +616,9 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "CustomerId", "CustomertId", "Description", "InsertTime", "IsConfirm", "ProductId", "RegisterDate", "RemoveTime", "Title", "UpdateTime" },
                 values: new object[,]
                 {
-                    { 1, null, null, "این محصول عالی است.", null, false, 1, new DateTime(2023, 6, 4, 10, 25, 52, 111, DateTimeKind.Local).AddTicks(5129), null, "عالی", null },
-                    { 2, null, null, "این محصول بد است.", null, false, 1, new DateTime(2023, 6, 4, 10, 25, 52, 111, DateTimeKind.Local).AddTicks(5182), null, "بد", null },
-                    { 20, null, null, "این محصول خوب است.", null, false, 2, new DateTime(2023, 6, 4, 10, 25, 52, 111, DateTimeKind.Local).AddTicks(5184), null, "خوب", null }
+                    { 1, null, 1, "این محصول عالی است.", null, null, 1, new DateTime(2023, 6, 6, 11, 8, 46, 715, DateTimeKind.Local).AddTicks(1475), null, "عالی", null },
+                    { 2, null, 2, "این محصول بد است.", null, null, 1, new DateTime(2023, 6, 6, 11, 8, 46, 715, DateTimeKind.Local).AddTicks(1491), null, "بد", null },
+                    { 20, null, 2, "این محصول خوب است.", null, null, 2, new DateTime(2023, 6, 6, 11, 8, 46, 715, DateTimeKind.Local).AddTicks(1493), null, "خوب", null }
                 });
 
             migrationBuilder.CreateIndex(

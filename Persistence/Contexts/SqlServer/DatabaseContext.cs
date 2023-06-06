@@ -151,7 +151,7 @@ namespace Persistence.Contexts.SqlServer
                     Name = "لپ تاپ",
                     BasePrice = 5000000,
                     IsAuction = false,
-                    IsConfirm = false,
+                    IsConfirm = null,
                     Availability = 10,
                     Description = "لپ تاپ جدید و بسیار کارآمد",
                     IsActive = true,
@@ -163,7 +163,7 @@ namespace Persistence.Contexts.SqlServer
                     Name = "گوشی هوشمند",
                     BasePrice = 2000000,
                     IsAuction = false,
-                    IsConfirm = false,
+                    IsConfirm = null,
                     Availability = 5,
                     Description = "گوشی هوشمند با قابلیت‌های فراوان",
                     IsActive = true,
@@ -176,7 +176,7 @@ namespace Persistence.Contexts.SqlServer
                     Name = "کتاب برنامه نویسی",
                     BasePrice = 100000,
                     IsAuction = false,
-                    IsConfirm = false,
+                    IsConfirm = null,
                     Availability = 50,
                     Description = "بهترین کتاب برای یادگیری برنامه‌نویسی",
                     IsActive = true,
@@ -189,7 +189,7 @@ namespace Persistence.Contexts.SqlServer
                 {
                     Id = 1,
                     Title = "عالی",
-                    IsConfirm = false,
+                    IsConfirm = null,
                     Description = "این محصول عالی است.",
                     ProductId = 1,
                     CustomertId = 1
@@ -198,7 +198,7 @@ namespace Persistence.Contexts.SqlServer
                 {
                     Id = 2,
                     Title = "بد",
-                    IsConfirm = false,
+                    IsConfirm = null,
                     Description = "این محصول بد است.",
                     ProductId = 1,
                     CustomertId = 2
@@ -208,7 +208,7 @@ namespace Persistence.Contexts.SqlServer
                 {
                     Id = 20,
                     Title = "خوب",
-                    IsConfirm = false,
+                    IsConfirm = null,
                     Description = "این محصول خوب است.",
                     ProductId = 2,
                     CustomertId = 2

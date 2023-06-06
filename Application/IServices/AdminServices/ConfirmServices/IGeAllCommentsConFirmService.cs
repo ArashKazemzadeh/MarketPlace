@@ -2,7 +2,7 @@
 
 namespace Application.IServices.AdminServices.ConfirmServices
 {
-    public interface IGeAllCommentsByFalseConFirmService
+    public interface IGeAllCommentsConFirmService
     {
         Task<List<CommentDto>> Execute();
     }

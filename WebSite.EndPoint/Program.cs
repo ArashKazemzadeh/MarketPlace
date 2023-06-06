@@ -65,7 +65,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ISellerRepository, SellerRepository>();
 builder.Services.AddScoped<IConfirmForAddProductService, ConfirmForAddProductService>();
 builder.Services.AddScoped<IGetProductsWithSellerNameAsyncService, GetProductsWithSellerNameAsyncService>();
-builder.Services.AddScoped<IGeAllCommentsByFalseConFirmService, GeAllCommentsByFalseConFirmService>();
+builder.Services.AddScoped<IGeAllCommentsConFirmService, GeAllCommentsConFirmService>();
 builder.Services.AddScoped<IConfirmForAddCommentService, ConfirmForAddCommentService>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IGetAllSellerAdminService, GetAllSellerAdminService>();

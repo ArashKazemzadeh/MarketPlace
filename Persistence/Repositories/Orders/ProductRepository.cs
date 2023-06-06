@@ -16,27 +16,21 @@ namespace Persistence.Repositories.Orders
             _context = context;
             _dbSet = _context.Set<Product>();
         }
-
         public async Task<Product> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
         }
-        
-
         public async Task<List<Product>> GetProductsWithSellerNameConfirmAsync()
         {
-            var products = await _dbSet
+            var products = await _dbSet.Where(x => x.IsConfirm == null)
                 .Include(p => p.Booth)
-                .ThenInclude(b => b.Seller).Where(x => x.IsConfirm == false || x.IsConfirm == null).ToListAsync();
-               
-
+                .ThenInclude(b => b.Seller).ToListAsync();
             return products;
         }
         public async Task<List<Product>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }
-
         public async Task AddAsync(Product product)
         {
             await _dbSet.AddAsync(product);

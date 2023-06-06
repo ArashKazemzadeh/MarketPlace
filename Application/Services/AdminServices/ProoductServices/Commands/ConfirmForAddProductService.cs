@@ -12,7 +12,34 @@ namespace Application.Services.AdminServices.ProoductServices.Commands
         {
             _productRepository = productRepository;
         }
-        public async Task<GeneralDto>  Execute(int id)
+
+        public async Task<GeneralDto> ExecuteFalse(int id)
+        {
+            var product = await _productRepository.GetByIdAsync(id);
+            if (product == null)
+            {
+                return new GeneralDto
+                {
+                    message = "این کالا موجود نیست."
+                };
+            }
+
+            if (product.IsConfirm == null)
+            {
+                product.IsConfirm = false;
+                await _productRepository.UpdateAsync(product);
+                return new GeneralDto
+                {
+                    message = "کالا با موفقیت رد شد."
+                };
+            }
+            return new GeneralDto
+            {
+                message = "عملیات با مشکل مواجه شد."
+            };
+        }
+
+        public async Task<GeneralDto>  ExecuteTrue(int id)
         {
             var product =await _productRepository.GetByIdAsync(id);
             if (product == null)
@@ -23,7 +50,7 @@ namespace Application.Services.AdminServices.ProoductServices.Commands
                 };
             }
 
-            if (product.IsConfirm == null || product.IsConfirm == false)
+            if (product.IsConfirm == null)
             {
                 product.IsConfirm = true;
              await   _productRepository.UpdateAsync(product);
@@ -32,15 +59,11 @@ namespace Application.Services.AdminServices.ProoductServices.Commands
                     message = "کالا با موفقیت تایید شد."
                 };
             }
-            else
+            return new GeneralDto
             {
-                product.IsConfirm = false;
-          await      _productRepository.UpdateAsync(product);
-                return new GeneralDto
-                {
-                    message = "تاییدیه کالا جهت نمایش و فروش لغو شد."
-                };
-            }
+                message = "عملیات با مشکل مواجه شد."
+            };
+
         }
     }
 }

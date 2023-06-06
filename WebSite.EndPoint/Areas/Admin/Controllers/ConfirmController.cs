@@ -9,26 +9,26 @@ public class ConfirmController : Controller
 {
     private readonly IGetProductsWithSellerNameAsyncService _getProductsWithSellerNameAsyncService;
     private readonly IConfirmForAddProductService _confirmForAddProductService;
-    private readonly IGeAllCommentsByFalseConFirmService _allCommentsByFalseConFirmService;
+    private readonly IGeAllCommentsConFirmService _allCommentsConFirmService;
     private readonly IConfirmForAddCommentService _confirmForAddCommentService;
     public ConfirmController(IGetProductsWithSellerNameAsyncService getProductsWithSellerNameAsyncService,
-        IConfirmForAddProductService confirmForAddProductService, 
-        IGeAllCommentsByFalseConFirmService allCommentsByFalseConFirmService,
+        IConfirmForAddProductService confirmForAddProductService,
+        IGeAllCommentsConFirmService allCommentsByFalseConFirmService,
         IConfirmForAddCommentService confirmForAddCommentService
-        )                                                       
+        )
     {
         _getProductsWithSellerNameAsyncService = getProductsWithSellerNameAsyncService;
         _confirmForAddProductService = confirmForAddProductService;
         _confirmForAddCommentService = confirmForAddCommentService;
-        _allCommentsByFalseConFirmService = allCommentsByFalseConFirmService;
+        _allCommentsConFirmService = allCommentsByFalseConFirmService;
     }
- 
-    public async Task<IActionResult> InConfirmProducts()
+
+    public async Task<IActionResult> ConfirmProducts()
     {
         var noConfirmProduct = await _getProductsWithSellerNameAsyncService.Execute();
         var viewModels = noConfirmProduct.Select(p => new ProductForConfirmVM
-        {   
-            Id=p.Id,
+        {
+            Id = p.Id,
             Name = p.Name,
             Description = p.Description,
             BasePrice = p.BasePrice,
@@ -39,27 +39,33 @@ public class ConfirmController : Controller
         }).ToList();
         return View(viewModels);
     }
-  
-    public async Task<IActionResult> ToConfirmingProduct(int productId)
-    {
-        var result=await _confirmForAddProductService.Execute(productId);
-        var noConfirmProduct = await _getProductsWithSellerNameAsyncService.Execute();
 
-       
-        return RedirectToAction("InConfirmProducts");
-    }
- 
-    public async Task<IActionResult> InConfirmComments()
+    public async Task<IActionResult> ConfirmingTrueProduct(int productId)
     {
-        var noConfirmComment = await _allCommentsByFalseConFirmService.Execute();
-     
+        var result = await _confirmForAddProductService.ExecuteTrue(productId);
+        return RedirectToAction("ConfirmProducts");
+    }
+    public async Task<IActionResult> ConfirmingFalseProduct(int productId)
+    {
+        var result = await _confirmForAddProductService.ExecuteFalse(productId);
+        return RedirectToAction("ConfirmProducts");
+    }
+
+    public async Task<IActionResult> ConfirmComments()
+    {
+        var noConfirmComment = await _allCommentsConFirmService.Execute();
         return View(noConfirmComment);
     }
-   
-    public async Task<IActionResult> ToConfirmingComment(int commentId)
+
+    public async Task<IActionResult> ConfirmingTrueComment(int commentId)
     {
-        var result = await _confirmForAddCommentService.Execute(commentId);
-        return RedirectToAction("InConfirmComments");
+        var result = await _confirmForAddCommentService.ExecuteTrue(commentId);
+        return RedirectToAction("ConfirmComments");
+    }
+    public async Task<IActionResult> ConfirmingFalseComment(int commentId)
+    {
+        var result = await _confirmForAddCommentService.ExecuteFalse(commentId);
+        return RedirectToAction("ConfirmComments");
     }
 }
 
