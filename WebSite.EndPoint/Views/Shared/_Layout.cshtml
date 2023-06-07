@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
 <!--[if lt IE 7]><html class="no-~/templatestore/js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]><html class="no-~/templatestore/js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]><html class="no-~/templatestore/js lt-ie9"> <![endif]-->
@@ -38,8 +39,20 @@
                     <div class="col-md-10 col-sm-10">
                         <div class="top-header-left">
                             <a asp-controller="Account" asp-action="Register">ثبت نام</a>
+                            @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+                            {
+                                <a asp-controller="Account" asp-action="Logout">خروج</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Account" asp-action="Login">ورود</a>
+                            }
+                        </div>
+                        @* <div class="top-header-left">
+                            <a asp-controller="Account" asp-action="Register">ثبت نام</a>
                             <a asp-controller="Account" asp-action="Login">ورود</a>
-                        </div> <!-- /.top-header-left -->
+                            <a asp-controller="Account" asp-action="Login">خروج</a>
+                        </div>*@ <!-- /.top-header-left -->
                     </div> <!-- /.col-md-6 -->
                     <div class="col-md-2 col-sm-2">
                         <div class="social-icons">

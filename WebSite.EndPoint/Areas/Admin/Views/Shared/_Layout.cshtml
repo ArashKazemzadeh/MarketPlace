@@ -37,7 +37,7 @@
                     </a>
                 </li>
                 <li class="nav-item theme-text">
-                    <a asp-area="" asp-controller="Home" asp-action="index" class="nav-link"> دال مارکت </a>
+                    <a asp-area="" asp-controller="Home" asp-action="index" class="nav-link"> آژی دهاک </a>
                 </li>
                 <li class="nav-item toggle-sidebar">
                     <a class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg></a>
@@ -50,15 +50,39 @@
 
                 <li class="nav-item align-self-center search-animated">
 
+                    <div id="commissionDiv">
+                        @await Component.InvokeAsync("Commission")
+                    </div>
 
                 </li>
             </ul>
             <ul class="navbar-item flex-row navbar-dropdown">
+                <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
+                    <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <svg  xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="35" viewBox="0,0,256,256"
+                             style="fill:#000000;">
+                            <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(4,4)"><path d="M42.82617,4c-21.795,0 -29.82617,5.46522 -29.82617,20.44922v3.21875v3.33203v1.42578c-0.59161,0.88387 -1.33984,2.27903 -1.33984,4.57422c0,3.70499 2.22852,5.76006 3.04688,6.45117c1.59185,4.11991 4.53515,7.5681 7.30078,10.15039c2.86937,2.67916 5.31987,4.32708 6.50977,4.94336l0.00195,0.00195l0.88281,0.45313h5.33789l0.43359,-0.22266l0.44922,-0.23242c1.19237,-0.61677 3.64038,-2.26406 6.50977,-4.94336c2.76597,-2.58273 5.70907,-6.03181 7.30078,-10.15234c0.83274,-0.70191 3.04688,-2.74806 3.04688,-6.45117c0,-2.31509 -0.92665,-3.77912 -1.48047,-4.54297v-0.45508v-4.33398v-3.2168c0,-4.768 -1.36222,-12.25977 -5.44922,-12.25977zM19.66992,18.74414c0,0 6.12977,1.25586 12.25977,1.25586c6.13,0 10.89648,-1.25586 10.89648,-1.25586c3.4453,2.95322 4.08105,9.04003 4.17383,12.21289v2.04297v0.74609l0.45898,0.55664c0.29966,0.3617 1.02148,1.21108 1.02148,2.69531c0,2.03376 -1.85299,3.67536 -1.91211,3.72266l-0.00195,0.00195l-0.48828,0.35742l-0.20703,0.57813c-1.1965,3.35921 -3.87363,6.59633 -6.46875,9.01953c-2.59511,2.4232 -5.30356,4.15222 -5.61719,4.31445v-0.00195l-0.01953,0.00977h-3.39453l-0.01367,-0.00781c-0.31611,-0.16372 -3.02401,-1.89136 -5.61914,-4.31445c-2.59513,-2.42309 -5.27226,-5.6584 -6.46875,-9.01758l-0.20508,-0.58008l-0.49219,-0.35937c-0.08693,-0.07031 -1.91211,-1.69201 -1.91211,-3.7207c0,-1.56783 0.95544,-2.87701 0.88477,-2.79102l0.45508,-0.55273v-0.65625v-4.67187c0.15867,-3.37943 0.74271,-7.65677 2.66992,-9.58398z"></path></g></g>
+                        </svg>  </a>
+                    <div class="dropdown-menu position-absolute animated fadeInUp" aria-labelledby="userProfileDropdown">
+                        <div class="user-profile-section">
+                            <div class="media mx-auto">
+                                <img src="~/themesite/assets/images/logo.png" class="img-fluid mr-2" alt="avatar">
+                                <div class="media-body">
+                                    <h5> لیست کاربران</h5>
+                                    <p>انتخاب نقش</p>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="dropdown-item">
+                            @await Component.InvokeAsync("UsersByRoleName")
+                               
+                        </div>
+                     
+                    </div>
 
-
-
-
-
+            </ul>
+            <ul class="navbar-item flex-row navbar-dropdown">
                 <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
@@ -81,6 +105,7 @@
                         <div class="dropdown-item">
                             <a href="apps_mailbox.html">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-inbox"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg> <span>صندوق ورودی من</span>
+                           
                             </a>
                         </div>
                         <div class="dropdown-item">
@@ -95,11 +120,7 @@
                         </div>
                     </div>
 
-
-
-
             </ul>
-
         </header>
     </div>
     <!--  END NAVBAR  -->
@@ -128,6 +149,10 @@
                     <li class="menu active">
                         <a asp-controller ="ForVisitor" asp-action="Index" asp-area="Admin" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256"
+                                     style="fill:#000000;">
+                                    <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(8.53333,8.53333)"><path d="M24,3c-1.65685,0 -3,1.34315 -3,3c0.00086,0.50634 0.12987,1.00422 0.375,1.44727l-5.82422,6.55273h-6.72461c-0.42351,-1.19786 -1.55565,-1.99904 -2.82617,-2c-1.65685,0 -3,1.34315 -3,3c0,1.65685 1.34315,3 3,3c1.2698,-0.00178 2.40095,-0.80282 2.82422,-2h6.72656l5.82227,6.55078c-0.24477,0.44381 -0.37311,0.94239 -0.37305,1.44922c0,1.65685 1.34315,3 3,3c1.65685,0 3,-1.34315 3,-3c0,-1.65685 -1.34315,-3 -3,-3c-0.3878,0.00043 -0.77184,0.07604 -1.13086,0.22266l-5.53125,-6.22266l5.53125,-6.22266c0.35902,0.14661 0.74306,0.22223 1.13086,0.22266c1.65685,0 3,-1.34315 3,-3c0,-1.65685 -1.34315,-3 -3,-3z"></path></g></g>
+                                </svg>
                                 <span>آمار بازدید</span>
                             </div>
                         </a>
@@ -135,6 +160,10 @@
                     <li class="menu active">
                         <a asp-controller="Confirm" asp-action="ConfirmComments" asp-area="Admin" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256"
+                                     style="fill:#000000;">
+                                    <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(8.53333,8.53333)"><path d="M15,3c-6.627,0 -12,5.373 -12,12c0,6.627 5.373,12 12,12c6.627,0 12,-5.373 12,-12c0,-6.627 -5.373,-12 -12,-12zM21.707,12.707l-7.56,7.56c-0.188,0.188 -0.442,0.293 -0.707,0.293c-0.265,0 -0.52,-0.105 -0.707,-0.293l-3.453,-3.453c-0.391,-0.391 -0.391,-1.023 0,-1.414c0.391,-0.391 1.023,-0.391 1.414,0l2.746,2.746l6.853,-6.853c0.391,-0.391 1.023,-0.391 1.414,0c0.391,0.391 0.391,1.023 0,1.414z"></path></g></g>
+                                </svg>
                                 <span>کامنت های تایید نشده</span>
                             </div>
                         </a>
@@ -143,40 +172,50 @@
                     <li class="menu active">
                         <a asp-controller="Confirm" asp-action="ConfirmProducts" asp-area="Admin" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
-                                 <span>کالاهای تایید نشده</span>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li class="menu active">
-                        <a asp-controller="Seller" asp-action="Index" asp-area="Admin" aria-expanded="true" class="dropdown-toggle">
-                            <div class="">
-                              <span>فروشنده ها</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256"
+                                     style="fill:#000000;">
+                                    <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(8.53333,8.53333)"><path d="M15,3c-6.627,0 -12,5.373 -12,12c0,6.627 5.373,12 12,12c6.627,0 12,-5.373 12,-12c0,-6.627 -5.373,-12 -12,-12zM21.707,12.707l-7.56,7.56c-0.188,0.188 -0.442,0.293 -0.707,0.293c-0.265,0 -0.52,-0.105 -0.707,-0.293l-3.453,-3.453c-0.391,-0.391 -0.391,-1.023 0,-1.414c0.391,-0.391 1.023,-0.391 1.414,0l2.746,2.746l6.853,-6.853c0.391,-0.391 1.023,-0.391 1.414,0c0.391,0.391 0.391,1.023 0,1.414z"></path></g></g>
+                                </svg>
+                                <span>کالاهای تایید نشده</span>
                             </div>
                         </a>
                     </li>
                     <li class="menu active">
                         <a asp-controller="Seller" asp-action="Index" asp-area="Admin" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
-                             
-                                <span>مشتری ها</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="64" height="64" viewBox="0,0,256,256"
+                                     style="fill:#000000;">
+                                    <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(4,4)"><path d="M42.82617,4c-21.795,0 -29.82617,5.46522 -29.82617,20.44922v3.21875v3.33203v1.42578c-0.59161,0.88387 -1.33984,2.27903 -1.33984,4.57422c0,3.70499 2.22852,5.76006 3.04688,6.45117c1.59185,4.11991 4.53515,7.5681 7.30078,10.15039c2.86937,2.67916 5.31987,4.32708 6.50977,4.94336l0.00195,0.00195l0.88281,0.45313h5.33789l0.43359,-0.22266l0.44922,-0.23242c1.19237,-0.61677 3.64038,-2.26406 6.50977,-4.94336c2.76597,-2.58273 5.70907,-6.03181 7.30078,-10.15234c0.83274,-0.70191 3.04688,-2.74806 3.04688,-6.45117c0,-2.31509 -0.92665,-3.77912 -1.48047,-4.54297v-0.45508v-4.33398v-3.2168c0,-4.768 -1.36222,-12.25977 -5.44922,-12.25977zM19.66992,18.74414c0,0 6.12977,1.25586 12.25977,1.25586c6.13,0 10.89648,-1.25586 10.89648,-1.25586c3.4453,2.95322 4.08105,9.04003 4.17383,12.21289v2.04297v0.74609l0.45898,0.55664c0.29966,0.3617 1.02148,1.21108 1.02148,2.69531c0,2.03376 -1.85299,3.67536 -1.91211,3.72266l-0.00195,0.00195l-0.48828,0.35742l-0.20703,0.57813c-1.1965,3.35921 -3.87363,6.59633 -6.46875,9.01953c-2.59511,2.4232 -5.30356,4.15222 -5.61719,4.31445v-0.00195l-0.01953,0.00977h-3.39453l-0.01367,-0.00781c-0.31611,-0.16372 -3.02401,-1.89136 -5.61914,-4.31445c-2.59513,-2.42309 -5.27226,-5.6584 -6.46875,-9.01758l-0.20508,-0.58008l-0.49219,-0.35937c-0.08693,-0.07031 -1.91211,-1.69201 -1.91211,-3.7207c0,-1.56783 0.95544,-2.87701 0.88477,-2.79102l0.45508,-0.55273v-0.65625v-4.67187c0.15867,-3.37943 0.74271,-7.65677 2.66992,-9.58398z"></path></g></g>
+                                </svg>
+                                <span> حساب کتاب فروشنده ها</span>
                             </div>
                         </a>
                     </li>
                     <li class="menu active">
                         <a asp-controller="Product" asp-action="Index" asp-area="Admin" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
-                               <span>همه ی کالاها</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0,0,256,256"
+                                     style="fill:#000000;">
+                                    <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M37,48c-0.17578,0 -0.34766,-0.04687 -0.50391,-0.13672l-11.49609,-6.70703l-11.49609,6.70703c-0.30859,0.17969 -0.69141,0.18359 -1,0.00391c-0.3125,-0.17969 -0.50391,-0.50781 -0.50391,-0.86719v-44c0,-0.55078 0.44922,-1 1,-1h24c0.55469,0 1,0.44922 1,1v44c0,0.35938 -0.19141,0.6875 -0.50391,0.86719c-0.15234,0.08984 -0.32422,0.13281 -0.49609,0.13281z"></path></g></g>
+                                </svg>
+                                <span>همه ی کالاها</span>
                             </div>
                         </a>
                     </li>
                     <li class="menu active">
                         <a asp-controller="Booth" asp-action="Index" asp-area="Admin" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
-                               <span>همه ی غرفه ها</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="64" height="64" viewBox="0,0,256,256"
+                                     style="fill:#000000;">
+                                    <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(4,4)"><path d="M32.23047,5c-8.382,-0.1 -15.7318,5.59359 -18.3418,13.55859c-2.761,8.425 1.49738,15.08163 4.73438,20.14063c1.391,2.174 2.63763,4.12122 3.14063,5.82422c0.256,0.867 1.02178,1.47656 1.92578,1.47656h1.31055c0,-2.901 -1.78361,-5.68897 -3.84961,-8.91797c-2.415,-3.773 -5.15039,-8.04903 -5.15039,-13.08203c0,-8.75 7.0592,-15.882 15.7832,-16c6.876,-0.091 12.81309,4.41566 15.24609,10.84766c2.782,7.355 -0.98069,13.23537 -4.17969,18.23438c-2.066,3.229 -3.84961,6.01697 -3.84961,8.91797h1.31055c0.904,0 1.66978,-0.61056 1.92578,-1.47656c0.504,-1.703 1.74963,-3.64827 3.14063,-5.82227c2.506,-3.916 5.62305,-8.79017 5.62305,-14.70117c0,-10.4 -8.39953,-18.875 -18.76953,-19zM8.6543,6.54883l-1.84375,2.36719l4.53516,3.53516l1.84375,-2.36719zM55.34766,6.55273l-4.53711,3.5332l1.84375,2.36719l4.53711,-3.53516zM2,23v3h5v-3zM57,23v3h5v-3zM26.80273,24.75586l-0.35547,0.20117c-1.24,0.706 -1.76572,2.20797 -1.26172,3.54297c1.127,2.985 2.81445,8.889 2.81445,17.5h3c0,-13.74 -4.02627,-20.94314 -4.19727,-21.24414zM37.19727,24.75586c-0.171,0.3 -4.19727,7.50414 -4.19727,21.24414h3c0,-8.612 1.6865,-14.517 2.8125,-17.5c0.504,-1.333 -0.01886,-2.83206 -1.25586,-3.53906zM52.6543,35.54883l-1.84375,2.36719l4.53516,3.53516l1.84375,-2.36719zM11.34375,35.55078l-4.53516,3.53516l1.84375,2.36523l4.53516,-3.5332zM23,49l0.60938,4.26172c0.235,1.648 1.4668,2.97689 3.0918,3.33789l1.41406,0.31445c0.41469,1.76691 1.99143,3.08594 3.88477,3.08594c1.89334,0 3.47008,-1.31903 3.88477,-3.08594l1.41406,-0.31445c1.625,-0.361 2.8568,-1.68989 3.0918,-3.33789l0.60938,-4.26172h-8h-2z"></path></g></g>
+                                </svg>
+                                <span>همه ی غرفه ها</span>
                             </div>
                         </a>
                     </li>
+                   
+                    <!--  END SIDEBAR  -->
+                    <!--  BEGIN CONTENT AREA  -->
                 </ul>
 
             </nav>
@@ -192,15 +231,12 @@
                 <p class=""> © کپی رایت</p>
             </div>
             <div class="footer-section f-section-2">
-                <span class="copyright">کلیه حقوق این سایت متعلق به  : <a href=""> دال مارکت </a>  است</span>
+                <span class="copyright">کلیه حقوق این سایت متعلق به  : <a href=""> آزی ذهاک </a>  است</span>
             </div>
         </div>
     </div>
     <!--  END CONTENT AREA  -->
- 
-    <!-- END MAIN CONTAINER -->
-    <!--  BEGIN FOOTER  -->
-    <!--  END FOOTER  -->
+
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="~/Theme/assets/js/libs/jquery-3.1.1.min.js"></script>
     <script src="~/Theme/bootstrap/js/popper.min.js"></script>

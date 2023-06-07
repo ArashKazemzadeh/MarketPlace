@@ -1,0 +1,103 @@
+﻿@model List<WebSite.EndPoint.Areas.Admin.Models.UserVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="row">
+
+    <div class="table-responsive m-5 col-10">
+        <table class="table table-bordered table-hover table-condensed mb-4">
+            <thead>
+                <tr>
+
+                    <th>
+                        نام و نام خانوادگی
+                    </th>
+                    <th>
+                        پست الکترونیکی
+                    </th>
+                    <th>
+                        نام کاربری
+                    </th>
+                    <th>
+                       نقش ها
+                    </th>
+                    <th class="text-center">
+                        عملیات
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @foreach (var role in item.Roles)
+                            {
+                                <span>@Html.DisplayFor(modelItem => role) ,</span>
+                            }
+
+                        </td>
+                        <td class="text-center">
+                            <ul class="table-controls row">
+                                <li>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="col-6" data-toggle="tooltip" data-placement="top" title="ویرایش">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success">
+                                            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="modal" data-target="#confirmModal-@item.Id" class="col-6" data-toggle="tooltip" data-placement="top" title="حذف">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-danger">
+                                            <polyline points="3 6 5 6 21 6"></polyline>
+                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <!-- Modal -->
+                    <div class="modal fade" id="confirmModal-@item.Id" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmModalLabel">هشدار</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    آیا از حذف  " <span style="color: darkorchid">@item.UserName</span>" اطمینان دارید؟
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">لغو</button>
+                                    <form asp-action="Delete" asp-route-email="@item.Email" method="post">
+                                        <button type="submit" class="btn btn-danger">حذف</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-2"> .</div>
+</div>     

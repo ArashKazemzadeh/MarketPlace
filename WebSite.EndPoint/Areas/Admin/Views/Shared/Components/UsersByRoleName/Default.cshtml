@@ -1,0 +1,18 @@
+﻿@model List<string>
+<div class="border-1" style="background-color: white;border-block: darkorchid">
+    @foreach (var item in Model)
+    {
+        <p> <a asp-area="Admin" asp-action="Index" asp-controller="Users" asp-route-role="@item"> @item</a></p>
+        <hr/>
+    }
+</div>
+
+
+
+
+
+
+
+
+
+

@@ -1,10 +1,10 @@
 ﻿using ConsoleApp1.Models;
 using Domin.Attributes;
 using Domin.Entities.Users;
-using Infrustracture.EntitiesConfiguration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Persistence.ModelConfigurations.AplpyConfiguration;
 
 namespace Persistence.Contexts.SqlServer
 {
@@ -66,164 +66,10 @@ namespace Persistence.Contexts.SqlServer
             #endregion
 
             #region AplyConfiguration
-
-            modelBuilder.ApplyConfiguration(new AuctionConfig());
-            modelBuilder.ApplyConfiguration(new AddressConfig());
-            modelBuilder.ApplyConfiguration(new BidConfig());
-            modelBuilder.ApplyConfiguration(new BoothConfig());
-            modelBuilder.ApplyConfiguration(new CartConfig());
-            modelBuilder.ApplyConfiguration(new CategoryConfig());
-            modelBuilder.ApplyConfiguration(new CommentConfig());
-            modelBuilder.ApplyConfiguration(new CustomerConfig());
-            modelBuilder.ApplyConfiguration(new ImageConfig());
-            modelBuilder.ApplyConfiguration(new InvoiceConfig());
-            modelBuilder.ApplyConfiguration(new ProductsCartConfig());
-            modelBuilder.ApplyConfiguration(new ProductConfig());
-            modelBuilder.ApplyConfiguration(new InvoiceConfig());
-            modelBuilder.ApplyConfiguration(new SellerConfig());
-            modelBuilder.ApplyConfiguration(new UserFileConfig());
-
+            ModelsConfigurations.ApplyEntityConfigurations(modelBuilder);
             #endregion
 
-
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Admin>(entity =>
-            {
-                entity.HasData(
-                    new Customer
-                    {
-                        Id = 3,
-                    }
-                );
-            });
-            modelBuilder.Entity<Customer>(entity =>
-            {
-                entity.HasData(
-                    new Customer
-                    {
-                        Id = 1,
-                    },
-                    new Customer
-                    {
-                        Id = 2,
-                    }
-                );
-            });
-            modelBuilder.Entity<User>(entity =>
-            {
-                entity.HasData(
-                    new User
-                    {
-                        Id = 1,
-                        FullName = "حسن"
-                    },
-                    new User
-                    {
-                        Id = 2,
-                        FullName = "جعفرقلی"
-                    },
-                new User
-                {
-                    Id = 3,
-                    FullName = "ساسان"
-                }
-                );
-            });
-            modelBuilder.Entity<Seller>(entity =>
-            {
-                entity.HasData(
-                    new Seller()
-                    {
-                        Id = 1,
-                        CompanyName = "شرکت نمونه",
-                        IsActive = true,
-                        CommissionPercentage = 10.5,
-                        CommissionsAmount = 500,
-                        SalesAmount = 10000,
-
-                    }
-                );
-            });
-            modelBuilder.Entity<Product>().HasData(
-                new Product
-                {
-                    Id = 1,
-                    Name = "لپ تاپ",
-                    BasePrice = 5000000,
-                    IsAuction = false,
-                    IsConfirm = null,
-                    Availability = 10,
-                    Description = "لپ تاپ جدید و بسیار کارآمد",
-                    IsActive = true,
-
-                },
-                new Product
-                {
-                    Id = 2,
-                    Name = "گوشی هوشمند",
-                    BasePrice = 2000000,
-                    IsAuction = false,
-                    IsConfirm = null,
-                    Availability = 5,
-                    Description = "گوشی هوشمند با قابلیت‌های فراوان",
-                    IsActive = true,
-
-                },
-
-                new Product
-                {
-                    Id = 20,
-                    Name = "کتاب برنامه نویسی",
-                    BasePrice = 100000,
-                    IsAuction = false,
-                    IsConfirm = null,
-                    Availability = 50,
-                    Description = "بهترین کتاب برای یادگیری برنامه‌نویسی",
-                    IsActive = true,
-
-                }
-            );
-
-            modelBuilder.Entity<Comment>().HasData(
-                new Comment
-                {
-                    Id = 1,
-                    Title = "عالی",
-                    IsConfirm = null,
-                    Description = "این محصول عالی است.",
-                    ProductId = 1,
-                    CustomertId = 1
-                },
-                new Comment
-                {
-                    Id = 2,
-                    Title = "بد",
-                    IsConfirm = null,
-                    Description = "این محصول بد است.",
-                    ProductId = 1,
-                    CustomertId = 2
-                },
-
-                new Comment
-                {
-                    Id = 20,
-                    Title = "خوب",
-                    IsConfirm = null,
-                    Description = "این محصول خوب است.",
-                    ProductId = 2,
-                    CustomertId = 2
-                }
-            );
-            modelBuilder.Entity<Booth>().HasData(
-                new Booth
-                {
-                    Id = 1,
-                    Name = "غذایی",
-                    Description = "فروشگاه غذایی",
-                    SellerId = 1
-                }
-            );
-
 
 
         }

@@ -1,4 +1,4 @@
-﻿using ConsoleApp.Models;
+﻿using Application.Dtos.UserDto;
 
 namespace Application.IServices.AdminServices.UserService.Queries;
 

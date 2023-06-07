@@ -1,8 +1,4 @@
-﻿
-
-namespace ConsoleApp.Models;
-
-
+﻿namespace ConsoleApp.Models;
 public class AuctionDto
 {
     public int Id { get; set; }

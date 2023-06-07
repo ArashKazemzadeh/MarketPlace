@@ -172,7 +172,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             Description = "فروشگاه غذایی",
-                            Name = "غذایی",
+                            Name = "شماره یک مواد غذایی",
                             SellerId = 1
                         });
                 });
@@ -297,7 +297,7 @@ namespace Persistence.Migrations
                             CustomertId = 1,
                             Description = "این محصول عالی است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 6, 11, 8, 46, 715, DateTimeKind.Local).AddTicks(1475),
+                            RegisterDate = new DateTime(2023, 6, 7, 15, 28, 43, 927, DateTimeKind.Local).AddTicks(1060),
                             Title = "عالی"
                         },
                         new
@@ -306,7 +306,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول بد است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 6, 11, 8, 46, 715, DateTimeKind.Local).AddTicks(1491),
+                            RegisterDate = new DateTime(2023, 6, 7, 15, 28, 43, 927, DateTimeKind.Local).AddTicks(1082),
                             Title = "بد"
                         },
                         new
@@ -315,7 +315,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول خوب است.",
                             ProductId = 2,
-                            RegisterDate = new DateTime(2023, 6, 6, 11, 8, 46, 715, DateTimeKind.Local).AddTicks(1493),
+                            RegisterDate = new DateTime(2023, 6, 7, 15, 28, 43, 927, DateTimeKind.Local).AddTicks(1086),
                             Title = "خوب"
                         });
                 });
@@ -346,7 +346,7 @@ namespace Persistence.Migrations
                         },
                         new
                         {
-                            Id = 2
+                            Id = 3
                         });
                 });
 
@@ -683,7 +683,7 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 3
+                            Id = 2
                         });
                 });
 
@@ -772,34 +772,53 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7bd1e6b0-cc2e-4dc0-ad88-5f412d7bdead",
+                            ConcurrencyStamp = "6d8cc683-be7f-4d36-9bb3-e8724d8a996a",
+                            Email = "userone@gmail.com",
                             EmailConfirmed = false,
-                            FullName = "حسن",
+                            FullName = "کاربر یک",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
+                            TwoFactorEnabled = false,
+                            UserName = "userone@gmail.com"
                         },
                         new
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3ea558dc-a22d-4fdc-ba01-845aaac33ba0",
+                            ConcurrencyStamp = "da7b285e-b52c-4cd4-a10e-e8e63d964ab9",
+                            Email = "admin@gmail.com",
                             EmailConfirmed = false,
-                            FullName = "جعفرقلی",
+                            FullName = "Admin",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
+                            TwoFactorEnabled = false,
+                            UserName = "admin@gmail.com"
                         },
                         new
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9569f7b1-61d0-4a22-bc4b-bb4968741745",
+                            ConcurrencyStamp = "d511d350-6f3b-4708-9fbc-dc9752741d7c",
+                            Email = "userotow@gmail.com",
                             EmailConfirmed = false,
-                            FullName = "ساسان",
+                            FullName = "کاربر دو",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
+                            TwoFactorEnabled = false,
+                            UserName = "userotow@gmail.com"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ba3d8f2a-230a-4518-b326-66277a775c73",
+                            Email = "userothree@gmail.com",
+                            EmailConfirmed = false,
+                            FullName = "کاربر سه",
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "userothree@gmail.com"
                         });
                 });
 
@@ -831,6 +850,26 @@ namespace Persistence.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Customer",
+                            NormalizedName = "CUSTOMER"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Seller",
+                            NormalizedName = "SELLER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -915,6 +954,33 @@ namespace Persistence.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 4,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            UserId = 4,
+                            RoleId = 1
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>

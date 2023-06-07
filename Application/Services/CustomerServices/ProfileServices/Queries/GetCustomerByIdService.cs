@@ -1,6 +1,6 @@
 ﻿using Application.Dtos;
+using Application.Dtos.UserDto;
 using Application.IServices.CustomerServices.ProfileServices.Queries;
-using ConsoleApp.Models;
 
 namespace Application.Services.CustomerServices.ProfileServices.Queries
 {

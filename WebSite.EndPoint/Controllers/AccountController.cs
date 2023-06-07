@@ -1,5 +1,5 @@
-﻿using Application.IServices.CustomerServices.UserService.Commands;
-using ConsoleApp.Models;
+﻿using Application.Dtos.UserDto;
+using Application.IServices.AdminServices.UserService.Commands;
 using Microsoft.AspNetCore.Mvc;
 using WebSite.EndPoint.Models.ViewModels.Users;
 using WebSite.EndPoint.Utilities.Filters;
@@ -37,24 +37,26 @@ namespace WebSite.EndPoint.Controllers
                 Password = model.Password
             };
             var result = await _accountService.CreateUserAsync(userdto);
-
             if (result.Succeeded)
             {
-                var createRoleResult = await _accountService.CreateRoleIfNotExists("Customer");
-                await _accountService.AssignUserToRole(model.Email, "Customer");
+                var newrole = "Customer";
+                // Create user role, assign role to user and do other necessary steps
                 var userId = await _accountService.FindUserIdByEmailAsync(model.Email);
+                await _accountService.CreateRoleIfNotExists(newrole);
+                await _accountService.AssignUserToRole(model.Email, newrole);
                 var newCustomer = new CustomerDto()
                 {
                     Id = userId
                 };
-                _addUserIdToCustomerForRegisterService.Execute(newCustomer);
+             await   _addUserIdToCustomerForRegisterService.Execute(newCustomer);
+                var user = await _accountService.FindUserByEmailAsync(model.Email);
+                await _accountService.SignInUserAsync(user, model.Password, true, true);
                 return RedirectToAction(nameof(Profile));
             }
             foreach (var item in result.Errors)
             {
                 ModelState.AddModelError(item.Code, item.Description);
             }
-
             return View(model);
         }
         public IActionResult Profile()

@@ -1,6 +1,7 @@
-﻿using Application.IServices.AdminServices.UserService.Commands;
+﻿using Application.Dtos.UserDto;
+using Application.IServices.AdminServices.UserService.Commands;
 using Application.IServices.AdminServices.UserService.Queries;
-using Application.Services.AdminServices.UserServices.Queries;
+using Application.Services.AdminServices.UserServices.SellerService.Queries;
 using ConsoleApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using WebSite.EndPoint.Areas.Admin.Models;

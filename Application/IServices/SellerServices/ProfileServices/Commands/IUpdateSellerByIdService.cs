@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Dtos;
-using ConsoleApp.Models;
+using Application.Dtos.UserDto;
 
 namespace Application.IServices.SellerServices.ProfileServices.Commands
 {

@@ -1,7 +1,4 @@
-﻿
-
-
-namespace ConsoleApp.Models;
+﻿namespace ConsoleApp.Models;
 
 
 public class BidDto
