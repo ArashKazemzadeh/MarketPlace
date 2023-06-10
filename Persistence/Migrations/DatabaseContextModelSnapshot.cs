@@ -241,6 +241,26 @@ namespace Persistence.Migrations
                         .HasName("PK__Category__19093A2B7D631E80");
 
                     b.ToTable("Categories", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "لپ تاپ جدید و بسیار کارآمد",
+                            Name = "تکنولوژی"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "لپ تاپ جدید و بسیار کارآمد",
+                            Name = "تکنولوژی"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "لپ تاپ جدید و بسیار کارآمد",
+                            Name = "تکنولوژی"
+                        });
                 });
 
             modelBuilder.Entity("ConsoleApp1.Models.Comment", b =>
@@ -297,7 +317,7 @@ namespace Persistence.Migrations
                             CustomertId = 1,
                             Description = "این محصول عالی است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 7, 15, 28, 43, 927, DateTimeKind.Local).AddTicks(1060),
+                            RegisterDate = new DateTime(2023, 6, 10, 17, 23, 20, 438, DateTimeKind.Local).AddTicks(7641),
                             Title = "عالی"
                         },
                         new
@@ -306,7 +326,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول بد است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 7, 15, 28, 43, 927, DateTimeKind.Local).AddTicks(1082),
+                            RegisterDate = new DateTime(2023, 6, 10, 17, 23, 20, 438, DateTimeKind.Local).AddTicks(7662),
                             Title = "بد"
                         },
                         new
@@ -315,7 +335,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول خوب است.",
                             ProductId = 2,
-                            RegisterDate = new DateTime(2023, 6, 7, 15, 28, 43, 927, DateTimeKind.Local).AddTicks(1086),
+                            RegisterDate = new DateTime(2023, 6, 10, 17, 23, 20, 438, DateTimeKind.Local).AddTicks(7664),
                             Title = "خوب"
                         });
                 });
@@ -528,6 +548,9 @@ namespace Persistence.Migrations
                     b.Property<bool?>("IsConfirm")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsRemove")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -554,6 +577,7 @@ namespace Persistence.Migrations
                             Description = "لپ تاپ جدید و بسیار کارآمد",
                             IsActive = true,
                             IsAuction = false,
+                            IsRemove = false,
                             Name = "لپ تاپ"
                         },
                         new
@@ -564,6 +588,7 @@ namespace Persistence.Migrations
                             Description = "گوشی هوشمند با قابلیت‌های فراوان",
                             IsActive = true,
                             IsAuction = false,
+                            IsRemove = false,
                             Name = "گوشی هوشمند"
                         },
                         new
@@ -574,6 +599,7 @@ namespace Persistence.Migrations
                             Description = "بهترین کتاب برای یادگیری برنامه‌نویسی",
                             IsActive = true,
                             IsAuction = false,
+                            IsRemove = false,
                             Name = "کتاب برنامه نویسی"
                         });
                 });
@@ -772,7 +798,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6d8cc683-be7f-4d36-9bb3-e8724d8a996a",
+                            ConcurrencyStamp = "68dda470-6876-42fa-8232-1ecfb337b61c",
                             Email = "userone@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر یک",
@@ -785,7 +811,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "da7b285e-b52c-4cd4-a10e-e8e63d964ab9",
+                            ConcurrencyStamp = "72456a32-6ebf-4d90-9750-2a48b8d4328d",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             FullName = "Admin",
@@ -798,7 +824,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d511d350-6f3b-4708-9fbc-dc9752741d7c",
+                            ConcurrencyStamp = "092f7016-bd21-410a-9780-814813e28033",
                             Email = "userotow@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر دو",
@@ -811,7 +837,7 @@ namespace Persistence.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ba3d8f2a-230a-4518-b326-66277a775c73",
+                            ConcurrencyStamp = "9b53c62b-d2a4-4678-badf-235f534704f3",
                             Email = "userothree@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر سه",

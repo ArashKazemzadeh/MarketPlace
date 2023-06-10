@@ -1,6 +1,6 @@
-﻿using ConsoleApp.Models;
-using Application.IServices.AdminServices.ProoductServices.Queries;
+﻿using Application.IServices.AdminServices.ProoductServices.Queries;
 using Domin.IRepositories.IseparationRepository;
+using Application.Dtos.ProductDto;
 
 namespace Application.Services.AdminServices.ProoductServices.Queries
 {

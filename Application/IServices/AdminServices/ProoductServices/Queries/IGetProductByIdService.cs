@@ -1,5 +1,5 @@
 ﻿using Application.Dtos;
-using ConsoleApp.Models;
+using Application.Dtos.ProductDto;
 
 
 

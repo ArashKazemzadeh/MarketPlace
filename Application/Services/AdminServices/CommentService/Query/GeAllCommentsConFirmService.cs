@@ -21,20 +21,24 @@ namespace Application.Services.AdminServices.CommentService.Query
             var comments = await _commentRepository.GetAllCommentsWithSellerNameConfirmAsync();
             var customerIds = comments.Select(c => c.CustomertId).ToList();
             var users = await _userRepository.GetUsersByCustomerIdsAsync(customerIds);
-
+            if (comments==null)
+            {
+                return new List<CommentDto>();
+            }
             var commentDtos = comments.Select(p => new CommentDto
             {
                 Id = p.Id,
                 RegisterDate = p.RegisterDate,
                 Title = p.Title,
-                ProductName = p.Product.Name,
+                ProductName = p.Product != null ? p.Product.Name : "",
                 Description = p.Description,
-                SellerName = p.Product?.Booth?.Seller.CompanyName,
+                SellerName = p.Product?.Booth?.Seller != null ? p.Product.Booth.Seller.CompanyName : "",
                 CustomerName = users.FirstOrDefault(u => u.Id == p.CustomertId)?.FullName
-            });
+            }).ToList();
 
 
-                return commentDtos.ToList();
+
+            return commentDtos;
         }
 
     }

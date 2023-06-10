@@ -32,6 +32,29 @@ namespace Persistence.ModelConfigurations.EntitiesConfiguration
                         j.HasKey("CategoryId", "ProductId").HasName("PK__Products__D249F64504564426");
                         j.ToTable("ProductsCategory");
                     });
+
+               entity.HasData(
+                new Category
+                {
+                    Id = 1,
+                    Name = "تکنولوژی",
+                    Description = "لپ تاپ جدید و بسیار کارآمد",
+
+                },
+                new Category
+                {
+                Id = 2,
+                Name = "تکنولوژی",
+                Description = "لپ تاپ جدید و بسیار کارآمد",
+
+                },
+                new Category
+                {
+                Id = 3,
+                Name = "تکنولوژی",
+                Description = "لپ تاپ جدید و بسیار کارآمد",
+
+                });
         }
     }
 }

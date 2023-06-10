@@ -1,12 +1,13 @@
 ﻿using ConsoleApp1.Models;
+using Domin.IRepositories.Dtos;
 
 namespace Domin.IRepositories.IseparationRepository;
 
 public interface IImageForProductRepository
 {
-    Task<ImageForProduct> GetByIdAsync(int id);
-    Task<List<ImageForProduct>> GetAllAsync();
-    Task AddAsync(ImageForProduct imageForProduct);
-    Task UpdateAsync(ImageForProduct imageForProduct);
-    Task DeleteAsync(ImageForProduct imageForProduct);
+    Task<ImageForProduct> GetByIdAsync(int imageId);
+    Task<IEnumerable<ImageForProduct>> GetImagesForProductAsync(int productId);
+    Task AddAsync(ImageForProductRepDto image);
+    Task<bool> RemoveAsync(int id);
+
 }

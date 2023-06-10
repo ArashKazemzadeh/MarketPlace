@@ -14,11 +14,11 @@ namespace Application.Services.AdminServices.ProoductServices.Commands
         }
         public async Task<GeneralDto> Execute(int id)
         {
-            var existingProduct =await _productRepository.GetByIdAsync(id);
+            var existingProduct = await _productRepository.GetByIdAsync(id);
             if (existingProduct == null)
                 return new GeneralDto { message = "محصول مورد نظر یافت نشد." };
 
-       await     _productRepository.DeleteAsync(existingProduct);
+            await _productRepository.DeleteAsync(id);
             return new GeneralDto { message = "محصول با موفقیت حذف شد." };
         }
     }

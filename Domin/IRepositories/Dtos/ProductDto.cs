@@ -1,5 +1,5 @@
-﻿
-namespace ConsoleApp.Models;
+﻿using ConsoleApp1.Models;
+namespace Domin.IRepositories.Dtos;
 
 
 public class ProductDto
@@ -11,7 +11,9 @@ public class ProductDto
     public bool? IsConfirm { get; set; }
     public int? Availability { get; set; }
     public string? Description { get; set; }
-    public string? SellerName { get; set; }
     public bool IsActive { get; set; }
-    public int? BidId { get; set; }
+    public Auction Auction { get; set; }
+    public ICollection<ImageForProduct>  Image { get; set; }
+    public ICollection<Category> Categories { get; set; }
 }
+

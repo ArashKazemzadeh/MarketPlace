@@ -1,7 +1,7 @@
 ﻿
 using System.Collections.Generic;
 
-namespace ConsoleApp.Models;
+namespace Application.Dtos.CategoryDto;
 
 
 public class CategoryDto
@@ -13,5 +13,5 @@ public class CategoryDto
     public string? Description { get; set; }
 
 
-   
+
 }

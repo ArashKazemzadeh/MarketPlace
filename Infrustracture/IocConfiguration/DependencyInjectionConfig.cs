@@ -36,6 +36,8 @@ namespace Infrustracture.IocConfiguration
         public static IServiceCollection AddScopeSqlServerTables(this IServiceCollection services,
             IConfiguration configuration)
         {
+            // ---------------------Admin-----------------------------------------------------------
+
             services.AddScoped<IGeneralRepository, GeneralRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ISellerRepository, SellerRepository>();
@@ -62,6 +64,11 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<IAddUserIdToCustomerForRegisterService, AddUserIdToCustomerForRegisterService>();
             services.AddScoped < IGetAllCommissionsService, GetAllCommissionsService>(); 
             services.AddScoped <IIdentityRoleService, IdentityRoleService>(); 
+           // ---------------------seller-----------------------------------------------------------
+            services.AddScoped <ICategoryRepository, CategoryRepository>();
+            services.AddScoped <IImageForProductRepository, ImageForProductRepository>();
+            //services.AddScoped <, >();
+            //services.AddScoped <, >();
             return services;
         }
         public static IServiceCollection AddScopeMongoDbDocuments(this IServiceCollection services,

@@ -1,5 +1,4 @@
-﻿using Common.Mappers;
-using Infrastructure.IdentityConfigs;
+﻿using Infrastructure.IdentityConfigs;
 using Infrustracture.IocConfiguration;
 using WebSite.EndPoint.Utilities.Filters;
 
@@ -22,7 +21,6 @@ builder.Services.ConfigureApplicationCookie(option =>
 
 #region AutoMapper
 builder.Services.AddAutoMapper(typeof(Program));
-builder.Services.AddTransient(typeof(ICustomMapper<,>), typeof(CustomMapper<,>));
 #endregion
 
 #region IOC
@@ -49,7 +47,7 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
-        name: "AdminArea",
+        name: "areaAdmin",
         pattern: "{area:exists}/{controller=ForVisitor}/{action=Index}/{id?}"
     );
 

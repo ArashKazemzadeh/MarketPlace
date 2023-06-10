@@ -1,7 +1,7 @@
 ﻿using Application.Dtos;
+using Application.Dtos.ProductDto;
 using Application.IServices.AdminServices.ProoductServices.Queries;
 using AutoMapper;
-using ConsoleApp.Models;
 using Domin.IRepositories.IseparationRepository;
 using System.Xml.Linq;
 

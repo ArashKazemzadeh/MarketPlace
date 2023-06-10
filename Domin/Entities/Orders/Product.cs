@@ -2,7 +2,6 @@
 
 namespace ConsoleApp1.Models;
 [Auditable]
-
 public class Product
 {
     public int Id { get; set; }
@@ -13,6 +12,7 @@ public class Product
     public int? Availability { get; set; }
     public string? Description { get; set; }
     public bool IsActive { get; set; } = true;
+    public bool IsRemove { get; set; } = false;
     public int? BidId { get; set; }
     public virtual Auction? Auction { get; set; }
     public int? BoothId { get; set; }

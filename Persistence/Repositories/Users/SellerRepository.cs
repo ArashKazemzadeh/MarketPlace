@@ -19,7 +19,9 @@ namespace Persistence.Repositories.Users
         }
         public async Task<Seller> GetByIdAsync(int id)
         {
-            return await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbSet.AsNoTracking()
+                .Include(b=>b.Booth).
+                FirstOrDefaultAsync(x => x.Id == id);
         }
 
 

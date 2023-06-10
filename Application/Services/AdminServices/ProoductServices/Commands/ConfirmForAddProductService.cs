@@ -1,5 +1,6 @@
 ﻿using Application.Dtos;
 using Application.IServices.AdminServices.ConfirmServices;
+using Domin.IRepositories.Dtos;
 using Domin.IRepositories.IseparationRepository;
 
 namespace Application.Services.AdminServices.ProoductServices.Commands
@@ -23,10 +24,11 @@ namespace Application.Services.AdminServices.ProoductServices.Commands
                     message = "این کالا موجود نیست."
                 };
             }
-
+            //صحت این متد بررسی شود
             if (product.IsConfirm == null)
             {
                 product.IsConfirm = false;
+               
                 await _productRepository.UpdateAsync(product);
                 return new GeneralDto
                 {
@@ -52,8 +54,13 @@ namespace Application.Services.AdminServices.ProoductServices.Commands
 
             if (product.IsConfirm == null)
             {
+               
+               
+                
                 product.IsConfirm = true;
-             await   _productRepository.UpdateAsync(product);
+
+
+await _productRepository.UpdateAsync(product);
                 return new GeneralDto
                 {
                     message = "کالا با موفقیت تایید شد."

@@ -1,14 +1,30 @@
 ﻿using Application.Dtos;
 using Application.IServices.SellerServices.ProductServices.Commands;
-using ConsoleApp.Models;
+using Domin.IRepositories.IseparationRepository;
 
 namespace Application.Services.SellerServices.ProductServices.Commands
 {
-    internal class DeleteProductSellerService : IDeleteProductSellerService
+    public class DeleteProductSellerService : IDeleteProductSellerService
     {
-        public GeneralDto Execute(ProductDto productDto, int boothId)
+        private readonly IProductRepository _productRepository;
+
+        public DeleteProductSellerService(IProductRepository productRepository)
         {
-            throw new NotImplementedException();
+            _productRepository = productRepository; 
+        }
+        public async Task< GeneralDto> Execute(int id)
+        {
+            var productGeneral= await _productRepository.GetByIdAsync(id);
+            if (productGeneral==null)
+            {
+                return new GeneralDto {message = "کالا موجود نیست"};
+            }
+            
+           await _productRepository.DeleteAsync(id);
+           return new GeneralDto
+           {
+               message = "عملیات با موفقیت انجام شد"
+           };
         }
     }
 }

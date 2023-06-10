@@ -1,51 +1,59 @@
 ﻿using ConsoleApp1.Models;
+using Domin.IRepositories.Dtos;
 using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Persistence.Contexts.SqlServer;
 
 namespace Persistence.Repositories.Optionals
 {
+   
+
     public class ImageForProductRepository : IImageForProductRepository
     {
-        private readonly DbContext _context;
-        private readonly DbSet<ImageForProduct> _dbSet;
+        private readonly DatabaseContext _dbContext;
+        private readonly DbSet<ImageForProduct> _imageSet;
 
-        public ImageForProductRepository(DbContext context)
+        public ImageForProductRepository(DatabaseContext dbContext)
         {
-            _context = context;
-            _dbSet = _context.Set<ImageForProduct>();
+            _dbContext = dbContext;
+            _imageSet = _dbContext.Set<ImageForProduct>();
         }
 
-        public async Task<ImageForProduct> GetByIdAsync(int id)
+        public async Task<ImageForProduct> GetByIdAsync(int imageId)
         {
-            return await _dbSet.FindAsync(id);
+            return await _imageSet.FindAsync(imageId);
         }
 
-        public async Task<List<ImageForProduct>> GetAllAsync()
+        public async Task<IEnumerable<ImageForProduct>> GetImagesForProductAsync(int productId)
         {
-            return await _dbSet.ToListAsync();
+            return await _imageSet.Where(i => i.ProductId == productId).ToListAsync();
         }
 
-        public async Task AddAsync(ImageForProduct imageForProduct)
+        public async Task AddAsync(ImageForProductRepDto imageDto)
         {
-            await _dbSet.AddAsync(imageForProduct);
-            await _context.SaveChangesAsync();
+            var image = new ImageForProduct
+            {
+                Url = imageDto.Url,
+                ProductId = imageDto.ProductId,
+                Product = imageDto.Product
+            };
+            
+            await _imageSet.AddAsync(image);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(ImageForProduct imageForProduct)
+        public async Task<bool> RemoveAsync(int id)
         {
-            _context.Entry(imageForProduct).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-        }
+            var image = await _imageSet.FindAsync(id);
+            if (image!=null)
+            {
+                _imageSet.Remove(image);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
 
-        public async Task DeleteAsync(ImageForProduct imageForProduct)
-        {
-            _dbSet.Remove(imageForProduct);
-            await _context.SaveChangesAsync();
+            return false;
         }
     }
+
 }

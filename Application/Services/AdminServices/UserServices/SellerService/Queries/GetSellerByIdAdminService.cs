@@ -1,7 +1,5 @@
 ﻿using Application.Dtos;
 using Application.Dtos.UserDto;
-using Common.Mappers;
-using ConsoleApp1.Models;
 using Domin.IRepositories.IseparationRepository;
 
 namespace Application.Services.AdminServices.UserServices.SellerService.Queries
@@ -13,8 +11,8 @@ namespace Application.Services.AdminServices.UserServices.SellerService.Queries
     public class GetSellerByIdAdminService : IGetSellerByIdAdminService
     {
         private readonly ISellerRepository _sellerRepository;
-        public GetSellerByIdAdminService(ISellerRepository sellerRepository,
-            ICustomMapper<SellerDto, Seller> mapper)
+        public GetSellerByIdAdminService(ISellerRepository sellerRepository
+          )
         {
             _sellerRepository = sellerRepository;
         }

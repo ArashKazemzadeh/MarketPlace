@@ -1,6 +1,6 @@
 ﻿using Application.Dtos;
+using Application.Dtos.ProductDto;
 using Application.IServices.CustomerServices.ProductServices.Commands;
-using ConsoleApp.Models;
 
 namespace Application.Services.CustomerServices.ProductServices.Commands
 {

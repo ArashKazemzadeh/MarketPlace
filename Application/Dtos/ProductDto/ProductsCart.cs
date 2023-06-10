@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace ConsoleApp.Models;
+namespace Application.Dtos.ProductDto;
 
 
 public class ProductsCart
@@ -13,5 +13,5 @@ public class ProductsCart
 
     public int? Quantity { get; set; }
 
-  
+
 }

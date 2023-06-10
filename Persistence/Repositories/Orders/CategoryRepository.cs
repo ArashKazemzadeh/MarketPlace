@@ -1,30 +1,42 @@
 ﻿using ConsoleApp1.Models;
 using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Domin.IRepositories.Dtos;
+using Persistence.Contexts.SqlServer;
 
 namespace Persistence.Repositories.Orders
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly DbContext _context;
+        private readonly DatabaseContext _context;
         private readonly DbSet<Category> _dbSet;
 
-        public CategoryRepository(DbContext context)
+        public CategoryRepository(DatabaseContext context)
         {
             _context = context;
             _dbSet = _context.Set<Category>();
         }
 
-        public async Task<Category> GetByIdAsync(int id)
+        public async Task<CategoryRepDto> GetByIdAsync(int id)
         {
-            return await _dbSet.FindAsync(id);
-        }
+            var product = await _dbSet.AsNoTracking()
+                .FirstOrDefaultAsync(c => c.Id == id);
+            return new CategoryRepDto
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Products = product.Products
+            };
 
+        }
+        public async Task<Category> GetByIdOrginalAsync(int id)
+        {
+            var product = await _dbSet.AsNoTracking()
+                .FirstOrDefaultAsync(c => c.Id == id);
+            return product;
+
+        }
         public async Task<List<Category>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
@@ -45,6 +57,19 @@ namespace Persistence.Repositories.Orders
         public async Task DeleteAsync(Category category)
         {
             _dbSet.Remove(category);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddProductToCategoryAsync(Category category, Product product)
+        {
+            category.Products.Add(product);
+            //_dbSet.Update(category);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteProductFromCategoryAsync(Category category, Product product)
+        {
+            category.Products.Remove(product);
             await _context.SaveChangesAsync();
         }
     }

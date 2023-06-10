@@ -1,4 +1,5 @@
-﻿using ConsoleApp1.Models;
+﻿using System.Linq.Expressions;
+using ConsoleApp1.Models;
 using Domin.Attributes;
 using Domin.Entities.Users;
 using Microsoft.AspNetCore.Identity;
@@ -59,7 +60,6 @@ namespace Persistence.Contexts.SqlServer
                     modelBuilder.Entity(entityType.Name).Property<DateTime?>("InsertTime");
                     modelBuilder.Entity(entityType.Name).Property<DateTime?>("UpdateTime");
                     modelBuilder.Entity(entityType.Name).Property<DateTime?>("RemoveTime");
-
                 }
             }
 
@@ -70,7 +70,6 @@ namespace Persistence.Contexts.SqlServer
             #endregion
 
             base.OnModelCreating(modelBuilder);
-
 
         }
         public override int SaveChanges()
@@ -88,7 +87,6 @@ namespace Persistence.Contexts.SqlServer
                 var inserted = entityType.FindProperty("InsertTime");
                 var updated = entityType.FindProperty("UpdateTime");
                 var removed = entityType.FindProperty("RemoveTime");
-                //var isRemoved = entityType.FindProperty("IsRemove");
                 if (item.State == EntityState.Added && inserted != null)
                 {
                     item.Property("InsertTime").CurrentValue = DateTime.Now;
@@ -100,7 +98,6 @@ namespace Persistence.Contexts.SqlServer
                 if (item.State == EntityState.Added && inserted != null)
                 {
                     item.Property("RemoveTime").CurrentValue = DateTime.Now;
-
                 }
             }
 
