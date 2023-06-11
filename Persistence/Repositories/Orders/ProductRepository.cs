@@ -17,11 +17,31 @@ namespace Persistence.Repositories.Orders
             _context = context;
             _dbSet = _context.Set<Product>();
         }
+
+        public async Task<List<AuctionProductDto>> GetProductsWithTrueAuctions(int sellerId)
+        {
+            var result = _dbSet.AsNoTracking().Where(a => a.IsActive && a.Booth.Seller.Id == sellerId)
+                .Include(a => a.Auction)
+                .Select(p => new AuctionProductDto
+                {
+                    ProductId = p.Id,
+                    ProductName = p.Name,
+                    BasePrice = p.BasePrice ?? 0,
+                    AuctionId = p.Auction.Id,
+                    StartDeadTime = p.Auction.StartDeadTime,
+                    EndDeadTime = p.Auction.EndDeadTime,
+                    HighestPrice = p.Auction.HighestPrice
+                }).ToList();
+
+            return result;
+        }
+
+
         public async Task<ProductDto> GetWithAllNavigationsByIdSellerAsync(int id)
         {
             var product = await _dbSet.AsNoTracking().Where(x => x.Id == id)
                     .Include(b => b.Auction)
-                   
+
                     .Include(c => c.Categories)
                     .FirstOrDefaultAsync();
             return new ProductDto
@@ -52,7 +72,7 @@ namespace Persistence.Repositories.Orders
 
         public async Task<List<ProductDto>> GetAllWithNavigationsAsync(int sellerId)
         {
-            var products = await _dbSet.AsNoTracking().Where(x => x.Id == sellerId )
+            var products = await _dbSet.AsNoTracking().Where(x => x.Id == sellerId)
                 .Include(b => b.Auction)
                 .Include(i => i.Images)
                 .Include(c => c.Categories).ToListAsync();
@@ -107,19 +127,19 @@ namespace Persistence.Repositories.Orders
             result.Availability = productDto.Availability;
             result.Description = productDto.Description;
             result.IsActive = productDto.IsActive;
-           
-            if (result!=null)
+
+            if (result != null)
             {
                 _context.Entry(result).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
             }
-          
+
         }
 
         public async Task DeleteAsync(int id)
         {
             var product = await _dbSet.FindAsync(id);
-            if (product!=null)
+            if (product != null)
             {
                 product.IsRemove = true;
             }

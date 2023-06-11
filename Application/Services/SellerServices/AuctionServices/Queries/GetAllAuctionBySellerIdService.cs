@@ -1,14 +1,35 @@
 ﻿using Application.Dtos;
 using Application.IServices.SellerServices.AuctionServices.Queries;
-using ConsoleApp.Models;
+using Domin.IRepositories.Dtos;
+using Domin.IRepositories.IseparationRepository;
 
 namespace Application.Services.SellerServices.AuctionServices.Queries
 {
-    internal class GetAllAuctionBySellerIdService : IGetAllAuctionBySellerIdService
+    public class GetAllAuctionBySellerIdService : IGetAllAuctionBySellerIdService
     {
-        public List<GeneralDto<AuctionDto>> Execute(int id)
+        private readonly ISellerRepository _sellerRepository;
+        private readonly IProductRepository _productRepository;
+
+        public GetAllAuctionBySellerIdService(
+            ISellerRepository sellerRepository, IProductRepository productRepository)
         {
-            throw new NotImplementedException();
+            _sellerRepository = sellerRepository;
+            _productRepository = productRepository;
+        }
+        public async Task<GeneralDto<List<AuctionProductDto>>> Execute(int sellerId)
+        {
+            var seller = await _sellerRepository.GetByIdAsync(sellerId);
+            if (seller==null)
+            {
+                return new GeneralDto<List<AuctionProductDto>> { message = "فروشنده یافت نشد"};
+            }
+
+        var result=    await _productRepository.GetProductsWithTrueAuctions(seller.Id);
+        return new GeneralDto<List<AuctionProductDto>>
+        {
+            Data = result,
+            message = "لیست کاملی از کالاها همراه با زمان اغاز و پایان مزایده"
+        };
         }
     }
 }

@@ -5,6 +5,7 @@ namespace Domin.IRepositories.IseparationRepository;
 
 public interface IProductRepository
 {
+    Task<List<AuctionProductDto> >GetProductsWithTrueAuctions(int sellerId);
     Task<List<Product>> GetProductsWithSellerNameConfirmAsync();
     Task<List<ProductDto>> GetAllWithNavigationsAsync(int sellerId);
     Task<ProductDto> GetWithAllNavigationsByIdSellerAsync(int id);

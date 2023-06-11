@@ -1,20 +1,15 @@
 ﻿using ConsoleApp1.Models;
 using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using Persistence.Contexts.SqlServer;
 namespace Persistence.Repositories.Orders
 {
     public class AuctionRepository : IAuctionRepository
     {
-        private readonly DbContext _context;
+        private readonly DatabaseContext _context;
         private readonly DbSet<Auction> _dbSet;
 
-        public AuctionRepository(DbContext context)
+        public AuctionRepository(DatabaseContext context)
         {
             _context = context;
             _dbSet = _context.Set<Auction>();
@@ -24,7 +19,7 @@ namespace Persistence.Repositories.Orders
         {
             return await _dbSet.FindAsync(id);
         }
-
+       
         public async Task<List<Auction>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
