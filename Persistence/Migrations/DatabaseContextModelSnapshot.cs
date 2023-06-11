@@ -246,20 +246,26 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "لپ تاپ جدید و بسیار کارآمد",
+                            Description = "تجهیزات رایانه ",
                             Name = "تکنولوژی"
                         },
                         new
                         {
                             Id = 2,
-                            Description = "لپ تاپ جدید و بسیار کارآمد",
-                            Name = "تکنولوژی"
+                            Description = "انواع ساز و تابلو های نقاشی",
+                            Name = "هنری"
                         },
                         new
                         {
                             Id = 3,
-                            Description = "لپ تاپ جدید و بسیار کارآمد",
-                            Name = "تکنولوژی"
+                            Description = "همه ی لوازم مورد نیاز در منزل",
+                            Name = "لوازم منزل"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "شامل همه ی کالاهایی که در دسته باندی بالا موجود نیست.",
+                            Name = "سایر"
                         });
                 });
 
@@ -317,7 +323,7 @@ namespace Persistence.Migrations
                             CustomertId = 1,
                             Description = "این محصول عالی است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 10, 17, 23, 20, 438, DateTimeKind.Local).AddTicks(7641),
+                            RegisterDate = new DateTime(2023, 6, 11, 22, 10, 41, 369, DateTimeKind.Local).AddTicks(877),
                             Title = "عالی"
                         },
                         new
@@ -326,7 +332,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول بد است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 10, 17, 23, 20, 438, DateTimeKind.Local).AddTicks(7662),
+                            RegisterDate = new DateTime(2023, 6, 11, 22, 10, 41, 369, DateTimeKind.Local).AddTicks(901),
                             Title = "بد"
                         },
                         new
@@ -335,7 +341,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول خوب است.",
                             ProductId = 2,
-                            RegisterDate = new DateTime(2023, 6, 10, 17, 23, 20, 438, DateTimeKind.Local).AddTicks(7664),
+                            RegisterDate = new DateTime(2023, 6, 11, 22, 10, 41, 369, DateTimeKind.Local).AddTicks(903),
                             Title = "خوب"
                         });
                 });
@@ -673,7 +679,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CommissionPercentage = 10.5,
+                            CommissionPercentage = 0.10000000000000001,
                             CommissionsAmount = 500,
                             CompanyName = "شرکت نمونه",
                             IsActive = true,
@@ -705,12 +711,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Admins");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 2
-                        });
                 });
 
             modelBuilder.Entity("Domin.Entities.Users.User", b =>
@@ -798,7 +798,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "68dda470-6876-42fa-8232-1ecfb337b61c",
+                            ConcurrencyStamp = "6845875c-235f-4b1a-aa4a-645e7e0d7f12",
                             Email = "userone@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر یک",
@@ -809,22 +809,22 @@ namespace Persistence.Migrations
                         },
                         new
                         {
-                            Id = 2,
+                            Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "72456a32-6ebf-4d90-9750-2a48b8d4328d",
-                            Email = "admin@gmail.com",
+                            ConcurrencyStamp = "d7d17b08-cd36-4ca2-90a4-deee957e83eb",
+                            Email = "userofour@gmail.com",
                             EmailConfirmed = false,
-                            FullName = "Admin",
+                            FullName = "کاربر چهار",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
-                            UserName = "admin@gmail.com"
+                            UserName = "userfour@gmail.com"
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "092f7016-bd21-410a-9780-814813e28033",
+                            ConcurrencyStamp = "948b6590-9205-499e-a134-395d1a940d43",
                             Email = "userotow@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر دو",
@@ -835,9 +835,9 @@ namespace Persistence.Migrations
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9b53c62b-d2a4-4678-badf-235f534704f3",
+                            ConcurrencyStamp = "7b902044-ab75-450e-88d6-9f2c0350a911",
                             Email = "userothree@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر سه",

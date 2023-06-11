@@ -9,10 +9,10 @@ public class AdminConfig : IEntityTypeConfiguration<Admin>
 {
     public void Configure(EntityTypeBuilder<Admin> entity)
     {
-        entity.HasData(
-            new Admin
-            {
-                Id = 2
-            });
+        //entity.HasData(
+        //    new Admin
+        //    {
+        //        Id = 2
+        //    });
     }
 }

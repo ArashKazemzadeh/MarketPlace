@@ -2,8 +2,8 @@
 (CRUD)product*+
 (CRD)ImageForProduct*+
 (CR)AuctionForProduct*+
-(CRU)Seller*
-(CRUD)Booth*
+(CRU)Seller*+
+(CRUD)Booth*+
 (CRD)(Category)*+  //متد های اصلی برای کتگوری باید در admin ایجاد شود و پس از ایجاد شدن این کامنت حذف شود
 ----------------
 Customer:

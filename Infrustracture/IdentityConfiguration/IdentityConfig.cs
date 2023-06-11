@@ -9,7 +9,8 @@ namespace Infrastructure.IdentityConfigs
 {
     public static class IdentityConfig
     {
-        public static IServiceCollection AddIdentityService(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddIdentityService(this IServiceCollection services,
+            IConfiguration configuration)
         {
             services.AddDbContext<DatabaseContext>(option =>
                 option.UseSqlServer(configuration.GetConnectionString("sqlserver")));
@@ -19,12 +20,10 @@ namespace Infrastructure.IdentityConfigs
                 .AddDefaultTokenProviders()
                 .AddRoles<IdentityRole<int>>()
                 .AddErrorDescriber<CustomIdentityError>();
-
-
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 8;
+                options.Password.RequiredLength = 1;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;

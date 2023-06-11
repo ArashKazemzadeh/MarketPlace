@@ -24,10 +24,12 @@ using Persistence.Repositories.Optionals;
 using Persistence.Repositories.Orders;
 using Persistence.Repositories.Users;
 using Application.IServices.AdminServices.CommissionServices.Queries;
+using Application.IServices.SellerServices.ProfileServices.Commands;
 using Application.Services.AdminServices.CommissionServices.Queries;
 using Application.Services.AdminServices.UserServices.SellerService.Queries;
 using Application.Services.AdminServices.UserServices.SellerService.Commands;
 using Application.Services.AdminServices.UserServices.AllUserService;
+using Application.Services.SellerServices.ProfileServices.Commands;
 
 namespace Infrustracture.IocConfiguration
 {
@@ -37,7 +39,6 @@ namespace Infrustracture.IocConfiguration
             IConfiguration configuration)
         {
             // ---------------------Admin-----------------------------------------------------------
-
             services.AddScoped<IGeneralRepository, GeneralRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ISellerRepository, SellerRepository>();
@@ -67,8 +68,8 @@ namespace Infrustracture.IocConfiguration
            // ---------------------seller-----------------------------------------------------------
             services.AddScoped <ICategoryRepository, CategoryRepository>();
             services.AddScoped <IImageForProductRepository, ImageForProductRepository>();
-            //services.AddScoped <, >();
-            //services.AddScoped <, >();
+            services.AddScoped <IAddressRepository, AddressRepository> ();
+            services.AddScoped<IAddSellerService, AddSellerService>();
             return services;
         }
         public static IServiceCollection AddScopeMongoDbDocuments(this IServiceCollection services,

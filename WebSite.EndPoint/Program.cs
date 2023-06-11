@@ -1,5 +1,6 @@
 ﻿using Infrastructure.IdentityConfigs;
 using Infrustracture.IocConfiguration;
+using Microsoft.AspNetCore.Hosting;
 using WebSite.EndPoint.Utilities.Filters;
 
 
@@ -19,12 +20,13 @@ builder.Services.ConfigureApplicationCookie(option =>
 });
 #endregion
 
-#region AutoMapper
-builder.Services.AddAutoMapper(typeof(Program));
-#endregion
+
 
 #region IOC
+builder.Services.AddAutoMapper(typeof(Program));
+
 builder.Services.AddScoped<SaveVisitorFilter>();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScopeSqlServerTables(builder.Configuration);
 builder.Services.AddScopeMongoDbDocuments(builder.Configuration);
 #endregion

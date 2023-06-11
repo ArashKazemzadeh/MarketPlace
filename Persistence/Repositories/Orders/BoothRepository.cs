@@ -34,15 +34,29 @@ namespace Persistence.Repositories.Orders
            }).ToList();
            return result;
         }
-        public async Task AddAsync(Booth booth)
+        public async Task AddAsync(BoothRepDto boothRepDto)
         {
+            var booth = new Booth()
+            {
+                Name = boothRepDto.Name,
+                Description = boothRepDto.Description, 
+                SellerId = boothRepDto.SellerId,
+            };
             await _dbSet.AddAsync(booth);
             await _context.SaveChangesAsync();
         }
-        public async Task UpdateAsync(Booth booth)
+        public async Task<bool> UpdateBoothAsync(BoothRepDto boothRepDto)
         {
+            var booth = await _dbSet.FirstOrDefaultAsync(x => x.Id == boothRepDto.BoothId);
+            if (booth == null)
+            {
+                return false;
+            }
+            booth.Name = boothRepDto.Name;
+            booth.Description = boothRepDto.Description;
             _context.Entry(booth).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            return true;
         }
         public async Task DeleteAsync(Booth booth)
         {

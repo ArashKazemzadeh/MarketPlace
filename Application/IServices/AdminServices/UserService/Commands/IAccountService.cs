@@ -6,6 +6,8 @@ namespace Application.IServices.AdminServices.UserService.Commands;
 
 public interface IAccountService
 {
+    Task AssignUserToRoleByUserId(string userId, string roleName);
+    Task<string> GetLoggedInUserId();
     Task<string> UpdateUserAsync(UserDto userDto);
     Task<UserDto> FindUserByIdAsync(string id);
     Task<string> DeleteUserAsync(string email);

@@ -25,7 +25,7 @@ namespace Persistence.ModelConfigurations.EntitiesConfiguration
                     Id = 1,
                     CompanyName = "شرکت نمونه",
                     IsActive = true,
-                    CommissionPercentage = 10.5,
+                    CommissionPercentage = 0.1,
                     CommissionsAmount = 500,
                     SalesAmount = 10000,
 

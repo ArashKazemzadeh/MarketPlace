@@ -12,8 +12,8 @@ using Persistence.Contexts.SqlServer;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230607115800_init1")]
-    partial class init1
+    [Migration("20230611182604_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -244,6 +244,32 @@ namespace Persistence.Migrations
                         .HasName("PK__Category__19093A2B7D631E80");
 
                     b.ToTable("Categories", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "تجهیزات رایانه ",
+                            Name = "تکنولوژی"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "انواع ساز و تابلو های نقاشی",
+                            Name = "هنری"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "همه ی لوازم مورد نیاز در منزل",
+                            Name = "لوازم منزل"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "شامل همه ی کالاهایی که در دسته باندی بالا موجود نیست.",
+                            Name = "سایر"
+                        });
                 });
 
             modelBuilder.Entity("ConsoleApp1.Models.Comment", b =>
@@ -300,7 +326,7 @@ namespace Persistence.Migrations
                             CustomertId = 1,
                             Description = "این محصول عالی است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 7, 15, 28, 0, 173, DateTimeKind.Local).AddTicks(3642),
+                            RegisterDate = new DateTime(2023, 6, 11, 21, 56, 4, 163, DateTimeKind.Local).AddTicks(4155),
                             Title = "عالی"
                         },
                         new
@@ -309,7 +335,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول بد است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 7, 15, 28, 0, 173, DateTimeKind.Local).AddTicks(3658),
+                            RegisterDate = new DateTime(2023, 6, 11, 21, 56, 4, 163, DateTimeKind.Local).AddTicks(4180),
                             Title = "بد"
                         },
                         new
@@ -318,7 +344,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول خوب است.",
                             ProductId = 2,
-                            RegisterDate = new DateTime(2023, 6, 7, 15, 28, 0, 173, DateTimeKind.Local).AddTicks(3660),
+                            RegisterDate = new DateTime(2023, 6, 11, 21, 56, 4, 163, DateTimeKind.Local).AddTicks(4182),
                             Title = "خوب"
                         });
                 });
@@ -531,6 +557,9 @@ namespace Persistence.Migrations
                     b.Property<bool?>("IsConfirm")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsRemove")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -557,6 +586,7 @@ namespace Persistence.Migrations
                             Description = "لپ تاپ جدید و بسیار کارآمد",
                             IsActive = true,
                             IsAuction = false,
+                            IsRemove = false,
                             Name = "لپ تاپ"
                         },
                         new
@@ -567,6 +597,7 @@ namespace Persistence.Migrations
                             Description = "گوشی هوشمند با قابلیت‌های فراوان",
                             IsActive = true,
                             IsAuction = false,
+                            IsRemove = false,
                             Name = "گوشی هوشمند"
                         },
                         new
@@ -577,6 +608,7 @@ namespace Persistence.Migrations
                             Description = "بهترین کتاب برای یادگیری برنامه‌نویسی",
                             IsActive = true,
                             IsAuction = false,
+                            IsRemove = false,
                             Name = "کتاب برنامه نویسی"
                         });
                 });
@@ -650,7 +682,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CommissionPercentage = 10.5,
+                            CommissionPercentage = 0.10000000000000001,
                             CommissionsAmount = 500,
                             CompanyName = "شرکت نمونه",
                             IsActive = true,
@@ -775,11 +807,12 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5139d7db-2589-4d85-8666-eaefdd258586",
+                            ConcurrencyStamp = "d68c4e09-5433-4967-92b9-36446ad22e40",
                             Email = "userone@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر یک",
                             LockoutEnabled = false,
+                            PhoneNumber = "1",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "userone@gmail.com"
@@ -788,7 +821,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f8f879a2-d8ff-4c02-b0da-dfb583bc456a",
+                            ConcurrencyStamp = "b5a54f08-46d9-4875-970c-8ff100022cb9",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             FullName = "Admin",
@@ -801,7 +834,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3fd2c949-fda9-4329-bb17-6681f59248bf",
+                            ConcurrencyStamp = "3d03150a-47de-42b9-9f5a-d1aaebb1720e",
                             Email = "userotow@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر دو",
@@ -814,7 +847,7 @@ namespace Persistence.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "aa7e349a-2c1d-49f0-b88d-138b83ca253e",
+                            ConcurrencyStamp = "dde16c10-a6a1-4e32-9afb-c9aad869189c",
                             Email = "userothree@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر سه",

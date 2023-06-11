@@ -14,26 +14,25 @@ public class UserConfig : IEntityTypeConfiguration<User>
                 Id = 1,
                 FullName = "کاربر یک",
                 Email = "userone@gmail.com",
-                UserName = "userone@gmail.com"
-
+                UserName = "userone@gmail.com",
+            },
+            new User
+            {
+                Id = 4,
+                FullName = "کاربر چهار",
+                Email = "userofour@gmail.com",
+                UserName = "userfour@gmail.com"
             },
             new User
             {
                 Id = 2,
-                FullName = "Admin",
-                Email = "admin@gmail.com",
-                UserName = "admin@gmail.com"
-            },
-            new User
-            {
-                Id = 3,
                 FullName = "کاربر دو",
                 Email = "userotow@gmail.com",
                 UserName = "userotow@gmail.com"
             },
             new User
             {
-                Id = 4,
+                Id = 3,
                 FullName = "کاربر سه",
                 Email = "userothree@gmail.com",
                 UserName = "userothree@gmail.com"

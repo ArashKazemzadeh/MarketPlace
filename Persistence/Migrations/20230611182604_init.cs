@@ -369,6 +369,7 @@ namespace Persistence.Migrations
                     Availability = table.Column<int>(type: "int", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsRemove = table.Column<bool>(type: "bit", nullable: false),
                     BidId = table.Column<int>(type: "int", nullable: true),
                     BoothId = table.Column<int>(type: "int", nullable: true),
                     InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -587,10 +588,21 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "InsertTime", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RemoveTime", "SecurityStamp", "TwoFactorEnabled", "UpdateTime", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "001a3192-5cf6-4b9f-a2af-69832712ce43", "userone@gmail.com", false, "کاربر یک", null, false, null, null, null, null, null, false, null, null, false, null, "userone@gmail.com" },
-                    { 2, 0, "dc546735-1191-446b-9f85-d7929a62916a", "admin@gmail.com", false, "Admin", null, false, null, null, null, null, null, false, null, null, false, null, "admin@gmail.com" },
-                    { 3, 0, "36eaa506-1ef4-418d-895c-27f3bc156647", "userotow@gmail.com", false, "کاربر دو", null, false, null, null, null, null, null, false, null, null, false, null, "userotow@gmail.com" },
-                    { 4, 0, "d5981945-95e7-44e2-863e-bef6751726f2", "userothree@gmail.com", false, "کاربر سه", null, false, null, null, null, null, null, false, null, null, false, null, "userothree@gmail.com" }
+                    { 1, 0, "d68c4e09-5433-4967-92b9-36446ad22e40", "userone@gmail.com", false, "کاربر یک", null, false, null, null, null, null, "1", false, null, null, false, null, "userone@gmail.com" },
+                    { 2, 0, "b5a54f08-46d9-4875-970c-8ff100022cb9", "admin@gmail.com", false, "Admin", null, false, null, null, null, null, null, false, null, null, false, null, "admin@gmail.com" },
+                    { 3, 0, "3d03150a-47de-42b9-9f5a-d1aaebb1720e", "userotow@gmail.com", false, "کاربر دو", null, false, null, null, null, null, null, false, null, null, false, null, "userotow@gmail.com" },
+                    { 4, 0, "dde16c10-a6a1-4e32-9afb-c9aad869189c", "userothree@gmail.com", false, "کاربر سه", null, false, null, null, null, null, null, false, null, null, false, null, "userothree@gmail.com" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Description", "InsertTime", "Name", "RemoveTime", "UpdateTime" },
+                values: new object[,]
+                {
+                    { 1, "تجهیزات رایانه ", null, "تکنولوژی", null, null },
+                    { 2, "انواع ساز و تابلو های نقاشی", null, "هنری", null, null },
+                    { 3, "همه ی لوازم مورد نیاز در منزل", null, "لوازم منزل", null, null },
+                    { 4, "شامل همه ی کالاهایی که در دسته باندی بالا موجود نیست.", null, "سایر", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -604,18 +616,18 @@ namespace Persistence.Migrations
 
             migrationBuilder.InsertData(
                 table: "Product",
-                columns: new[] { "Id", "Availability", "BasePrice", "BidId", "BoothId", "Description", "InsertTime", "IsActive", "IsAuction", "IsConfirm", "Name", "RemoveTime", "UpdateTime" },
+                columns: new[] { "Id", "Availability", "BasePrice", "BidId", "BoothId", "Description", "InsertTime", "IsActive", "IsAuction", "IsConfirm", "IsRemove", "Name", "RemoveTime", "UpdateTime" },
                 values: new object[,]
                 {
-                    { 1, 10, 5000000, null, null, "لپ تاپ جدید و بسیار کارآمد", null, true, false, null, "لپ تاپ", null, null },
-                    { 2, 5, 2000000, null, null, "گوشی هوشمند با قابلیت‌های فراوان", null, true, false, null, "گوشی هوشمند", null, null },
-                    { 20, 50, 100000, null, null, "بهترین کتاب برای یادگیری برنامه‌نویسی", null, true, false, null, "کتاب برنامه نویسی", null, null }
+                    { 1, 10, 5000000, null, null, "لپ تاپ جدید و بسیار کارآمد", null, true, false, null, false, "لپ تاپ", null, null },
+                    { 2, 5, 2000000, null, null, "گوشی هوشمند با قابلیت‌های فراوان", null, true, false, null, false, "گوشی هوشمند", null, null },
+                    { 20, 50, 100000, null, null, "بهترین کتاب برای یادگیری برنامه‌نویسی", null, true, false, null, false, "کتاب برنامه نویسی", null, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Sellers",
                 columns: new[] { "Id", "CommissionPercentage", "CommissionsAmount", "CompanyName", "InsertTime", "IsActive", "IsRemoved", "RemoveTime", "SalesAmount", "UpdateTime" },
-                values: new object[] { 1, 10.5, 500, "شرکت نمونه", null, true, false, null, 10000, null });
+                values: new object[] { 1, 0.10000000000000001, 500, "شرکت نمونه", null, true, false, null, 10000, null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -632,16 +644,16 @@ namespace Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "Booths",
                 columns: new[] { "Id", "Description", "InsertTime", "Name", "RemoveTime", "SellerId", "UpdateTime" },
-                values: new object[] { 1, "فروشگاه غذایی", null, "غذایی", null, 1, null });
+                values: new object[] { 1, "فروشگاه غذایی", null, "شماره یک مواد غذایی", null, 1, null });
 
             migrationBuilder.InsertData(
                 table: "Comments",
                 columns: new[] { "Id", "CustomerId", "CustomertId", "Description", "InsertTime", "IsConfirm", "ProductId", "RegisterDate", "RemoveTime", "Title", "UpdateTime" },
                 values: new object[,]
                 {
-                    { 1, null, 1, "این محصول عالی است.", null, null, 1, new DateTime(2023, 6, 7, 14, 48, 16, 994, DateTimeKind.Local).AddTicks(2609), null, "عالی", null },
-                    { 2, null, 2, "این محصول بد است.", null, null, 1, new DateTime(2023, 6, 7, 14, 48, 16, 994, DateTimeKind.Local).AddTicks(2631), null, "بد", null },
-                    { 20, null, 2, "این محصول خوب است.", null, null, 2, new DateTime(2023, 6, 7, 14, 48, 16, 994, DateTimeKind.Local).AddTicks(2633), null, "خوب", null }
+                    { 1, null, 1, "این محصول عالی است.", null, null, 1, new DateTime(2023, 6, 11, 21, 56, 4, 163, DateTimeKind.Local).AddTicks(4155), null, "عالی", null },
+                    { 2, null, 2, "این محصول بد است.", null, null, 1, new DateTime(2023, 6, 11, 21, 56, 4, 163, DateTimeKind.Local).AddTicks(4180), null, "بد", null },
+                    { 20, null, 2, "این محصول خوب است.", null, null, 2, new DateTime(2023, 6, 11, 21, 56, 4, 163, DateTimeKind.Local).AddTicks(4182), null, "خوب", null }
                 });
 
             migrationBuilder.CreateIndex(

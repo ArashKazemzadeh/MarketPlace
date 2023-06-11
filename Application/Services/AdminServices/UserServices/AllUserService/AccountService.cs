@@ -1,6 +1,7 @@
 ﻿using Application.Dtos.UserDto;
 using Application.IServices.AdminServices.UserService.Commands;
 using Domin.Entities.Users;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
 namespace Application.Services.AdminServices.UserServices.AllUserService
@@ -10,15 +11,24 @@ namespace Application.Services.AdminServices.UserServices.AllUserService
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<IdentityRole<int>> _roleManager;
-
+        private readonly IHttpContextAccessor _httpContextAccessor;
         public AccountService(UserManager<User> userManager,
             RoleManager<IdentityRole<int>> roleManager,
-            SignInManager<User> signInManager)
+            SignInManager<User> signInManager,
+            IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+            _httpContextAccessor = httpContextAccessor;
         }
+        public async Task<string> GetLoggedInUserId()
+        {
+            var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var userId = await _userManager.GetUserIdAsync(user);
+            return userId;
+        }
+
 
         public async Task<int> FindUserIdByEmailAsync(string email)
         {
@@ -109,6 +119,11 @@ namespace Application.Services.AdminServices.UserServices.AllUserService
         public async Task AssignUserToRole(string userEmail, string roleName)
         {
             var user = await _userManager.FindByEmailAsync(userEmail);
+            await _userManager.AddToRoleAsync(user, roleName);
+        }
+        public async Task AssignUserToRoleByUserId(string userId, string roleName)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
             await _userManager.AddToRoleAsync(user, roleName);
         }
         public async Task<User> FindUserByEmailAsync(string email)

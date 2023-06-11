@@ -30,8 +30,14 @@ namespace Persistence.Repositories.Users
             return await _dbSet.Where(x => x.IsRemoved == false).ToListAsync();
         }
 
-        public async Task AddAsync(Seller seller)
+        public async Task AddAsync(SellerRepDto sellerRepDto)
         {
+            var seller = new Seller
+            {
+                Id = sellerRepDto.Id,
+                CompanyName = sellerRepDto.CompanyName,
+                CommissionPercentage = 0.1,
+            };
             await _dbSet.AddAsync(seller);
             await _context.SaveChangesAsync();
         }
@@ -48,6 +54,61 @@ namespace Persistence.Repositories.Users
             seller.IsActive = sellerDto.IsActive;
             seller.CommissionPercentage = sellerDto.CommissionPercentage;
            _context.Entry(seller).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        public async Task<bool> UpdateProfileAsync(AddSellerDto updatesellerDto)
+        {
+            var seller = await _dbSet.Include(x => x.Address)
+                .Include(b=>b.Booth)
+                .FirstOrDefaultAsync(x => x.Id == updatesellerDto.SellerId);
+
+            if (seller == null)
+            {
+                return false;
+            }
+
+            seller.CompanyName = updatesellerDto.CompanyName;
+
+            if (seller.Address == null)
+            {
+                var address = new Address
+                {
+                    City = updatesellerDto.City,
+                    Street = updatesellerDto.Street,
+                    Description = updatesellerDto.AddressDescription,
+                    SellerId = updatesellerDto.SellerId
+                };
+
+                seller.Address = address;
+            }
+            else
+            {
+                // Update the existing address
+                seller.Address.City = updatesellerDto.City;
+                seller.Address.Street = updatesellerDto.Street;
+                seller.Address.Description = updatesellerDto.AddressDescription;
+
+            }
+            if (seller.Booth == null)
+            {
+                var booth = new Booth()
+                {
+                    Name = updatesellerDto.BoothName,
+                    SellerId  = updatesellerDto.SellerId,
+                    Description = updatesellerDto.BoothDescription
+                };
+
+                seller.Booth = booth;
+            }
+            else
+            {
+                seller.Booth.Name = updatesellerDto.BoothName;
+                seller.Booth.Description = updatesellerDto.BoothDescription;
+            }
+
+
+            _context.Entry(seller).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return true;
         }

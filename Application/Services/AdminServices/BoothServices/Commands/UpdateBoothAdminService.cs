@@ -2,6 +2,7 @@
 using Application.IServices.AdminServices.BoothServices.Commands;
 using AutoMapper;
 using ConsoleApp.Models;
+using Domin.IRepositories.Dtos;
 using Domin.IRepositories.IseparationRepository;
 
 namespace Application.Services.AdminServices.BoothServices.Commands
@@ -14,17 +15,21 @@ namespace Application.Services.AdminServices.BoothServices.Commands
         {
             _boothRepository = boothRepository;
         }
-        public async Task<GeneralDto> Execute(BoothDto booth)
+        public async Task<GeneralDto> Execute(BoothDto boothDto)
         {
-            var existingBooth = await _boothRepository.GetByIdAsync(booth.Id);
+            var existingBooth = await _boothRepository.GetByIdAsync(boothDto.Id);
             if (existingBooth == null)
                 return new GeneralDto
                 {
                     message = "غرفه یافت نشد."
                 };
-            existingBooth.Name = booth.Name;
-            existingBooth.Description = booth.Description;
-            await _boothRepository.UpdateAsync(existingBooth);
+            var booth = new BoothRepDto
+            {
+                Name = boothDto.Name,
+                Description = boothDto.Description,
+                BoothId = boothDto.Id
+            };
+            await _boothRepository.UpdateBoothAsync(booth);
 
             return new GeneralDto
             {

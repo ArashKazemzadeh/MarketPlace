@@ -38,21 +38,28 @@ namespace Persistence.ModelConfigurations.EntitiesConfiguration
                 {
                     Id = 1,
                     Name = "تکنولوژی",
-                    Description = "لپ تاپ جدید و بسیار کارآمد",
-
+                    Description = "تجهیزات رایانه ",
+                    
                 },
                 new Category
                 {
                 Id = 2,
-                Name = "تکنولوژی",
-                Description = "لپ تاپ جدید و بسیار کارآمد",
+                Name = "هنری",
+                Description = "انواع ساز و تابلو های نقاشی",
 
                 },
                 new Category
                 {
                 Id = 3,
-                Name = "تکنولوژی",
-                Description = "لپ تاپ جدید و بسیار کارآمد",
+                Name = "لوازم منزل",
+                Description = "همه ی لوازم مورد نیاز در منزل",
+
+                },
+                new Category
+                {
+                    Id = 4,
+                    Name = "سایر",
+                    Description = "شامل همه ی کالاهایی که در دسته باندی بالا موجود نیست.",
 
                 });
         }
