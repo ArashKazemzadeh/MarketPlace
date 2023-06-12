@@ -14,7 +14,7 @@ namespace Persistence.ModelConfigurations.EntitiesConfiguration
 
             entity.ToTable("Booths");
 
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            //entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Name).HasMaxLength(100);
 
             entity.HasOne(d => d.Seller).WithOne(p => p.Booth)

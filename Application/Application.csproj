@@ -31,7 +31,6 @@
   <ItemGroup>
     <Folder Include="IServices\CustomerServices\UserService\Commands\" />
     <Folder Include="IServices\CustomerServices\UserService\Querys\" />
-    <Folder Include="IServices\SellerServices\ProfileServices\Queries\" />
     <Folder Include="Services\CustomerServices\UserService\Commands\" />
   </ItemGroup>
 

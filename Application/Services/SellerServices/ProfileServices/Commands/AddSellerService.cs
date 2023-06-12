@@ -44,10 +44,9 @@ public class AddSellerService: IAddSellerService
                 CompanyName = addSellerDto.CompanyName,
                 CommissionPercentage = 0.1
             };
-
+            await _sellerRepository.AddAsync(sellerDto);
             await _addressRepository.AddAsync(addressDto);
             await _boothRepository.AddAsync(boothDto);
-            await _sellerRepository.AddAsync(sellerDto);
 
             return "فروشنده جدید با موفقیت ایجاد شد.";
         }

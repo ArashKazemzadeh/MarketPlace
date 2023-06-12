@@ -1,0 +1,43 @@
+﻿@model Application.Dtos.ProductDto.ProductForUpdateDto
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="row m-5 p-5 form-group d-flex justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="Id" type="hidden" class="form-control" />
+           
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BasePrice" class="control-label"></label>
+                <input asp-for="BasePrice" class="form-control" />
+                <span asp-validation-for="BasePrice" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Availability" class="control-label"></label>
+                <input asp-for="Availability" class="form-control" />
+                <span asp-validation-for="Availability" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+          
+            <div class="form-group">
+                <input type="submit" value="ویرایش کن" class="btn btn-primary btn-block" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

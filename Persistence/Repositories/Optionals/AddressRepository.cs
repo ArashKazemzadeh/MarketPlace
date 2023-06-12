@@ -35,7 +35,7 @@ namespace Persistence.Repositories.Optionals
                 Street = addressRepDto.Street,
                 Description = addressRepDto.Description,
                 SellerId= addressRepDto.SellerId,
-                CustomerId = addressRepDto.CustomerId
+                //CustomerId = addressRepDto.CustomerId
             };
             await _dbSet.AddAsync(address);
             await _context.SaveChangesAsync();

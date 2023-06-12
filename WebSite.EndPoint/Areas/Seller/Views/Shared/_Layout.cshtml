@@ -81,14 +81,14 @@
                             <div class="media mx-auto">
                                 <img src="~/themesite/assets/images/logo.png" class="img-fluid mr-2" alt="avatar">
                                 <div class="media-body">
-                                    <h5> کاربر</h5>
-                                    <p>مدیر پروژه</p>
+                                    <h5> پنل فروشگاه</h5>
+                                    <p>مدیر فروشگاه</p>
                                 </div>
                             </div>
                         </div>
                         <div class="dropdown-item">
-                            <a href="user_profile.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> <span>پروفایل من</span>
+                            <a asp-area="Seller" asp-controller="Home" asp-action="EditProfile">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> <span>ویرایش پروفایل</span>
                             </a>
                         </div>
                         <div class="dropdown-item">
@@ -135,18 +135,18 @@
 
                 <div class="shadow-bottom"></div>
                 <ul class="list-unstyled menu-categories" id="accordionExample">
-                    <li class="menu active">
-                        <a asp-controller="ForVisitor" asp-action="Index" asp-area="Admin" aria-expanded="true" class="dropdown-toggle">
+                   @* <li class="menu active">
+                        <a asp-controller="Product" asp-action="Index" asp-area="Seller" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256"
                                      style="fill:#000000;">
                                     <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(8.53333,8.53333)"><path d="M24,3c-1.65685,0 -3,1.34315 -3,3c0.00086,0.50634 0.12987,1.00422 0.375,1.44727l-5.82422,6.55273h-6.72461c-0.42351,-1.19786 -1.55565,-1.99904 -2.82617,-2c-1.65685,0 -3,1.34315 -3,3c0,1.65685 1.34315,3 3,3c1.2698,-0.00178 2.40095,-0.80282 2.82422,-2h6.72656l5.82227,6.55078c-0.24477,0.44381 -0.37311,0.94239 -0.37305,1.44922c0,1.65685 1.34315,3 3,3c1.65685,0 3,-1.34315 3,-3c0,-1.65685 -1.34315,-3 -3,-3c-0.3878,0.00043 -0.77184,0.07604 -1.13086,0.22266l-5.53125,-6.22266l5.53125,-6.22266c0.35902,0.14661 0.74306,0.22223 1.13086,0.22266c1.65685,0 3,-1.34315 3,-3c0,-1.65685 -1.34315,-3 -3,-3z"></path></g></g>
                                 </svg>
-                                <span>آمار بازدید</span>
+                                <span>کالاها</span>
                             </div>
                         </a>
-                    </li>
-                    <li class="menu active">
+                    </li>*@
+                   @* <li class="menu active">
                         <a asp-controller="Confirm" asp-action="ConfirmComments" asp-area="Admin" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256"
@@ -156,9 +156,9 @@
                                 <span>کامنت های تایید نشده</span>
                             </div>
                         </a>
-                    </li>
+                    </li>*@
 
-                    <li class="menu active">
+                  @*  <li class="menu active">
                         <a asp-controller="Confirm" asp-action="ConfirmProducts" asp-area="Admin" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256"
@@ -168,8 +168,8 @@
                                 <span>کالاهای تایید نشده</span>
                             </div>
                         </a>
-                    </li>
-                    <li class="menu active">
+                    </li>*@
+                   @* <li class="menu active">
                         <a asp-controller="Seller" asp-action="Index" asp-area="Admin" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="64" height="64" viewBox="0,0,256,256"
@@ -179,9 +179,9 @@
                                 <span> حساب کتاب فروشنده ها</span>
                             </div>
                         </a>
-                    </li>
+                    </li>*@
                     <li class="menu active">
-                        <a asp-controller="Product" asp-action="Index" asp-area="Admin" aria-expanded="true" class="dropdown-toggle">
+                        <a asp-controller="Product" asp-action="Index" asp-area="Seller" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0,0,256,256"
                                      style="fill:#000000;">
@@ -191,7 +191,7 @@
                             </div>
                         </a>
                     </li>
-                    <li class="menu active">
+                   @* <li class="menu active">
                         <a asp-controller="Booth" asp-action="Index" asp-area="Admin" aria-expanded="true" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="64" height="64" viewBox="0,0,256,256"
@@ -201,7 +201,7 @@
                                 <span>همه ی غرفه ها</span>
                             </div>
                         </a>
-                    </li>
+                    </li>*@
 
                     <!--  END SIDEBAR  -->
                     <!--  BEGIN CONTENT AREA  -->

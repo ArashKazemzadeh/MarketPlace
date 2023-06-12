@@ -5,6 +5,7 @@ namespace Domin.IRepositories.IseparationRepository;
 
 public interface ISellerRepository
 {
+    Task<AddSellerDto> GetByIdWithNavigationAsync(int id);
     Task<Seller> GetByIdAsync(int id);
     Task<List<Seller>> GetAllAsync();
     Task AddAsync(SellerRepDto seller);

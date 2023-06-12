@@ -7,7 +7,7 @@ public interface IProductRepository
 {
     Task<List<AuctionProductDto> >GetProductsWithTrueAuctions(int sellerId);
     Task<List<Product>> GetProductsWithSellerNameConfirmAsync();
-    Task<List<ProductDto>> GetAllWithNavigationsAsync(int sellerId);
+    Task<List<ProductDto>> GetAllWithNavigationsAsync(int? boothId);
     Task<ProductDto> GetWithAllNavigationsByIdSellerAsync(int id);
     Task<Product> GetByIdAsync(int id);
     Task<List<Product>> GetAllAsync();

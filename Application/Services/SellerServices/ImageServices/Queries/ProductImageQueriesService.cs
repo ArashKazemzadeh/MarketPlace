@@ -25,5 +25,22 @@ namespace Application.Services.SellerServices.ImageServices.Queries
         {
             return await _imageRepository.GetImagesForProductAsync(productId);
         }
+        public async Task<List<string>> GetImageUrlForProduct(int productId)
+        {
+            var images = await _imageRepository.GetImagesForProductAsync(productId);
+          var urls=  images.Select(i => i.Url).ToList();
+
+            if (images != null)
+            {
+                return urls;
+            }
+
+            return new List<string>();
+            //return new List<string>
+            //{
+            //    "~/templateStore/images/tm-170x80-1.jpg"
+            //};
+        }
+
     }
 }

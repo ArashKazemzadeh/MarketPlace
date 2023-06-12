@@ -19,10 +19,10 @@ public class UpdateSellerByIdService : IUpdateSellerByIdService
         _boothRepository = boothRepository;
         _addressRepository = addressRepository;
     }
-    public async Task<string> Execute(AddSellerDto updateSellerDto)
+    public async Task<bool> Execute(AddSellerDto updateSellerDto)
     {
         var update = await _sellerRepository.UpdateProfileAsync(updateSellerDto);
-        int addressId = updateSellerDto.AddressId;
+        int? addressId = updateSellerDto.AddressId;
         if (addressId != 0)
         {
             var addressDto = new AddressRepDto
@@ -34,7 +34,7 @@ public class UpdateSellerByIdService : IUpdateSellerByIdService
             };
             await _addressRepository.UpdateAsync(addressDto);
         }
-        int boothId = updateSellerDto.AddressId;
+        int? boothId = updateSellerDto.AddressId;
         if (boothId != 0)
         {
             var boothDto = new BoothRepDto()
@@ -46,8 +46,8 @@ public class UpdateSellerByIdService : IUpdateSellerByIdService
             await _boothRepository.UpdateBoothAsync(boothDto);
         }
         if (update)
-            return "تغییرات با موفقیت ذخیره شد.";
-        return "فروشنده موجود نیست.";
+            return true;
+        return false;
     }
 }
 

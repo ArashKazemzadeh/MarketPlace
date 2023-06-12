@@ -70,9 +70,9 @@ namespace Persistence.Repositories.Orders
             return await _dbSet.AsNoTracking().ToListAsync();
         }
 
-        public async Task<List<ProductDto>> GetAllWithNavigationsAsync(int sellerId)
+        public async Task<List<ProductDto>> GetAllWithNavigationsAsync(int? boothId)
         {
-            var products = await _dbSet.AsNoTracking().Where(x => x.Id == sellerId)
+            var products = await _dbSet.AsNoTracking().Where(x => x.BoothId == boothId)
                 .Include(b => b.Auction)
                 .Include(i => i.Images)
                 .Include(c => c.Categories).ToListAsync();
@@ -105,7 +105,7 @@ namespace Persistence.Repositories.Orders
                 Description = productDto.Description,
                 Availability = productDto.Availability,
                 BoothId = productDto.BoothId,
-                Booth = productDto.Booth
+                //Booth = productDto.Booth,
             };
             await _dbSet.AddAsync(product);
             await _context.SaveChangesAsync();
@@ -120,21 +120,19 @@ namespace Persistence.Repositories.Orders
         public async Task UpdateAsync(ProductDto productDto)
         {
             var result = await _dbSet.FindAsync(productDto.Id);
-            result.Id = productDto.Id;
-            result.Name = productDto.Name;
-            result.BasePrice = productDto.BasePrice;
-            result.IsAuction = productDto.IsActive;
-            result.Availability = productDto.Availability;
-            result.Description = productDto.Description;
-            result.IsActive = productDto.IsActive;
 
             if (result != null)
             {
+                result.Name = productDto.Name;
+                result.BasePrice = productDto.BasePrice;
+                result.Availability = productDto.Availability;
+                result.Description = productDto.Description;
+
                 _context.Entry(result).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
             }
-
         }
+
 
         public async Task DeleteAsync(int id)
         {

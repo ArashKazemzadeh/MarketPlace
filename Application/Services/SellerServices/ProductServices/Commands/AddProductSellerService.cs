@@ -40,7 +40,7 @@ namespace Application.Services.SellerServices.ProductServices.Commands
                 Booth = booth
             };
 
-            _productRepository.AddAsync(newProductDto);
+         await   _productRepository.AddAsync(newProductDto);
             return "کالااضافه شد";
         }
     }

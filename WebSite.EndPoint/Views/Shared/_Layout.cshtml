@@ -42,9 +42,9 @@
                         @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
                         {
                             <a asp-controller="Account" asp-action="Logout">خروج</a>
-                            @if (HttpContextAccessor.HttpContext.User.IsInRole("seller"))
+                            @if (HttpContextAccessor.HttpContext.User.IsInRole("Seller"))
                             {
-                                <a asp-controller="Seller" asp-action="Shop">ورود به فروشگاه</a>
+                                <a asp-area="Seller" asp-controller="Home" asp-action="Index">ورود به فروشگاه</a>
                             }
                             else
                             {

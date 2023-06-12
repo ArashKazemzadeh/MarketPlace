@@ -23,7 +23,23 @@ namespace Persistence.Repositories.Users
                 .Include(b=>b.Booth).
                 FirstOrDefaultAsync(x => x.Id == id);
         }
-
+        public async Task<AddSellerDto> GetByIdWithNavigationAsync(int id)
+        {
+         var result=   await _dbSet.AsNoTracking().Select(s=>new AddSellerDto
+                {
+                  SellerId = s.Id,
+                  CompanyName = s.CompanyName,
+                  City=s.Address.City,
+                  Street = s.Address.Street,
+                  AddressDescription = s.Address.Description,
+                  BoothName = s.Booth.Name,
+                  BoothDescription = s.Booth.Description,
+                  BoothId = s.Booth.Id,
+                  AddressId = s.Address.Id
+                })
+                .FirstOrDefaultAsync(x => x.SellerId == id);
+            return result;
+        }
 
         public async Task<List<Seller>> GetAllAsync()
         {

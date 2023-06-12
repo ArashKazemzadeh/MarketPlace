@@ -2,6 +2,7 @@
 using Application.Dtos.ProductDto;
 using Application.IServices.SellerServices.ProductServices.Commands;
 using Domin.IRepositories.IseparationRepository;
+using ProductDto = Domin.IRepositories.Dtos.ProductDto;
 
 namespace Application.Services.SellerServices.ProductServices.Commands
 {
@@ -22,24 +23,25 @@ namespace Application.Services.SellerServices.ProductServices.Commands
             var product = await _productRepository.GetByIdAsync(productUpdateDto.Id);
             if (product == null)
             {
-                return new GeneralDto {message = "کالا یافت نشد"};
+                return new GeneralDto { message = "کالا یافت نشد" };
             }
 
-            var result = new Domin.IRepositories.Dtos. ProductDto
+            var result = new ProductDto
             {
                 Id = productUpdateDto.Id,
                 Name = productUpdateDto.Name,
                 BasePrice = productUpdateDto.BasePrice,
-                IsAuction = productUpdateDto.IsActive,
                 Availability = productUpdateDto.Availability,
                 Description = productUpdateDto.Description,
-                IsActive = productUpdateDto.IsActive
+                IsActive = product.IsActive, // استفاده از مقدار موجود در product
             };
-          await  _productRepository.UpdateAsync(result);
-          return new GeneralDto {
-                  message = "کالا با موفقیت ویرایش شد"
-          }
-          ;
+
+            await _productRepository.UpdateAsync(result);
+            return new GeneralDto
+            {
+                message = "کالا با موفقیت ویرایش شد"
+            };
         }
+
     }
 }

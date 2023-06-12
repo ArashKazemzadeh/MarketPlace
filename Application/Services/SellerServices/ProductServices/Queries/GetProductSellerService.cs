@@ -1,6 +1,8 @@
 ﻿using Application.Dtos;
 using Application.Dtos.ProductDto;
 using Application.IServices.SellerServices.ProductServices.Queries;
+using Application.IServices.SellerServices.ProfileServices.Queries;
+using Application.Services.SellerServices.ProfileServices.Queries;
 using Domin.IRepositories.IseparationRepository;
 
 namespace Application.Services.SellerServices.ProductServices.Queries
@@ -8,14 +10,16 @@ namespace Application.Services.SellerServices.ProductServices.Queries
     public class GetProductSellerService : IGetProductSellerService
     {
         private readonly IProductRepository _productRepository;
-
-        public GetProductSellerService(IProductRepository productRepository)
+        private readonly IGetSellerByIdService _getSellerByIdService;
+        public GetProductSellerService(IProductRepository productRepository, IGetSellerByIdService getSellerByIdService)
         {
-            _productRepository = productRepository; 
+            _productRepository = productRepository;
+            _getSellerByIdService = getSellerByIdService;
         }
 
         public async Task<GeneralDto<ProductGeneralDto>> FindByIdAsync(int id)
         {
+           
             var productDto = await _productRepository.GetByIdAsync(id);
             if (productDto == null)
             {
@@ -45,8 +49,10 @@ namespace Application.Services.SellerServices.ProductServices.Queries
 
         public async Task<GeneralDto<List<ProductGeneralDto>>> GetAllProductBySellerIdAsync(int sellerId)
         {
-            var products = await _productRepository.GetAllWithNavigationsAsync(sellerId);
-            if (products==null)
+          var seller=await  _getSellerByIdService.Execute(sellerId);
+          var i = seller.BoothId;
+            var products = await _productRepository.GetAllWithNavigationsAsync(i);
+            if (products == null)
             {
                 return new GeneralDto<List<ProductGeneralDto>>
                 {
@@ -54,10 +60,11 @@ namespace Application.Services.SellerServices.ProductServices.Queries
                 };
             }
 
-            var result = products.Select(p => 
-            
+            var result = products.Select(p =>
+
                 new ProductGeneralDto
-                {
+                {    
+                    Id = p.Id,
                     Name = p.Name,
                     BasePrice = p.BasePrice,
                     IsAuction = p.IsAuction,

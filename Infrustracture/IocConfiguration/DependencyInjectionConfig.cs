@@ -30,6 +30,14 @@ using Application.Services.AdminServices.UserServices.SellerService.Queries;
 using Application.Services.AdminServices.UserServices.SellerService.Commands;
 using Application.Services.AdminServices.UserServices.AllUserService;
 using Application.Services.SellerServices.ProfileServices.Commands;
+using Application.IServices.SellerServices.ProfileServices.Queries;
+using Application.Services.SellerServices.ProfileServices.Queries;
+using Application.IServices.SellerServices.ProductServices.Commands;
+using Application.IServices.SellerServices.ProductServices.Queries;
+using Application.Services.SellerServices.ProductServices.Commands;
+using Application.Services.SellerServices.ProductServices.Queries;
+using Application.IServices.SellerServices.ImageServices.Commands;
+using Application.Services.SellerServices.ImageServices.Queries;
 
 namespace Infrustracture.IocConfiguration
 {
@@ -63,13 +71,20 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IAddUserIdToCustomerForRegisterService, AddUserIdToCustomerForRegisterService>();
-            services.AddScoped < IGetAllCommissionsService, GetAllCommissionsService>(); 
-            services.AddScoped <IIdentityRoleService, IdentityRoleService>(); 
-           // ---------------------seller-----------------------------------------------------------
-            services.AddScoped <ICategoryRepository, CategoryRepository>();
-            services.AddScoped <IImageForProductRepository, ImageForProductRepository>();
-            services.AddScoped <IAddressRepository, AddressRepository> ();
+            services.AddScoped<IGetAllCommissionsService, GetAllCommissionsService>();
+            services.AddScoped<IIdentityRoleService, IdentityRoleService>();
+            // ---------------------seller-----------------------------------------------------------
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IImageForProductRepository, ImageForProductRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<IAddSellerService, AddSellerService>();
+            services.AddScoped<IUpdateSellerByIdService, UpdateSellerByIdService>();
+            services.AddScoped<IGetSellerByIdService, GetSellerByIdService>();
+            services.AddScoped<IAddProductTooBoothSellerService, AddProductTooBoothSellerService>();
+            services.AddScoped<IGetProductSellerService, GetProductSellerService>();
+            services.AddScoped<IUpdateProductSellerService, UpdateProductSellerService>(); 
+            services.AddScoped<IProductImageQueriesService, ProductImageQueriesService>(); 
+            services.AddScoped<IDeleteProductSellerService, DeleteProductSellerService>(); 
             return services;
         }
         public static IServiceCollection AddScopeMongoDbDocuments(this IServiceCollection services,

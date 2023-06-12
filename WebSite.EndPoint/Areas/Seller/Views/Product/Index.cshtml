@@ -1,0 +1,132 @@
+﻿@model List<WebSite.EndPoint.Areas.Seller.Models.ProductSellerVm>
+@{
+    ViewData["Title"] = "کالا ها";
+}
+<div class="m-5">
+    <a asp-area="Seller" asp-controller="Product" asp-action="Create" type="button" class="btn btn-secondary">ثبت کالا جدید</a>
+</div>
+<div class="row">
+    <div class="table-responsive m-5 col-10">
+        <table class="table table-bordered table-hover table-condensed mb-4">
+            <thead>
+                <tr>
+                    <th>
+                        عکس
+                    </th>
+                    <th>
+                        نام کالا
+                    </th>
+                    <th>
+                        قیمت پایه
+                    </th>
+                    <th>
+                        موجودی
+                    </th>
+                    <th>
+                        وضعیت تاییدیه
+                    </th>
+                    <th>
+                        فعال / غیر فعال
+                    </th>
+                    <th>
+                        وضعیت مزایده
+                    </th>
+                    <th class="text-center">عملیات</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @if (item.ImagedUrls.Count > 0)
+                            {
+                                <img src="@item.ImagedUrls[0]" alt="عکس کالا" width="75" height="75" />
+                            }
+                        </td>
+                        <td>
+
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.BasePrice
+                        </td>
+                        <td>
+                            @item.Availability
+                        </td>
+                        <td>
+                            @item.IsConfirm
+                        </td>
+                        <td>
+                            @item.IsActive
+                        </td>
+                        <td>
+                            @item.IsAuction
+                        </td>
+
+                        <td class="text-center">
+                            <ul class="table-controls row">
+                                <li>
+                                    <a asp-action="Detail" asp-route-id="@item.ProductId" class="col-6" data-toggle="tooltip" data-placement="top" title="مشاهده ی جزییات">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success">
+                                            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                                        </svg>
+                                    </a>
+                                </li>
+                                @* <li>
+                            <a asp-action="" asp-route-id="@item.ProductId" class="col-6" data-toggle="tooltip" data-placement="top" title="شرکت در مزایده">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0,0,256,256"
+                            style="fill:#000000;">
+                            <g fill="#ff0800" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M4,4v41c0.00006,0.55226 0.44774,0.99994 1,1h40c0.55226,-0.00006 0.99994,-0.44774 1,-1v-13h-2v12h-38v-40zM37.99023,4.99023c-0.40692,0.00011 -0.77321,0.24676 -0.92633,0.62377c-0.15312,0.37701 -0.06255,0.80921 0.22907,1.09303l4.29297,4.29297h-6.56055c-10.02671,-0.24953 -16.52417,2.39498 -20.33008,7.39844c-3.80591,5.00346 -4.86371,12.10851 -4.69531,20.62109c0.01079,0.55228 0.46725,0.99126 1.01953,0.98047c0.55228,-0.01079 0.99126,-0.46725 0.98047,-1.01953c-0.1646,-8.32042 0.93202,-14.9603 4.28711,-19.37109c3.35509,-4.41079 9.02521,-6.84984 18.6875,-6.60937h0.01367h6.59766l-4.29297,4.29297c-0.26124,0.25082 -0.36648,0.62327 -0.27512,0.97371c0.09136,0.35044 0.36503,0.62411 0.71547,0.71547c0.35044,0.09136 0.72289,-0.01388 0.97371,-0.27512l6.70703,-6.70703l-6.70703,-6.70703c-0.18827,-0.19353 -0.4468,-0.30272 -0.7168,-0.30273z"></path></g></g>
+                            </svg>
+                            </a>
+                            </li>*@
+                                @* <li>
+                            <a asp-action="Detail" asp-route-id="@item.ProductId" class="col-6" data-toggle="tooltip" data-placement="top" title="مشاهده ی جزییات">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success">
+                            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                            </svg>
+                            </a>
+                            </li>*@
+                                <li>
+                                    <a data-toggle="modal" data-target="#confirmModal-@item.ProductId" class="col-6" data-toggle="tooltip" data-placement="top" title="حذف">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-danger">
+                                            <polyline points="3 6 5 6 21 6"></polyline>
+                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <!-- Modal -->
+                    <div class="modal fade" id="confirmModal-@item.ProductId" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmModalLabel">هشدار</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    آیا از حذف این کالا اطمینان دارید؟
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">نه لغو کن</button>
+                                    <form asp-action="Delete" asp-route-id="@item.ProductId" method="post">
+                                        <button type="submit" class="btn btn-danger">حذف کن</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
