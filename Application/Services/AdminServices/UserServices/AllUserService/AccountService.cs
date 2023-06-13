@@ -28,7 +28,16 @@ namespace Application.Services.AdminServices.UserServices.AllUserService
             var userId = await _userManager.GetUserIdAsync(user);
             return userId;
         }
-
+        //public async Task<string> GetLoggedInUserId()
+        //{
+        //    var userId = "";
+        //    if (_httpContextAccessor.HttpContext != null && _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+        //    {
+        //        var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+        //        userId = await _userManager.GetUserIdAsync(user);
+        //    }
+        //    return userId;
+        //}
 
         public async Task<int> FindUserIdByEmailAsync(string email)
         {

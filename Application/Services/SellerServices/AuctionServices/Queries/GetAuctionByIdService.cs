@@ -1,14 +1,16 @@
 ﻿using Application.Dtos;
+using Application.IServices.CustomerServices.AuctionServices.Queries;
+using Application.IServices.SellerServices.AuctionServices.Queries;
 using ConsoleApp.Models;
 using Domin.IRepositories.IseparationRepository;
 
 namespace Application.Services.SellerServices.AuctionServices.Queries
 {
-    public class GetAuctionById
+    public class GetAuctionByIdService: IGetAuctionByIdService
     {
         private readonly IAuctionRepository _auctionRepository;
 
-        public GetAuctionById(IAuctionRepository auctionRepository)
+        public GetAuctionByIdService(IAuctionRepository auctionRepository)
         {
             _auctionRepository = auctionRepository; 
         }

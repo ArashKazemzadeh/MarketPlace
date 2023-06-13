@@ -1,6 +1,6 @@
 ﻿using Infrastructure.IdentityConfigs;
+using Infrustracture.IdentityConfiguration;
 using Infrustracture.IocConfiguration;
-using Microsoft.AspNetCore.Hosting;
 using WebSite.EndPoint.Utilities.Filters;
 
 
@@ -10,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
 #region ContextAndIdentity
+
+builder.Services.AddDbContextService(builder.Configuration);
 builder.Services.AddIdentityService(builder.Configuration);
 builder.Services.ConfigureApplicationCookie(option =>
 {

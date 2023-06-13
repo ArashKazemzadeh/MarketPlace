@@ -3,46 +3,49 @@
     ViewData["Title"] = "Detail";
 }
 <div class="row">
-<div class="table-responsive m-5 col-10">
-    <table class="table table-bordered table-hover table-condensed mb-4">
+    <div class="table-responsive m-5 col-10">
+        <table class="table table-bordered table-hover table-condensed mb-4">
+            <tbody>
+            <tr>
+                <th scope="row">نام کالا: @Model.Name</th>
+                <td>قیمت پایه: @Model.BasePrice</td>
+                <td>موجودی: @Model.Availability</td>
+            </tr>
+            <tr>
+                <th scope="row">توضیحات</th>
+                <td colspan="3"> @Model.Description</td>
+            </tr>
+            <tr>
+                <th scope="row">عملیات</th>
+                <td colspan="3">
+                    <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-primary m-1">ویرایش کالا</a>
+                    <a asp-action="Create" asp-controller="Auction" asp-area="Seller" asp-route-productId="@Model.ProductId" class="btn btn-primary m-1">شرکت در مزایده</a>
+                    @*<a asp-action="Category" class="btn btn-primary m-1">افزودن دسته بندی</a>*@
+                </td>
+            <tr>
+                <th scope="row">بارگذاری عکس</th>
+                <td colspan="3" class="row">
+                    <form asp-controller="Image" asp-action="UploadImage" asp-route-productId="@Model.ProductId" method="post" enctype="multipart/form-data" class="d-flex align-items-center">
+                        <div class="form-group mb-0">
+                            <input type="file" id="photo" name="photo" class="form-control " accept="image/*">
+                        </div>
+                        <button type="submit" class="btn btn-primary mr-1 ">افزودن عکس</button>
+                    </form>
+                </td>
 
-        <tbody>
-        <tr>
-            <th scope="row"> نام کالا: @Model.Name</th>
-            <td>قیمت پایه: @Model.BasePrice</td>
-            <td>موجودی: @Model.Availability</td>
-
-        </tr>
-        <tr>
-            <th scope="row">توضیحات:</th>
-            <td colspan="3"> @Model.Description</td>
-        </tr>
-        <tr>
-            <th scope="row"> عملیات</th>
-            <td colspan="3">
-                <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-primary m-1">ویرایش کالا</a>
-                        <a asp-action="" asp-route-id="@Model.ProductId" class="btn btn-primary m-1">شرکت در مزایده</a>
-                <a asp-action="Category" class="btn btn-primary m-1">افزودن دسته بندی</a>
-                <a asp-action="AddImage" class="btn btn-primary m-1">افزودن عکس</a>
-            </td>
-
-
-        </tr>
-        </tbody>
-    </table>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-</div>
-@foreach (var imageUrl in Model.ImagedUrls)
-{
-    <div class="row">
-        <div class="card component-card_2 col-4">
-            <img src="~/Theme/assets/img/400x300.jpg" class="card-img-top" alt="widget-card-2">
+<div class="row ">
+    @foreach (var imageUrl in Model.ImagedUrls)
+    {
+        <div class="card component-card_2 col-4 m-5">
             <img src="@imageUrl" class="img-fluid">
             <div class="card-body">
-                <a href="#" class="btn btn-primary">حذف عکس</a>
+                <a href="@Url.Action("DeleteImage", "Image", new { imageUrl = imageUrl })" class="btn btn-primary btn-block">حذف عکس</a>
             </div>
         </div>
-    </div>
-
-
-}
+    }
+</div>

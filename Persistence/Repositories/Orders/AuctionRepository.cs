@@ -27,9 +27,10 @@ namespace Persistence.Repositories.Orders
 
         public async Task AddAsync(Auction auction)
         {
-            await _dbSet.AddAsync(auction);
+            _context.Entry(auction).State = EntityState.Added; 
             await _context.SaveChangesAsync();
         }
+
 
         public async Task UpdateAsync(Auction auction)
         {

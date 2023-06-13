@@ -24,6 +24,9 @@ using Persistence.Repositories.Optionals;
 using Persistence.Repositories.Orders;
 using Persistence.Repositories.Users;
 using Application.IServices.AdminServices.CommissionServices.Queries;
+using Application.IServices.CustomerServices.AuctionServices.Queries;
+using Application.IServices.SellerServices.AuctionServices.Commands;
+using Application.IServices.SellerServices.AuctionServices.Queries;
 using Application.IServices.SellerServices.ProfileServices.Commands;
 using Application.Services.AdminServices.CommissionServices.Queries;
 using Application.Services.AdminServices.UserServices.SellerService.Queries;
@@ -38,6 +41,10 @@ using Application.Services.SellerServices.ProductServices.Commands;
 using Application.Services.SellerServices.ProductServices.Queries;
 using Application.IServices.SellerServices.ImageServices.Commands;
 using Application.Services.SellerServices.ImageServices.Queries;
+using Application.IServices.SellerServices.ImageServices.Queries;
+using Application.Services.SellerServices.AuctionServices.Commands;
+using Application.Services.SellerServices.AuctionServices.Queries;
+using Application.Services.SellerServices.ImageServices.Commands;
 
 namespace Infrustracture.IocConfiguration
 {
@@ -82,9 +89,13 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<IGetSellerByIdService, GetSellerByIdService>();
             services.AddScoped<IAddProductTooBoothSellerService, AddProductTooBoothSellerService>();
             services.AddScoped<IGetProductSellerService, GetProductSellerService>();
-            services.AddScoped<IUpdateProductSellerService, UpdateProductSellerService>(); 
-            services.AddScoped<IProductImageQueriesService, ProductImageQueriesService>(); 
-            services.AddScoped<IDeleteProductSellerService, DeleteProductSellerService>(); 
+            services.AddScoped<IUpdateProductSellerService, UpdateProductSellerService>();
+            services.AddScoped<IProductImageQueriesService, ProductImageQueriesService>();
+            services.AddScoped<IDeleteProductSellerService, DeleteProductSellerService>();
+            services.AddScoped<IProductImageCommandsService, ProductImageCommandsService>();
+            services.AddScoped<IAddAuctionForProductService, AddAuctionForProductService>();
+            services.AddScoped<IGetAllAuctionBySellerIdService, GetAllAuctionBySellerIdService>();
+            services.AddScoped<IAuctionRepository, AuctionRepository>();
             return services;
         }
         public static IServiceCollection AddScopeMongoDbDocuments(this IServiceCollection services,

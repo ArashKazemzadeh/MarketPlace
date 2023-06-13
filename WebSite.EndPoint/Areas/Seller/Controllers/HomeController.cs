@@ -1,6 +1,7 @@
 ﻿using Application.IServices.AdminServices.UserService.Commands;
 using Application.IServices.SellerServices.ProfileServices.Commands;
 using Application.IServices.SellerServices.ProfileServices.Queries;
+using Application.IServices.Visitors;
 using Application.Services.AdminServices.UserServices.SellerService.Queries;
 using ConsoleApp1.Models;
 using Domin.IRepositories.Dtos;
@@ -16,20 +17,23 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
         private readonly IUpdateSellerByIdService _updateSellerByIdService;
         private readonly IGetSellerByIdService _getSellerByIdService;
         private readonly IAccountService _accountService;
-     
+
+        private readonly IGetToDayReportService _getTodayReportService;
 
         public HomeController(
             IUpdateSellerByIdService updateSellerByIdService, 
             IAccountService accountService, 
-            IGetSellerByIdService getSellerByIdService)
+            IGetSellerByIdService getSellerByIdService, IGetToDayReportService getTodayReportService)
         {
             _updateSellerByIdService = updateSellerByIdService;
             _accountService = accountService;
             _getSellerByIdService = getSellerByIdService;
+            _getTodayReportService = getTodayReportService;
         }
+        
         public IActionResult Index()
         {
-            return View();
+            return View(_getTodayReportService.Execute());
         }
         public async Task<IActionResult>  EditProfile()
         {

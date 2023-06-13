@@ -9,6 +9,6 @@ public class AuctionDto
     public int HighestPrice { get; set; }
     public int ProductId { get; set; }
     public  Product Product { get; set; }
-    //public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
+    public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
 }
 

@@ -48,6 +48,20 @@ namespace Application.Services.SellerServices.ImageServices.Commands
 
             return "عکس پیدا نشد.";
         }
+        public async Task<string> DeleteImageFromProduct(string url)
+        {
+            if (!string.IsNullOrEmpty(url))
+            {
+                var image = await _imageForProductRepository.GetByUrlAsync(url);
+                if (image != null)
+                {
+                    await _imageForProductRepository.RemoveAsync(image.Url);
+                    return "عکس حذف شد";
+                }
+            }
+
+            return "عکس پیدا نشد.";
+        }
 
     }
 

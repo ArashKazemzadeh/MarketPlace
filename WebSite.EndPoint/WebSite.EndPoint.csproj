@@ -36,6 +36,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Seller\Data\" />
+    <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 
 </Project>

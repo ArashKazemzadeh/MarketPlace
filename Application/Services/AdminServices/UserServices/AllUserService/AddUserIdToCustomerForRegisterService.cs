@@ -29,7 +29,7 @@ namespace Application.Services.AdminServices.UserServices.AllUserService
             {
                 Id = customerDto.Id
             };
-            _customerRepository.AddAsync(customer);
+         await   _customerRepository.AddAsync(customer);
             return new GeneralDto
             {
                 message = $"برای کاربر{customerDto.Id} پنل مشتری ایجاد شد"

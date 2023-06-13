@@ -11,7 +11,7 @@ namespace Persistence.ModelConfigurations.EntitiesConfiguration
         {
             entity.ToTable("Auctions");
 
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            //entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.EndDeadTime).HasColumnType("datetime");
             entity.Property(e => e.StartDeadTime).HasColumnType("datetime");
 

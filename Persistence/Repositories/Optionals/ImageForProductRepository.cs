@@ -28,6 +28,10 @@ namespace Persistence.Repositories.Optionals
         {
             return await _imageSet.Where(i => i.ProductId == productId).ToListAsync();
         }
+        public async Task<ImageForProduct> GetByUrlAsync(string url)
+        {
+            return await _imageSet.FirstOrDefaultAsync(image => image.Url == url);
+        }
 
         public async Task AddAsync(ImageForProductRepDto imageDto)
         {
@@ -54,6 +58,19 @@ namespace Persistence.Repositories.Optionals
 
             return false;
         }
+        public async Task<bool> RemoveAsync(string url)
+        {
+            var image = await _imageSet.FirstOrDefaultAsync(image => image.Url == url);
+            if (image != null)
+            {
+                _imageSet.Remove(image);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
+        }
+
     }
 
 }
