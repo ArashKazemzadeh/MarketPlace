@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using WebSite.EndPoint.Models;
 using WebSite.EndPoint.Utilities.Filters;
 using Microsoft.Extensions.Options;
-using WebApplication3.Configs;
 
 namespace WebSite.EndPoint.Controllers
 {

@@ -1,32 +1,21 @@
 ﻿using Infrastructure.IdentityConfigs;
-using Infrustracture.IdentityConfiguration;
+using Infrustracture.CookiesConfiguration;
 using Infrustracture.IocConfiguration;
 using WebSite.EndPoint.Utilities.Filters;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
-#region ContextAndIdentity
-
-builder.Services.AddDbContextService(builder.Configuration);
 builder.Services.AddIdentityService(builder.Configuration);
-builder.Services.ConfigureApplicationCookie(option =>
-{
-    option.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-    option.LoginPath = "/account/login";
-    option.AccessDeniedPath = "/Account/AccessDenied";
-    option.SlidingExpiration = true;
-});
-#endregion
+builder.Services.AddCookiesService(builder.Configuration);
+
 
 
 
 #region IOC
 builder.Services.AddAutoMapper(typeof(Program));
-
 builder.Services.AddScoped<SaveVisitorFilter>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScopeSqlServerTables(builder.Configuration);

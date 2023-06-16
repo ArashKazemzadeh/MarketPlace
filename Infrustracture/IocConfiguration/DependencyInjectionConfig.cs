@@ -19,12 +19,10 @@ using Application.Services.Visitors.SaveVisitorInfo;
 using Application.Visitors.SaveVisitorInfo;
 using Domin.IRepositories.IseparationRepository;
 using Persistence.Contexts.MongoContext;
-using Persistence.Repositories.FacadeRepository;
 using Persistence.Repositories.Optionals;
 using Persistence.Repositories.Orders;
 using Persistence.Repositories.Users;
 using Application.IServices.AdminServices.CommissionServices.Queries;
-using Application.IServices.CustomerServices.AuctionServices.Queries;
 using Application.IServices.SellerServices.AuctionServices.Commands;
 using Application.IServices.SellerServices.AuctionServices.Queries;
 using Application.IServices.SellerServices.ProfileServices.Commands;
@@ -54,7 +52,6 @@ namespace Infrustracture.IocConfiguration
             IConfiguration configuration)
         {
             // ---------------------Admin-----------------------------------------------------------
-            services.AddScoped<IGeneralRepository, GeneralRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ISellerRepository, SellerRepository>();
             services.AddScoped<IConfirmForAddProductService, ConfirmForAddProductService>();
@@ -96,6 +93,8 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<IAddAuctionForProductService, AddAuctionForProductService>();
             services.AddScoped<IGetAllAuctionBySellerIdService, GetAllAuctionBySellerIdService>();
             services.AddScoped<IAuctionRepository, AuctionRepository>();
+            // ---------------------Customer-----------------------------------------------------------
+
             return services;
         }
         public static IServiceCollection AddScopeMongoDbDocuments(this IServiceCollection services,
@@ -105,6 +104,7 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<ISaveVisitorInfoService, SaveVisitorInfoService>();
             services.AddTransient<IGetToDayReportService, GetToDayReportService>();
             services.AddTransient(typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
+            //services.AddScoped<SaveVisitorFilter>();
             return services;
         }
     }
