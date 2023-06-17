@@ -1,4 +1,3 @@
-# MarketPlace
 # Market Place Project
 
 This project is a web-based market place that includes three roles: seller, buyer, and admin. Sellers can create stalls with various categorized products and upload their images. They can set the selling price as fixed or run an auction for a specific period. The highest bidder wins the auction, and if no one bids, the product becomes inactive. The seller pays a commission to the site for each sale, which decreases with increasing sales and when reaching a certain amount on all products. Sellers can also edit their profile information.
