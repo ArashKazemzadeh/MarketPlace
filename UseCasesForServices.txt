@@ -7,8 +7,8 @@
 (CRD)(Category)*+  //متد های اصلی برای کتگوری باید در admin ایجاد شود و پس از ایجاد شدن این کامنت حذف شود
 ----------------
 Customer:
-GetBoothWithSellerId*
-GetSellersByCategoryId*
+GetBoothWithSellerId*+
+GetSellersByCategoryId*+
 (CD)ProductToCart*
 AddBidForAuction*
 GetAuctions*

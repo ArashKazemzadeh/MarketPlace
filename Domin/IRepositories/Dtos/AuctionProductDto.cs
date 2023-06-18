@@ -13,8 +13,11 @@ namespace Domin.IRepositories.Dtos
         public string? ProductName { get; set; }
         public int? BasePrice { get; set; }
         public int AuctionId { get; set; }
+        public bool IsActive { get; set; }
+        public int? Availability { get; set; }
         public DateTime? StartDeadTime { get; set; }
         public DateTime? EndDeadTime { get; set; }
         public int HighestPrice { get; set; }
+        public List<string> ImagesUrls { get; set; }
     }
 }

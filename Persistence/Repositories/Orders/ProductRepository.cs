@@ -38,8 +38,7 @@ namespace Persistence.Repositories.Orders
 
         public async Task<List<AuctionProductDto>> GetProductsWithTrueAuctions(int sellerId)
         {
-            var result = _dbSet.AsNoTracking().Where(a => a.IsActive && a.Booth.Seller.Id == sellerId)
-                .Include(a => a.Auction)
+            var result =await _dbSet.Where(a => a.IsActive==true && a.Booth.Seller.Id == sellerId)
                 .Select(p => new AuctionProductDto
                 {
                     ProductId = p.Id,
@@ -49,7 +48,7 @@ namespace Persistence.Repositories.Orders
                     StartDeadTime = p.Auction.StartDeadTime,
                     EndDeadTime = p.Auction.EndDeadTime,
                     HighestPrice = p.Auction.HighestPrice
-                }).ToList();
+                }).ToListAsync();
 
             return result;
         }

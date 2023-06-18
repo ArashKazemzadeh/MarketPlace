@@ -1,0 +1,46 @@
+﻿@model List<WebSite.EndPoint.Areas.Seller.Models.AuctionGetVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row ">
+    @foreach (var p in Model)
+    {
+        <div class="card component-card_2 col-3 m-5 text-center">
+            <div class="row m-1">
+                @foreach (var i in p.ImagesUrls)
+                {
+                    <img src="@i" class="col-3 img-fluid" />
+                }
+            </div>
+
+            <h3> @p.ProductName</h3>
+            <p>قیمت پایه: @p.BasePrice</p>
+            <p>بالاترین قیمت تا اکنون: @p.HighestPrice</p>
+            <p>تعداد : @p.Availability</p>
+            <p>زمان آغاز مزایده: @p.StartDeadTime</p>
+            <p>زمان پایان مزایده: @p.EndDeadTime</p>
+            @if (p.IsActive == true)
+            {
+                <div class="card-body">
+                    <a asp-controller="" asp-action="">شرکت در مزایده</a>
+                </div>
+            }
+            @if (p.IsActive == false)
+            {
+                <div class="card-body">
+                    <a class="btn btn-block btn-danger">زمان مزایده به اتمام رسید و کالا  به فروش نرفت</a>
+                </div>
+            }
+            @if (p.EndDeadTime<DateTime.Now)
+            {
+                <div class="card-body">
+                    <a class="btn btn-block btn-danger">زمان مزایده به اتمام رسیده است</a>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+
+

@@ -1,9 +1,10 @@
-﻿using Application.Dtos;
-using ConsoleApp.Models;
+﻿using ConsoleApp.Models;
+using Domin.IRepositories.Dtos;
+
 namespace Application.IServices.CustomerServices.AuctionServices.Queries
 {
     public interface IGetAllAuctionsService
     {
-       List<GeneralDto<AuctionDto>>  Execute();
+      Task<List<AuctionProductDto>> Execute();
     }
 }

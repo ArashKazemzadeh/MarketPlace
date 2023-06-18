@@ -39,10 +39,10 @@ namespace Persistence.Repositories.Optionals
             {
                 Url = imageDto.Url,
                 ProductId = imageDto.ProductId,
-                Product = imageDto.Product
+                //Product = imageDto.Product
             };
             
-            await _imageSet.AddAsync(image);
+          var i=  await _imageSet.AddAsync(image);
          var result=   await _dbContext.SaveChangesAsync();
         }
 

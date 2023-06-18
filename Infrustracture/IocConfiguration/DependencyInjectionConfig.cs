@@ -52,6 +52,8 @@ using Application.IServices.CustomerServices.CategoryServices;
 using Application.Services.CustomerServices.CategoryServices.Queries;
 using Application.IServices.CustomerServices.ProductServices.Queries;
 using Application.Services.CustomerServices.ProductServices.Queries;
+using Application.IServices.CustomerServices.AuctionServices.Queries;
+using Application.Services.CustomerServices.AuctionServices.Queries;
 
 namespace Infrustracture.IocConfiguration
 {
@@ -108,6 +110,7 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped < IGetBoothsByCategoryId, GetBoothsByCategoryId>();
             services.AddScoped < ICategoryCustomerQueryService, CategoryCustomerQueryService>();
             services.AddScoped < IGetAllProductsByBoothIdService, GetAllProductsByBoothIdService>();
+            services.AddScoped < IGetAllAuctionsService, GetAllAuctionsService>();
             return services;
         }
         public static IServiceCollection AddScopeMongoDbDocuments(this IServiceCollection services,

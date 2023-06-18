@@ -1,16 +1,27 @@
-﻿
+﻿using Application.IServices.CustomerServices.AuctionServices.Queries;
+using Domin.IRepositories.Dtos;
+using Domin.IRepositories.IseparationRepository;
+namespace Application.Services.CustomerServices.AuctionServices.Queries;
 
-using Application.Dtos;
-using Application.IServices.CustomerServices.AuctionServices.Queries;
-using ConsoleApp.Models;
-
-namespace Application.Services.CustomerServices.AuctionServices.Queries
+public class GetAllAuctionsService : IGetAllAuctionsService
 {
-    public class GetAllAuctionsService : IGetAllAuctionsService
+
+    private readonly IAuctionRepository _auctionRepository;
+
+    public GetAllAuctionsService(IAuctionRepository auctionRepository)
     {
-        public List<GeneralDto<AuctionDto>> Execute()
+        _auctionRepository = auctionRepository;
+    }
+
+    public async Task<List<AuctionProductDto>> Execute()
+    {
+        var auctions = await _auctionRepository.GetAllAsync();
+        if (auctions==null || auctions.Count==0)
         {
-            throw new NotImplementedException();
+            return new List<AuctionProductDto>();
         }
+
+        return auctions;
     }
 }
+

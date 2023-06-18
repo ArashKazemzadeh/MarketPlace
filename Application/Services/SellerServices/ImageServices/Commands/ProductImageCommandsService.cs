@@ -31,11 +31,11 @@ namespace Application.Services.SellerServices.ImageServices.Commands
             {
                 Url = imageUrl,
                 ProductId = productId,
-                Product = product
+                //Product = product
             };
 
-            _imageForProductRepository.AddAsync(image);
-            return $" عکس به {image.Product.Name}افزوده شد.";
+        await    _imageForProductRepository.AddAsync(image);
+            return $" عکس به .";
         }
 
         public async Task<string> DeleteImageFromProduct(int id)
