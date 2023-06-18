@@ -36,10 +36,6 @@ namespace Application.Services.SellerServices.ImageServices.Queries
             }
 
             return new List<string>();
-            //return new List<string>
-            //{
-            //    "~/templateStore/images/tm-170x80-1.jpg"
-            //};
         }
 
     }

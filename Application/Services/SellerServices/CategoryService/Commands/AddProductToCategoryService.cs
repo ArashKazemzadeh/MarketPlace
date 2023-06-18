@@ -28,7 +28,7 @@ namespace Application.Services.SellerServices.CategoryService.Commands
             {
                 return "دسته بندی مورد نظر یافت نشد.";
             }
-            await _categoryRepository.AddProductToCategoryAsync(category, product);
+            await _categoryRepository.AddProductToCategoryAsync(productId, categoryId);
             return "محصول با موفقیت به دسته بندی اضافه شد.";
         }
     }

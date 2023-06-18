@@ -16,6 +16,14 @@
                 <td colspan="3"> @Model.Description</td>
             </tr>
             <tr>
+                <th scope="row">دسته بندی</th>
+
+                @foreach (var item in Model.Categories)
+                {
+                    <td colspan="3"> @item.Name</td>
+                }
+            </tr>
+            <tr>
                 <th scope="row">عملیات</th>
                 <td colspan="3">
                     <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-primary m-1">ویرایش کالا</a>

@@ -5,7 +5,7 @@ namespace Domin.IRepositories.IseparationRepository;
 
 public interface ICategoryRepository
 {
-    Task AddProductToCategoryAsync(Category category, Product product);
+    Task AddProductToCategoryAsync(int productId, int categoryId);
     Task DeleteProductFromCategoryAsync(Category category, Product product);
     Task<Category> GetByIdOrginalAsync(int id);
     Task<CategoryRepDto> GetByIdAsync(int id);

@@ -13,7 +13,5 @@ public class ProductSellerVm
     public string? Description { get; set; }
     public bool IsActive { get; set; }
     public List<string> ImagedUrls { get; set; }
-
-    //public Auction Auction { get; set; }
-    //public ICollection<Category> Categories { get; set; }
+    public ICollection<Category> Categories { get; set; }
 }

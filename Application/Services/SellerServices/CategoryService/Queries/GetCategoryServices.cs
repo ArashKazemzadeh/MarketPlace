@@ -10,8 +10,9 @@ public class GetCategoryServices : IGetCategoryServices
 
     public GetCategoryServices(ICategoryRepository categoryRepository)
     {
-        _categoryRepository = categoryRepository;   
+        _categoryRepository = categoryRepository;
     }
+
     public async Task<List<CategoryDto>> GetAll()
     {
         var products = await _categoryRepository.GetAllAsync();

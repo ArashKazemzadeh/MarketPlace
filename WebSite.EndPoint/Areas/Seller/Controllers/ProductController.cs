@@ -1,9 +1,11 @@
 ﻿using Application.Dtos.ProductDto;
 using Application.IServices.AdminServices.UserService.Commands;
+using Application.IServices.SellerServices.CategoryService;
 using Application.IServices.SellerServices.ImageServices.Commands;
 using Application.IServices.SellerServices.ProductServices.Commands;
 using Application.IServices.SellerServices.ProductServices.Queries;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using WebSite.EndPoint.Areas.Seller.Models;
 
 namespace WebSite.EndPoint.Areas.Seller.Controllers
@@ -17,12 +19,13 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
         private readonly IGetProductSellerService _getProductSellerService;
         private readonly IProductImageQueriesService _productImageQueriesService;
         private readonly IAccountService _accountService;
-
+        private readonly IGetCategoryServices _getCategoryServices;
+        private readonly IAddProductToCategoryService _addProductToCategoryService;
         public ProductController(IAddProductTooBoothSellerService addProductTooBoothSellerService,
             IGetProductSellerService getProductSellerService, IAccountService accountService,
             IUpdateProductSellerService updateProductSellerService,
             IProductImageQueriesService productImageQueriesService,
-            IDeleteProductSellerService deleteProductSellerService)
+            IDeleteProductSellerService deleteProductSellerService, IGetCategoryServices getCategoryServices, IAddProductToCategoryService addProductToCategoryService)
         {
             _addProductTooBoothSellerService = addProductTooBoothSellerService;
             _getProductSellerService = getProductSellerService;
@@ -30,15 +33,23 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
             _updateProductSellerService = updateProductSellerService;
             _productImageQueriesService = productImageQueriesService;
             _deleteProductSellerService = deleteProductSellerService;
+            _getCategoryServices = getCategoryServices;
+            _addProductToCategoryService = addProductToCategoryService;
         }
+       
         public async Task<IActionResult> Index()
         {
-            var SellerId = Convert.ToInt32(await _accountService.GetLoggedInUserId());
-            var productDtos = await _getProductSellerService.GetAllProductBySellerIdAsync(SellerId);
-            var tasks = productDtos.Data.Select(async p =>
+            var sellerId = Convert.ToInt32(await _accountService.GetLoggedInUserId());
+            var productDtos = await _getProductSellerService.GetAllProductBySellerIdAsync(sellerId);
+
+            var result = new List<ProductSellerVm>();
+
+            foreach (var p in productDtos.Data)
             {
-                var urls = await _productImageQueriesService.GetImageUrlForProduct(p.Id);
-                return new ProductSellerVm
+                var images = await _productImageQueriesService.GetImagesForProductAsync(p.Id);
+                var urls = images.Select(i => i.Url).ToList();
+
+                var productSellerVm = new ProductSellerVm
                 {
                     ProductId = p.Id,
                     Name = p.Name,
@@ -47,14 +58,16 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
                     IsAuction = p.IsAuction,
                     IsConfirm = p.IsConfirm,
                     Availability = p.Availability,
-                    ImagedUrls = urls
+                    ImagedUrls = urls,
+                    Categories = p.Categories
                 };
-            }).ToList();
 
-            var result = await Task.WhenAll(tasks); // انتظار برای اتمام همه تسک‌ها و بازگشت آرایه‌ای از نتایج
+                result.Add(productSellerVm);
+            }
 
-            return View(result.ToList()); // تبدیل آرایه به لیست
+            return View(result);
         }
+
         public async Task<IActionResult> Detail(int id)
         {
             var product = await _getProductSellerService.FindByIdAsync(id);
@@ -66,34 +79,68 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
                 BasePrice = product.Data.BasePrice,
                 Availability = product.Data.Availability,
                 Description = product.Data.Description,
-                ImagedUrls = urls
+                ImagedUrls = urls   ,
+                Categories=product.Data.Categories
             };
             return View(model);
         }
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            return View();
+            var categories = await _getCategoryServices.GetAll();
+            var categoryList = new SelectList(categories, "Id", "Name");
+
+            var model = new AddProductVm();
+            model.CategoryList = categoryList;
+
+            return View(model);
         }
+
+
         [HttpPost]
         public async Task<IActionResult> Create(AddProductVm model)
         {
-            var SellerId = Convert.ToInt32(await _accountService.GetLoggedInUserId());
-            if (!ModelState.IsValid)
-            {
-                return View(model);
+            var sellerId = Convert.ToInt32(await _accountService.GetLoggedInUserId());
+           
 
-            }
             var newProduct = new ProductForAddDto
             {
                 Name = model.Name,
-                BasePrice = model.BasePrice,
+                BasePrice = model.BasePrice.Value,
                 Description = model.Description,
-                Availability = model.Availability
+                Availability = model.Availability.Value
             };
-            var result = await _addProductTooBoothSellerService.Execute(newProduct, SellerId);
-            return RedirectToAction("index");
+
+            var result = await _addProductTooBoothSellerService.Execute(newProduct, sellerId);
+
+            if (result!=0 && result!=null)
+            {
+                // افزودن محصول به دسته بندی
+                var categoryId = model.CategoryId;
+                var addProductToCategoryResult = await _addProductToCategoryService.Execute(result, categoryId);
+
+                if (addProductToCategoryResult == "محصول با موفقیت به دسته بندی اضافه شد.")
+                {
+                    return RedirectToAction("Detail", new { id = result});
+
+                }
+                ModelState.AddModelError("", addProductToCategoryResult);
+                
+            }
+            else
+            {
+                ModelState.AddModelError("", "افزودن کالا با خطا مواجه شده است.");
+            }
+
+            // دریافت لیست دسته بندی‌ها
+            var categories = await _getCategoryServices.GetAll();
+
+            // ساخت SelectList از لیست دسته بندی‌ها
+            model.CategoryList = new SelectList(categories, "Id", "Name");
+
+            return View(model);
         }
+
         public async Task<IActionResult> Edit(int id)
         {
             var productgeneral = await _getProductSellerService.FindByIdAsync(id);

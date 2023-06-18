@@ -12,8 +12,8 @@ using Persistence.Contexts.SqlServer;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230613111615_dghzf")]
-    partial class dghzf
+    [Migration("20230618151950_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -326,7 +326,7 @@ namespace Persistence.Migrations
                             CustomertId = 1,
                             Description = "این محصول عالی است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 13, 14, 46, 15, 167, DateTimeKind.Local).AddTicks(2788),
+                            RegisterDate = new DateTime(2023, 6, 18, 18, 49, 50, 655, DateTimeKind.Local).AddTicks(4963),
                             Title = "عالی"
                         },
                         new
@@ -335,7 +335,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول بد است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 13, 14, 46, 15, 167, DateTimeKind.Local).AddTicks(2808),
+                            RegisterDate = new DateTime(2023, 6, 18, 18, 49, 50, 655, DateTimeKind.Local).AddTicks(4983),
                             Title = "بد"
                         },
                         new
@@ -344,7 +344,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول خوب است.",
                             ProductId = 2,
-                            RegisterDate = new DateTime(2023, 6, 13, 14, 46, 15, 167, DateTimeKind.Local).AddTicks(2810),
+                            RegisterDate = new DateTime(2023, 6, 18, 18, 49, 50, 655, DateTimeKind.Local).AddTicks(4985),
                             Title = "خوب"
                         });
                 });
@@ -444,7 +444,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Image", (string)null);
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("ConsoleApp1.Models.Invoice", b =>
@@ -801,7 +801,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "54ecc869-d53e-41a6-9fa4-cc70e8742824",
+                            ConcurrencyStamp = "3e50728d-ae58-48c9-8560-45973a2b5c67",
                             Email = "userone@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر یک",
@@ -814,7 +814,7 @@ namespace Persistence.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "35ec0d9d-2781-4b9b-b68e-788ac1cf7657",
+                            ConcurrencyStamp = "40d61cee-179c-4ff0-9b3d-a8eb9c177a1e",
                             Email = "userofour@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر چهار",
@@ -827,7 +827,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c4909d26-c85c-4984-a954-50ba21140c66",
+                            ConcurrencyStamp = "c8e2e673-6490-4c6a-a2d3-0d3421166128",
                             Email = "userotow@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر دو",
@@ -840,7 +840,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5adff9b4-df0c-4c16-8b46-fb198cc3f261",
+                            ConcurrencyStamp = "54a11077-6184-4de5-a8b9-4222e0bb7266",
                             Email = "userothree@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر سه",

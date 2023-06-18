@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9DF3D475
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{2E045099-B5CB-4364-94BC-B44F48467FEE}"
 	ProjectSection(SolutionItems) = preProject
-		C:\Users\ArashKaf\Desktop\CleanArc.jpg = C:\Users\ArashKaf\Desktop\CleanArc.jpg
+		..\..\CleanArc.jpg = ..\..\CleanArc.jpg
 		UseCasesForServices.txt = UseCasesForServices.txt
 	EndProjectSection
 EndProject

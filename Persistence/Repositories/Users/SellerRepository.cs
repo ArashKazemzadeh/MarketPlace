@@ -17,6 +17,7 @@ namespace Persistence.Repositories.Users
             _context = context;
             _dbSet = _context.Set<Seller>();
         }
+        
         public async Task<Seller> GetByIdAsync(int id)
         {
             return await _dbSet.AsNoTracking()

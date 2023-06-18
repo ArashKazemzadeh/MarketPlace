@@ -43,6 +43,15 @@ using Application.IServices.SellerServices.ImageServices.Queries;
 using Application.Services.SellerServices.AuctionServices.Commands;
 using Application.Services.SellerServices.AuctionServices.Queries;
 using Application.Services.SellerServices.ImageServices.Commands;
+using Application.IServices.SellerServices.CategoryService;
+using Application.Services.SellerServices.CategoryService.Commands;
+using Application.Services.SellerServices.CategoryService.Queries;
+using Application.IServices.CustomerServices.SellerServices.Queries;
+using Application.Services.CustomerServices.SellerServices.Queries;
+using Application.IServices.CustomerServices.CategoryServices;
+using Application.Services.CustomerServices.CategoryServices.Queries;
+using Application.IServices.CustomerServices.ProductServices.Queries;
+using Application.Services.CustomerServices.ProductServices.Queries;
 
 namespace Infrustracture.IocConfiguration
 {
@@ -79,6 +88,7 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<IIdentityRoleService, IdentityRoleService>();
             // ---------------------seller-----------------------------------------------------------
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IGetCategoryServices, GetCategoryServices>();
             services.AddScoped<IImageForProductRepository, ImageForProductRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<IAddSellerService, AddSellerService>();
@@ -93,8 +103,11 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<IAddAuctionForProductService, AddAuctionForProductService>();
             services.AddScoped<IGetAllAuctionBySellerIdService, GetAllAuctionBySellerIdService>();
             services.AddScoped<IAuctionRepository, AuctionRepository>();
+            services.AddScoped<IAddProductToCategoryService, AddProductToCategoryService>();
             // ---------------------Customer-----------------------------------------------------------
-
+            services.AddScoped < IGetBoothsByCategoryId, GetBoothsByCategoryId>();
+            services.AddScoped < ICategoryCustomerQueryService, CategoryCustomerQueryService>();
+            services.AddScoped < IGetAllProductsByBoothIdService, GetAllProductsByBoothIdService>();
             return services;
         }
         public static IServiceCollection AddScopeMongoDbDocuments(this IServiceCollection services,

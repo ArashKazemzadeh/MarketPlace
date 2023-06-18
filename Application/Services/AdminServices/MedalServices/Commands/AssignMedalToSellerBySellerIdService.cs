@@ -3,7 +3,6 @@ using Application.IServices.AdminServices.MedalServices.Commands;
 using ConsoleApp1.Models;
 using Domin.Enums;
 using Domin.IRepositories.IseparationRepository;
-
 namespace Application.Services.AdminServices.MedalServices.Commands;
 
 
@@ -19,7 +18,7 @@ public class AssignMedalToSellerBySellerIdService : IAssignMedalToSellerBySeller
         _medalRepository = medalRepository;
     }
 
-    // متد برای اختصاص مدال به فروشنده بر اساس شناسه
+    
     public async Task<GeneralDto> Execute(int sellerId)
     {
         var seller = await _sellerRepository.GetByIdAsync(sellerId);

@@ -45,7 +45,8 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
 
                 await _productImageCommandsService.AddImageToProduct(productId, imageUrl);
 
-                return Ok("Photo uploaded successfully.");
+                return RedirectToAction("Detail", "Product", new { id = productId });
+
             }
             catch (Exception ex)
             {
@@ -67,7 +68,7 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
                 {
                     System.IO.File.Delete(imagePath);
 
-                    return Ok("Image deleted successfully.");
+                return RedirectToAction("Detail","Product");
                 }
 
                 return NotFound();

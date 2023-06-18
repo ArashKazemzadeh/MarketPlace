@@ -1,0 +1,16 @@
+﻿@model List<Application.Dtos.CategoryDto.CategoryDto>
+@{
+    ViewData["Title"] = "GetAllCategories";
+}
+<div class="row ">
+    @foreach (var c in Model)
+    {
+        <div class="card component-card_2 col-3 m-5 text-center">
+            <h3> @c.Name</h3>
+            <p>توضیحات:  @c.Description</p>
+            <div class="card-body">
+                <a asp-controller="Booth" asp-action="GetBoothByCategoryId" asp-route-categoryid="@c.Id">مشاهده ی غرفه ها</a>
+            </div>
+        </div>
+    }
+</div>

@@ -470,7 +470,7 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Image",
+                name: "Images",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -483,7 +483,7 @@ namespace Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Image", x => x.Id);
+                    table.PrimaryKey("PK_Images", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Image_Product",
                         column: x => x.ProductId,
@@ -569,11 +569,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Admins",
-                columns: new[] { "Id", "InsertTime", "RemoveTime", "TotalSiteCommissionAmounts", "UpdateTime" },
-                values: new object[] { 2, null, null, null, null });
-
-            migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
@@ -588,10 +583,10 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "InsertTime", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RemoveTime", "SecurityStamp", "TwoFactorEnabled", "UpdateTime", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "d68c4e09-5433-4967-92b9-36446ad22e40", "userone@gmail.com", false, "کاربر یک", null, false, null, null, null, null, "1", false, null, null, false, null, "userone@gmail.com" },
-                    { 2, 0, "b5a54f08-46d9-4875-970c-8ff100022cb9", "admin@gmail.com", false, "Admin", null, false, null, null, null, null, null, false, null, null, false, null, "admin@gmail.com" },
-                    { 3, 0, "3d03150a-47de-42b9-9f5a-d1aaebb1720e", "userotow@gmail.com", false, "کاربر دو", null, false, null, null, null, null, null, false, null, null, false, null, "userotow@gmail.com" },
-                    { 4, 0, "dde16c10-a6a1-4e32-9afb-c9aad869189c", "userothree@gmail.com", false, "کاربر سه", null, false, null, null, null, null, null, false, null, null, false, null, "userothree@gmail.com" }
+                    { 1, 0, "3e50728d-ae58-48c9-8560-45973a2b5c67", "userone@gmail.com", false, "کاربر یک", null, false, null, null, null, null, null, false, null, null, false, null, "userone@gmail.com" },
+                    { 2, 0, "c8e2e673-6490-4c6a-a2d3-0d3421166128", "userotow@gmail.com", false, "کاربر دو", null, false, null, null, null, null, null, false, null, null, false, null, "userotow@gmail.com" },
+                    { 3, 0, "54a11077-6184-4de5-a8b9-4222e0bb7266", "userothree@gmail.com", false, "کاربر سه", null, false, null, null, null, null, null, false, null, null, false, null, "userothree@gmail.com" },
+                    { 4, 0, "40d61cee-179c-4ff0-9b3d-a8eb9c177a1e", "userofour@gmail.com", false, "کاربر چهار", null, false, null, null, null, null, null, false, null, null, false, null, "userfour@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -651,9 +646,9 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "CustomerId", "CustomertId", "Description", "InsertTime", "IsConfirm", "ProductId", "RegisterDate", "RemoveTime", "Title", "UpdateTime" },
                 values: new object[,]
                 {
-                    { 1, null, 1, "این محصول عالی است.", null, null, 1, new DateTime(2023, 6, 11, 21, 56, 4, 163, DateTimeKind.Local).AddTicks(4155), null, "عالی", null },
-                    { 2, null, 2, "این محصول بد است.", null, null, 1, new DateTime(2023, 6, 11, 21, 56, 4, 163, DateTimeKind.Local).AddTicks(4180), null, "بد", null },
-                    { 20, null, 2, "این محصول خوب است.", null, null, 2, new DateTime(2023, 6, 11, 21, 56, 4, 163, DateTimeKind.Local).AddTicks(4182), null, "خوب", null }
+                    { 1, null, 1, "این محصول عالی است.", null, null, 1, new DateTime(2023, 6, 18, 18, 49, 50, 655, DateTimeKind.Local).AddTicks(4963), null, "عالی", null },
+                    { 2, null, 2, "این محصول بد است.", null, null, 1, new DateTime(2023, 6, 18, 18, 49, 50, 655, DateTimeKind.Local).AddTicks(4983), null, "بد", null },
+                    { 20, null, 2, "این محصول خوب است.", null, null, 2, new DateTime(2023, 6, 18, 18, 49, 50, 655, DateTimeKind.Local).AddTicks(4985), null, "خوب", null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -751,8 +746,8 @@ namespace Persistence.Migrations
                 column: "SellerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Image_ProductId",
-                table: "Image",
+                name: "IX_Images_ProductId",
+                table: "Images",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
@@ -815,7 +810,7 @@ namespace Persistence.Migrations
                 name: "Files");
 
             migrationBuilder.DropTable(
-                name: "Image");
+                name: "Images");
 
             migrationBuilder.DropTable(
                 name: "Invoice");

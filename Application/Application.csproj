@@ -9,10 +9,16 @@
   <ItemGroup>
     <Compile Remove="IRepositories\**" />
     <Compile Remove="IServices\AdminServices\UserServices\**" />
+    <Compile Remove="IServices\CustomerServices\UserService\**" />
+    <Compile Remove="Services\CustomerServices\UserService\**" />
     <EmbeddedResource Remove="IRepositories\**" />
     <EmbeddedResource Remove="IServices\AdminServices\UserServices\**" />
+    <EmbeddedResource Remove="IServices\CustomerServices\UserService\**" />
+    <EmbeddedResource Remove="Services\CustomerServices\UserService\**" />
     <None Remove="IRepositories\**" />
     <None Remove="IServices\AdminServices\UserServices\**" />
+    <None Remove="IServices\CustomerServices\UserService\**" />
+    <None Remove="Services\CustomerServices\UserService\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,12 +32,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\Domin\Domin.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="IServices\CustomerServices\UserService\Commands\" />
-    <Folder Include="IServices\CustomerServices\UserService\Querys\" />
-    <Folder Include="Services\CustomerServices\UserService\Commands\" />
   </ItemGroup>
 
 </Project>

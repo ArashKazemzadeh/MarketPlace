@@ -17,17 +17,17 @@ namespace Application.Services.SellerServices.ProductServices.Commands
             _sellerRepository = sellerRepository;
          
         }
-        public async Task<string> Execute(ProductForAddDto productDto, int sellerId)
+        public async Task<int> Execute(ProductForAddDto productDto, int sellerId)
         {
             var seller = await _sellerRepository.GetByIdAsync(sellerId);
             if (seller==null)
             {
-                return "فروشنده موجود نیست";
+                return 0;
             }
             var booth = seller.Booth;
             if (booth==null)
             {
-                return "غرفه موجود نیست";
+                return 0;
             }
 
             var newProductDto = new ProductAddDto
@@ -40,8 +40,8 @@ namespace Application.Services.SellerServices.ProductServices.Commands
                 Booth = booth
             };
 
-         await   _productRepository.AddAsync(newProductDto);
-            return "کالااضافه شد";
+     var id=    await   _productRepository.AddAsync(newProductDto);
+            return id;
         }
     }
 }

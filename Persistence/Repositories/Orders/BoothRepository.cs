@@ -22,16 +22,24 @@ namespace Persistence.Repositories.Orders
         }
         public async Task<List<BoothRepositoryDto>> GetAllAsync()
         {
-           var booth= await _dbSet.AsNoTracking().Include(x=>x.Seller).ToListAsync();
-           var result = booth.Select(b=>new BoothRepositoryDto
-           {
-               Id = b.Id,
-               Name = b.Name,
-               Description = b.Description,
-               Seller = b.Seller,
-               SellerId = b.SellerId,
-               SellerName = b.Seller.CompanyName
-           }).ToList();
+            var booth = await _dbSet.AsNoTracking().Include(x => x.Seller).ToListAsync();
+            var result = booth.Select(b => new BoothRepositoryDto
+            {
+                Id = b.Id,
+                Name = b.Name,
+                Description = b.Description,
+                Seller = b.Seller,
+                SellerId = b.SellerId,
+                SellerName = b.Seller.CompanyName
+            }).ToList();
+            return result;
+        }
+        public async Task<List<Booth>> GetByCategoryIdAsync(int categoryId)
+        {
+           var result= await _dbSet
+                .Where(b => b.Products.Any(p => p.Categories.Any(c => c.Id == categoryId)))
+                .Include(s=>s.Seller)
+                .ToListAsync();
            return result;
         }
         public async Task AddAsync(BoothRepDto boothRepDto)

@@ -5,6 +5,7 @@ namespace Domin.IRepositories.IseparationRepository;
 
 public interface IBoothRepository
 {
+    Task<List<Booth>> GetByCategoryIdAsync(int categoryId);
     Task<Booth> GetByIdAsync(int id);
     Task<List<BoothRepositoryDto>> GetAllAsync();
     Task AddAsync(BoothRepDto booth);

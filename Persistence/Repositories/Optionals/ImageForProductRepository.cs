@@ -43,7 +43,7 @@ namespace Persistence.Repositories.Optionals
             };
             
             await _imageSet.AddAsync(image);
-            await _dbContext.SaveChangesAsync();
+         var result=   await _dbContext.SaveChangesAsync();
         }
 
         public async Task<bool> RemoveAsync(int id)

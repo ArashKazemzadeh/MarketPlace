@@ -60,12 +60,16 @@ namespace Persistence.Repositories.Orders
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddProductToCategoryAsync(Category category, Product product)
+        public async Task AddProductToCategoryAsync(int productId,int categoryId)
         {
-            category.Products.Add(product);
-            //_dbSet.Update(category);
+          
+            var trackedProduct = await _context.Products.FindAsync(productId);
+            var trackedcaCategoryt = await _context.Categories.FindAsync(categoryId);
+            trackedProduct.Categories.Add(trackedcaCategoryt);
+            _context.Entry(trackedProduct).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
+
 
         public async Task DeleteProductFromCategoryAsync(Category category, Product product)
         {

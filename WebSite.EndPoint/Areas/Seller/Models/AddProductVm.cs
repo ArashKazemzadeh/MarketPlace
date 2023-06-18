@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebSite.EndPoint.Areas.Seller.Models
 {
@@ -15,5 +16,9 @@ namespace WebSite.EndPoint.Areas.Seller.Models
         public int? Availability { get; set; }
         [Display(Name = "توضیحات")]
         public string? Description { get; set; }
+        [Display(Name = "دسته بندی")]
+        public int CategoryId { get; set; } 
+
+        public SelectList CategoryList { get; set; } 
     }
 }

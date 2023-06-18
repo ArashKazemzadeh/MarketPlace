@@ -18,6 +18,24 @@ namespace Persistence.Repositories.Orders
             _dbSet = _context.Set<Product>();
         }
 
+        public async Task<List<ProductCustomerDto>> GetProductByBoothIdAsync(int boothId)
+        {
+            var dto = await _dbSet.Where(x => x.Booth.Id == boothId && x.IsAuction==false).Select(p => new ProductCustomerDto
+            {
+                BoothId = p.Booth.Id,
+                Name = p.Name,
+                Description = p.Description,
+                BasePrice = p.BasePrice,
+                Availability = p.Availability,
+                Id = p.Id,
+                ImagesUrls = p.Images.Select(u => u.Url).ToList(),
+                Categories = p.Categories.Select(n => n.Name).ToList(),
+                BoothName = p.Booth.Name,
+                IsActive = p.IsActive
+            }).ToListAsync();
+            return dto;
+        }
+
         public async Task<List<AuctionProductDto>> GetProductsWithTrueAuctions(int sellerId)
         {
             var result = _dbSet.AsNoTracking().Where(a => a.IsActive && a.Booth.Seller.Id == sellerId)
@@ -96,7 +114,7 @@ namespace Persistence.Repositories.Orders
             return result;
         }
 
-        public async Task AddAsync(ProductAddDto productDto)
+        public async Task<int> AddAsync(ProductAddDto productDto)
         {
             var product = new Product
             {
@@ -105,10 +123,11 @@ namespace Persistence.Repositories.Orders
                 Description = productDto.Description,
                 Availability = productDto.Availability,
                 BoothId = productDto.BoothId,
-                //Booth = productDto.Booth,
             };
             await _dbSet.AddAsync(product);
             await _context.SaveChangesAsync();
+            var id = product.Id;
+            return id;
         }
 
         public async Task UpdateAsync(Product product)
@@ -146,7 +165,8 @@ namespace Persistence.Repositories.Orders
 
         public async Task<Product> GetByIdAsync(int id)
         {
-            return await _dbSet.FindAsync(id);
+            var redult = await _dbSet.AsNoTracking().Where(p => p.Id == id).Include(c => c.Categories).FirstOrDefaultAsync();
+            return redult;
         }
     }
 }

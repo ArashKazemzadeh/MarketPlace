@@ -1,11 +1,11 @@
-﻿using Application.Dtos;
-using Application.Dtos.UserDto;
+﻿
+using Domin.IRepositories.Dtos;
 
 namespace Application.IServices.CustomerServices.SellerServices.Queries
 {
-    public interface IGetSellersByCategoryId
+    public interface IGetBoothsByCategoryId
     {
-        GeneralDto<SellerDto> Execute(int id);
+        Task<List<BoothRepositoryDto>> Execute(int categoryId);
 
     }
 }
