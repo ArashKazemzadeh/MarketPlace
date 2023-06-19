@@ -9,13 +9,13 @@
 Customer:
 GetBoothWithSellerId*+
 GetSellersByCategoryId*+
-(CD)ProductToCart*
-AddBidForAuction*
+(CD)ProductToCart*+
+AddBidForAuction*+
 GetAuctions*+
 GetAuctionById*+
-AddCommentForProduct*
-GetInvoices*
+GetInvoices*+ //کارت های دارای فیلد ترو isregisterFinalize
 UpdateCustomer*
+AddCommentForProduct*
 -----------------
 Admin:
 ConfirmForAddProduct*+

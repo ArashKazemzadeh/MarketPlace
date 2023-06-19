@@ -1,6 +1,4 @@
-﻿
-
-namespace Domin.IRepositories.Dtos
+﻿namespace Domin.IRepositories.Dtos.Cart
 {
     public class CartGetDto
     {

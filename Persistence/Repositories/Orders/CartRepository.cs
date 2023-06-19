@@ -1,9 +1,9 @@
-﻿using ConsoleApp1.Models;
-using Domin.IRepositories.Dtos;
+﻿using Castle.Core.Resource;
+using ConsoleApp1.Models;
+using Domin.IRepositories.Dtos.Cart;
 using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contexts.SqlServer;
-
 
 namespace Persistence.Repositories.Orders
 {
@@ -16,6 +16,17 @@ namespace Persistence.Repositories.Orders
         {
             _context = context;
             _dbSet = _context.Set<Cart>();
+        }
+        public async Task<List<Cart>> GetOpenCartsForCustomerIdByBoothIdAsync(int boothId,int cudtomerId)
+        {
+            //لست کارت های باز یک مشتری که مربوط به یک غرفه است
+            var carts = await _dbSet
+                .Where(c => !c.IsRegistrationFinalized && c.Customer.Id==cudtomerId)
+                .ToListAsync();
+            var matchingCarts = carts
+                .Where(c => c.ProductsCarts.Any(pc => pc.Product.BoothId == boothId))
+                .ToList();
+            return matchingCarts;
         }
         public async Task<bool> FinalizeCartAsync(int cartId)
         {
@@ -75,10 +86,25 @@ namespace Persistence.Repositories.Orders
             return await _dbSet.ToListAsync();
         }
 
-        public async Task AddAsync(Cart cart)
+        public async Task<CartAddDto> AddAsync(CartAddDto dto)
         {
+            var cart = new Cart
+            {
+                CustomerId = dto.CustomerId,
+                SellerId = dto.SellerId,
+                TotalPrices = dto.TotalPrices,
+            };
             await _dbSet.AddAsync(cart);
-            await _context.SaveChangesAsync();
+          var result=  await _context.SaveChangesAsync();
+          if (result != 0)
+              return new CartAddDto
+              {
+                  Id = cart.Id,
+                  CustomerId = dto.CustomerId,
+                  SellerId = dto.SellerId,
+                  TotalPrices = dto.TotalPrices,
+              };
+          return null;
         }
 
         public async Task UpdateAsync(Cart cart)
@@ -92,5 +118,7 @@ namespace Persistence.Repositories.Orders
             _dbSet.Remove(cart);
             await _context.SaveChangesAsync();
         }
+
+       
     }
 }

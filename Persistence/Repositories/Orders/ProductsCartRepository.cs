@@ -1,4 +1,6 @@
-﻿using ConsoleApp1.Models;
+﻿
+using ConsoleApp1.Models;
+using Domin.IRepositories.Dtos.Cart;
 using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contexts.SqlServer;
@@ -15,6 +17,34 @@ namespace Persistence.Repositories.Orders
             _context = context;
             _dbSet = _context.Set<ProductsCart>();
         }
+        public async Task AddProductToCartAsync(int cartId, int productId)
+        {
+            var cart = await _context.Carts.FirstOrDefaultAsync(c => c.Id == cartId);
+            if (cart == null)
+                return;
+            var existingProductsCart = cart.ProductsCarts.FirstOrDefault(pc => pc.ProductId == productId);
+            if (existingProductsCart != null)
+            {
+                // کالای با ایدی مشترک در کارت وجود دارد، تعداد آن را افزایش دهید
+                var quantity = existingProductsCart.Quantity++;
+                existingProductsCart.Cart.TotalPrices = quantity * existingProductsCart.Product.BasePrice;
+                cart.TotalPrices = quantity * existingProductsCart.Product.BasePrice;
+                _context.Entry(cart).State = EntityState.Modified;
+                _context.Entry(existingProductsCart).State = EntityState.Modified;
+            }
+            else
+            {
+                // کالای با ایدی مشترک در کارت وجود ندارد، کالای جدیدی را به کارت اضافه کنید
+                var productsCart = new ProductsCart
+                {
+                    CartId = cart.Id,
+                    ProductId = productId,
+                    Quantity = 1
+                };
+                await _context.ProductsCarts.AddAsync(productsCart);
+            }
+            await _context.SaveChangesAsync();
+        }
 
         public async Task<ProductsCart> GetByIdAsync(int id)
         {
@@ -26,8 +56,14 @@ namespace Persistence.Repositories.Orders
             return await _dbSet.ToListAsync();
         }
 
-        public async Task AddAsync(ProductsCart productsCart)
+        public async Task AddAsync(ProductsCartDto dto)
         {
+            var productsCart = new ProductsCart
+            {
+                CartId =(int) dto.CartId ,
+                ProductId = dto.ProductId ,
+                Quantity = 1
+            };
             await _dbSet.AddAsync(productsCart);
             await _context.SaveChangesAsync();
         }

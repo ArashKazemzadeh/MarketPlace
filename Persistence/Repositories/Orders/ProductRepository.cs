@@ -18,6 +18,8 @@ namespace Persistence.Repositories.Orders
             _dbSet = _context.Set<Product>();
         }
 
+       
+
         public async Task<List<ProductCustomerDto>> GetProductByBoothIdAsync(int boothId)
         {
             var dto = await _dbSet.Where(x => x.Booth.Id == boothId && x.IsAuction==false).Select(p => new ProductCustomerDto

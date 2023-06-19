@@ -22,10 +22,10 @@ namespace Persistence.ModelConfigurations.AplpyConfiguration
             modelBuilder.ApplyConfiguration(new CommentConfig());
             modelBuilder.ApplyConfiguration(new CustomerConfig());
             modelBuilder.ApplyConfiguration(new ImageConfig());
-            modelBuilder.ApplyConfiguration(new InvoiceConfig());
+   
             modelBuilder.ApplyConfiguration(new ProductsCartConfig());
             modelBuilder.ApplyConfiguration(new ProductConfig());
-            modelBuilder.ApplyConfiguration(new InvoiceConfig());
+     
             modelBuilder.ApplyConfiguration(new SellerConfig());
             modelBuilder.ApplyConfiguration(new UserFileConfig());
             modelBuilder.ApplyConfiguration(new AdminConfig());

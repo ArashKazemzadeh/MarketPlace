@@ -1,4 +1,4 @@
-﻿using Domin.IRepositories.Dtos;
+﻿using Domin.IRepositories.Dtos.Cart;
 
 namespace Application.IServices.CustomerServices.CartService.Queries;
 

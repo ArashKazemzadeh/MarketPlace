@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Domin.IRepositories.Dtos;
 using Application.IServices.CustomerServices.CartService.Queries;
+using Domin.IRepositories.Dtos.Cart;
 
 namespace Application.Services.CustomerServices.CartService.Queries
 {
