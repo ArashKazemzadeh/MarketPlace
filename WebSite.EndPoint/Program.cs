@@ -1,4 +1,5 @@
-﻿using Domin.IRepositories.IseparationRepository;
+﻿using Application.IServices.AutoServices;
+using Domin.IRepositories.IseparationRepository;
 using Hangfire;
 using Infrastructure.IdentityConfigs;
 using Infrustracture.CookiesConfiguration;
@@ -14,7 +15,8 @@ builder.Services.AddIdentityDbContextService(builder.Configuration);
 builder.Services.AddCookiesService(builder.Configuration);
 builder.Services.AddHangfire(config =>
 {
-    config.UseSqlServerStorage("sqlserver");
+    config.UseSqlServerStorage("Server=.\\SQL2022;Database=MarketPlaceDb;User Id=sa;Password=377-00;TrustServerCertificate=True;");
+
 });
 builder.Services.AddHangfireServer();
 #endregion
@@ -38,8 +40,8 @@ if (!app.Environment.IsDevelopment())
 // Use Hangfire 
 app.UseHangfireDashboard("/hangfire");
 app.UseHangfireServer();
-RecurringJob.AddOrUpdate<IAutomaticTasksOfTheApplicationRepository>
-    (x => x.ProcessCompletedAuctions(), Cron.MinuteInterval(1));
+RecurringJob.AddOrUpdate<IProcessCompletedAuctionsAndAddToWinnerCart>
+    (x => x.Execute(), Cron.MinuteInterval(1));
 //--------------
 
 app.UseHttpsRedirection();

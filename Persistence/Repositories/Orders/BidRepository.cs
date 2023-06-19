@@ -1,26 +1,37 @@
 ﻿using ConsoleApp1.Models;
 using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Domin.IRepositories.Dtos;
-using Castle.Core.Resource;
-using ConsoleApp.Models;
+using Persistence.Contexts.SqlServer;
 
 namespace Persistence.Repositories.Orders
 {
     public class BidRepository : IBidRepository
     {
-        private readonly DbContext _context;
+        private readonly DatabaseContext _context;
         private readonly DbSet<Bid> _dbSet;
 
-        public BidRepository(DbContext context)
+        public BidRepository(DatabaseContext context)
         {
             _context = context;
             _dbSet = _context.Set<Bid>();
+        }
+
+        public async Task<List<BidGetRepDto>> GetBidsByCustomerId(int customerId)
+        {
+            var customerBids = await _dbSet
+                .Where(b => b.Customer.Id == customerId)
+                .Select(b=> new BidGetRepDto
+                {
+                    Id = b.Id,
+                    Price = b.Price,
+                    StartDateAuction = b.Auction.StartDeadTime,
+                    EndDateAuction = b.Auction.EndDeadTime,
+                    IsAccepted = b.IsAccepted,
+                    RegisterDate = b.RegisterDate,
+                    AuctionId = b.AuctionId
+                }).ToListAsync();
+            return customerBids;
         }
 
         public async Task<Bid> GetByIdAsync(int id)

@@ -54,6 +54,17 @@ using Application.IServices.CustomerServices.ProductServices.Queries;
 using Application.Services.CustomerServices.ProductServices.Queries;
 using Application.IServices.CustomerServices.AuctionServices.Queries;
 using Application.Services.CustomerServices.AuctionServices.Queries;
+using Application.IServices.AutoServices;
+using Application.Services.AutoServices;
+using Persistence.Repositories.Auto;
+using Application.IServices.CustomerServices.BidServices.Commands;
+using Application.Services.CustomerServices.BidServices.Commands;
+using Application.IServices.CustomerServices.BidServices.Queries;
+using Application.Services.CustomerServices.BidServices.Queries;
+using Application.IServices.CustomerServices.CartService.Queries;
+using Application.Services.CustomerServices.CartService.Queries;
+using Application.IServices.CustomerServices.CartService.Commands;
+using Application.Services.CustomerServices.CartService.Commands;
 
 namespace Infrustracture.IocConfiguration
 {
@@ -107,10 +118,22 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<IAuctionRepository, AuctionRepository>();
             services.AddScoped<IAddProductToCategoryService, AddProductToCategoryService>();
             // ---------------------Customer-----------------------------------------------------------
-            services.AddScoped < IGetBoothsByCategoryId, GetBoothsByCategoryId>();
-            services.AddScoped < ICategoryCustomerQueryService, CategoryCustomerQueryService>();
-            services.AddScoped < IGetAllProductsByBoothIdService, GetAllProductsByBoothIdService>();
-            services.AddScoped < IGetAllAuctionsService, GetAllAuctionsService>();
+            services.AddScoped<IGetBoothsByCategoryId, GetBoothsByCategoryId>();
+            services.AddScoped<ICategoryCustomerQueryService, CategoryCustomerQueryService>();
+            services.AddScoped<IGetAllProductsByBoothIdService, GetAllProductsByBoothIdService>();
+            services.AddScoped<IGetAllAuctionsService, GetAllAuctionsService>();
+            services.AddScoped<IBidRepository, BidRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<IProductsCartRepository, ProductsCartRepository>();
+            services.AddScoped<IAutomaticTasksOfTheApplicationRepository, AutomaticTasksOfTheApplicationRepository>();
+            services.AddScoped<IProcessCompletedAuctionsAndAddToWinnerCart, ProcessCompletedAuctionsAndAddToWinnerCart>();
+            services.AddScoped<IAddBidForAuctionService, AddBidForAuctionService>();
+            services.AddScoped<IBidCustomerQueryServise, BidCustomerQueryServise>();
+            services.AddScoped<ICartQueryService, CartQueryService>();
+            services.AddScoped<ICartCommandService, CartCommandService>();
+
+
+
             return services;
         }
         public static IServiceCollection AddScopeMongoDbDocuments(this IServiceCollection services,
@@ -120,7 +143,6 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<ISaveVisitorInfoService, SaveVisitorInfoService>();
             services.AddTransient<IGetToDayReportService, GetToDayReportService>();
             services.AddTransient(typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
-            //services.AddScoped<SaveVisitorFilter>();
             return services;
         }
     }

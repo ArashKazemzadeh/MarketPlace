@@ -1,20 +1,16 @@
 ﻿using ConsoleApp1.Models;
 using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Persistence.Contexts.SqlServer;
 
 namespace Persistence.Repositories.Orders
 {
     public class ProductsCartRepository : IProductsCartRepository
     {
-        private readonly DbContext _context;
+        private readonly DatabaseContext _context;
         private readonly DbSet<ProductsCart> _dbSet;
 
-        public ProductsCartRepository(DbContext context)
+        public ProductsCartRepository(DatabaseContext context)
         {
             _context = context;
             _dbSet = _context.Set<ProductsCart>();

@@ -1,17 +1,11 @@
-﻿using Domin.IRepositories.IseparationRepository;
+﻿using Application.IServices.AutoServices;
+using Domin.IRepositories.IseparationRepository;
 namespace Application.Services.AutoServices;
 
-
-
-
-public interface IProcessCompletedAuctionsAndAddToWinnerCart
-{
-    Task Execute();
-}
-public class ProcessCompletedAuctions : IProcessCompletedAuctionsAndAddToWinnerCart
+public class ProcessCompletedAuctionsAndAddToWinnerCart : IProcessCompletedAuctionsAndAddToWinnerCart
 {
     private readonly IAutomaticTasksOfTheApplicationRepository _automaticTasksOfTheApplicationRepository;
-    public ProcessCompletedAuctions(IAutomaticTasksOfTheApplicationRepository automaticTasksOfTheApplicationRepository)
+    public ProcessCompletedAuctionsAndAddToWinnerCart(IAutomaticTasksOfTheApplicationRepository automaticTasksOfTheApplicationRepository)
     {
         _automaticTasksOfTheApplicationRepository = automaticTasksOfTheApplicationRepository;
     }

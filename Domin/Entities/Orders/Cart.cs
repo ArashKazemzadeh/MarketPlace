@@ -10,7 +10,7 @@ public class Cart
     public int? TotalPrices { get; set; }
 
     public int? CustomerId { get; set; }
-
+    public bool IsRegistrationFinalized { get; set; } = false;
     public virtual Customer? Customer { get; set; }
     public int? SellerId { get; set; }
 
@@ -20,3 +20,4 @@ public class Cart
 
     public virtual ICollection<ProductsCart> ProductsCarts { get; set; } = new List<ProductsCart>();
 }
+
