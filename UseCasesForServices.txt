@@ -11,8 +11,8 @@ GetBoothWithSellerId*+
 GetSellersByCategoryId*+
 (CD)ProductToCart*
 AddBidForAuction*
-GetAuctions*
-GetAuctionById*
+GetAuctions*+
+GetAuctionById*+
 AddCommentForProduct*
 GetInvoices*
 UpdateCustomer*

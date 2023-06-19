@@ -5,6 +5,8 @@ namespace Domin.IRepositories.IseparationRepository;
 
 public interface IAuctionRepository
 {
+    Task<List<Auction>> GetCompletedsAsync();
+    Task UpdateWithBidAsync(Auction auction, BidRepDto bidDto);
     Task<Auction> GetByIdAsync(int id);
     Task<List<AuctionProductDto>> GetAllAsync();
     Task AddAsync(Auction auction);

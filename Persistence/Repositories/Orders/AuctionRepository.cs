@@ -1,4 +1,5 @@
-﻿using ConsoleApp1.Models;
+﻿using Castle.Core.Resource;
+using ConsoleApp1.Models;
 using Domin.IRepositories.Dtos;
 using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,15 @@ namespace Persistence.Repositories.Orders
             _context = context;
             _dbSet = _context.Set<Auction>();
         }
+
+        public async Task<List<Auction>> GetCompletedsAsync()
+        {
+            var completedAuctions = _dbSet
+                .Where(a => a.EndDeadTime <= DateTime.Now)
+                .ToList();
+            return completedAuctions;
+        }
+
         public async Task<Auction> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
@@ -26,8 +36,9 @@ namespace Persistence.Repositories.Orders
                 ProductId = a.Product.Id,
                 ProductName = a.Product.Name,
                 BasePrice = a.Product.BasePrice,
-             HighestPrice = a.Bids.Max(b => b.Price).GetValueOrDefault(),
-             StartDeadTime = a.StartDeadTime,
+             //HighestPrice = a.Bids.Max(b => b.Price).GetValueOrDefault(),
+                HighestPrice = a.HighestPrice,
+                StartDeadTime = a.StartDeadTime,
                 EndDeadTime = a.EndDeadTime,
                 ImagesUrls = a.Product.Images.Select(i=> i.Url).ToList(),
                 Availability = a.Product.Availability,
@@ -46,6 +57,19 @@ namespace Persistence.Repositories.Orders
             await _context.SaveChangesAsync();
         }
 
+        public async Task UpdateWithBidAsync(Auction auction,BidRepDto bidDto)
+        {
+            var bid = new Bid
+            {
+                Price = bidDto.Price,
+                RegisterDate = bidDto.RegisterDate,
+                AuctionId = bidDto.AuctionId,
+                Customer = bidDto.Customer
+            };
+            auction.Bids.Add(bid);
+            _context.Entry(auction).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
         public async Task DeleteAsync(Auction auction)
         {
             _dbSet.Remove(auction);

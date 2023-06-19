@@ -9,7 +9,7 @@ namespace Infrastructure.IdentityConfigs
 {
     public static class IdentityConfig
     {
-        public static IServiceCollection AddIdentityService(this IServiceCollection services,
+        public static IServiceCollection AddIdentityDbContextService(this IServiceCollection services,
             IConfiguration configuration)
         {
             services.AddDbContext<DatabaseContext>(option =>

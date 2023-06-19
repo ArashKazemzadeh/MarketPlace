@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domin.IRepositories.Dtos;
+using Castle.Core.Resource;
+using ConsoleApp.Models;
 
 namespace Persistence.Repositories.Orders
 {
@@ -30,8 +33,16 @@ namespace Persistence.Repositories.Orders
             return await _dbSet.ToListAsync();
         }
 
-        public async Task AddAsync(Bid bid)
+        public async Task AddAsync(BidRepDto dto)
         {
+            var bid = new Bid
+            {
+                Price = dto.Price,
+                RegisterDate = dto.RegisterDate,
+                AuctionId = dto.AuctionId,
+                Customer = dto.Customer,
+                Auction = dto.Auction,
+            };
             await _dbSet.AddAsync(bid);
             await _context.SaveChangesAsync();
         }
