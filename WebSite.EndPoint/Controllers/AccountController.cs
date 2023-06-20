@@ -5,6 +5,7 @@ using Domin.IRepositories.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using WebSite.EndPoint.Areas.Seller.Models;
 using WebSite.EndPoint.Models.ViewModels.Users;
+using WebSite.EndPoint.Utilities.AppSettings.Services;
 using WebSite.EndPoint.Utilities.Filters;
 
 namespace WebSite.EndPoint.Controllers
@@ -13,17 +14,19 @@ namespace WebSite.EndPoint.Controllers
     [ServiceFilter(typeof(SaveVisitorFilter))]
     public class AccountController : Controller
     {
+        private readonly IWelcomeMessageService _welcomeMessageService;
         private readonly IAccountService _accountService;
         private readonly IAddUserIdToCustomerForRegisterService _addUserIdToCustomerForRegisterService;
         private readonly IAddSellerService _addSellerService;
         public AccountController(IAccountService accountService,
               IAddUserIdToCustomerForRegisterService addUserIdToCustomerForRegisterService,
-              IAddSellerService addSellerService)
+              IAddSellerService addSellerService, IWelcomeMessageService welcomeMessageService)
         {
 
             _accountService = accountService;
             _addUserIdToCustomerForRegisterService = addUserIdToCustomerForRegisterService;
             _addSellerService = addSellerService;
+            _welcomeMessageService = welcomeMessageService;
         }
         public async Task<IActionResult>  RegisterSeller()
         {
@@ -101,12 +104,15 @@ namespace WebSite.EndPoint.Controllers
         }
         public IActionResult Profile()
         {
+            var welcomeMessage = _welcomeMessageService.GetWelcomeMessage();
+            ViewBag.Message = welcomeMessage;
             return View();
         }
       
         
         public async Task<IActionResult> Login(string returnUrl = "/")
         {
+           
             return View(new LoginViewModel
             {
                 ReturnUrl = returnUrl,

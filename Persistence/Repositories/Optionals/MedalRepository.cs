@@ -2,6 +2,7 @@
 using Domin.Enums;
 using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
+using Persistence.Contexts.SqlServer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,10 @@ namespace Persistence.Repositories.Optionals
 {
     public class MedalRepository : IMedalRepository
     {
-        private readonly DbContext _context;
+        private readonly DatabaseContext _context;
         private readonly DbSet<Medal> _dbSet;
 
-        public MedalRepository(DbContext context)
+        public MedalRepository(DatabaseContext context)
         {
             _context = context;
             _dbSet = _context.Set<Medal>();

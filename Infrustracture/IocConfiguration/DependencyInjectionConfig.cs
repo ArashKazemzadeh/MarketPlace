@@ -129,6 +129,7 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<IBidCustomerQueryServise, BidCustomerQueryServise>();
             services.AddScoped<ICartQueryService, CartQueryService>();
             services.AddScoped<ICartCommandService, CartCommandService>();
+            services.AddScoped<IMedalRepository, MedalRepository>();
             //-----------------------------------------------hangfire--------------------
             services.AddScoped<IAutomaticTasksOfTheApplicationRepository, AutomaticTasksOfTheApplicationRepository>();
             services.AddScoped<IProcessCompletedAuctionsAndAddToWinnerCart, ProcessCompletedAuctionsAndAddToWinnerCart>();

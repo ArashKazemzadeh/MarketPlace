@@ -1,32 +1,27 @@
 ﻿using Application.IServices.AutoServices;
 using Hangfire;
-using Hangfire.SqlServer;
 using Infrastructure.IdentityConfigs;
+using Infrustracture.appsettingConfiguration;
 using Infrustracture.CookiesConfiguration;
+using Infrustracture.HangFireConfiguration;
 using Infrustracture.IocConfiguration;
 using WebSite.EndPoint.Utilities.Filters;
+
+
 var builder = WebApplication.CreateBuilder(args);
+
+
 builder.Services.AddControllersWithViews();
+
+
 #region Services
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddIdentityDbContextService(builder.Configuration);
 builder.Services.AddCookiesService(builder.Configuration);
-builder.Services.AddHangfire(configuration => configuration
-    .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
-    .UseSimpleAssemblyNameTypeSerializer()
-    .UseRecommendedSerializerSettings()
-    .UseSqlServerStorage(builder.Configuration.GetConnectionString(
-        "sqlserver"), new SqlServerStorageOptions
-    {
-        CommandBatchMaxTimeout = TimeSpan.FromSeconds(5),
-        SlidingInvisibilityTimeout = TimeSpan.FromSeconds(5),
-        QueuePollInterval = TimeSpan.Zero,
-        UseRecommendedIsolationLevel = true,
-        DisableGlobalLocks = true
-    }));
-builder.Services.AddHangfireServer();
+builder.Services.AddAppSettingService(builder.Configuration);
+builder.Services.AddHangFireCustomService(builder.Configuration);
 
-builder.Services.AddHangfireServer();
+
 #endregion
 #region IOC
 builder.Services.AddScoped<SaveVisitorFilter>();

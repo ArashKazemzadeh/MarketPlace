@@ -4,6 +4,7 @@ using ConsoleApp1.Models;
 using Domin.Enums;
 using Domin.IRepositories.Dtos;
 using Domin.IRepositories.IseparationRepository;
+using Microsoft.Extensions.Configuration;
 using ZstdSharp;
 
 namespace Application.Services.AutoServices;
@@ -25,65 +26,49 @@ public class AssignMedalToSeller : IAssignMedalToSeller
     public async Task Execute()
     {
         var sellers = await _sellerRepository.GetAllAsync();
-
+        var medals = await _medalRepository.GetAllAsync();
         foreach (var seller in sellers)
         {
             var saleAmount = seller.SalesAmount;
-            if (seller.Medals.Count == 0 || seller.Medals==null && saleAmount > 1000)
+
+            if (seller.Medals.Count == 0 && saleAmount > 1000)
             {
-
-                var bronzeMedal = await _medalRepository.GetMedalByTypeAsync(MedalEnum.Bronze);
-                if (bronzeMedal != null)
+                var bronzeMedal = medals.FirstOrDefault(m => m.Type == MedalEnum.Bronze);
+                if (bronzeMedal == null)
                 {
-                    seller.Medals.Add(bronzeMedal);
-
-                }
-                else
-                {
-                    await _medalRepository.AddAsync(new Medal { Type = MedalEnum.Bronze });
-                    seller.Medals.Add(bronzeMedal);
-
+                    bronzeMedal = new Medal { Type = MedalEnum.Bronze };
+                    await _medalRepository.AddAsync(bronzeMedal);
+                    medals.Add(bronzeMedal);
                 }
 
+                seller.Medals.Add(bronzeMedal);
                 seller.CommissionPercentage = 0.09;
             }
-
-            if (!seller.Medals.Any(m => m.Type == MedalEnum.Silver) && saleAmount > 5000)
+            else if (!seller.Medals.Any(m => m.Type == MedalEnum.Silver) && saleAmount >= 5000)
             {
-                var silverMedal = await _medalRepository.GetMedalByTypeAsync(MedalEnum.Silver);
-                if (silverMedal != null)
+                var silverMedal = medals.FirstOrDefault(m => m.Type == MedalEnum.Silver);
+                if (silverMedal == null)
                 {
-                    seller.Medals.Add(silverMedal);
-
+                    silverMedal = new Medal { Type = MedalEnum.Silver };
+                    await _medalRepository.AddAsync(silverMedal);
+                    medals.Add(silverMedal);
                 }
-                else
-                {
-                    await _medalRepository.AddAsync(new Medal { Type = MedalEnum.Silver });
-                    seller.Medals.Add(silverMedal);
-
-                }
+                seller.Medals.Add(silverMedal);
                 seller.CommissionPercentage = 0.07;
-
             }
-
-            if (!seller.Medals.Any(m => m.Type == MedalEnum.Gold) && saleAmount > 10000)
+            else if (!seller.Medals.Any(m => m.Type == MedalEnum.Gold) && saleAmount >= 10000)
             {
-                var goldMedal = await _medalRepository.GetMedalByTypeAsync(MedalEnum.Gold);
-                if (goldMedal != null)
+                var goldMedal = medals.FirstOrDefault(m => m.Type == MedalEnum.Gold);
+                if (goldMedal == null)
                 {
-                    seller.Medals.Add(goldMedal);
-
+                    goldMedal = new Medal { Type = MedalEnum.Gold };
+                    await _medalRepository.AddAsync(goldMedal);
+                    medals.Add(goldMedal);
                 }
-                else
-                {
-                    await _medalRepository.AddAsync(new Medal { Type = MedalEnum.Gold });
-                    seller.Medals.Add(goldMedal);
 
-                }
+                seller.Medals.Add(goldMedal);
                 seller.CommissionPercentage = 0.05;
-
             }
-
             var sellerDto = new SellerUpdateRepositoryDto
             {
                 Id = seller.Id,
@@ -95,8 +80,6 @@ public class AssignMedalToSeller : IAssignMedalToSeller
             await _sellerRepository.UpdateAsync(sellerDto);
         }
     }
-
-
 }
 
 
