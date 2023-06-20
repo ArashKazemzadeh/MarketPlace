@@ -10,8 +10,8 @@
     <PackageReference Include="Hangfire.AspNetCore" Version="1.8.2" />
     <PackageReference Include="Hangfire.Core" Version="1.8.2" />
     <PackageReference Include="Hangfire.SqlServer" Version="1.8.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="7.0.7" />
     <PackageReference Include="MongoDB.Bson" Version="2.19.2" />
   </ItemGroup>
 
