@@ -125,15 +125,15 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<IBidRepository, BidRepository>();
             services.AddScoped<ICartRepository, CartRepository>();
             services.AddScoped<IProductsCartRepository, ProductsCartRepository>();
-            services.AddScoped<IAutomaticTasksOfTheApplicationRepository, AutomaticTasksOfTheApplicationRepository>();
-            services.AddScoped<IProcessCompletedAuctionsAndAddToWinnerCart, ProcessCompletedAuctionsAndAddToWinnerCart>();
             services.AddScoped<IAddBidForAuctionService, AddBidForAuctionService>();
             services.AddScoped<IBidCustomerQueryServise, BidCustomerQueryServise>();
             services.AddScoped<ICartQueryService, CartQueryService>();
             services.AddScoped<ICartCommandService, CartCommandService>();
-
-
-
+            //-----------------------------------------------hangfire--------------------
+            services.AddScoped<IAutomaticTasksOfTheApplicationRepository, AutomaticTasksOfTheApplicationRepository>();
+            services.AddScoped<IProcessCompletedAuctionsAndAddToWinnerCart, ProcessCompletedAuctionsAndAddToWinnerCart>();
+            services.AddScoped<IAggregateCommissionsForAdmin, AggregateCommissionsForAdmin>();
+            services.AddScoped<IAssignMedalToSeller, AssignMedalToSeller>();
             return services;
         }
         public static IServiceCollection AddScopeMongoDbDocuments(this IServiceCollection services,

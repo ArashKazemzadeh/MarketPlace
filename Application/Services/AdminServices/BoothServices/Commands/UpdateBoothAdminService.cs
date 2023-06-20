@@ -1,6 +1,5 @@
 ﻿using Application.Dtos;
 using Application.IServices.AdminServices.BoothServices.Commands;
-using AutoMapper;
 using ConsoleApp.Models;
 using Domin.IRepositories.Dtos;
 using Domin.IRepositories.IseparationRepository;
@@ -11,7 +10,7 @@ namespace Application.Services.AdminServices.BoothServices.Commands
     {
         private readonly IBoothRepository _boothRepository;
 
-        public UpdateBoothAdminService(IBoothRepository boothRepository, IMapper mapper)
+        public UpdateBoothAdminService(IBoothRepository boothRepository)
         {
             _boothRepository = boothRepository;
         }

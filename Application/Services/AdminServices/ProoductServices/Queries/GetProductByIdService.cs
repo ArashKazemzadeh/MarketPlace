@@ -1,7 +1,6 @@
 ﻿using Application.Dtos;
 using Application.Dtos.ProductDto;
 using Application.IServices.AdminServices.ProoductServices.Queries;
-using AutoMapper;
 using Domin.IRepositories.IseparationRepository;
 using System.Xml.Linq;
 
@@ -9,11 +8,11 @@ namespace Application.Services.AdminServices.ProoductServices.Queries;
 public class GetProductByIdService : IGetProductByIdService
 {
     private readonly IProductRepository _productRepository;
-    private readonly IMapper _mapper;
-    public GetProductByIdService(IProductRepository productRepository, IMapper mapper)
+  
+    public GetProductByIdService(IProductRepository productRepository)
     {
         _productRepository = productRepository;
-        _mapper = mapper;
+ 
 
     }
     public async Task<GeneralDto<ProductDto>> Execute(int id)

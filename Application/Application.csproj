@@ -22,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="Hangfire.AspNetCore" Version="1.8.2" />
+    <PackageReference Include="Hangfire.Core" Version="1.8.2" />
     <PackageReference Include="Hangfire.SqlServer" Version="1.8.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
@@ -34,6 +34,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\Domin\Domin.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="IServices\AdminServices\MedalServices\Commands\" />
+    <Folder Include="Services\AdminServices\MedalServices\Commands\" />
   </ItemGroup>
 
 </Project>

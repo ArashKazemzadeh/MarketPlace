@@ -1,7 +1,6 @@
 ﻿using Application.Dtos;
 using Application.Dtos.ProductDto;
 using Application.IServices.AdminServices.ProoductServices.Commands;
-using AutoMapper;
 using ConsoleApp1.Models;
 using Domin.IRepositories.IseparationRepository;
 
@@ -10,7 +9,7 @@ namespace Application.Services.AdminServices.ProoductServices.Commands
     public class UpdateProductAdminService : IUpdateProductAdminService
     {
         private readonly IProductRepository _productRepository;
-        public UpdateProductAdminService(IProductRepository productRepository, IMapper mapper)
+        public UpdateProductAdminService(IProductRepository productRepository)
         {
             _productRepository = productRepository;
           

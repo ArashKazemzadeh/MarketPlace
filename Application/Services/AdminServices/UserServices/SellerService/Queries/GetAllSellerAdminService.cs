@@ -1,6 +1,5 @@
 ﻿using Application.Dtos.UserDto;
 using Application.IServices.AdminServices.UserService.Queries;
-using AutoMapper;
 using Domin.IRepositories.IseparationRepository;
 
 namespace Application.Services.AdminServices.UserServices.SellerService.Queries

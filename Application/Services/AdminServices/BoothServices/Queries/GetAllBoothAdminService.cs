@@ -1,5 +1,4 @@
 ﻿using Application.IServices.AdminServices.BoothServices.Queries;
-using AutoMapper;
 using ConsoleApp.Models;
 using Domin.IRepositories.IseparationRepository;
 
@@ -8,7 +7,7 @@ namespace Application.Services.AdminServices.BoothServices.Queries
     public class GetAllBoothAdminService : IGetAllBoothAdminService
     {
         private readonly IBoothRepository _boothRepository;
-        public GetAllBoothAdminService(IBoothRepository boothRepository, IMapper mapper)
+        public GetAllBoothAdminService(IBoothRepository boothRepository)
         {
             _boothRepository = boothRepository;
         }

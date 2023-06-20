@@ -1,6 +1,5 @@
 ﻿using Application.Dtos;
 using Application.IServices.AdminServices.BoothServices.Queries;
-using AutoMapper;
 using ConsoleApp.Models;
 using Domin.IRepositories.IseparationRepository;
 
@@ -9,7 +8,7 @@ namespace Application.Services.AdminServices.BoothServices.Queries
     public class GetBoothByIdService : IGetBoothByIdService
     {
         private readonly IBoothRepository _boothRepository;
-        public GetBoothByIdService(IBoothRepository boothRepository, IMapper mapper)
+        public GetBoothByIdService(IBoothRepository boothRepository)
         {
             _boothRepository = boothRepository;
         }
