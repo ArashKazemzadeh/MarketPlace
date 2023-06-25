@@ -2,6 +2,7 @@
 using Application.IServices.AdminServices.UserService.Commands;
 using Microsoft.AspNetCore.Mvc;
 using WebSite.EndPoint.Areas.Admin.Models;
+using WebSite.EndPoint.Areas.Customer.Models;
 using WebSite.EndPoint.Models.ViewModels.Users;
 
 namespace WebSite.EndPoint.Areas.Customer.Controllers
@@ -14,7 +15,6 @@ namespace WebSite.EndPoint.Areas.Customer.Controllers
         {
             _accountService = accountService;   
         }
-        // GET: HomeController
         public async Task<IActionResult> Detail()
         {
             var userId = await _accountService.GetLoggedInUserId();
@@ -33,10 +33,10 @@ namespace WebSite.EndPoint.Areas.Customer.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateUserPassWord(string currentPassword, string newPassword)
+        public async Task<IActionResult> UpdateUserPassWord(PasswordUpdateVM model)
         {
             var userId = await _accountService.GetLoggedInUserId();
-            var result = await _accountService.UpdatePasswordAsync(userId, currentPassword, newPassword);
+            var result = await _accountService.UpdatePasswordAsync(userId, model.currentPassword, model.newPassword);
             ViewBag.Message = result;
             return View();
         }
@@ -57,7 +57,7 @@ namespace WebSite.EndPoint.Areas.Customer.Controllers
             };
             var update = await _accountService.UpdateUserAsync(dto);
             ViewBag.Message = update;
-            return View();
+            return RedirectToAction("Detail");
         }
     }
 }

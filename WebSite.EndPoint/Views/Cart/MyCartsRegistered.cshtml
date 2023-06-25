@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebSite.EndPoint.Models.ViewModels.CartGetVM>
+
+@{
+    ViewData["Title"] = "MyCartsRegistered";
+    Layout = "/Areas/Customer/Views/Shared/_Layout.cshtml";
+}
+
+<div class="alert alert-secondary m-5 text-center"> فاکتورهای نهایی شده</div>
+
+
+
+<div class="row">
+
+    <div class="table-responsive m-5 col-10">
+        <table class="table table-bordered table-hover table-condensed mb-4">
+            <thead>
+                <tr>
+                    <th>
+                     مجموع مبلغ
+                    </th>
+                    <th>
+                        نام غرفه ی فروشنده
+                    </th>
+
+                    <th>
+                        عملیات
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalPrices)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BoothName)
+                        </td>
+
+                        <td>
+
+                            @Html.ActionLink("مشاهده ی جزییات", "Details", new { /* id=item.PrimaryKey */ })
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

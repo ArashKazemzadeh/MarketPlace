@@ -25,7 +25,7 @@ namespace WebSite.EndPoint.Models.ViewModels.Users
         [Compare(nameof(Password), ErrorMessage = "پسورد و تکرار آن باید برابر باشد")]
         [Display(Name = "تکرار پسورد")]
         public string RePassword { get; set; }
-        [Required(ErrorMessage = "تکرار پسورد را وارد نمایید")]
+        [Required(ErrorMessage = "شماره ی همراه را وارد نمایید")]
         [Display(Name = "شماره ی همراه")]
         public string PhoneNumber { get; set; }
     }

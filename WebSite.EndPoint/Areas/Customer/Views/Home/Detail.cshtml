@@ -1,7 +1,17 @@
-﻿
+﻿@model WebSite.EndPoint.Areas.Admin.Models.UserVM
 @{
     ViewData["Title"] = "Detail";
 }
+<input type="hidden"  value=" @Model.Id" />
+<div class="card text-center m-5 p-5 " style="width: 18rem;">
+    <div class="card-header">
+       مشخصات کاربری 
+    </div>
+    <ul class="list-group list-group-flush ">
 
-<h1>Detail</h1>
-
+     
+        <li class="list-group-item">نام و نام خانوادگی: @Model.FullName</li>
+        <li class="list-group-item">پست الکترونیکی: @Model.Email</li>
+        <li class="list-group-item">نام کاربری: @Model.UserName</li>
+    </ul>
+</div>

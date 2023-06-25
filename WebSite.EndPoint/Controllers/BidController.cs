@@ -2,7 +2,6 @@
 using Application.IServices.CustomerServices.BidServices.Commands;
 using Application.IServices.CustomerServices.BidServices.Queries;
 using Microsoft.AspNetCore.Mvc;
-using WebSite.EndPoint.Models.ViewModels;
 using WebSite.EndPoint.Models.ViewModels.Bids;
 
 namespace WebSite.EndPoint.Controllers
