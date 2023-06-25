@@ -28,16 +28,7 @@ namespace Application.Services.AdminServices.UserServices.AllUserService
             var userId = await _userManager.GetUserIdAsync(user);
             return userId;
         }
-        //public async Task<string> GetLoggedInUserId()
-        //{
-        //    var userId = "";
-        //    if (_httpContextAccessor.HttpContext != null && _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
-        //    {
-        //        var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
-        //        userId = await _userManager.GetUserIdAsync(user);
-        //    }
-        //    return userId;
-        //}
+       
 
         public async Task<int> FindUserIdByEmailAsync(string email)
         {
@@ -81,7 +72,27 @@ namespace Application.Services.AdminServices.UserServices.AllUserService
                 return "ویرایش با شکست مواجه شد";
             }
         }
-   
+
+        public async Task<string> UpdatePasswordAsync(string userId , string currentPassword, string newPassword)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                return "کاربر یافت نشد";
+            }
+
+            var passwordCorrect = await _userManager.CheckPasswordAsync(user, currentPassword);
+            if (!passwordCorrect)
+                return "رمز عبور فعلی نادرست است.";
+            
+
+            // تغییر رمز عبور کاربر
+            var result = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+            if (result.Succeeded)
+                return "گذرواژه تغییر کرد";
+            return "تغییر گذرواژه با خطا مواجه شد.";
+        }
 
         public async Task<string> DeleteUserAsync(string email)
         {

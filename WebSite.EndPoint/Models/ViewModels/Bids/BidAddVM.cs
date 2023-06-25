@@ -1,4 +1,4 @@
-﻿namespace WebSite.EndPoint.Models.ViewModels;
+﻿namespace WebSite.EndPoint.Models.ViewModels.Bids;
 
 public class BidAddVM
 {

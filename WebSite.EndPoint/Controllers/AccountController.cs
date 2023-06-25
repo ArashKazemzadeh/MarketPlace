@@ -3,6 +3,7 @@ using Application.IServices.AdminServices.UserService.Commands;
 using Application.IServices.SellerServices.ProfileServices.Commands;
 using Domin.IRepositories.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using WebSite.EndPoint.Areas.Admin.Models;
 using WebSite.EndPoint.Areas.Seller.Models;
 using WebSite.EndPoint.Models.ViewModels.Users;
 using WebSite.EndPoint.Utilities.AppSettings.Services;
@@ -10,7 +11,7 @@ using WebSite.EndPoint.Utilities.Filters;
 
 namespace WebSite.EndPoint.Controllers
 {
-    
+
     [ServiceFilter(typeof(SaveVisitorFilter))]
     public class AccountController : Controller
     {
@@ -28,6 +29,7 @@ namespace WebSite.EndPoint.Controllers
             _addSellerService = addSellerService;
             _welcomeMessageService = welcomeMessageService;
         }
+        
         public async Task<IActionResult>  RegisterSeller()
         {
             return View();
@@ -104,6 +106,7 @@ namespace WebSite.EndPoint.Controllers
         }
         public IActionResult Profile()
         {
+            //appsetting
             var welcomeMessage = _welcomeMessageService.GetWelcomeMessage();
             ViewBag.Message = welcomeMessage;
             return View();
@@ -144,12 +147,12 @@ namespace WebSite.EndPoint.Controllers
 
             return View(model);
         }
+       
         public async Task<IActionResult> LogOut()
         {
             await _accountService.SignOutUserAsync();
             return RedirectToAction("Index", "Home");
         }
-    }
 
-    
+    }
 }

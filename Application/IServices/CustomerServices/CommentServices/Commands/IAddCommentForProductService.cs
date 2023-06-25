@@ -1,12 +1,14 @@
 ﻿using Application.Dtos;
-using ConsoleApp.Models;
+using Domin.IRepositories.Dtos;
 
 
 namespace Application.IServices.CustomerServices.CommentServices.Commands
 {
     public interface IAddCommentForProductService
     {
-        GeneralDto<CommentDto> Execute(CommentDto commentDto);
+        Task<string> Execute(CommentAddDto dto);
 
     }
+
+
 }

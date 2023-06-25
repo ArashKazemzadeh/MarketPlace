@@ -36,12 +36,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\Infrustracture\Infrustracture.csproj" />
     <ProjectReference Include="..\Persistence\Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Customer\Models\" />
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 

@@ -6,6 +6,7 @@ namespace Application.IServices.AdminServices.UserService.Commands;
 
 public interface IAccountService
 {
+    Task<string> UpdatePasswordAsync(string userId, string currentPassword, string newPassword);
     Task AssignUserToRoleByUserId(string userId, string roleName);
     Task<string> GetLoggedInUserId();
     Task<string> UpdateUserAsync(UserDto userDto);

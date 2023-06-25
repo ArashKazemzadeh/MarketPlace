@@ -1,5 +1,5 @@
 ﻿using ConsoleApp1.Models;
-using Domin.Entities.Users;
+using Domin.IRepositories.Dtos;
 using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contexts.SqlServer;
@@ -36,10 +36,19 @@ namespace Persistence.Repositories.Optionals
            
             return comments;
         }
-        public async Task AddAsync(Comment comment)
+        public async Task<int> AddAsync(CommentAddDto dto)
         {
+            var comment = new Comment
+            {
+                Title = dto.title,
+                Description = dto.describtion,
+                CustomertId =Convert.ToInt32(dto.userId) ,
+                ProductId = dto.productId,
+                RegisterDate = DateTime.Now,
+            };
             await _dbSet.AddAsync(comment);
-            await _context.SaveChangesAsync();
+       var result=     await _context.SaveChangesAsync();
+       return result;
         }
 
         public async Task UpdateAsync(Comment comment)
