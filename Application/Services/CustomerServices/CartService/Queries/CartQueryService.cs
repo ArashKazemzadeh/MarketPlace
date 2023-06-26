@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.IServices.CustomerServices.CartService.Queries;
 using Domin.IRepositories.Dtos.Cart;
+using Domin.IRepositories.Dtos;
 
 namespace Application.Services.CustomerServices.CartService.Queries
 {
@@ -37,6 +38,12 @@ namespace Application.Services.CustomerServices.CartService.Queries
                 return new List<CartGetDto>();
             }
 
+            return result;
+        }
+
+        public async Task<List<ProductDto>> GetProductByCartId(int cartId)
+        {
+            var result = await _cartRepository.GetProductByCartId(cartId);
             return result;
         }
     }

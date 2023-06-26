@@ -1,26 +1,24 @@
 ﻿@model IEnumerable<WebSite.EndPoint.Models.ViewModels.CartGetVM>
 
 @{
-    ViewData["Title"] = "MyCartsRegistered";
+    ViewData["Title"] = "MyCartsUnRegistered";
     Layout = "/Areas/Customer/Views/Shared/_Layout.cshtml";
 }
-
-<div class="alert alert-secondary m-5 text-center"> فاکتورهای نهایی شده</div>
-
-
-
+<div class="alert alert-secondary m-5 text-center"> سبد خریدهای پرداخت نشده</div>
 <div class="row">
 
     <div class="table-responsive m-5 col-10">
         <table class="table table-bordered table-hover table-condensed mb-4">
             <thead>
                 <tr>
-
+                    <th>
+                        مجموع مبلغ
+                    </th>
                     <th>
                         نام غرفه ی فروشنده
                     </th>
                     <th>
-                        کالاها
+                        نام محصولات
                     </th>
                     <th>
                         عملیات
@@ -31,7 +29,9 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalPrices)
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.BoothName)
                         </td>
@@ -40,10 +40,10 @@
                             {
                                 @Html.DisplayFor(modelItem => product) <i>,</i>
                             }
+
                         </td>
                         <td>
-                            @Html.ActionLink("جزییات محصولات", "GetProductsInCart", new {  cartId=item.Id })
-
+                            @Html.ActionLink("پرداخت", "DoRegisteringCart", new {  cartId=item.Id  })
                         </td>
                     </tr>
                 }

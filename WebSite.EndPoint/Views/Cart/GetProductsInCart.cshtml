@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Domin.IRepositories.Dtos.ProductDto>
+
+@{
+    ViewData["Title"] = "GetProductsInCart";
+}
+
+<
+
+
+<div class="row">
+    <div class="table-responsive m-5 col-10">
+        <table class="table table-bordered table-hover table-condensed mb-4">
+            <thead>
+                <tr>
+
+                    <th>
+                        نام کالا
+                    </th>
+                    <th>
+                        قیمت کل
+                    </th>
+                    <th>
+                        توضیحات کالا
+                    </th>
+
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BasePrice)
+                    </td>
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                       
+                    <td>
+                        @Html.ActionLink("ثبت دیدگاه", "AddCommentForCart", new {  productId=item.Id  })
+
+                    </td>
+                </tr>
+               
+            }
+                @{
+                    int? a = 0;
+                }
+            @foreach (var item in Model)
+            {
+                a += item.BasePrice;
+            }
+            <tr>
+                <th scope="row">جمع کل</th>
+                <td colspan="2" class="table-active text-right">@a</td>
+                <td>دلار</td>
+            </tr>
+            </tbody>
+           
+        </table>
+    </div>
+</div>

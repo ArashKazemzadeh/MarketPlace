@@ -7,6 +7,7 @@ public class BidGetVm
     public DateTime? RegisterDate { get; set; }
     public bool? IsAccepted { get; set; }
     public int? AuctionId { get; set; }
+    public string ProductName { get; set; }
     public DateTime? EndDateAuction { get; set; }
     public DateTime? StartDateAuction { get; set; }
 }

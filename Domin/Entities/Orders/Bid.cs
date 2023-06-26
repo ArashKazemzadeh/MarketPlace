@@ -14,6 +14,7 @@ public class Bid
     public bool? IsAccepted { get; set; }
 
     public int? AuctionId { get; set; }
+    public int? CustomerId { get; set; }
 
     public virtual Auction? Auction { get; set; }
 

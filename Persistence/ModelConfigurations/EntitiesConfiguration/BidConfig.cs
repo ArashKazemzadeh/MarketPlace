@@ -9,12 +9,10 @@ namespace Persistence.ModelConfigurations.EntitiesConfiguration
         public void Configure(EntityTypeBuilder<Bid> entity)
         {
             entity.HasOne(d => d.Auction).WithMany(p => p.Bids)
-                .HasForeignKey(d => d.AuctionId)
-                .HasConstraintName("FK_Bids_Auction");
+                .HasForeignKey(d => d.AuctionId);
 
             entity.HasOne(d => d.Customer).WithMany(p => p.Bids)
-                .HasForeignKey(d => d.AuctionId)
-                .HasConstraintName("FK_Bids_Buyer1");
+                .HasForeignKey(d => d.CustomerId);
         }
     }
 }

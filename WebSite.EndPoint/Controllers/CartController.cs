@@ -24,8 +24,19 @@ namespace WebSite.EndPoint.Controllers
             _cartCommandService = cartCommandService;
             _addCommentForProductService = addCommentForProductService;
         }
-        public async Task<IActionResult> AddCommentForCart()
+
+        public async Task<IActionResult> GetProductsInCart(int cartId)
         {
+            var products = await _cartQueryService.GetProductByCartId(cartId);
+            return View(products);
+        }
+
+        public async Task<IActionResult> AddCommentForCart(int ProductId)
+        {
+            var model = new CommentAddVm
+            {
+                productId = ProductId
+            };
             return View();
         }
         [HttpPost]
@@ -46,7 +57,7 @@ namespace WebSite.EndPoint.Controllers
             var result = await _addCommentForProductService.Execute(dto);
             if (result== "دیدگاه با موفقیت ثبت شد")
             {
-                return RedirectToAction("MyCartsUnRegistered");
+                return RedirectToAction("MyCartsRegistered");
             }
 
             ViewBag.Message = result;
@@ -104,13 +115,16 @@ namespace WebSite.EndPoint.Controllers
             TempData["errorDoRegisteringCart"] = "سبد خرید یافت نشد";
             return RedirectToAction("MyCartsUnRegistered");
         }
-
-        public async Task AddToCartBasePrice(int customerId,int productId,int boothId)
+        //افزودن به سبد خرید
+        public async Task<IActionResult> AddToCartBasePrice(int productId,int boothId)  
         {
-         var result=   await _cartCommandService.AddProductToCart(customerId, productId, boothId);
-         if (true)
-             ViewBag.response = "کالا با موفقیت به سبد افزوده شد";
-             ViewBag.response = "افزودن کالا به سبد خرید با مشکل مواجه شد";
+            var userId = await _accountService.GetLoggedInUserId();
+            var result=   await _cartCommandService.AddProductToCart(Convert.ToInt32(userId), productId, boothId);
+            if (true)
+            {
+                return RedirectToAction("MyCartsUnRegistered");
+            }
+         
         }
     }
 }

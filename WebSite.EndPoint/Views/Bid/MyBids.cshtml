@@ -1,0 +1,77 @@
+﻿@model List<WebSite.EndPoint.Models.ViewModels.Bids.BidGetVm>
+@{
+    ViewData["Title"] = "MyBids";
+    Layout = "/Areas/Customer/Views/Shared/_Layout.cshtml";
+}
+
+<div class="alert alert-secondary m-5 text-center"> پیشنهاد های ثبت شده</div>
+
+
+
+<div class="row">
+
+    <div class="table-responsive m-5 col-10">
+        <table class="table table-bordered table-hover table-condensed mb-4">
+            <thead>
+            <tr>
+                <th>
+                    نام کالا
+                </th>
+                <th>
+                    پذیرفته شده/نشده
+                </th>
+                <th>
+                    مبلغ پبسنهادی
+                </th>
+                <th>
+                    تاریخ ثبت
+                </th>
+                <th>
+                    تاریخ آغاز
+                </th>
+                <th>
+                    تاریخ تایخ پایان
+                </th>
+
+                <th>
+                    عملیات
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsAccepted)
+                        </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegisterDate)
+                    </td>
+                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDateAuction)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDateAuction)
+                    </td>
+
+                    <td>
+                        @* @Html.ActionLink("مشاهده ی جزییات", "Details", new { /* id=item.PrimaryKey */ })*@
+
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+

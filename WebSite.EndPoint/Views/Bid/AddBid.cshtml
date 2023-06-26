@@ -1,0 +1,29 @@
+﻿@model WebSite.EndPoint.Models.ViewModels.Bids.BidAddVM
+
+@{
+    ViewData["Title"] = "AddBid";
+    Layout = "/Areas/Customer/Views/Shared/_Layout.cshtml";
+}
+@if (ViewBag.Error!=null)
+{
+    <div class="alert alert-danger">
+        <p>@ViewBag.Error</p>
+    </div>
+}
+<div class="row m-5 p-5 form-group d-flex justify-content-center border-3">
+    <div class="col-md-4">
+        <form asp-action="AddBid" asp-controller="Bid" asp-area="" method="post">
+            <input asp-for="AuctionId" type="hidden" class="form-control" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input  asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ثبت مزایده جدید" class="btn btn-primary btn-block" />
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -42,11 +42,10 @@ namespace Persistence.Repositories.Users
             _context.Entry(customer).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
-        public async Task UpdateWithBidAsync(Customer customer,BidRepDto bidDto)
+        public async Task<int> UpdateWithBidAsync(Customer customer,BidRepDto bidDto)
         {
             var bid = new Bid
             {
-
                 Price = bidDto.Price,
                 RegisterDate = bidDto.RegisterDate,
                 AuctionId = bidDto.AuctionId,
@@ -54,7 +53,8 @@ namespace Persistence.Repositories.Users
             };
             customer.Bids.Add(bid);
             _context.Entry(customer).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+          var result=  await _context.SaveChangesAsync();
+          return result;
         }
         public async Task DeleteAsync(Customer customer)
         {

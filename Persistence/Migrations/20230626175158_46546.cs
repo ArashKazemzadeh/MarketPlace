@@ -6,112 +6,153 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class kfjhik : Migration
+    public partial class _46546 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Bids_Customer_AuctionId",
+                table: "Bids");
+
+            migrationBuilder.AddColumn<int>(
+                name: "CustomerId",
+                table: "Bids",
+                type: "int",
+                nullable: true);
+
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "ConcurrencyStamp",
-                value: "bde1a898-d44e-48e6-9861-84105e48e9cb");
+                value: "88da7713-3870-43ee-8fca-600eb61580d0");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "ConcurrencyStamp",
-                value: "d697e195-d007-4d49-b0e5-e8f3aa6aa69e");
+                value: "1687d0fe-d026-438b-b4ab-c6bf1cd17033");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "ConcurrencyStamp",
-                value: "e29bf189-8abc-4116-a852-21f91bc3dcc6");
+                value: "24b5d1ee-0720-41f6-996c-ce341aaba102");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 4,
                 column: "ConcurrencyStamp",
-                value: "14bb5193-d15a-49bb-8562-82fda4909b35");
+                value: "b5972437-a355-4ea2-81c4-1fca320a6ebb");
 
             migrationBuilder.UpdateData(
                 table: "Comments",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "RegisterDate",
-                value: new DateTime(2023, 6, 20, 13, 26, 55, 228, DateTimeKind.Local).AddTicks(2878));
+                value: new DateTime(2023, 6, 26, 21, 21, 57, 870, DateTimeKind.Local).AddTicks(7758));
 
             migrationBuilder.UpdateData(
                 table: "Comments",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "RegisterDate",
-                value: new DateTime(2023, 6, 20, 13, 26, 55, 228, DateTimeKind.Local).AddTicks(2899));
+                value: new DateTime(2023, 6, 26, 21, 21, 57, 870, DateTimeKind.Local).AddTicks(7782));
 
             migrationBuilder.UpdateData(
                 table: "Comments",
                 keyColumn: "Id",
                 keyValue: 20,
                 column: "RegisterDate",
-                value: new DateTime(2023, 6, 20, 13, 26, 55, 228, DateTimeKind.Local).AddTicks(2901));
+                value: new DateTime(2023, 6, 26, 21, 21, 57, 870, DateTimeKind.Local).AddTicks(7784));
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bids_CustomerId",
+                table: "Bids",
+                column: "CustomerId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Bids_Customer_CustomerId",
+                table: "Bids",
+                column: "CustomerId",
+                principalTable: "Customer",
+                principalColumn: "Id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Bids_Customer_CustomerId",
+                table: "Bids");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Bids_CustomerId",
+                table: "Bids");
+
+            migrationBuilder.DropColumn(
+                name: "CustomerId",
+                table: "Bids");
+
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "ConcurrencyStamp",
-                value: "2e6c9bc2-3157-49f9-8135-7fd95ffa9674");
+                value: "29cbc23e-ce51-477f-a3fa-cedadfff67cf");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "ConcurrencyStamp",
-                value: "3d79e041-1f2a-4946-872a-093046061085");
+                value: "21186276-e815-441f-b2ed-e7d330744924");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "ConcurrencyStamp",
-                value: "a2ceb26f-63ff-46a9-900f-2ab5c0b7fbd0");
+                value: "8c8961cc-4287-4111-b183-03585136165a");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 4,
                 column: "ConcurrencyStamp",
-                value: "0116249d-9993-4fe7-8ea5-3a6690e92cb8");
+                value: "ff91f37f-5a1e-449f-8ec1-a1c9e2160f35");
 
             migrationBuilder.UpdateData(
                 table: "Comments",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "RegisterDate",
-                value: new DateTime(2023, 6, 19, 23, 11, 36, 830, DateTimeKind.Local).AddTicks(8595));
+                value: new DateTime(2023, 6, 26, 17, 38, 33, 17, DateTimeKind.Local).AddTicks(1142));
 
             migrationBuilder.UpdateData(
                 table: "Comments",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "RegisterDate",
-                value: new DateTime(2023, 6, 19, 23, 11, 36, 830, DateTimeKind.Local).AddTicks(8617));
+                value: new DateTime(2023, 6, 26, 17, 38, 33, 17, DateTimeKind.Local).AddTicks(1160));
 
             migrationBuilder.UpdateData(
                 table: "Comments",
                 keyColumn: "Id",
                 keyValue: 20,
                 column: "RegisterDate",
-                value: new DateTime(2023, 6, 19, 23, 11, 36, 830, DateTimeKind.Local).AddTicks(8619));
+                value: new DateTime(2023, 6, 26, 17, 38, 33, 17, DateTimeKind.Local).AddTicks(1162));
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Bids_Customer_AuctionId",
+                table: "Bids",
+                column: "AuctionId",
+                principalTable: "Customer",
+                principalColumn: "Id");
         }
     }
 }

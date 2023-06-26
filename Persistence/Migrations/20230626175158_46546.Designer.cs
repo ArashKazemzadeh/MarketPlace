@@ -12,15 +12,15 @@ using Persistence.Contexts.SqlServer;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230619101538_CARTBOOLFINALIST")]
-    partial class CARTBOOLFINALIST
+    [Migration("20230626175158_46546")]
+    partial class _46546
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.5")
+                .HasAnnotation("ProductVersion", "7.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -109,6 +109,9 @@ namespace Persistence.Migrations
                     b.Property<int?>("AuctionId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -130,6 +133,8 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AuctionId");
+
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Bids");
                 });
@@ -329,7 +334,7 @@ namespace Persistence.Migrations
                             CustomertId = 1,
                             Description = "این محصول عالی است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 19, 13, 45, 37, 896, DateTimeKind.Local).AddTicks(2825),
+                            RegisterDate = new DateTime(2023, 6, 26, 21, 21, 57, 870, DateTimeKind.Local).AddTicks(7758),
                             Title = "عالی"
                         },
                         new
@@ -338,7 +343,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول بد است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 19, 13, 45, 37, 896, DateTimeKind.Local).AddTicks(2844),
+                            RegisterDate = new DateTime(2023, 6, 26, 21, 21, 57, 870, DateTimeKind.Local).AddTicks(7782),
                             Title = "بد"
                         },
                         new
@@ -347,7 +352,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول خوب است.",
                             ProductId = 2,
-                            RegisterDate = new DateTime(2023, 6, 19, 13, 45, 37, 896, DateTimeKind.Local).AddTicks(2846),
+                            RegisterDate = new DateTime(2023, 6, 26, 21, 21, 57, 870, DateTimeKind.Local).AddTicks(7784),
                             Title = "خوب"
                         });
                 });
@@ -448,51 +453,6 @@ namespace Persistence.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Images");
-                });
-
-            modelBuilder.Entity("ConsoleApp1.Models.Invoice", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CartId")
-                        .HasColumnType("int")
-                        .HasColumnName("CartID");
-
-                    b.Property<DateTime?>("DeliveryDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("InsertTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("OrderDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("PaymentInfo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PaymentStatus")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime?>("RemoveTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("TotalPrices")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id")
-                        .HasName("PK__Invoice__D796AAD5A0B9A395");
-
-                    b.HasIndex("CartId");
-
-                    b.ToTable("Invoice", (string)null);
                 });
 
             modelBuilder.Entity("ConsoleApp1.Models.Medal", b =>
@@ -625,6 +585,9 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("OrderDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("Quantity")
@@ -804,7 +767,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cf70c60e-3de7-4749-b6dd-d4862d409dc1",
+                            ConcurrencyStamp = "88da7713-3870-43ee-8fca-600eb61580d0",
                             Email = "userone@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر یک",
@@ -817,7 +780,7 @@ namespace Persistence.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "74c2e1ce-687a-4b6f-8ad7-813bacdd9745",
+                            ConcurrencyStamp = "b5972437-a355-4ea2-81c4-1fca320a6ebb",
                             Email = "userofour@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر چهار",
@@ -830,7 +793,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c01c1083-3a7f-464f-ad54-f1efa9a18a92",
+                            ConcurrencyStamp = "1687d0fe-d026-438b-b4ab-c6bf1cd17033",
                             Email = "userotow@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر دو",
@@ -843,7 +806,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "739362e9-efba-4e8b-becc-0d909a97c3c0",
+                            ConcurrencyStamp = "24b5d1ee-0720-41f6-996c-ce341aaba102",
                             Email = "userothree@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر سه",
@@ -1070,8 +1033,7 @@ namespace Persistence.Migrations
                     b.HasOne("ConsoleApp1.Models.Product", "Product")
                         .WithOne("Auction")
                         .HasForeignKey("ConsoleApp1.Models.Auction", "ProductId")
-                        .IsRequired()
-                        .HasConstraintName("FK_Auction_Product1");
+                        .IsRequired();
 
                     b.Navigation("Product");
                 });
@@ -1080,13 +1042,11 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("ConsoleApp1.Models.Auction", "Auction")
                         .WithMany("Bids")
-                        .HasForeignKey("AuctionId")
-                        .HasConstraintName("FK_Bids_Auction");
+                        .HasForeignKey("AuctionId");
 
                     b.HasOne("ConsoleApp1.Models.Customer", "Customer")
                         .WithMany("Bids")
-                        .HasForeignKey("AuctionId")
-                        .HasConstraintName("FK_Bids_Buyer1");
+                        .HasForeignKey("CustomerId");
 
                     b.Navigation("Auction");
 
@@ -1154,16 +1114,6 @@ namespace Persistence.Migrations
                         .HasConstraintName("FK_Image_Product");
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("ConsoleApp1.Models.Invoice", b =>
-                {
-                    b.HasOne("ConsoleApp1.Models.Cart", "Cart")
-                        .WithMany("Invoices")
-                        .HasForeignKey("CartId")
-                        .HasConstraintName("FK__Invoice__Shoppin__4E88ABD4");
-
-                    b.Navigation("Cart");
                 });
 
             modelBuilder.Entity("ConsoleApp1.Models.Medal", b =>
@@ -1282,8 +1232,6 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("ConsoleApp1.Models.Cart", b =>
                 {
-                    b.Navigation("Invoices");
-
                     b.Navigation("ProductsCarts");
                 });
 

@@ -19,7 +19,7 @@ namespace Application.Services.CustomerServices.CommentServices.Commands
 
         public async Task<string> Execute(CommentAddDto dto)
         {
-            var customer = await _commentRepository.GetByIdAsync(Convert.ToInt32(dto.userId));
+            var customer = await _customerRepository.GetByIdAsync(Convert.ToInt32(dto.userId));
             var product = await _productRepository.GetByIdAsync(dto.productId);
             if (customer==null)
             {

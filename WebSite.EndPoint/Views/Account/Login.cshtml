@@ -59,7 +59,7 @@
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-element-row">
                                 <label asp-for="Email" class="label-element"></label>
-
+                                <input type="hidden" asp-for="ReturnUrl" />
                                 <div class="form-element-with-icon">
                                     <input asp-for="Email" class="input-element" />
                                     <i class="fad fa-user"></i>
@@ -71,7 +71,7 @@
                                 <label asp-for="Password" class="label-element">
                                     <span class="d-flex justify-content-between">
                                         <span>کلمه عبور</span>
-                                      @*  <a href="#" class="link--with-border-bottom">رمز عبور خود را فراموش کرده‌ام</a>*@
+                               
                                     </span>
                                 </label>
                                 <div class="form-element-with-icon">
@@ -92,11 +92,11 @@
                                     ورود به فروشگاه
                                 </button>
                             </div>
-                            <input type="hidden" asp-for="ReturnUrl" />
+                           
                         </form>
                         <div class="auth-form-footer">
                             <span>کاربر جدید هستید؟</span>
-                            <a href="~/account/register" class="link--with-border-bottom">ثبت نام در فروشگاه</a>
+                            <a asp-controller="account" asp-action="Register" asp-area="" class="link--with-border-bottom">ثبت نام در فروشگاه</a>
                         </div>
                     </div>
                 </div>

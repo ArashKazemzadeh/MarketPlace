@@ -23,7 +23,7 @@
             @if (p.IsActive == true)
             {
                 <div class="card-body">
-                    <a asp-controller="" asp-action="">شرکت در مزایده</a>
+                    <a asp-controller="Bid" asp-action="AddBid" asp-area="" asp-route-auctionId="@p.Id">شرکت در مزایده</a>
                 </div>
             }
             @if (p.IsActive == false)

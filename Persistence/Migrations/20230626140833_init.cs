@@ -290,6 +290,7 @@ namespace Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TotalPrices = table.Column<int>(type: "int", nullable: true),
                     CustomerId = table.Column<int>(type: "int", nullable: true),
+                    IsRegistrationFinalized = table.Column<bool>(type: "bit", nullable: false),
                     SellerId = table.Column<int>(type: "int", nullable: true),
                     InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -387,32 +388,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Invoice",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CartID = table.Column<int>(type: "int", nullable: true),
-                    PaymentInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TotalPrices = table.Column<int>(type: "int", nullable: true),
-                    PaymentStatus = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    OrderDate = table.Column<DateTime>(type: "datetime", nullable: true),
-                    DeliveryDate = table.Column<DateTime>(type: "datetime", nullable: true),
-                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK__Invoice__D796AAD5A0B9A395", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK__Invoice__Shoppin__4E88ABD4",
-                        column: x => x.CartID,
-                        principalTable: "Carts",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Auctions",
                 columns: table => new
                 {
@@ -430,7 +405,7 @@ namespace Persistence.Migrations
                 {
                     table.PrimaryKey("PK_Auctions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Auction_Product1",
+                        name: "FK_Auctions_Product_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Product",
                         principalColumn: "Id");
@@ -498,6 +473,7 @@ namespace Persistence.Migrations
                     CartId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: true),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -557,12 +533,12 @@ namespace Persistence.Migrations
                 {
                     table.PrimaryKey("PK_Bids", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bids_Auction",
+                        name: "FK_Bids_Auctions_AuctionId",
                         column: x => x.AuctionId,
                         principalTable: "Auctions",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Bids_Buyer1",
+                        name: "FK_Bids_Customer_AuctionId",
                         column: x => x.AuctionId,
                         principalTable: "Customer",
                         principalColumn: "Id");
@@ -583,10 +559,10 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "InsertTime", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RemoveTime", "SecurityStamp", "TwoFactorEnabled", "UpdateTime", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "3e50728d-ae58-48c9-8560-45973a2b5c67", "userone@gmail.com", false, "کاربر یک", null, false, null, null, null, null, null, false, null, null, false, null, "userone@gmail.com" },
-                    { 2, 0, "c8e2e673-6490-4c6a-a2d3-0d3421166128", "userotow@gmail.com", false, "کاربر دو", null, false, null, null, null, null, null, false, null, null, false, null, "userotow@gmail.com" },
-                    { 3, 0, "54a11077-6184-4de5-a8b9-4222e0bb7266", "userothree@gmail.com", false, "کاربر سه", null, false, null, null, null, null, null, false, null, null, false, null, "userothree@gmail.com" },
-                    { 4, 0, "40d61cee-179c-4ff0-9b3d-a8eb9c177a1e", "userofour@gmail.com", false, "کاربر چهار", null, false, null, null, null, null, null, false, null, null, false, null, "userfour@gmail.com" }
+                    { 1, 0, "29cbc23e-ce51-477f-a3fa-cedadfff67cf", "userone@gmail.com", false, "کاربر یک", null, false, null, null, null, null, null, false, null, null, false, null, "userone@gmail.com" },
+                    { 2, 0, "21186276-e815-441f-b2ed-e7d330744924", "userotow@gmail.com", false, "کاربر دو", null, false, null, null, null, null, null, false, null, null, false, null, "userotow@gmail.com" },
+                    { 3, 0, "8c8961cc-4287-4111-b183-03585136165a", "userothree@gmail.com", false, "کاربر سه", null, false, null, null, null, null, null, false, null, null, false, null, "userothree@gmail.com" },
+                    { 4, 0, "ff91f37f-5a1e-449f-8ec1-a1c9e2160f35", "userofour@gmail.com", false, "کاربر چهار", null, false, null, null, null, null, null, false, null, null, false, null, "userfour@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -646,9 +622,9 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "CustomerId", "CustomertId", "Description", "InsertTime", "IsConfirm", "ProductId", "RegisterDate", "RemoveTime", "Title", "UpdateTime" },
                 values: new object[,]
                 {
-                    { 1, null, 1, "این محصول عالی است.", null, null, 1, new DateTime(2023, 6, 18, 18, 49, 50, 655, DateTimeKind.Local).AddTicks(4963), null, "عالی", null },
-                    { 2, null, 2, "این محصول بد است.", null, null, 1, new DateTime(2023, 6, 18, 18, 49, 50, 655, DateTimeKind.Local).AddTicks(4983), null, "بد", null },
-                    { 20, null, 2, "این محصول خوب است.", null, null, 2, new DateTime(2023, 6, 18, 18, 49, 50, 655, DateTimeKind.Local).AddTicks(4985), null, "خوب", null }
+                    { 1, null, 1, "این محصول عالی است.", null, null, 1, new DateTime(2023, 6, 26, 17, 38, 33, 17, DateTimeKind.Local).AddTicks(1142), null, "عالی", null },
+                    { 2, null, 2, "این محصول بد است.", null, null, 1, new DateTime(2023, 6, 26, 17, 38, 33, 17, DateTimeKind.Local).AddTicks(1160), null, "بد", null },
+                    { 20, null, 2, "این محصول خوب است.", null, null, 2, new DateTime(2023, 6, 26, 17, 38, 33, 17, DateTimeKind.Local).AddTicks(1162), null, "خوب", null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -751,11 +727,6 @@ namespace Persistence.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Invoice_CartID",
-                table: "Invoice",
-                column: "CartID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Medals_SellerId",
                 table: "Medals",
                 column: "SellerId");
@@ -811,9 +782,6 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Images");
-
-            migrationBuilder.DropTable(
-                name: "Invoice");
 
             migrationBuilder.DropTable(
                 name: "Medals");

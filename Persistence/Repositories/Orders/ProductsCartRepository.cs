@@ -19,7 +19,9 @@ namespace Persistence.Repositories.Orders
         }
         public async Task AddProductToCartAsync(int cartId, int productId)
         {
-            var cart = await _context.Carts.FirstOrDefaultAsync(c => c.Id == cartId);
+            var cart = await _context.Carts.Include(pc=>pc.ProductsCarts)
+                .ThenInclude(p=>p.Product)
+                .FirstOrDefaultAsync(c => c.Id == cartId);
             if (cart == null)
                 return;
             var existingProductsCart = cart.ProductsCarts.FirstOrDefault(pc => pc.ProductId == productId);

@@ -37,9 +37,10 @@ public class AddAuctionForProductService : IAddAuctionForProductService
         };
 
         // Set the Auction property of the Product
-        product.Auction = auction;
+        
         product.IsAuction = true;
         await _auctionRepository.AddAsync(auction);
+        product.Auction = auction;
         // Update the product and add the auction to the repository
         await _productRepository.UpdateAsync(product);
     

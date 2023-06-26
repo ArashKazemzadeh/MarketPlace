@@ -54,7 +54,7 @@ namespace Application.Services.CustomerServices.CartService.Commands
                 var newCart = new CartAddDto
                 {
                     CustomerId = customerId,
-                    SellerId = product.Booth.SellerId,
+                    SellerId = booth.SellerId,
                     TotalPrices = product.BasePrice,
                 };
                 var result = await _cartRepository.AddAsync(newCart);

@@ -10,6 +10,7 @@ namespace Domin.IRepositories.Dtos
     {
         public int Id { get; set; }
         public int? Price { get; set; }
+        public string ProductName { get; set; }//
         public DateTime? RegisterDate { get; set; }
         public bool? IsAccepted { get; set; }
         public int? AuctionId { get; set; }

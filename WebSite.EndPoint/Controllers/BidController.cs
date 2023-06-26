@@ -1,11 +1,13 @@
 ﻿using Application.IServices.AdminServices.UserService.Commands;
 using Application.IServices.CustomerServices.BidServices.Commands;
 using Application.IServices.CustomerServices.BidServices.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebSite.EndPoint.Models.ViewModels.Bids;
 
 namespace WebSite.EndPoint.Controllers
 {
+    [Authorize]
     public class BidController : Controller
     {
         private readonly IAddBidForAuctionService _addBidForAuctionService;
@@ -18,6 +20,16 @@ namespace WebSite.EndPoint.Controllers
             _accountService = accountService;
             _bidCustomerQueryServise = bidCustomerQueryServise;
         }
+
+        public async Task<IActionResult> AddBid(int auctionId)
+        {
+            var model = new BidAddVM
+            {
+                AuctionId = auctionId
+            };
+            return View(model);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddBid(BidAddVM model)
         {
@@ -38,13 +50,14 @@ namespace WebSite.EndPoint.Controllers
            var dto=await _bidCustomerQueryServise.GetCustomerBids(Convert.ToInt32(userId));
            var model =  dto.Select(b => new BidGetVm
            {
-               Id = b.Id,
-               Price = b.Price,
+               Id = b.Id,                                       
+               Price = b.Price,                                           
                RegisterDate = b.RegisterDate,
-               IsAccepted = b.IsAccepted,
+               IsAccepted = b.IsAccepted,  
                AuctionId = b.AuctionId,
                EndDateAuction = b.EndDateAuction,
                StartDateAuction = b.StartDateAuction,
+               ProductName=b.ProductName
            }).ToList();
            return View(model);
         }

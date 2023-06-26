@@ -57,7 +57,7 @@ namespace Persistence.Repositories.Orders
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateWithBidAsync(Auction auction,BidRepDto bidDto)
+        public async Task<int> UpdateWithBidAsync(Auction auction,BidRepDto bidDto)
         {
             var bid = new Bid
             {
@@ -68,7 +68,8 @@ namespace Persistence.Repositories.Orders
             };
             auction.Bids.Add(bid);
             _context.Entry(auction).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+         var result= await _context.SaveChangesAsync();
+         return result;
         }
         public async Task DeleteAsync(Auction auction)
         {

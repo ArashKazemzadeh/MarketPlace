@@ -58,7 +58,7 @@
                                 @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
                                 {
                                     <li><a title="پروفایل" asp-area="Customer" asp-controller="Home" asp-action="Detail"> <img src="~/templatestore/images/profile.png" width="90%" /></a></li>
-                                    <li><a title="سبد خرید" href=""><img src="~/templatestore/images/cart.png" width="90%" /></a></li>
+                                    <li><a title="سبد خرید" asp-area="" asp-controller="Cart" asp-action="MyCartsUnRegistered" ><img src="~/templatestore/images/cart.png" width="90%" /></a></li>
                                 }
                             </ul>
 
@@ -77,7 +77,6 @@
                             <ul>
                                 <li><a asp-controller="Home" asp-action="Index">خانه</a></li>
                                 <li><a asp-controller="Booth" asp-action="GetAllCategories">دسته بندی</a></li>
-                                <li><a href="index.html">فروشگاه ها</a></li>
                                 <li><a asp-controller="Auction" asp-action="Index"> مزایده ها</a></li>
                             </ul>
                         </div> <!-- /.list-menu -->

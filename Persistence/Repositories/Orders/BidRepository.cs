@@ -29,7 +29,8 @@ namespace Persistence.Repositories.Orders
                     EndDateAuction = b.Auction.EndDeadTime,
                     IsAccepted = b.IsAccepted,
                     RegisterDate = b.RegisterDate,
-                    AuctionId = b.AuctionId
+                    AuctionId = b.AuctionId,
+                    ProductName = b.Auction.Product.Name
                 }).ToListAsync();
             return customerBids;
         }
@@ -44,7 +45,7 @@ namespace Persistence.Repositories.Orders
             return await _dbSet.ToListAsync();
         }
 
-        public async Task AddAsync(BidRepDto dto)
+        public async Task<int> AddAsync(BidRepDto dto )
         {
             var bid = new Bid
             {
@@ -55,7 +56,8 @@ namespace Persistence.Repositories.Orders
                 Auction = dto.Auction,
             };
             await _dbSet.AddAsync(bid);
-            await _context.SaveChangesAsync();
+          var result=  await _context.SaveChangesAsync();
+          return result;
         }
 
         public async Task UpdateAsync(Bid bid)

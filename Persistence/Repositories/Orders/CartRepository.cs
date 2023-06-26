@@ -1,5 +1,6 @@
 ﻿using Castle.Core.Resource;
 using ConsoleApp1.Models;
+using Domin.IRepositories.Dtos;
 using Domin.IRepositories.Dtos.Cart;
 using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
@@ -17,15 +18,17 @@ namespace Persistence.Repositories.Orders
             _context = context;
             _dbSet = _context.Set<Cart>();
         }
-        public async Task<List<Cart>> GetOpenCartsForCustomerIdByBoothIdAsync(int boothId,int cudtomerId)
+        public async Task<List<Cart>> GetOpenCartsForCustomerIdByBoothIdAsync(int boothId, int cudtomerId)
         {
             //لست کارت های باز یک مشتری که مربوط به یک غرفه است
             var carts = await _dbSet
-                .Where(c => !c.IsRegistrationFinalized && c.Customer.Id==cudtomerId)
+                .Where(c => !c.IsRegistrationFinalized && c.Customer.Id == cudtomerId)
+                .Include(s => s.Seller)
+                .ThenInclude(b => b.Booth)
                 .ToListAsync();
+
             var matchingCarts = carts
-                .Where(c => c.ProductsCarts.Any(pc => pc.Product.BoothId == boothId))
-                .ToList();
+                .Where(c => c.Seller.Booth.Id == boothId).ToList();
             return matchingCarts;
         }
         public async Task<bool> FinalizeCartAsync(int cartId)
@@ -33,30 +36,30 @@ namespace Persistence.Repositories.Orders
             var cart = await _dbSet.FindAsync(cartId);
             if (cart == null)
             {
-                return false; 
+                return false;
             }
 
             cart.IsRegistrationFinalized = true;
             await _context.SaveChangesAsync();
-            return true; 
+            return true;
         }
         public async Task<List<CartGetDto>> GetUnfinalizedCartsByCustomerId(int customerId)
         {
-         var list=   await _dbSet
-                .Where(c => c.CustomerId == customerId && (c.IsRegistrationFinalized == null || c.IsRegistrationFinalized == false))
-                .Select(c=>new CartGetDto
-                {
-                    Id = c.Id,
-                    CustomerId = customerId,
-                    boothId = c.Seller.Booth.Id,
-                    BoothName = c.Seller.Booth.Name,
-                    TotalPrices = c.TotalPrices,
-                    IsRegistrationFinalized = c.IsRegistrationFinalized,
-                    ProductsNames = c.ProductsCarts.Select(p=>p.Product.Name).ToList()
-                })
-                .ToListAsync();
+            var list = await _dbSet
+                   .Where(c => c.CustomerId == customerId && (c.IsRegistrationFinalized == null || c.IsRegistrationFinalized == false))
+                   .Select(c => new CartGetDto
+                   {
+                       Id = c.Id,
+                       CustomerId = customerId,
+                       boothId = c.Seller.Booth.Id,
+                       BoothName = c.Seller.Booth.Name,
+                       TotalPrices = c.TotalPrices,
+                       IsRegistrationFinalized = c.IsRegistrationFinalized,
+                       ProductsNames = c.ProductsCarts.Select(p => p.Product.Name).ToList()
+                   })
+                   .ToListAsync();
 
-         return list;
+            return list;
         }
         public async Task<List<CartGetDto>> GetfinalizedCartsByCustomerId(int customerId)
         {
@@ -95,16 +98,16 @@ namespace Persistence.Repositories.Orders
                 TotalPrices = dto.TotalPrices,
             };
             await _dbSet.AddAsync(cart);
-          var result=  await _context.SaveChangesAsync();
-          if (result != 0)
-              return new CartAddDto
-              {
-                  Id = cart.Id,
-                  CustomerId = dto.CustomerId,
-                  SellerId = dto.SellerId,
-                  TotalPrices = dto.TotalPrices,
-              };
-          return null;
+            var result = await _context.SaveChangesAsync();
+            if (result != 0)
+                return new CartAddDto
+                {
+                    Id = cart.Id,
+                    CustomerId = dto.CustomerId,
+                    SellerId = dto.SellerId,
+                    TotalPrices = dto.TotalPrices,
+                };
+            return null;
         }
 
         public async Task UpdateAsync(Cart cart)
@@ -119,6 +122,28 @@ namespace Persistence.Repositories.Orders
             await _context.SaveChangesAsync();
         }
 
-       
+        public async Task<List<ProductDto>> GetProductByCartId(int cartId)
+        {
+            var cart = await _dbSet.Include(c => c.ProductsCarts).ThenInclude(pc => pc.Product).FirstOrDefaultAsync(c => c.Id == cartId);
+            if (cart == null)
+                return new List<ProductDto>();
+            var products = cart.ProductsCarts.Select(pc => pc.Product).ToList();
+
+            var result = products.Select(p => new ProductDto
+            {
+                Id = p.Id,
+                Name = p.Name,
+                BasePrice = p.BasePrice,
+                IsActive = p.IsActive,
+                IsConfirm = p.IsConfirm,
+                Image = p.Images,
+                IsAuction = p.IsAuction,
+                Availability = p.Availability,
+                Auction = p.Auction,
+                Description = p.Description,
+                Categories = p.Categories
+            }).ToList();
+            return result;
+        }
     }
 }

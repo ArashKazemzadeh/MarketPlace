@@ -17,7 +17,7 @@ namespace Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.5")
+                .HasAnnotation("ProductVersion", "7.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -106,6 +106,9 @@ namespace Persistence.Migrations
                     b.Property<int?>("AuctionId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -127,6 +130,8 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AuctionId");
+
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Bids");
                 });
@@ -326,7 +331,7 @@ namespace Persistence.Migrations
                             CustomertId = 1,
                             Description = "این محصول عالی است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 20, 13, 26, 55, 228, DateTimeKind.Local).AddTicks(2878),
+                            RegisterDate = new DateTime(2023, 6, 26, 21, 21, 57, 870, DateTimeKind.Local).AddTicks(7758),
                             Title = "عالی"
                         },
                         new
@@ -335,7 +340,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول بد است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 20, 13, 26, 55, 228, DateTimeKind.Local).AddTicks(2899),
+                            RegisterDate = new DateTime(2023, 6, 26, 21, 21, 57, 870, DateTimeKind.Local).AddTicks(7782),
                             Title = "بد"
                         },
                         new
@@ -344,7 +349,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول خوب است.",
                             ProductId = 2,
-                            RegisterDate = new DateTime(2023, 6, 20, 13, 26, 55, 228, DateTimeKind.Local).AddTicks(2901),
+                            RegisterDate = new DateTime(2023, 6, 26, 21, 21, 57, 870, DateTimeKind.Local).AddTicks(7784),
                             Title = "خوب"
                         });
                 });
@@ -759,7 +764,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bde1a898-d44e-48e6-9861-84105e48e9cb",
+                            ConcurrencyStamp = "88da7713-3870-43ee-8fca-600eb61580d0",
                             Email = "userone@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر یک",
@@ -772,7 +777,7 @@ namespace Persistence.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "14bb5193-d15a-49bb-8562-82fda4909b35",
+                            ConcurrencyStamp = "b5972437-a355-4ea2-81c4-1fca320a6ebb",
                             Email = "userofour@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر چهار",
@@ -785,7 +790,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d697e195-d007-4d49-b0e5-e8f3aa6aa69e",
+                            ConcurrencyStamp = "1687d0fe-d026-438b-b4ab-c6bf1cd17033",
                             Email = "userotow@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر دو",
@@ -798,7 +803,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e29bf189-8abc-4116-a852-21f91bc3dcc6",
+                            ConcurrencyStamp = "24b5d1ee-0720-41f6-996c-ce341aaba102",
                             Email = "userothree@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر سه",
@@ -1025,8 +1030,7 @@ namespace Persistence.Migrations
                     b.HasOne("ConsoleApp1.Models.Product", "Product")
                         .WithOne("Auction")
                         .HasForeignKey("ConsoleApp1.Models.Auction", "ProductId")
-                        .IsRequired()
-                        .HasConstraintName("FK_Auction_Product1");
+                        .IsRequired();
 
                     b.Navigation("Product");
                 });
@@ -1035,13 +1039,11 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("ConsoleApp1.Models.Auction", "Auction")
                         .WithMany("Bids")
-                        .HasForeignKey("AuctionId")
-                        .HasConstraintName("FK_Bids_Auction");
+                        .HasForeignKey("AuctionId");
 
                     b.HasOne("ConsoleApp1.Models.Customer", "Customer")
                         .WithMany("Bids")
-                        .HasForeignKey("AuctionId")
-                        .HasConstraintName("FK_Bids_Buyer1");
+                        .HasForeignKey("CustomerId");
 
                     b.Navigation("Auction");
 

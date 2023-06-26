@@ -26,7 +26,8 @@
             @if (p.IsActive==true)
             {
                 <div class="card-body">
-                    <a asp-controller="Booth" asp-action="GetBoothByCategoryId">خرید کالا</a>
+                    <a asp-controller="Cart" asp-action="AddToCartBasePrice" 
+                       asp-route-boothId="@p.BoothId" asp-route-productId="@p.Id" >خرید کالا</a>
                 </div>
             }
             @if (p.IsActive==false)

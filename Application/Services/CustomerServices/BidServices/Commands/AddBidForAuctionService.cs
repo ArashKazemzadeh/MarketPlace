@@ -23,10 +23,9 @@ public class AddBidForAuctionService : IAddBidForAuctionService
             return false;
         if (customer == null)
             return false;
-        if (auction.EndDeadTime > DateTime.Now)
+        if (auction.EndDeadTime < DateTime.Now)
             return false;
-        if (price > auction.HighestPrice)
-            auction.HighestPrice = price;
+       
 
         var bidDto = new BidRepDto
         {
@@ -36,9 +35,18 @@ public class AddBidForAuctionService : IAddBidForAuctionService
             Customer = customer,
             Auction = auction,
         };
-        await _bidRepository.AddAsync(bidDto);
-        await _auctionRepository.UpdateWithBidAsync(auction, bidDto);
-        await _customerRepository.UpdateWithBidAsync(customer, bidDto);
+        var result1 = await _bidRepository.AddAsync(bidDto);
+        if (price > auction.HighestPrice)
+        {
+            auction.HighestPrice = price;
+            await _auctionRepository.UpdateAsync(auction);
+        }
+        else
+            return false;
+
+        var result2 = await _auctionRepository.UpdateWithBidAsync(auction, bidDto);
+        var result3 = await _customerRepository.UpdateWithBidAsync(customer, bidDto);
+
         return true;
     }
 
