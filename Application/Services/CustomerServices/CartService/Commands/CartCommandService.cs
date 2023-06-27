@@ -38,14 +38,20 @@ namespace Application.Services.CustomerServices.CartService.Commands
             }
             return false;
         }
-        public async Task<bool> AddProductToCart(int customerId, int productId, int boothId)
+        public async Task<string> AddProductToCart(int customerId, int productId, int boothId)
         {
             // بررسی وجود کالا و موجودی آن
             var product = await _productRepository.GetByIdAsync(productId);
             var customer = await _customerRepository.GetByIdAsync(customerId);
             var booth = await _boothRepository.GetByIdAsync(boothId);
-            if (product == null || product.Availability <= 0 || booth == null || customer == null)
-                return false;
+            if (product == null)
+                return "کالا موجود نیست!" ;
+            if (product.Availability <1)
+                return "موجودی کالا به اتمام رسیده است!";
+            if (booth == null)
+                return "غرفه موجود نیست!";
+            if ( customer == null)
+                return "کاربری شما موجود نیست . ابتدا خارج و دوباره وارد شوید.";
             // بررسی کارت های یک مشتری با IsRegistrationFinalized=false که دارای boothId مورد نظر هستند
             var openCartsOneCustomerInOneBooth = await _cartRepository.GetOpenCartsForCustomerIdByBoothIdAsync(boothId, customerId);
             if (openCartsOneCustomerInOneBooth.Count == 0)
@@ -81,7 +87,7 @@ namespace Application.Services.CustomerServices.CartService.Commands
             // کم کردن تعداد کالا از دیتابیس
             product.Availability--;
             await _productRepository.UpdateAsync(product);
-            return true;
+            return "کالا با موفقیت افزوده شد.";
         }
     }
 }

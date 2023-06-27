@@ -4,6 +4,6 @@
 
 public interface ICartCommandService
 {
-    Task<bool> AddProductToCart(int customerId, int productId, int boothId);
+    Task<string> AddProductToCart(int customerId, int productId, int boothId);
     Task<bool> FinalizeCartAsync(int cartId);
 }

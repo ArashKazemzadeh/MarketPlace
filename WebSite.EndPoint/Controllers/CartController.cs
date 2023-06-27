@@ -120,9 +120,10 @@ namespace WebSite.EndPoint.Controllers
         {
             var userId = await _accountService.GetLoggedInUserId();
             var result=   await _cartCommandService.AddProductToCart(Convert.ToInt32(userId), productId, boothId);
+            TempData["AddToCartBasePrice"] = result;
             if (true)
             {
-                return RedirectToAction("MyCartsUnRegistered");
+                return RedirectToAction("EnterToBooth","Booth",new{ boothId= boothId } );
             }
          
         }

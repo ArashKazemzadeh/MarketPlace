@@ -55,6 +55,7 @@ namespace WebSite.EndPoint.Controllers
               Categories = p.Categories,
               IsActive = p.IsActive
           }).ToList();
+          ViewBag.Message = TempData["AddToCartBasePrice"].ToString();
             return View(model);
 
         }

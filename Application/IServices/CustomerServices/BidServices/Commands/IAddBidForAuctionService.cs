@@ -5,7 +5,7 @@ namespace Application.IServices.CustomerServices.BidServices.Commands
 {
     public interface IAddBidForAuctionService
     {
-        Task<bool> Execute(int userId, int auctionId, int price);
+        Task<string> Execute(int userId, int auctionId, int price);
 
     }
 }

@@ -44,10 +44,12 @@ namespace Persistence.Repositories.Auto
 
                     await _dbContext.ProductsCarts.AddAsync(productsCart);
                     product.Availability = 0;
+                    product.IsActive = false;
                     _dbContext.Entry(product).State = EntityState.Modified;
                 }
 
                 auction.HighestPrice = highestBid?.Price ?? 0;
+
                 _dbContext.Entry(auction).State = EntityState.Modified;
             }
             await _dbContext.SaveChangesAsync();

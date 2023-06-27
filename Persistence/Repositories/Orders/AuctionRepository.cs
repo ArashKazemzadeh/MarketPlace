@@ -36,7 +36,6 @@ namespace Persistence.Repositories.Orders
                 ProductId = a.Product.Id,
                 ProductName = a.Product.Name,
                 BasePrice = a.Product.BasePrice,
-             //HighestPrice = a.Bids.Max(b => b.Price).GetValueOrDefault(),
                 HighestPrice = a.HighestPrice,
                 StartDeadTime = a.StartDeadTime,
                 EndDeadTime = a.EndDeadTime,
@@ -75,6 +74,12 @@ namespace Persistence.Repositories.Orders
         {
             _dbSet.Remove(auction);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<Auction> GetByCustomerIdAsync(int id)
+        {
+            var action = await _dbSet.AsNoTracking().FirstOrDefaultAsync(a => a.Bids.Any(b=>b.CustomerId==id));
+            return action;
         }
     }
 }
