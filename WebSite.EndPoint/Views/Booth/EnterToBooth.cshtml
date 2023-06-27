@@ -3,15 +3,16 @@
     ViewData["Title"] = "EnterToBooth";
 }
 @if (ViewBag.Message != null)
-{
-    <div class="alert alert-danger text-center">
+{   
+    <button id="my-heading" class="alert alert-primary text-center m-1">
         <p>@ViewBag.Message</p>
-    </div>
+    </button>
 }
 
 <div class="row ">
     @foreach (var p in Model)
     {
+       
         <div class="card component-card_2 col-3 m-5 text-center">
             <div class="row m-1">
                 @foreach (var i in p.ImagesUrls)
@@ -57,3 +58,13 @@
 </div>
 
 
+@section scripts
+{
+  
+    <script>
+        setTimeout(function() {
+            document.getElementById("my-heading").style.display = "none";
+        }, 2000); // مقدار 2000 برابر با دو ثانیه است.
+    </script>
+
+}

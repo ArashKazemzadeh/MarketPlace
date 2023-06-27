@@ -85,7 +85,8 @@ namespace WebSite.EndPoint.Controllers
                 IsRegistrationFinalized = c.IsRegistrationFinalized,
                 BoothName = c.BoothName,
                 boothId = c.boothId,
-                ProductsNames = c.ProductsNames
+                ProductsNames = c.ProductsNames,
+                QuantityFromOne = c.QuantityFromOne
             }).ToList();
             return View(model);
         }

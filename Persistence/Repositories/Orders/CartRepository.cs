@@ -46,6 +46,7 @@ namespace Persistence.Repositories.Orders
         }
         public async Task<List<CartGetDto>> GetUnfinalizedCartsByCustomerId(int customerId)
         {
+     
             var list = await _dbSet
                    .Where(c => c.CustomerId == customerId && (c.IsRegistrationFinalized == null || c.IsRegistrationFinalized == false))
                    .Select(c => new CartGetDto
@@ -56,8 +57,9 @@ namespace Persistence.Repositories.Orders
                        BoothName = c.Seller.Booth.Name,
                        TotalPrices = c.TotalPrices,
                        IsRegistrationFinalized = c.IsRegistrationFinalized,
-                       ProductsNames = c.ProductsCarts.Select(p => p.Product.Name).ToList()
-                   })
+                       ProductsNames = c.ProductsCarts.Select(p => p.Product.Name).ToList(),
+                       QuantityFromOne =c.ProductsCarts.Select(c => c.Quantity.Value).Sum()
+        })
                    .ToListAsync();
 
             return list;

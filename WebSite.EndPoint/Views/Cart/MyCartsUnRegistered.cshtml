@@ -15,6 +15,9 @@
                         مجموع مبلغ
                     </th>
                     <th>
+                        تعداد
+                    </th>
+                    <th>
                         نام غرفه ی فروشنده
                     </th>
                     <th>
@@ -31,6 +34,9 @@
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.TotalPrices)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.QuantityFromOne)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.BoothName)

@@ -166,7 +166,7 @@ namespace Persistence.Repositories.Orders
 
         public async Task<Product> GetByIdAsync(int id)
         {
-            var redult = await _dbSet.AsNoTracking().Where(p => p.Id == id).Include(c => c.Categories).FirstOrDefaultAsync();
+            var redult = await _dbSet.Where(p => p.Id == id).Include(c => c.Categories).FirstOrDefaultAsync();
             return redult;
         }
     }
