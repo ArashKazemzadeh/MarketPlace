@@ -6,42 +6,49 @@
     <div class="table-responsive m-5 col-10">
         <table class="table table-bordered table-hover table-condensed mb-4">
             <tbody>
-            <tr>
-                <th scope="row">نام کالا: @Model.Name</th>
-                <td>قیمت پایه: @Model.BasePrice</td>
-                <td>موجودی: @Model.Availability</td>
-            </tr>
-            <tr>
-                <th scope="row">توضیحات</th>
-                <td colspan="3"> @Model.Description</td>
-            </tr>
-            <tr>
-                <th scope="row">دسته بندی</th>
+                <tr>
+                    <th scope="row">نام کالا: @Model.Name</th>
+                    <td>قیمت پایه: @Model.BasePrice</td>
+                    <td>موجودی: @Model.Availability</td>
+                </tr>
+                <tr>
+                    <th scope="row">توضیحات</th>
+                    <td colspan="3"> @Model.Description</td>
+                </tr>
+                <tr>
+                    <th scope="row">دسته بندی</th>
 
-                @foreach (var item in Model.Categories)
-                {
-                    <td colspan="3"> @item.Name</td>
-                }
-            </tr>
-            <tr>
-                <th scope="row">عملیات</th>
-                <td colspan="3">
-                    <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-primary m-1">ویرایش کالا</a>
-                    <a asp-action="Create" asp-controller="Auction" asp-area="Seller" asp-route-productId="@Model.ProductId" class="btn btn-primary m-1">شرکت در مزایده</a>
-                    @*<a asp-action="Category" class="btn btn-primary m-1">افزودن دسته بندی</a>*@
-                </td>
-            <tr>
-                <th scope="row">بارگذاری عکس</th>
-                <td colspan="3" class="row">
-                    <form asp-controller="Image" asp-action="UploadImage" asp-route-productId="@Model.ProductId" method="post" enctype="multipart/form-data" class="d-flex align-items-center">
-                        <div class="form-group mb-0">
-                            <input type="file" id="photo" name="photo" class="form-control " accept="image/*">
-                        </div>
-                        <button type="submit" class="btn btn-primary mr-1 ">افزودن عکس</button>
-                    </form>
-                </td>
+                    @foreach (var item in Model.Categories)
+                    {
+                        <td colspan="3"> @item.Name</td>
+                    }
+                </tr>
+                <tr>
+                    <th scope="row">عملیات</th>
+                    <td colspan="3">
+                        <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-primary m-1">ویرایش کالا</a>
+                        @if (!Model.IsAuction)
+                        {
+                            <a asp-action="Create" asp-controller="Auction" asp-area="Seller" asp-route-productId="@Model.ProductId" class="btn btn-primary m-1">شرکت در مزایده</a>
+                        }
+                        else if (Model.IsAuction)
+                        {
+                            <a class="btn btn-danger m-1">کالا در مزایده است</a>
+                        }
 
-            </tr>
+                    </td>
+                <tr>
+                    <th scope="row">بارگذاری عکس</th>
+                    <td colspan="3" class="row">
+                        <form asp-controller="Image" asp-action="UploadImage" asp-route-productId="@Model.ProductId" method="post" enctype="multipart/form-data" class="d-flex align-items-center">
+                            <div class="form-group mb-0">
+                                <input type="file" id="photo" name="photo" class="form-control " accept="image/*">
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-1 ">افزودن عکس</button>
+                        </form>
+                    </td>
+
+                </tr>
             </tbody>
         </table>
     </div>

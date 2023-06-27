@@ -23,6 +23,9 @@
                         کالاها
                     </th>
                     <th>
+                        تاریخ ثبت 
+                    </th>
+                    <th>
                         عملیات
                     </th>
                 </tr>
@@ -40,6 +43,9 @@
                             {
                                 @Html.DisplayFor(modelItem => product) <i>,</i>
                             }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RegisterDate)
                         </td>
                         <td>
                             @Html.ActionLink("جزییات محصولات", "GetProductsInCart", new {  cartId=item.Id })

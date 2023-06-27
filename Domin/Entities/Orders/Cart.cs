@@ -8,6 +8,7 @@ public class Cart
     public int Id { get; set; }
     public int? TotalPrices { get; set; }
     public int? CustomerId { get; set; }
+    public DateTime? RegisterDate { get; set; }=DateTime.Now;
     public bool IsRegistrationFinalized { get; set; } = false;
     public virtual Customer? Customer { get; set; }
     public int? SellerId { get; set; }

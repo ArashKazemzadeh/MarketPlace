@@ -5,6 +5,7 @@ namespace Domin.IRepositories.IseparationRepository;
 
 public interface IBidRepository
 {
+     Task<bool> HasPlacedBid(int customerId, int auctionId);
     Task<List<BidGetRepDto>> GetBidsByCustomerId(int customerId);
     Task<Bid> GetByIdAsync(int id);
     Task<List<Bid>> GetAllAsync();

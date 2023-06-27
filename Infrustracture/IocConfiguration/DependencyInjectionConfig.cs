@@ -67,6 +67,8 @@ using Application.IServices.CustomerServices.CartService.Commands;
 using Application.Services.CustomerServices.CartService.Commands;
 using Application.IServices.CustomerServices.CommentServices.Commands;
 using Application.Services.CustomerServices.CommentServices.Commands;
+using Application.IServices.CustomerServices.CommentServices.Queries;
+using Application.Services.CustomerServices.CommentServices.Queries;
 
 namespace Infrustracture.IocConfiguration
 {
@@ -132,7 +134,8 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<ICartQueryService, CartQueryService>();
             services.AddScoped<ICartCommandService, CartCommandService>();
             services.AddScoped<IMedalRepository, MedalRepository>();
-            services.AddScoped<IAddCommentForProductService, AddCommentForProductService>(); 
+            services.AddScoped<IAddCommentForProductService, AddCommentForProductService>();
+            services.AddScoped < ICommentQueryService, CommentQueryService>();
             //-----------------------------------------------hangfire--------------------
             services.AddScoped<IAutomaticTasksOfTheApplicationRepository, AutomaticTasksOfTheApplicationRepository>();
             services.AddScoped<IProcessCompletedAuctionsAndAddToWinnerCart, ProcessCompletedAuctionsAndAddToWinnerCart>();

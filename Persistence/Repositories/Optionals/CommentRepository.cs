@@ -22,6 +22,27 @@ namespace Persistence.Repositories.Optionals
             return await _dbSet.FindAsync(id);
         }
 
+        public async Task<List<CommentGetDto>> GetByProductIdAsync(int productId)
+        {
+            var comments = await _dbSet.AsNoTracking()
+                .Where(c=> c.ProductId== productId /*&& c.IsConfirm==true*/)
+                .Include(p=>p.Product)
+                .Include(c=>c.Customer)
+                .ToListAsync();
+            var result = comments.Select(c=> new CommentGetDto
+            {
+                Id = c.Id,
+                IsConfirm = c.IsConfirm,
+                CustomertId = c.CustomertId,
+                ProductId = c.ProductId,
+                Description = c.Description,
+                RegisterDate = c.RegisterDate,
+                Product = c.Product,
+                Customer = c.Customer
+            }).ToList();
+            return result;
+        }
+
         public async Task<List<Comment>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();

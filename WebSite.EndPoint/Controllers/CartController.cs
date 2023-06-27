@@ -1,14 +1,17 @@
-﻿using Application.IServices.AdminServices.UserService.Commands;
+﻿using Application.Dtos.UserDto;
+using Application.IServices.AdminServices.UserService.Commands;
 using Application.IServices.CustomerServices.CartService.Commands;
 using Application.IServices.CustomerServices.CartService.Queries;
 using Application.IServices.CustomerServices.CommentServices.Commands;
 using Domin.IRepositories.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebSite.EndPoint.Areas.Seller.Models;
 using WebSite.EndPoint.Models.ViewModels;
 
 namespace WebSite.EndPoint.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly ICartQueryService _cartQueryService;
@@ -99,7 +102,8 @@ namespace WebSite.EndPoint.Controllers
                 IsRegistrationFinalized = c.IsRegistrationFinalized,
                 BoothName = c.BoothName,
                 boothId = c.boothId,
-                ProductsNames = c.ProductsNames
+                ProductsNames = c.ProductsNames,
+                RegisterDate=c.RegisterDate
             }).ToList();
             return View(model);
         }
@@ -120,6 +124,7 @@ namespace WebSite.EndPoint.Controllers
         {
             var userId = await _accountService.GetLoggedInUserId();
             var result=   await _cartCommandService.AddProductToCart(Convert.ToInt32(userId), productId, boothId);
+            
             TempData["AddToCartBasePrice"] = result;
             if (true)
             {

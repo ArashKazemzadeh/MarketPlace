@@ -3,6 +3,7 @@ using Domin.IRepositories.IseparationRepository;
 using Microsoft.EntityFrameworkCore;
 using Domin.IRepositories.Dtos;
 using Persistence.Contexts.SqlServer;
+using Domin.Entities.Users;
 
 namespace Persistence.Repositories.Orders
 {
@@ -16,6 +17,19 @@ namespace Persistence.Repositories.Orders
             _context = context;
             _dbSet = _context.Set<Bid>();
         }
+
+        public async Task<bool>  HasPlacedBid(int customerId, int  auctionId)
+        {
+            var bid = await _dbSet.Where(b => b.Customer.Id == customerId)
+                .FirstOrDefaultAsync(b => b.AuctionId == auctionId);
+            if (bid==null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
 
         public async Task<List<BidGetRepDto>> GetBidsByCustomerId(int customerId)
         {
@@ -45,7 +59,7 @@ namespace Persistence.Repositories.Orders
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<int> AddAsync(BidRepDto dto )
+        public async Task<int> AddAsync(BidRepDto dto )//1
         {
             var bid = new Bid
             {

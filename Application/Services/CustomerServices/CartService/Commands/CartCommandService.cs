@@ -28,14 +28,11 @@ namespace Application.Services.CustomerServices.CartService.Commands
         {
             var cart = await _cartRepository.GetByIdAsync(cartId);
             if (cart == null)
-            {
                 return false;
-            }
+            
             var result = await _cartRepository.FinalizeCartAsync(cartId);
             if (result)
-            {
                 return true;
-            }
             return false;
         }
         public async Task<string> AddProductToCart(int customerId, int productId, int boothId)
@@ -65,10 +62,8 @@ namespace Application.Services.CustomerServices.CartService.Commands
                 };
                 var result = await _cartRepository.AddAsync(newCart);
                 if (result==null)
-                {
                     throw new InvalidOperationException("SAVECHANGEASYNC() has encountered a problem and the card could not be registered in the database");
-
-                }
+                 
                 // افزودن کالا به کارت
                 var productsCart = new ProductsCartDto
                 {

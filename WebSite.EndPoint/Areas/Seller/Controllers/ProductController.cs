@@ -80,6 +80,7 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
                 Availability = product.Data.Availability,
                 Description = product.Data.Description,
                 ImagedUrls = urls   ,
+                IsAuction = product.Data.IsAuction,
                 Categories=product.Data.Categories
             };
             return View(model);

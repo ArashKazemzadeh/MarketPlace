@@ -40,6 +40,7 @@ namespace Persistence.Repositories.Orders
             }
 
             cart.IsRegistrationFinalized = true;
+            cart.RegisterDate=DateTime.Now;
             await _context.SaveChangesAsync();
             return true;
         }
@@ -73,7 +74,8 @@ namespace Persistence.Repositories.Orders
                     BoothName = c.Seller.Booth.Name,
                     TotalPrices = c.TotalPrices,
                     IsRegistrationFinalized = c.IsRegistrationFinalized,
-                    ProductsNames = c.ProductsCarts.Select(p => p.Product.Name).ToList()
+                    ProductsNames = c.ProductsCarts.Select(p => p.Product.Name).ToList(),
+                    RegisterDate = c.RegisterDate
                 })
                 .ToListAsync();
 

@@ -2,9 +2,9 @@
 @{
     ViewData["Title"] = "EnterToBooth";
 }
-@if (ViewBag.Message!=null)
+@if (ViewBag.Message != null)
 {
-    <div class="alert alert-danger ">
+    <div class="alert alert-danger text-center">
         <p>@ViewBag.Message</p>
     </div>
 }
@@ -12,14 +12,14 @@
 <div class="row ">
     @foreach (var p in Model)
     {
-        <div class="card component-card_2 col-10 m-5 text-center">
+        <div class="card component-card_2 col-3 m-5 text-center">
             <div class="row m-1">
                 @foreach (var i in p.ImagesUrls)
                 {
                     <img src="@i" class="col-3 img-fluid" />
                 }
             </div>
-           
+
             <h3> @p.Name</h3>
             <p>توضیحات: @p.Description</p>
             <p>قیمت پایه: @p.BasePrice</p>
@@ -29,20 +29,24 @@
             {
                 <span style="border-block: darkorchid" class="m-1">@c </span>
             }
-            @if (p.IsActive==true)
+            @if (p.IsActive == true && p.Availability != 0 && p.Availability != null)
             {
                 <div class="card-body">
-                    <a asp-controller="Cart" asp-action="AddToCartBasePrice" 
-                       asp-route-boothId="@p.BoothId" asp-route-productId="@p.Id" >خرید کالا</a>
+                    <a asp-controller="Booth" asp-action="GetCommentByProductId" 
+                       asp-route-productId="@p.Id"
+                       class="btn btn-block btn-primary">نمایش دیدگاه</a>
+                    <a asp-controller="Cart" asp-action="AddToCartBasePrice"
+               asp-route-boothId="@p.BoothId" asp-route-productId="@p.Id"
+                       class="btn btn-block btn-primary">خرید کالا</a>
                 </div>
             }
-            @if (p.IsActive==false)
+            @if (p.IsActive == false)
             {
                 <div class="card-body">
                     <a class="btn btn-block btn-danger">کالا فعلا غیر قابل خرید است</a>
                 </div>
             }
-            @if (p.Availability == 0 || p.Availability==null)
+            @if (p.Availability == 0 || p.Availability == null)
             {
                 <div class="card-body">
                     <a class="btn btn-block btn-danger">کالا موجود نیست</a>

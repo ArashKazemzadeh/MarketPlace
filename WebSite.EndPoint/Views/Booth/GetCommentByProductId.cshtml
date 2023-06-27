@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Domin.IRepositories.Dtos.CommentGetDto>
+
+@{
+    ViewData["Title"] = "GetCommentByProductId";
+}
+<div class="row m-3">
+    
+    @foreach (var item in Model)
+    {
+
+        <div class="card col-3 m-3 p-1" style="width: 18rem;">
+            <div class="card-body">
+                <p style="color: dodgerblue"> @Html.DisplayFor(modelItem => item.RegisterDate)</p>
+                <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Title)</h5>
+                <p class="card-text"> @Html.DisplayFor(modelItem => item.Description)</p>
+            </div>
+        </div>
+
+    }
+
+</div>

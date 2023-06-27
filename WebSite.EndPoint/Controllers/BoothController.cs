@@ -1,4 +1,5 @@
 ﻿using Application.IServices.CustomerServices.CategoryServices;
+using Application.IServices.CustomerServices.CommentServices.Queries;
 using Application.IServices.CustomerServices.ProductServices.Queries;
 using Application.IServices.CustomerServices.SellerServices.Queries;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,21 @@ namespace WebSite.EndPoint.Controllers
         private readonly IGetBoothsByCategoryId _getBoothsByCategoryId;
         private readonly ICategoryCustomerQueryService _categoryCustomerQueryService;
         private readonly IGetAllProductsByBoothIdService _allProductsByBoothIdService;
-        public BoothController(IGetBoothsByCategoryId getBoothsByCategory, ICategoryCustomerQueryService categoryCustomerQueryService, IGetAllProductsByBoothIdService allProductsByBoothIdService)
+        private readonly ICommentQueryService _commentQueryService;
+        public BoothController(IGetBoothsByCategoryId getBoothsByCategory,
+            ICategoryCustomerQueryService categoryCustomerQueryService,
+            IGetAllProductsByBoothIdService allProductsByBoothIdService, 
+            ICommentQueryService commentQueryService)
         {
             _getBoothsByCategoryId = getBoothsByCategory;
             _categoryCustomerQueryService = categoryCustomerQueryService;
             _allProductsByBoothIdService = allProductsByBoothIdService;
+            _commentQueryService = commentQueryService;
+        }
+        public async Task<IActionResult> GetCommentByProductId(int productId)
+        {
+            var result = await _commentQueryService.GetCommentByProductId(productId);
+            return View(result);
         }
         public async Task<IActionResult> GetBoothByCategoryId(int categoryid)
         {
@@ -55,7 +66,7 @@ namespace WebSite.EndPoint.Controllers
               Categories = p.Categories,
               IsActive = p.IsActive
           }).ToList();
-          ViewBag.Message = TempData["AddToCartBasePrice"].ToString();
+          ViewBag.Message = TempData["AddToCartBasePrice"];
             return View(model);
 
         }

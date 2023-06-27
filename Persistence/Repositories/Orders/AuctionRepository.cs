@@ -76,10 +76,6 @@ namespace Persistence.Repositories.Orders
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Auction> GetByCustomerIdAsync(int id)
-        {
-            var action = await _dbSet.AsNoTracking().FirstOrDefaultAsync(a => a.Bids.Any(b=>b.CustomerId==id));
-            return action;
-        }
+       
     }
 }

@@ -27,10 +27,11 @@ namespace Persistence.Repositories.Orders
             var existingProductsCart = cart.ProductsCarts.FirstOrDefault(pc => pc.ProductId == productId);
             if (existingProductsCart != null)
             {
+
                 // کالای با ایدی مشترک در کارت وجود دارد، تعداد آن را افزایش دهید
-                var quantity = existingProductsCart.Quantity++;
-                existingProductsCart.Cart.TotalPrices = quantity * existingProductsCart.Product.BasePrice;
-                cart.TotalPrices = quantity * existingProductsCart.Product.BasePrice;
+                existingProductsCart.Quantity =1+ existingProductsCart.Quantity;
+                existingProductsCart.Cart.TotalPrices = existingProductsCart.Quantity * existingProductsCart.Product.BasePrice;
+                cart.TotalPrices = existingProductsCart.Quantity * existingProductsCart.Product.BasePrice;
                 _context.Entry(cart).State = EntityState.Modified;
                 _context.Entry(existingProductsCart).State = EntityState.Modified;
             }
@@ -45,7 +46,7 @@ namespace Persistence.Repositories.Orders
                 };
                 await _context.ProductsCarts.AddAsync(productsCart);
             }
-            await _context.SaveChangesAsync();
+         var result=   await _context.SaveChangesAsync();
         }
 
         public async Task<ProductsCart> GetByIdAsync(int id)

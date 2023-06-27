@@ -199,6 +199,9 @@ namespace Persistence.Migrations
                     b.Property<bool>("IsRegistrationFinalized")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("RegisterDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -331,7 +334,7 @@ namespace Persistence.Migrations
                             CustomertId = 1,
                             Description = "این محصول عالی است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 26, 21, 21, 57, 870, DateTimeKind.Local).AddTicks(7758),
+                            RegisterDate = new DateTime(2023, 6, 27, 14, 14, 29, 414, DateTimeKind.Local).AddTicks(3722),
                             Title = "عالی"
                         },
                         new
@@ -340,7 +343,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول بد است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 26, 21, 21, 57, 870, DateTimeKind.Local).AddTicks(7782),
+                            RegisterDate = new DateTime(2023, 6, 27, 14, 14, 29, 414, DateTimeKind.Local).AddTicks(3741),
                             Title = "بد"
                         },
                         new
@@ -349,7 +352,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول خوب است.",
                             ProductId = 2,
-                            RegisterDate = new DateTime(2023, 6, 26, 21, 21, 57, 870, DateTimeKind.Local).AddTicks(7784),
+                            RegisterDate = new DateTime(2023, 6, 27, 14, 14, 29, 414, DateTimeKind.Local).AddTicks(3743),
                             Title = "خوب"
                         });
                 });
@@ -764,7 +767,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "88da7713-3870-43ee-8fca-600eb61580d0",
+                            ConcurrencyStamp = "dc28bfb0-bb99-4b52-b657-1a5673a16b61",
                             Email = "userone@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر یک",
@@ -777,7 +780,7 @@ namespace Persistence.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b5972437-a355-4ea2-81c4-1fca320a6ebb",
+                            ConcurrencyStamp = "3b9e3bca-8e6d-4cd5-bce6-1022970fb58a",
                             Email = "userofour@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر چهار",
@@ -790,7 +793,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1687d0fe-d026-438b-b4ab-c6bf1cd17033",
+                            ConcurrencyStamp = "49e8fbab-d3f8-4f4e-986c-bf2dd27b8a3c",
                             Email = "userotow@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر دو",
@@ -803,7 +806,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "24b5d1ee-0720-41f6-996c-ce341aaba102",
+                            ConcurrencyStamp = "556f3ec5-2160-4346-b1b3-4aa9b312e13d",
                             Email = "userothree@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر سه",

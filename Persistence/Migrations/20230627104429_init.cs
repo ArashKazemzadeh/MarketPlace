@@ -290,6 +290,7 @@ namespace Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TotalPrices = table.Column<int>(type: "int", nullable: true),
                     CustomerId = table.Column<int>(type: "int", nullable: true),
+                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsRegistrationFinalized = table.Column<bool>(type: "bit", nullable: false),
                     SellerId = table.Column<int>(type: "int", nullable: true),
                     InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -525,6 +526,7 @@ namespace Persistence.Migrations
                     RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsAccepted = table.Column<bool>(type: "bit", nullable: true),
                     AuctionId = table.Column<int>(type: "int", nullable: true),
+                    CustomerId = table.Column<int>(type: "int", nullable: true),
                     InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -538,8 +540,8 @@ namespace Persistence.Migrations
                         principalTable: "Auctions",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Bids_Customer_AuctionId",
-                        column: x => x.AuctionId,
+                        name: "FK_Bids_Customer_CustomerId",
+                        column: x => x.CustomerId,
                         principalTable: "Customer",
                         principalColumn: "Id");
                 });
@@ -559,10 +561,10 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "InsertTime", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RemoveTime", "SecurityStamp", "TwoFactorEnabled", "UpdateTime", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "29cbc23e-ce51-477f-a3fa-cedadfff67cf", "userone@gmail.com", false, "کاربر یک", null, false, null, null, null, null, null, false, null, null, false, null, "userone@gmail.com" },
-                    { 2, 0, "21186276-e815-441f-b2ed-e7d330744924", "userotow@gmail.com", false, "کاربر دو", null, false, null, null, null, null, null, false, null, null, false, null, "userotow@gmail.com" },
-                    { 3, 0, "8c8961cc-4287-4111-b183-03585136165a", "userothree@gmail.com", false, "کاربر سه", null, false, null, null, null, null, null, false, null, null, false, null, "userothree@gmail.com" },
-                    { 4, 0, "ff91f37f-5a1e-449f-8ec1-a1c9e2160f35", "userofour@gmail.com", false, "کاربر چهار", null, false, null, null, null, null, null, false, null, null, false, null, "userfour@gmail.com" }
+                    { 1, 0, "dc28bfb0-bb99-4b52-b657-1a5673a16b61", "userone@gmail.com", false, "کاربر یک", null, false, null, null, null, null, null, false, null, null, false, null, "userone@gmail.com" },
+                    { 2, 0, "49e8fbab-d3f8-4f4e-986c-bf2dd27b8a3c", "userotow@gmail.com", false, "کاربر دو", null, false, null, null, null, null, null, false, null, null, false, null, "userotow@gmail.com" },
+                    { 3, 0, "556f3ec5-2160-4346-b1b3-4aa9b312e13d", "userothree@gmail.com", false, "کاربر سه", null, false, null, null, null, null, null, false, null, null, false, null, "userothree@gmail.com" },
+                    { 4, 0, "3b9e3bca-8e6d-4cd5-bce6-1022970fb58a", "userofour@gmail.com", false, "کاربر چهار", null, false, null, null, null, null, null, false, null, null, false, null, "userfour@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -622,9 +624,9 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "CustomerId", "CustomertId", "Description", "InsertTime", "IsConfirm", "ProductId", "RegisterDate", "RemoveTime", "Title", "UpdateTime" },
                 values: new object[,]
                 {
-                    { 1, null, 1, "این محصول عالی است.", null, null, 1, new DateTime(2023, 6, 26, 17, 38, 33, 17, DateTimeKind.Local).AddTicks(1142), null, "عالی", null },
-                    { 2, null, 2, "این محصول بد است.", null, null, 1, new DateTime(2023, 6, 26, 17, 38, 33, 17, DateTimeKind.Local).AddTicks(1160), null, "بد", null },
-                    { 20, null, 2, "این محصول خوب است.", null, null, 2, new DateTime(2023, 6, 26, 17, 38, 33, 17, DateTimeKind.Local).AddTicks(1162), null, "خوب", null }
+                    { 1, null, 1, "این محصول عالی است.", null, null, 1, new DateTime(2023, 6, 27, 14, 14, 29, 414, DateTimeKind.Local).AddTicks(3722), null, "عالی", null },
+                    { 2, null, 2, "این محصول بد است.", null, null, 1, new DateTime(2023, 6, 27, 14, 14, 29, 414, DateTimeKind.Local).AddTicks(3741), null, "بد", null },
+                    { 20, null, 2, "این محصول خوب است.", null, null, 2, new DateTime(2023, 6, 27, 14, 14, 29, 414, DateTimeKind.Local).AddTicks(3743), null, "خوب", null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -688,6 +690,11 @@ namespace Persistence.Migrations
                 name: "IX_Bids_AuctionId",
                 table: "Bids",
                 column: "AuctionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bids_CustomerId",
+                table: "Bids",
+                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Booths_SellerId",

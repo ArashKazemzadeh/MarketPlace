@@ -19,14 +19,14 @@ public class AddBidForAuctionService : IAddBidForAuctionService
     {
         var auction = await _auctionRepository.GetByIdAsync(auctionId);
         var customer = await _customerRepository.GetByIdAsync(userId);
-        var actionByCustomerId = await _auctionRepository.GetByCustomerIdAsync(userId);
+        var actionByCustomer = await _bidRepository.HasPlacedBid(userId, auctionId);
         if (auction == null)
             return "مزایده موجود نیست.";
         if (customer == null)
-            return "کاربر موجود نیست."; ;
+            return "کاربر موجود نیست.";
         if (auction.EndDeadTime < DateTime.Now)
             return "زمان مزایده به اتمام رسیده است";
-        if (actionByCustomerId!=null)
+        if (actionByCustomer)
             return "شما قبلا در این مزایده شرکت کرده اید.";
         var bidDto = new BidRepDto
         {
@@ -36,11 +36,8 @@ public class AddBidForAuctionService : IAddBidForAuctionService
             Customer = customer,
             Auction = auction,
         };
-        var result1 = await _bidRepository.AddAsync(bidDto);
-        if (result1==0)
-        {
-            return "ثبت پیشنهاد با مشکل مواجه شد.";
-        }
+
+
         if (price > auction.HighestPrice)
         {
             auction.HighestPrice = price;
@@ -48,10 +45,10 @@ public class AddBidForAuctionService : IAddBidForAuctionService
         }
         else
             return "قیمت پیشنهادی باید از اخرین مبلغ پیشنهادی بیشتر باشد.";
-
-        var result2 = await _auctionRepository.UpdateWithBidAsync(auction, bidDto);
-        var result3 = await _customerRepository.UpdateWithBidAsync(customer, bidDto);
-        if (result2 == 0 || result3 == 0)
+        var result = await _bidRepository.AddAsync(bidDto);//+
+        //var result2 = await _auctionRepository.UpdateWithBidAsync(auction, bidDto);
+        //var result3 = await _customerRepository.UpdateWithBidAsync(customer, bidDto);
+        if (result == 0 )
         {
             return "خطا هنگام ذخیره ی اطلاعات رخ داد";
         }
