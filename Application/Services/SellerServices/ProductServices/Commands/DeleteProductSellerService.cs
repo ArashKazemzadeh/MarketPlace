@@ -10,21 +10,22 @@ namespace Application.Services.SellerServices.ProductServices.Commands
 
         public DeleteProductSellerService(IProductRepository productRepository)
         {
-            _productRepository = productRepository; 
+            _productRepository = productRepository;
         }
-        public async Task< GeneralDto> Execute(int id)
+        public async Task<GeneralDto> Execute(int id)
         {
-            var productGeneral= await _productRepository.GetByIdAsync(id);
-            if (productGeneral==null)
+            var productGeneral = await _productRepository.GetByIdAsync(id);
+            if (productGeneral == null)
+                return new GeneralDto { message = "کالا موجود نیست" };
+            if (productGeneral.IsAuction)
+                return new GeneralDto { message = "تا پایان مزایده امکان حذف کالا وجود ندارد" };
+
+
+            await _productRepository.DeleteAsync(id);
+            return new GeneralDto
             {
-                return new GeneralDto {message = "کالا موجود نیست"};
-            }
-            
-           await _productRepository.DeleteAsync(id);
-           return new GeneralDto
-           {
-               message = "عملیات با موفقیت انجام شد"
-           };
+                message = "عملیات با موفقیت انجام شد"
+            };
         }
     }
 }

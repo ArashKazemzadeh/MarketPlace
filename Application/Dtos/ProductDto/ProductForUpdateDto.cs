@@ -1,4 +1,6 @@
-﻿namespace Application.Dtos.ProductDto;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace Application.Dtos.ProductDto;
 
 public class ProductForUpdateDto
 {
@@ -8,6 +10,7 @@ public class ProductForUpdateDto
  
     public int? Availability { get; set; }
     public string? Description { get; set; }
-   
+    public List<int> CategoryIds { get; set; }
+
 
 }

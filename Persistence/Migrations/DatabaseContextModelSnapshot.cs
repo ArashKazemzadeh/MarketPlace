@@ -334,7 +334,7 @@ namespace Persistence.Migrations
                             CustomertId = 1,
                             Description = "این محصول عالی است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 27, 14, 14, 29, 414, DateTimeKind.Local).AddTicks(3722),
+                            RegisterDate = new DateTime(2023, 6, 27, 17, 14, 29, 983, DateTimeKind.Local).AddTicks(2448),
                             Title = "عالی"
                         },
                         new
@@ -343,7 +343,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول بد است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 27, 14, 14, 29, 414, DateTimeKind.Local).AddTicks(3741),
+                            RegisterDate = new DateTime(2023, 6, 27, 17, 14, 29, 983, DateTimeKind.Local).AddTicks(2467),
                             Title = "بد"
                         },
                         new
@@ -352,7 +352,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول خوب است.",
                             ProductId = 2,
-                            RegisterDate = new DateTime(2023, 6, 27, 14, 14, 29, 414, DateTimeKind.Local).AddTicks(3743),
+                            RegisterDate = new DateTime(2023, 6, 27, 17, 14, 29, 983, DateTimeKind.Local).AddTicks(2469),
                             Title = "خوب"
                         });
                 });
@@ -767,7 +767,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dc28bfb0-bb99-4b52-b657-1a5673a16b61",
+                            ConcurrencyStamp = "a200cb3a-5d65-4204-8c7f-8259980e390c",
                             Email = "userone@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر یک",
@@ -780,7 +780,7 @@ namespace Persistence.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3b9e3bca-8e6d-4cd5-bce6-1022970fb58a",
+                            ConcurrencyStamp = "9d7dd3f9-fe27-469e-be71-6e525b521829",
                             Email = "userofour@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر چهار",
@@ -793,7 +793,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "49e8fbab-d3f8-4f4e-986c-bf2dd27b8a3c",
+                            ConcurrencyStamp = "74265da6-385a-433a-af8a-0c3212fc36df",
                             Email = "userotow@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر دو",
@@ -806,7 +806,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "556f3ec5-2160-4346-b1b3-4aa9b312e13d",
+                            ConcurrencyStamp = "111eedc3-af72-4356-b4bc-76c3f74ab612",
                             Email = "userothree@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر سه",

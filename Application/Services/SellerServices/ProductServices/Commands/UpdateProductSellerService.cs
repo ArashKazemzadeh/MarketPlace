@@ -22,9 +22,9 @@ namespace Application.Services.SellerServices.ProductServices.Commands
         {
             var product = await _productRepository.GetByIdAsync(productUpdateDto.Id);
             if (product == null)
-            {
                 return new GeneralDto { message = "کالا یافت نشد" };
-            }
+            if (product.IsAuction)
+                return new GeneralDto { message = "تا پایان مزایده امکان ویرایش کالا وجود ندارد!" };
 
             var result = new ProductDto
             {
@@ -36,12 +36,14 @@ namespace Application.Services.SellerServices.ProductServices.Commands
                 IsActive = product.IsActive, // استفاده از مقدار موجود در product
             };
 
-            await _productRepository.UpdateAsync(result);
+            await _productRepository.UpdateAsync(result, productUpdateDto.CategoryIds); // ارسال لیست دسته‌بندی‌ها به متد UpdateAsync
+
             return new GeneralDto
             {
                 message = "کالا با موفقیت ویرایش شد"
             };
         }
+
 
     }
 }

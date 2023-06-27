@@ -40,7 +40,7 @@ namespace Persistence.Repositories.Orders
 
         public async Task<List<AuctionProductDto>> GetProductsWithTrueAuctions(int sellerId)
         {
-            var result =await _dbSet.Where(a => a.IsActive==true && a.Booth.Seller.Id == sellerId)
+            var result =await _dbSet.Where(a =>a.IsAuction==true && a.IsActive==true && a.Booth.Seller.Id == sellerId)
                 .Select(p => new AuctionProductDto
                 {
                     ProductId = p.Id,
@@ -169,5 +169,25 @@ namespace Persistence.Repositories.Orders
             var redult = await _dbSet.Where(p => p.Id == id).Include(c => c.Categories).FirstOrDefaultAsync();
             return redult;
         }
+
+        public async Task UpdateAsync(ProductDto productDto, List<int> categoryIds)
+        {
+            var result = await _dbSet.FindAsync(productDto.Id);
+
+            if (result != null)
+            {
+                result.Name = productDto.Name;
+                result.BasePrice = productDto.BasePrice;
+                result.Availability = productDto.Availability;
+                result.Description = productDto.Description;
+
+                // به روزرسانی دسته‌بندی‌ها
+                result.Categories = await _context.Categories.Where(c => categoryIds.Contains(c.Id)).ToListAsync();
+
+                _context.Entry(result).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+        }
+
     }
 }

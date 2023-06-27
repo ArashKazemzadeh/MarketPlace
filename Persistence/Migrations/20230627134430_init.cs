@@ -561,10 +561,10 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "InsertTime", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RemoveTime", "SecurityStamp", "TwoFactorEnabled", "UpdateTime", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "dc28bfb0-bb99-4b52-b657-1a5673a16b61", "userone@gmail.com", false, "کاربر یک", null, false, null, null, null, null, null, false, null, null, false, null, "userone@gmail.com" },
-                    { 2, 0, "49e8fbab-d3f8-4f4e-986c-bf2dd27b8a3c", "userotow@gmail.com", false, "کاربر دو", null, false, null, null, null, null, null, false, null, null, false, null, "userotow@gmail.com" },
-                    { 3, 0, "556f3ec5-2160-4346-b1b3-4aa9b312e13d", "userothree@gmail.com", false, "کاربر سه", null, false, null, null, null, null, null, false, null, null, false, null, "userothree@gmail.com" },
-                    { 4, 0, "3b9e3bca-8e6d-4cd5-bce6-1022970fb58a", "userofour@gmail.com", false, "کاربر چهار", null, false, null, null, null, null, null, false, null, null, false, null, "userfour@gmail.com" }
+                    { 1, 0, "a200cb3a-5d65-4204-8c7f-8259980e390c", "userone@gmail.com", false, "کاربر یک", null, false, null, null, null, null, null, false, null, null, false, null, "userone@gmail.com" },
+                    { 2, 0, "74265da6-385a-433a-af8a-0c3212fc36df", "userotow@gmail.com", false, "کاربر دو", null, false, null, null, null, null, null, false, null, null, false, null, "userotow@gmail.com" },
+                    { 3, 0, "111eedc3-af72-4356-b4bc-76c3f74ab612", "userothree@gmail.com", false, "کاربر سه", null, false, null, null, null, null, null, false, null, null, false, null, "userothree@gmail.com" },
+                    { 4, 0, "9d7dd3f9-fe27-469e-be71-6e525b521829", "userofour@gmail.com", false, "کاربر چهار", null, false, null, null, null, null, null, false, null, null, false, null, "userfour@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -624,9 +624,9 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "CustomerId", "CustomertId", "Description", "InsertTime", "IsConfirm", "ProductId", "RegisterDate", "RemoveTime", "Title", "UpdateTime" },
                 values: new object[,]
                 {
-                    { 1, null, 1, "این محصول عالی است.", null, null, 1, new DateTime(2023, 6, 27, 14, 14, 29, 414, DateTimeKind.Local).AddTicks(3722), null, "عالی", null },
-                    { 2, null, 2, "این محصول بد است.", null, null, 1, new DateTime(2023, 6, 27, 14, 14, 29, 414, DateTimeKind.Local).AddTicks(3741), null, "بد", null },
-                    { 20, null, 2, "این محصول خوب است.", null, null, 2, new DateTime(2023, 6, 27, 14, 14, 29, 414, DateTimeKind.Local).AddTicks(3743), null, "خوب", null }
+                    { 1, null, 1, "این محصول عالی است.", null, null, 1, new DateTime(2023, 6, 27, 17, 14, 29, 983, DateTimeKind.Local).AddTicks(2448), null, "عالی", null },
+                    { 2, null, 2, "این محصول بد است.", null, null, 1, new DateTime(2023, 6, 27, 17, 14, 29, 983, DateTimeKind.Local).AddTicks(2467), null, "بد", null },
+                    { 20, null, 2, "این محصول خوب است.", null, null, 2, new DateTime(2023, 6, 27, 17, 14, 29, 983, DateTimeKind.Local).AddTicks(2469), null, "خوب", null }
                 });
 
             migrationBuilder.CreateIndex(

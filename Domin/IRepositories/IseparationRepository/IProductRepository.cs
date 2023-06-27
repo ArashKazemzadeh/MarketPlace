@@ -5,6 +5,7 @@ namespace Domin.IRepositories.IseparationRepository;
 
 public interface IProductRepository
 {
+    Task UpdateAsync(ProductDto productDto, List<int> categoryIds);
     Task<List<ProductCustomerDto>> GetProductByBoothIdAsync(int boothId);
     Task<List<AuctionProductDto> >GetProductsWithTrueAuctions(int sellerId);
     Task<List<Product>> GetProductsWithSellerNameConfirmAsync();

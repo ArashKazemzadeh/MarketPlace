@@ -146,22 +146,27 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
         {
             var productgeneral = await _getProductSellerService.FindByIdAsync(id);
             var model = new ProductForUpdateDto
-            {   
+            {
                 Id = id,
                 Name = productgeneral.Data.Name,
                 BasePrice = productgeneral.Data.BasePrice,
                 Description = productgeneral.Data.Description,
-                Availability = productgeneral.Data.Availability
+                Availability = productgeneral.Data.Availability,
+                // اضافه کردن دسته‌بندی‌های محصول در مدل
+                CategoryIds = productgeneral.Data.Categories.Select(c => c.Id).ToList()
             };
+            // ارسال دسته‌بندی‌ها به ویو
+            ViewBag.Categories = await _getCategoryServices.GetAll(); // جایگزین کردن _categoryRepository با مخزن (repository) مربوطه
+
             return View(model);
         }
+
         [HttpPost]
         public async Task<IActionResult> Edit(ProductForUpdateDto model)
         {
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
+            
             var result = await _updateProductSellerService.Execute(model);
             ViewBag.Message = result;
             return RedirectToAction("Index");

@@ -8,7 +8,6 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="Id" type="hidden" class="form-control" />
-           
 
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -31,7 +30,14 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-          
+
+            <div class="form-group">
+                <label asp-for="CategoryIds" class="control-label">دسته‌بندی‌ها</label>
+                <select asp-for="CategoryIds" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))" multiple class="form-control">
+                </select>
+                <span asp-validation-for="CategoryIds" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="ویرایش کن" class="btn btn-primary btn-block" />
             </div>
