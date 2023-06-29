@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistence.ModelConfigurations.EntitiesConfiguration
 {
-    public class UserFileConfig : IEntityTypeConfiguration<FileForUser>
+    public class UserFileConfig : IEntityTypeConfiguration<ConsoleApp1.Models.File>
     {
-        public void Configure(EntityTypeBuilder<FileForUser> entity)
+        public void Configure(EntityTypeBuilder<ConsoleApp1.Models.File> entity)
         {
             entity.ToTable("Files");
 

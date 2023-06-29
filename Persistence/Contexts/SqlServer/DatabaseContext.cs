@@ -33,9 +33,9 @@ namespace Persistence.Contexts.SqlServer
 
         public virtual DbSet<Customer> Customers { get; set; }
 
-        public virtual DbSet<FileForUser> Files { get; set; }
+        public virtual DbSet<ConsoleApp1.Models.File> Files { get; set; }
 
-        public virtual DbSet<ImageForProduct> Images { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
 
         public virtual DbSet<Medal> Medals { get; set; }
 

@@ -7,21 +7,21 @@ namespace Application.Services.SellerServices.ImageServices.Queries
 {
     public class ProductImageQueriesService: IProductImageQueriesService
     {
-        private readonly IImageForProductRepository _imageRepository;
+        private readonly IImageRepository _imageRepository;
      
 
-        public ProductImageQueriesService(IImageForProductRepository imageRepository)
+        public ProductImageQueriesService(IImageRepository imageRepository)
         {
             _imageRepository = imageRepository;
            
         }
 
-        public async Task<ImageForProduct> GetImageByIdAsync(int imageId)
+        public async Task<Image> GetImageByIdAsync(int imageId)
         {
             return await _imageRepository.GetByIdAsync(imageId);
         }
 
-        public async Task<IEnumerable<ImageForProduct>> GetImagesForProductAsync(int productId)
+        public async Task<IEnumerable<Image>> GetImagesForProductAsync(int productId)
         {
             return await _imageRepository.GetImagesForProductAsync(productId);
         }

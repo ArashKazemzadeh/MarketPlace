@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistence.ModelConfigurations.EntitiesConfiguration
 {
-    public class ImageConfig : IEntityTypeConfiguration<ImageForProduct>
+    public class ImageConfig : IEntityTypeConfiguration<Image>
     {
-        public void Configure(EntityTypeBuilder<ImageForProduct> entity)
+        public void Configure(EntityTypeBuilder<Image> entity)
         {
           
 

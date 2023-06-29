@@ -7,10 +7,10 @@ namespace Application.Services.SellerServices.ImageServices.Commands
 {
     public class ProductImageCommandsService : IProductImageCommandsService
     {
-        private readonly IImageForProductRepository _imageForProductRepository;
+        private readonly IImageRepository _imageForProductRepository;
         private readonly IProductRepository _productRepository;
 
-        public ProductImageCommandsService(IImageForProductRepository imageForProductRepository,
+        public ProductImageCommandsService(IImageRepository imageForProductRepository,
             IProductRepository productRepository)
         {
             _imageForProductRepository = imageForProductRepository;

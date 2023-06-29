@@ -18,7 +18,7 @@ public class Product
     public int? BoothId { get; set; }
     public virtual Booth? Booth { get; set; }
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
-    public virtual ICollection<ImageForProduct> Images { get; set; } = new List<ImageForProduct>();
+    public virtual ICollection<Image> Images { get; set; } = new List<Image>();
     public virtual ICollection<ProductsCart> ProductsCarts { get; set; } = new List<ProductsCart>();
     public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
 }

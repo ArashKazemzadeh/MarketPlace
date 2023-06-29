@@ -20,7 +20,14 @@
     <!-- Bootstrap 4.5.3 -->
     <link rel="stylesheet" href="~/themesite/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/themesite/assets/css/theme.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
 
+    </style>
 </head>
 
 <body>
@@ -35,7 +42,7 @@
 
                     </div>
                     <div class="auth-form-title text-center">
-                        ثبت نام در دال مارکت
+                       ویرایش پروفایل فروشنده
                     </div>
                     <form asp-action="EditProfile" asp-controller="Home" asp-area="Seller" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -55,7 +62,7 @@
                             <label asp-for="BoothName" class="label-element"> </label>
                             <div class="form-element-with-icon">
                                 <input asp-for="BoothName" class="input-element">
-                                <i class="fad fa-mailbox"></i>
+                                <i class="fad fa-user"></i>
                             </div>
                             <span asp-validation-for="BoothName" class="text-danger"></span>
                         </div>
@@ -63,7 +70,7 @@
                             <label asp-for="BoothDescription" class="label-element"> </label>
                             <div class="form-element-with-icon">
                                 <input asp-for="BoothDescription" class="input-element">
-                                <i class="fad fa-key"></i>
+                                <i class="fad fa-user"></i>
                             </div>
                             <span asp-validation-for="BoothDescription" class="text-danger"></span>
 
@@ -72,7 +79,7 @@
                             <label asp-for="City" class="label-element"> </label>
                             <div class="form-element-with-icon">
                                 <input asp-for="City" class="input-element">
-                                <i class="fad fa-key"></i>
+                                <i class="fad fa-user"></i>
                             </div>
                             <span asp-validation-for="City" class="text-danger"></span>
 
@@ -81,7 +88,7 @@
                             <label asp-for="Street" class="label-element"> </label>
                             <div class="form-element-with-icon">
                                 <input asp-for="Street" class="input-element">
-                                <i class="fad fa-mobile-alt"></i>
+                                <i class="fad fa-user"></i>
                             </div>
                             <span asp-validation-for="Street" class="text-danger"></span>
 
@@ -90,20 +97,24 @@
                             <label asp-for="AddressDescription" class="label-element"> </label>
                             <div class="form-element-with-icon">
                                 <input asp-for="AddressDescription" class="input-element">
-                                <i class="fad fa-mobile-alt"></i>
+                                <i class="fad fa-user"></i>
                             </div>
                             <span asp-validation-for="AddressDescription" class="text-danger"></span>
 
                         </div>
                         
                         <div class="form-element-row text-left">
-                            <button class="btn-element btn-success-element">
+                            <button class="btn-element btn-success-element btn-block">
                                 <i class="fad fa-user-edit"></i>
-                               به روز رسانی کن
+                                به روز رسانی کن
                             </button>
                         </div>
 
                     </form>
+                    <a class="btn-element btn-success-element" asp-controller="Home" asp-action="Index" asp-area="Seller">
+                        <i class="fad fa-user-back"></i>
+                        بازگشت به صفحه قبل
+                    </a>
                 </div>
             </div>
         </div>

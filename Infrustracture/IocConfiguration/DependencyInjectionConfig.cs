@@ -106,7 +106,7 @@ namespace Infrustracture.IocConfiguration
             // ---------------------seller-----------------------------------------------------------
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IGetCategoryServices, GetCategoryServices>();
-            services.AddScoped<IImageForProductRepository, ImageForProductRepository>();
+            services.AddScoped<IImageRepository, ImageRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<IAddSellerService, AddSellerService>();
             services.AddScoped<IUpdateSellerByIdService, UpdateSellerByIdService>();
@@ -121,6 +121,9 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<IGetAllAuctionBySellerIdService, GetAllAuctionBySellerIdService>();
             services.AddScoped<IAuctionRepository, AuctionRepository>();
             services.AddScoped<IAddProductToCategoryService, AddProductToCategoryService>();
+            services.AddScoped < IFileCommandService,FileCommandService>();
+            services.AddScoped< IFilesQueryService, FilesQueryService>();
+            services.AddScoped< IFileRepository, FileRepository>();
             // ---------------------Customer-----------------------------------------------------------
             services.AddScoped<IGetBoothsByCategoryId, GetBoothsByCategoryId>();
             services.AddScoped<ICategoryCustomerQueryService, CategoryCustomerQueryService>();

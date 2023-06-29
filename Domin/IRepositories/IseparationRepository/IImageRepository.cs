@@ -3,13 +3,13 @@ using Domin.IRepositories.Dtos;
 
 namespace Domin.IRepositories.IseparationRepository;
 
-public interface IImageForProductRepository
+public interface IImageRepository
 {
-    Task<ImageForProduct> GetByIdAsync(int imageId);
-    Task<IEnumerable<ImageForProduct>> GetImagesForProductAsync(int productId);
+    Task<Image> GetByIdAsync(int imageId);
+    Task<IEnumerable<Image>> GetImagesForProductAsync(int productId);
     Task AddAsync(ImageForProductRepDto image);
     Task<bool> RemoveAsync(int id);
-    Task<ImageForProduct> GetByUrlAsync(string url);
+    Task<Image> GetByUrlAsync(string url);
     Task<bool> RemoveAsync(string url);
 
 }

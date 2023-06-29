@@ -13,6 +13,6 @@ public class ProductGeneralDto
     public string? Description { get; set; }
     public bool IsActive { get; set; }
     public Auction Auction { get; set; }
-    public ICollection<ImageForProduct> Image { get; set; }
+    public ICollection<Image> Image { get; set; }
     public ICollection<Category> Categories { get; set; }
 }

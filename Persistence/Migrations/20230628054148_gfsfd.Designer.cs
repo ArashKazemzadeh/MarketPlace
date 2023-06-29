@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts.SqlServer;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts.SqlServer;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230628054148_gfsfd")]
+    partial class gfsfd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -334,7 +337,7 @@ namespace Persistence.Migrations
                             CustomertId = 1,
                             Description = "این محصول عالی است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 28, 12, 52, 50, 480, DateTimeKind.Local).AddTicks(7727),
+                            RegisterDate = new DateTime(2023, 6, 28, 9, 11, 48, 394, DateTimeKind.Local).AddTicks(2502),
                             Title = "عالی"
                         },
                         new
@@ -343,7 +346,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول بد است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 28, 12, 52, 50, 480, DateTimeKind.Local).AddTicks(7748),
+                            RegisterDate = new DateTime(2023, 6, 28, 9, 11, 48, 394, DateTimeKind.Local).AddTicks(2522),
                             Title = "بد"
                         },
                         new
@@ -352,7 +355,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول خوب است.",
                             ProductId = 2,
-                            RegisterDate = new DateTime(2023, 6, 28, 12, 52, 50, 480, DateTimeKind.Local).AddTicks(7750),
+                            RegisterDate = new DateTime(2023, 6, 28, 9, 11, 48, 394, DateTimeKind.Local).AddTicks(2524),
                             Title = "خوب"
                         });
                 });
@@ -394,6 +397,10 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<byte[]>("FileData")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
@@ -770,7 +777,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "828a8f4b-6de2-4ccb-ae2c-334194903291",
+                            ConcurrencyStamp = "90329857-f7ce-4f11-8c66-4759b1000cce",
                             Email = "userone@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر یک",
@@ -783,7 +790,7 @@ namespace Persistence.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "29873faf-f4f6-4acc-9a90-54cf4a85067a",
+                            ConcurrencyStamp = "d32a17e5-ed1d-4945-a79c-7a65342bdb53",
                             Email = "userofour@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر چهار",
@@ -796,7 +803,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2b3d85cf-90c4-41de-93d1-9dea234533e1",
+                            ConcurrencyStamp = "74b7abaf-9850-4573-8dbf-c3602fb4b43a",
                             Email = "userotow@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر دو",
@@ -809,7 +816,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "38573c70-2168-43c0-ad68-a808a205e18f",
+                            ConcurrencyStamp = "2f5205e1-7ccb-4535-a069-2eed3d27ab8d",
                             Email = "userothree@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر سه",

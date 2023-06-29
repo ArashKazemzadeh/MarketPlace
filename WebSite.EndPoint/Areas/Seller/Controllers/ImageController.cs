@@ -80,8 +80,5 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
         }
 
 
-
-
-
     }
 }
