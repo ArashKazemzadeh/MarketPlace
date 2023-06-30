@@ -2,7 +2,7 @@
 using Application.Dtos.ProductDto;
 using Application.IServices.AdminServices.ProoductServices.Commands;
 using ConsoleApp1.Models;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.AdminServices.ProoductServices.Commands
 {

@@ -1,7 +1,7 @@
 ﻿using Application.Dtos;
 using Application.Dtos.ProductDto;
 using Application.IServices.SellerServices.ProductServices.Commands;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 using ProductDto = Domin.IRepositories.Dtos.ProductDto;
 
 namespace Application.Services.SellerServices.ProductServices.Commands

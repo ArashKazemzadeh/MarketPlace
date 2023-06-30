@@ -1,5 +1,4 @@
 ﻿using ConsoleApp1.Models;
-using Domin.IRepositories.IseparationRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +7,7 @@ using System.Threading.Tasks;
 using Application.IServices.CustomerServices.CartService.Queries;
 using Domin.IRepositories.Dtos.Cart;
 using Domin.IRepositories.Dtos;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.CustomerServices.CartService.Queries
 {

@@ -1,7 +1,8 @@
 ﻿using Application.IServices.AdminServices.CommissionServices.Queries;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
+
 namespace Application.Services.AdminServices.CommissionServices.Queries;
-   
+
 public class GetAllCommissionsService : IGetAllCommissionsService
 {
     private readonly ISellerRepository _sellerRepository;

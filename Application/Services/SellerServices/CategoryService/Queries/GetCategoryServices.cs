@@ -1,6 +1,6 @@
 ﻿using Application.Dtos.CategoryDto;
 using Application.IServices.SellerServices.CategoryService;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.SellerServices.CategoryService.Queries;
 

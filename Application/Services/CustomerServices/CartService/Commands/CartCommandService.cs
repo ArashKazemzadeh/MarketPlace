@@ -1,6 +1,6 @@
 ﻿using Application.IServices.CustomerServices.CartService.Commands;
 using Domin.IRepositories.Dtos.Cart;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.CustomerServices.CartService.Commands
 {
@@ -71,7 +71,7 @@ namespace Application.Services.CustomerServices.CartService.Commands
                     ProductId = productId,
                     Quantity = 1
                 };
-                _productsCartRepository.AddAsync(productsCart);
+              await  _productsCartRepository.AddAsync(productsCart);
             }
             else
             {

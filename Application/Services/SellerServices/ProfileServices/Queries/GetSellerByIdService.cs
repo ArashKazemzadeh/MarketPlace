@@ -1,6 +1,6 @@
 ﻿using Application.IServices.SellerServices.ProfileServices.Queries;
 using Domin.IRepositories.Dtos;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.SellerServices.ProfileServices.Queries
 {

@@ -1,7 +1,7 @@
 ﻿using Application.IServices.SellerServices.ImageServices.Commands;
 using Domin.IRepositories.Dtos;
 using Domin.IRepositories.Dtos.File;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.SellerServices.ImageServices.Commands
 {

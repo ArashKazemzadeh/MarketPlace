@@ -1,6 +1,6 @@
 ﻿using Application.IServices.CustomerServices.CommentServices.Commands;
 using Domin.IRepositories.Dtos;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.CustomerServices.CommentServices.Commands
 {

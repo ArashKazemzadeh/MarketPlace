@@ -2,7 +2,7 @@
 using Application.IServices.AdminServices.BoothServices.Commands;
 using ConsoleApp.Models;
 using Domin.IRepositories.Dtos;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.AdminServices.BoothServices.Commands
 {

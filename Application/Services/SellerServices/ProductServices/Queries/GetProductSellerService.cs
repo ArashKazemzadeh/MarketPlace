@@ -3,7 +3,7 @@ using Application.Dtos.ProductDto;
 using Application.IServices.SellerServices.ProductServices.Queries;
 using Application.IServices.SellerServices.ProfileServices.Queries;
 using Application.Services.SellerServices.ProfileServices.Queries;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.SellerServices.ProductServices.Queries
 {

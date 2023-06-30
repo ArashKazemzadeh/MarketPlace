@@ -5,6 +5,8 @@ using Infrustracture.appsettingConfiguration;
 using Infrustracture.CookiesConfiguration;
 using Infrustracture.HangFireConfiguration;
 using Infrustracture.IocConfiguration;
+using MongoDB.Driver;
+using Serilog;
 using WebSite.EndPoint.Utilities.Filters;
 
 
@@ -29,6 +31,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScopeSqlServerTables(builder.Configuration);
 builder.Services.AddScopeMongoDbDocuments(builder.Configuration);
 #endregion
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -40,10 +43,6 @@ if (!app.Environment.IsDevelopment())
 app.UseHangfireServer();
 RecurringJob.AddOrUpdate<IProcessCompletedAuctionsAndAddToWinnerCart>
     ("Add product to winner of cart", x => x.Execute(), Cron.Minutely);
-RecurringJob.AddOrUpdate<ICalculationOfSalesAndTheCommissionAmountOfEachSeller>
-    ("Commission Calculation", x => x.Execute(), Cron.Minutely);
-RecurringJob.AddOrUpdate<IAggregateCommissionsForAdmin>
-    ("Total commission calculation site", x => x.Execute(), Cron.Minutely);
 RecurringJob.AddOrUpdate<IAssignMedalToSeller>
     ("create medal for sellers", x => x.Execute(), Cron.Minutely);
 

@@ -75,15 +75,14 @@
                             <span asp-validation-for="BoothDescription" class="text-danger"></span>
 
                         </div>
-                        <div class="form-element-row">
-                            <label asp-for="City" class="label-element"> </label>
-                            <div class="form-element-with-icon">
-                                <input asp-for="City" class="input-element">
-                                <i class="fad fa-user"></i>
-                            </div>
-                            <span asp-validation-for="City" class="text-danger"></span>
-
-                        </div>
+                        <select id="citySelect" class="form-control" name="selectedCity">
+                            <option value="">یک شهر را انتخاب کنید</option>
+                            @foreach (var city in ViewBag.Cities)
+                            {
+                                <option value="@city">@city</option>
+                            }
+                        </select>
+                       
                         <div class="form-element-row">
                             <label asp-for="Street" class="label-element"> </label>
                             <div class="form-element-with-icon">

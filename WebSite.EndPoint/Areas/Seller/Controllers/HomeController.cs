@@ -19,17 +19,21 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
         private readonly IGetSellerByIdService _getSellerByIdService;
         private readonly IAccountService _accountService;
         private readonly IProductImageQueriesService _imageQueriesService;
-
+        private readonly IConfiguration _configuration;
 
         public HomeController(
             IUpdateSellerByIdService updateSellerByIdService,
             IAccountService accountService,
-            IGetSellerByIdService getSellerByIdService, IProductImageQueriesService imageQueriesService)
+            IGetSellerByIdService getSellerByIdService,
+            IProductImageQueriesService imageQueriesService, 
+            IConfiguration configuration
+            )
         {
             _updateSellerByIdService = updateSellerByIdService;
             _accountService = accountService;
             _getSellerByIdService = getSellerByIdService;
             _imageQueriesService = imageQueriesService;
+            _configuration = configuration;
         }
 
         public async Task<IActionResult> Index()
@@ -46,6 +50,8 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
         {
             var sellerId = Convert.ToInt32(await _accountService.GetLoggedInUserId());
             var seller = await _getSellerByIdService.Execute(sellerId);
+            var cities = _configuration.GetSection("Cities").Get<string[]>();
+            ViewBag.Cities = cities;
             var model = new BoothSellerVM
             {
                 SellerId = seller.SellerId,
@@ -61,17 +67,17 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> EditProfile(BoothSellerVM seller)
+        public async Task<IActionResult> EditProfile(BoothSellerVM seller, string selectedCity)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(seller);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(seller);
+            //}
             var updatedSeller = new AddSellerDto
             {
                 SellerId = seller.SellerId,//
                 CompanyName = seller.CompanyName,
-                City = seller.City,
+                City = selectedCity,
                 Street = seller.Street,
                 AddressDescription = seller.AddressDescription,
                 BoothName = seller.BoothName,

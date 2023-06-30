@@ -17,11 +17,7 @@ using Application.Services.AdminServices.ProoductServices.Commands;
 using Application.Services.AdminServices.ProoductServices.Queries;
 using Application.Services.Visitors.SaveVisitorInfo;
 using Application.Visitors.SaveVisitorInfo;
-using Domin.IRepositories.IseparationRepository;
 using Persistence.Contexts.MongoContext;
-using Persistence.Repositories.Optionals;
-using Persistence.Repositories.Orders;
-using Persistence.Repositories.Users;
 using Application.IServices.AdminServices.CommissionServices.Queries;
 using Application.IServices.SellerServices.AuctionServices.Commands;
 using Application.IServices.SellerServices.AuctionServices.Queries;
@@ -56,7 +52,6 @@ using Application.IServices.CustomerServices.AuctionServices.Queries;
 using Application.Services.CustomerServices.AuctionServices.Queries;
 using Application.IServices.AutoServices;
 using Application.Services.AutoServices;
-using Persistence.Repositories.Auto;
 using Application.IServices.CustomerServices.BidServices.Commands;
 using Application.Services.CustomerServices.BidServices.Commands;
 using Application.IServices.CustomerServices.BidServices.Queries;
@@ -70,6 +65,20 @@ using Application.Services.CustomerServices.CommentServices.Commands;
 using Application.IServices.CustomerServices.CommentServices.Queries;
 using Application.Services.CustomerServices.CommentServices.Queries;
 using Application.Services.Visitors.ProfileImageService;
+using Domin.IRepositories.IseparationRepository.Dapper;
+using Persistence.DapperRepositories;
+using Microsoft.Extensions.Logging;
+using Serilog;
+using MongoDB.Driver;
+using Persistence.Repositories.SqlServer.Users;
+using Persistence.Repositories.SqlServer.Orders;
+using Persistence.Repositories.SqlServer.Optionals;
+using Persistence.Repositories.SqlServer.Auto;
+using Domin.IRepositories.IseparationRepository.SqlServer;
+using Application.IServices.LogServices;
+using Persistence.Repositories.DapperRepositories;
+using Persistence.Repositories.MongoDb;
+using Application.Services.LogService;
 
 namespace Infrustracture.IocConfiguration
 {
@@ -122,10 +131,14 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<IGetAllAuctionBySellerIdService, GetAllAuctionBySellerIdService>();
             services.AddScoped<IAuctionRepository, AuctionRepository>();
             services.AddScoped<IAddProductToCategoryService, AddProductToCategoryService>();
-            services.AddScoped < IFileCommandService,FileCommandService>();
-            services.AddScoped< IFilesQueryService, FilesQueryService>();
-            services.AddScoped< IFileRepository, FileRepository>();
-            services.AddTransient < IProfileImageService, ProfileImageService>();
+            services.AddScoped<IFileCommandService, FileCommandService>();
+            services.AddScoped<IFilesQueryService, FilesQueryService>();
+            services.AddScoped<IFileRepository, FileRepository>();
+            services.AddTransient<IProfileImageService, ProfileImageService>();
+            services.AddTransient<IGetFinancialBySellerId, GetFinancialBySellerId>();
+            services.AddScoped<IUserDapperRepository>(provider =>
+                new UserDapperRepository(configuration.GetConnectionString("sqlserver")));
+
             // ---------------------Customer-----------------------------------------------------------
             services.AddScoped<IGetBoothsByCategoryId, GetBoothsByCategoryId>();
             services.AddScoped<ICategoryCustomerQueryService, CategoryCustomerQueryService>();
@@ -140,11 +153,10 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<ICartCommandService, CartCommandService>();
             services.AddScoped<IMedalRepository, MedalRepository>();
             services.AddScoped<IAddCommentForProductService, AddCommentForProductService>();
-            services.AddScoped < ICommentQueryService, CommentQueryService>();
+            services.AddScoped<ICommentQueryService, CommentQueryService>();
             //-----------------------------------------------hangfire--------------------
             services.AddScoped<IAutomaticTasksOfTheApplicationRepository, AutomaticTasksOfTheApplicationRepository>();
             services.AddScoped<IProcessCompletedAuctionsAndAddToWinnerCart, ProcessCompletedAuctionsAndAddToWinnerCart>();
-            services.AddScoped<IAggregateCommissionsForAdmin, AggregateCommissionsForAdmin>();
             services.AddScoped<IAssignMedalToSeller, AssignMedalToSeller>();
             return services;
         }
@@ -155,6 +167,28 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<ISaveVisitorInfoService, SaveVisitorInfoService>();
             services.AddTransient<IGetToDayReportService, GetToDayReportService>();
             services.AddTransient(typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
+
+            services.AddScoped<ILogingService, LogingService>();
+            services.AddScoped<ILoggingRepository, LoggingRepository>();
+
+            services.AddLogging();
+
+            var mongoDbConnectionString = "mongodb://localhost:27017"; // آدرس اتصال به دیتابیس
+            var mongoDbDatabaseName = "LogsDb"; // نام دیتابیس
+            // پیکربندی سری لاگ
+            var client = new MongoClient(mongoDbConnectionString);
+            var database = client.GetDatabase(mongoDbDatabaseName);
+            // پیکربندی سری لاگ
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Information() // حداقل سطح لاگ‌ها
+                .WriteTo.MongoDB(database, collectionName: "Logs") // اتصال به دیتابیس و نام کالکشن برای ثبت لاگ‌ها
+                .CreateLogger();
+
+
+
+
+
+
             return services;
         }
     }

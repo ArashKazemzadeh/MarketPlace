@@ -1,6 +1,7 @@
 ﻿@model Domin.IRepositories.Dtos.ImageUserDto
 @{
     ViewData["Title"] = "UploadProfileImage";
+    Layout = "/Areas/Seller/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -10,9 +11,9 @@
         flex-direction: column;
         align-items: center;
         border: 2px solid #ccc;
-        padding: 20px;
+        padding: 5%;
         width: 300px;
-        margin: 0 auto;
+        margin:10% 35% 20%;
     }
 
     .upload-form input[type="file"] {
@@ -28,11 +29,12 @@
     }
 </style>
 
-<div class="upload-form">
+<div class="upload-form ">
+    <p>عکس مورد نظر را بارگذاری کنید</p>
     <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadProfileImage" asp-area="">
-        <input type="hidden" asp-for="SellerId"  />
-        <input type="file" name="file" />
-        <input type="submit" value="Upload" asp-route-sellerId="@Model.SellerId" />
+        <input type="hidden" asp-for="SellerId"/>
+        <input type="file" name="file"/>
+        <input class="btn-block" type="submit" value="بارگذاری" asp-route-sellerId="@Model.SellerId"/>
     </form>
 </div>
 

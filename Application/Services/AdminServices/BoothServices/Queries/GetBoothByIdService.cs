@@ -1,7 +1,7 @@
 ﻿using Application.Dtos;
 using Application.IServices.AdminServices.BoothServices.Queries;
 using ConsoleApp.Models;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.AdminServices.BoothServices.Queries
 {

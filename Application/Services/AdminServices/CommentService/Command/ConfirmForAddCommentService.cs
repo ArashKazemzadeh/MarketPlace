@@ -1,6 +1,6 @@
 ﻿using Application.Dtos;
 using Application.IServices.AdminServices.ConfirmServices;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.AdminServices.CommentService.Command
 {

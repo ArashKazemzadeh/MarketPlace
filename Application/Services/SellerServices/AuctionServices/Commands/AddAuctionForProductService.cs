@@ -1,7 +1,8 @@
 ﻿using Application.IServices.SellerServices.AuctionServices.Commands;
 using ConsoleApp.Models;
 using ConsoleApp1.Models;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
+
 namespace Application.Services.SellerServices.AuctionServices.Commands;
 
 

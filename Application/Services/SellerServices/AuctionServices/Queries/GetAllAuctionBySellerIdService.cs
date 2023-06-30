@@ -1,7 +1,7 @@
 ﻿using Application.Dtos;
 using Application.IServices.SellerServices.AuctionServices.Queries;
 using Domin.IRepositories.Dtos;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.SellerServices.AuctionServices.Queries
 {

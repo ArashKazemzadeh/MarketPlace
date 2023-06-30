@@ -1,6 +1,6 @@
 ﻿using Application.Dtos;
 using Application.IServices.SellerServices.ProductServices.Commands;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.SellerServices.ProductServices.Commands
 {

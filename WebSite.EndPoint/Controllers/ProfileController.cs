@@ -18,7 +18,7 @@ namespace WebSite.EndPoint.Controllers
             this.webHostEnvironment = webHostEnvironment;
         }
 
-        public async Task<IActionResult> UploadProfileImage()
+        public async Task<IActionResult> UploadProfileImage()//seller
         {
             var seInUserId = await _accountService.GetLoggedInUserId();
             if (seInUserId == null)

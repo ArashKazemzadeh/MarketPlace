@@ -9,7 +9,9 @@
             <img src="@imageUrl.Url" class="img-fluid">
             <p>@imageUrl.Product.Name</p>
             <div class="card-body">
-                <a asp-action="Detail" asp-controller="Product" asp-route-id="@imageUrl.ProductId" class="btn btn-primary btn-block">برو ببینم چیه</a>
+                <a asp-action="Detail" asp-controller="Product"
+                asp-route-id="@imageUrl.ProductId" class="btn btn-primary btn-block">برو ببینم چیه
+            </a>
             </div>
         </div>
     }

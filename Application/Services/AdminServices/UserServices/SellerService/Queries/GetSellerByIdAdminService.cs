@@ -1,6 +1,6 @@
 ﻿using Application.Dtos;
 using Application.Dtos.UserDto;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.AdminServices.UserServices.SellerService.Queries
 {

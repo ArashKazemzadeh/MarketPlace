@@ -1,6 +1,7 @@
 ﻿using Application.IServices.CustomerServices.BidServices.Commands;
 using Domin.IRepositories.Dtos;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
+
 namespace Application.Services.CustomerServices.BidServices.Commands;
 
 public class AddBidForAuctionService : IAddBidForAuctionService

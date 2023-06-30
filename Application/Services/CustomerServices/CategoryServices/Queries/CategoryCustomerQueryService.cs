@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Application.Dtos.CategoryDto;
 using Application.IServices.CustomerServices.CategoryServices;
 using ConsoleApp.Models;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.CustomerServices.CategoryServices.Queries
 {

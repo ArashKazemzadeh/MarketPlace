@@ -1,6 +1,9 @@
 ﻿using Application.Dtos.UserDto;
+using Application.Interfaces.Contexts;
 using Application.IServices.AdminServices.UserService.Commands;
 using Application.IServices.SellerServices.ProfileServices.Commands;
+using Castle.Core.Resource;
+using ConsoleApp1.Models;
 using Domin.IRepositories.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using WebSite.EndPoint.Areas.Admin.Models;
@@ -19,30 +22,34 @@ namespace WebSite.EndPoint.Controllers
         private readonly IAccountService _accountService;
         private readonly IAddUserIdToCustomerForRegisterService _addUserIdToCustomerForRegisterService;
         private readonly IAddSellerService _addSellerService;
-        public AccountController(IAccountService accountService,
+        
+        public AccountController(
+            IAccountService accountService,
               IAddUserIdToCustomerForRegisterService addUserIdToCustomerForRegisterService,
-              IAddSellerService addSellerService, IWelcomeMessageService welcomeMessageService)
+              IAddSellerService addSellerService, IWelcomeMessageService welcomeMessageService
+            )
         {
 
             _accountService = accountService;
             _addUserIdToCustomerForRegisterService = addUserIdToCustomerForRegisterService;
             _addSellerService = addSellerService;
             _welcomeMessageService = welcomeMessageService;
+          
         }
-        
-        public async Task<IActionResult>  RegisterSeller()
+
+        public async Task<IActionResult> RegisterSeller()
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult>  RegisterSeller(BoothSellerVM model)
+        public async Task<IActionResult> RegisterSeller(BoothSellerVM model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            var userId =await _accountService.GetLoggedInUserId();
-            if (userId==null)
+            var userId = await _accountService.GetLoggedInUserId();
+            if (userId == null)
             {
                 ViewBag.Message = "نام کاربری یافت نشد. لطفا  از سیستم خارج شوید و دوباره وارد شوید.";
                 return View(model);
@@ -52,15 +59,15 @@ namespace WebSite.EndPoint.Controllers
             await _accountService.AssignUserToRoleByUserId(userId, newrole);
             var addSellerDto = new AddSellerDto
             {
-                SellerId =Convert.ToInt32(userId) ,
-                CompanyName=model.CompanyName,
+                SellerId = Convert.ToInt32(userId),
+                CompanyName = model.CompanyName,
                 City = model.City,
                 Street = model.Street,
                 AddressDescription = model.AddressDescription,
                 BoothName = model.BoothName,
                 BoothDescription = model.BoothDescription
             };
-         var result =   await _addSellerService.Execute(addSellerDto);
+            var result = await _addSellerService.Execute(addSellerDto);
             return Redirect("/seller/home/index");
         }
         public async Task<IActionResult> Register()
@@ -93,7 +100,7 @@ namespace WebSite.EndPoint.Controllers
                 {
                     Id = userId
                 };
-             await   _addUserIdToCustomerForRegisterService.Execute(newCustomer);
+                await _addUserIdToCustomerForRegisterService.Execute(newCustomer);
                 var user = await _accountService.FindUserByEmailAsync(model.Email);
                 await _accountService.SignInUserAsync(user, model.Password, true, true);
                 return RedirectToAction(nameof(Profile));
@@ -111,11 +118,10 @@ namespace WebSite.EndPoint.Controllers
             ViewBag.Message = welcomeMessage;
             return View();
         }
-      
-        
+
         public async Task<IActionResult> Login(string returnUrl = "/")
         {
-           
+
             return View(new LoginViewModel
             {
                 ReturnUrl = returnUrl,
@@ -147,7 +153,7 @@ namespace WebSite.EndPoint.Controllers
 
             return View(model);
         }
-       
+
         public async Task<IActionResult> LogOut()
         {
             await _accountService.SignOutUserAsync();
@@ -155,4 +161,11 @@ namespace WebSite.EndPoint.Controllers
         }
 
     }
+    public class YourEntity
+    {
+        public string UserName { get; set; }
+        public string Message { get; set; }
+        public DateTime Timestamp { get; set; }
+    }
+
 }

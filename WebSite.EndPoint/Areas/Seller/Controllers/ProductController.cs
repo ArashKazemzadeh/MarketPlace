@@ -21,11 +21,17 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
         private readonly IAccountService _accountService;
         private readonly IGetCategoryServices _getCategoryServices;
         private readonly IAddProductToCategoryService _addProductToCategoryService;
-        public ProductController(IAddProductTooBoothSellerService addProductTooBoothSellerService,
-            IGetProductSellerService getProductSellerService, IAccountService accountService,
+      
+        public ProductController(
+            IAddProductTooBoothSellerService addProductTooBoothSellerService,
+            IGetProductSellerService getProductSellerService,
+            IAccountService accountService,
             IUpdateProductSellerService updateProductSellerService,
             IProductImageQueriesService productImageQueriesService,
-            IDeleteProductSellerService deleteProductSellerService, IGetCategoryServices getCategoryServices, IAddProductToCategoryService addProductToCategoryService)
+            IDeleteProductSellerService deleteProductSellerService,
+            IGetCategoryServices getCategoryServices,
+            IAddProductToCategoryService addProductToCategoryService
+            )
         {
             _addProductTooBoothSellerService = addProductTooBoothSellerService;
             _getProductSellerService = getProductSellerService;
@@ -35,8 +41,9 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
             _deleteProductSellerService = deleteProductSellerService;
             _getCategoryServices = getCategoryServices;
             _addProductToCategoryService = addProductToCategoryService;
+        
         }
-       
+
         public async Task<IActionResult> Index()
         {
             var sellerId = Convert.ToInt32(await _accountService.GetLoggedInUserId());
@@ -79,9 +86,9 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
                 BasePrice = product.Data.BasePrice,
                 Availability = product.Data.Availability,
                 Description = product.Data.Description,
-                ImagedUrls = urls   ,
+                ImagedUrls = urls,
                 IsAuction = product.Data.IsAuction,
-                Categories=product.Data.Categories
+                Categories = product.Data.Categories
             };
             return View(model);
         }
@@ -90,7 +97,7 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
         {
             var categories = await _getCategoryServices.GetAll();
             var categoryList = new SelectList(categories, "Id", "Name");
-
+          
             var model = new AddProductVm();
             model.CategoryList = categoryList;
 
@@ -102,7 +109,7 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
         public async Task<IActionResult> Create(AddProductVm model)
         {
             var sellerId = Convert.ToInt32(await _accountService.GetLoggedInUserId());
-           
+
 
             var newProduct = new ProductForAddDto
             {
@@ -114,7 +121,7 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
 
             var result = await _addProductTooBoothSellerService.Execute(newProduct, sellerId);
 
-            if (result!=0 && result!=null)
+            if (result != 0 && result != null)
             {
                 // افزودن محصول به دسته بندی
                 var categoryId = model.CategoryId;
@@ -122,11 +129,11 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
 
                 if (addProductToCategoryResult == "محصول با موفقیت به دسته بندی اضافه شد.")
                 {
-                    return RedirectToAction("Detail", new { id = result});
+                    return RedirectToAction("Detail", new { id = result });
 
                 }
                 ModelState.AddModelError("", addProductToCategoryResult);
-                
+
             }
             else
             {
@@ -166,7 +173,7 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
-            
+
             var result = await _updateProductSellerService.Execute(model);
             ViewBag.Message = result;
             return RedirectToAction("Index");

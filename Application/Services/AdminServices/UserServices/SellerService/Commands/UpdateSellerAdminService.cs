@@ -2,7 +2,7 @@
 using Application.Dtos.UserDto;
 using Application.IServices.AdminServices.UserService.Commands;
 using Domin.IRepositories.Dtos;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.AdminServices.UserServices.SellerService.Commands
 {

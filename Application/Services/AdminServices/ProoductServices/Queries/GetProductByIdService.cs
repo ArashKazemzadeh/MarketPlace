@@ -1,7 +1,7 @@
 ﻿using Application.Dtos;
 using Application.Dtos.ProductDto;
 using Application.IServices.AdminServices.ProoductServices.Queries;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 using System.Xml.Linq;
 
 namespace Application.Services.AdminServices.ProoductServices.Queries;

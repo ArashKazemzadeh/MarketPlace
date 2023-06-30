@@ -2,7 +2,7 @@
 using Application.IServices.CustomerServices.AuctionServices.Queries;
 using Application.IServices.SellerServices.AuctionServices.Queries;
 using ConsoleApp.Models;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.SellerServices.AuctionServices.Queries
 {

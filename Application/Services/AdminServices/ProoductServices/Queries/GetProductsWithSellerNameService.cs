@@ -1,6 +1,6 @@
 ﻿using Application.IServices.AdminServices.ProoductServices.Queries;
-using Domin.IRepositories.IseparationRepository;
 using Application.Dtos.ProductDto;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.AdminServices.ProoductServices.Queries
 {

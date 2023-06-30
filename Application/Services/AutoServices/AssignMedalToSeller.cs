@@ -3,7 +3,7 @@ using Application.IServices.AutoServices;
 using ConsoleApp1.Models;
 using Domin.Enums;
 using Domin.IRepositories.Dtos;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 using Microsoft.Extensions.Configuration;
 using ZstdSharp;
 

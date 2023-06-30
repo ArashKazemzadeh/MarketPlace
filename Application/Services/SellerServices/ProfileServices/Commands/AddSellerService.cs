@@ -1,6 +1,7 @@
 ﻿using Application.IServices.SellerServices.ProfileServices.Commands;
 using Domin.IRepositories.Dtos;
-using Domin.IRepositories.IseparationRepository;
+using Domin.IRepositories.IseparationRepository.SqlServer;
+
 namespace Application.Services.SellerServices.ProfileServices.Commands;
 
 public class AddSellerService: IAddSellerService

@@ -1,8 +1,8 @@
 ﻿using Application.Dtos;
 using Microsoft.AspNetCore.Http;
 using Domin.IRepositories.Dtos;
-using Domin.IRepositories.IseparationRepository;
 using Application.IServices.Visitors;
+using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.Visitors.ProfileImageService
 {
