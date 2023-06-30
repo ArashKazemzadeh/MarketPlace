@@ -2,6 +2,7 @@
 using Application.IServices.SellerServices.ImageServices.Commands;
 using Application.IServices.SellerServices.ImageServices.Queries;
 using Application.Services.SellerServices.ImageServices.Commands;
+using Domin.IRepositories.Dtos;
 using Domin.IRepositories.Dtos.File;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -58,7 +59,7 @@ public class FileController : Controller
         if (sellerStringId == null)
         {
             TempData["FileMessage"] = "شما لاگین نیستید";
-            return View();
+            return RedirectToAction("FileManager");
         }
         var sellerId = Convert.ToInt32(sellerStringId);
         try
@@ -130,7 +131,7 @@ public class FileController : Controller
 
     }
 
-       
-    
+   
+
 }
 

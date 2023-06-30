@@ -2,60 +2,76 @@
 @{
     ViewData["Title"] = "FileManager";
 }
+<h2 class="border-1 m-1 text-center text-primary"> مدیریت فایل ها</h2>
+<div style="background-color: wheat">
+    
+  
+    <div class=" p-5">
 
-<h2>مدیریت فایل</h2>
+        @if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div id="my-heading" class="row">
+                <div class="col-4"></div>
+                <h3 class="alert alert-secondary col-4">@ViewBag.Message</h3>
+                <div class="col-4"></div>
+            </div>
+
+        }
+        <div class="m-5 text-center">
+
+            <form method="post" enctype="multipart/form-data" action="@Url.Action("Create", "File")">
+                <div>
+                    <label for="photo">انتخاب فایل:</label>
+                    <input type="file" id="photo" name="photo" required>
+                </div>
+                <div>
+                    <label for="name">نام فایل:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <button type="submit">افزودن فایل</button>
+                </div>
+            </form>
+
+        </div>
+        <!-- فرم افزودن فایل -->
+        <!-- نمایش فایل‌ها -->
+        <div class=" row">
+            @if (Model != null && Model.Count > 0)
+            {
+                @foreach (var file in Model)
+                {
+                    <div class="card component-card_2 col-5 m-1">
+                        @if (file.Url.EndsWith(".pdf"))
+                        {
+                            <div>
+                                <embed src="@file.Url" type="application/pdf" width="100%" height="500px" />
+                            </div>
+                        }
+                        else
+                        {
+                            <img src="@file.Url" class="img-fluid" />
+                        }
+                        <div class="card-body">
+                            <h4>@file.Name</h4>
+                            <form method="post" action="@Url.Action("Delete", "File", new { fileId = file.Id })">
+                                <button type="submit">حذف فایل</button>
+                            </form>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+
+    </div>
+
+</div>
+
+
 
 <!-- پیغام‌های اطلاع رسانی -->
-@if (!string.IsNullOrEmpty(ViewBag.Message))
-{
-    <div id="my-heading" class="row">
-        <div class="col-4"></div>
-        <h3 class="alert alert-secondary col-4">@ViewBag.Message</h3>
-        <div class="col-4"></div>
-    </div>
-   
-}
 
-<!-- فرم افزودن فایل -->
-<form method="post" enctype="multipart/form-data" action="@Url.Action("Create", "File")">
-    <div>
-        <label for="photo">انتخاب فایل:</label>
-        <input type="file" id="photo" name="photo" required>
-    </div>
-    <div>
-        <label for="name">نام فایل:</label>
-        <input type="text" id="name" name="name" required>
-    </div>
-    <div>
-        <button type="submit">افزودن فایل</button>
-    </div>
-</form>
-
-<!-- نمایش فایل‌ها -->
-@if (Model != null && Model.Count > 0)
-{
-    @foreach (var file in Model)
-    {
-        <div class="card component-card_2 col-4 m-5">
-            @if (file.Url.EndsWith(".pdf"))
-            {
-                <div>
-                    <embed src="@file.Url" type="application/pdf" width="100%" height="500px" />
-                </div>
-            }
-            else
-            {
-                <img src="@file.Url" class="img-fluid" />
-            }
-            <div class="card-body">
-                <h4>@file.Name</h4>
-                <form method="post" action="@Url.Action("Delete", "File", new { fileId = file.Id })">
-                    <button type="submit">حذف فایل</button>
-                </form>
-            </div>
-        </div>
-    }
-}
 
 @section scripts
 {

@@ -12,8 +12,8 @@ using Persistence.Contexts.SqlServer;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230628092250_gfsfdsd")]
-    partial class gfsfdsd
+    [Migration("20230629224454_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -337,7 +337,7 @@ namespace Persistence.Migrations
                             CustomertId = 1,
                             Description = "این محصول عالی است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 28, 12, 52, 50, 480, DateTimeKind.Local).AddTicks(7727),
+                            RegisterDate = new DateTime(2023, 6, 30, 2, 14, 54, 316, DateTimeKind.Local).AddTicks(5720),
                             Title = "عالی"
                         },
                         new
@@ -346,7 +346,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول بد است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 28, 12, 52, 50, 480, DateTimeKind.Local).AddTicks(7748),
+                            RegisterDate = new DateTime(2023, 6, 30, 2, 14, 54, 316, DateTimeKind.Local).AddTicks(5739),
                             Title = "بد"
                         },
                         new
@@ -355,7 +355,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول خوب است.",
                             ProductId = 2,
-                            RegisterDate = new DateTime(2023, 6, 28, 12, 52, 50, 480, DateTimeKind.Local).AddTicks(7750),
+                            RegisterDate = new DateTime(2023, 6, 30, 2, 14, 54, 316, DateTimeKind.Local).AddTicks(5741),
                             Title = "خوب"
                         });
                 });
@@ -441,6 +441,9 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("SellerId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
 
@@ -450,6 +453,10 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("SellerId")
+                        .IsUnique()
+                        .HasFilter("[SellerId] IS NOT NULL");
 
                     b.ToTable("Images");
                 });
@@ -620,9 +627,6 @@ namespace Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("ImageId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -643,10 +647,6 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id")
                         .HasName("PK__Seller__7FE3DBA13EC0B8EB");
-
-                    b.HasIndex("ImageId")
-                        .IsUnique()
-                        .HasFilter("[ImageId] IS NOT NULL");
 
                     b.ToTable("Sellers", (string)null);
 
@@ -773,7 +773,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "828a8f4b-6de2-4ccb-ae2c-334194903291",
+                            ConcurrencyStamp = "a101513c-84f9-4b8f-a1c9-a7c39cf41e4b",
                             Email = "userone@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر یک",
@@ -786,7 +786,7 @@ namespace Persistence.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "29873faf-f4f6-4acc-9a90-54cf4a85067a",
+                            ConcurrencyStamp = "27dcff0e-cbe8-4733-ae44-6d22653eecd9",
                             Email = "userofour@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر چهار",
@@ -799,7 +799,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2b3d85cf-90c4-41de-93d1-9dea234533e1",
+                            ConcurrencyStamp = "9f4cb459-41de-4dcd-9c62-c32bf78fa1d1",
                             Email = "userotow@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر دو",
@@ -812,7 +812,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "38573c70-2168-43c0-ad68-a808a205e18f",
+                            ConcurrencyStamp = "0e9313f0-c078-49a7-b64e-33dbbb699b3d",
                             Email = "userothree@gmail.com",
                             EmailConfirmed = false,
                             FullName = "کاربر سه",
@@ -1119,7 +1119,13 @@ namespace Persistence.Migrations
                         .HasForeignKey("ProductId")
                         .HasConstraintName("FK_Image_Product");
 
+                    b.HasOne("ConsoleApp1.Models.Seller", "Seller")
+                        .WithOne("Image")
+                        .HasForeignKey("ConsoleApp1.Models.Image", "SellerId");
+
                     b.Navigation("Product");
+
+                    b.Navigation("Seller");
                 });
 
             modelBuilder.Entity("ConsoleApp1.Models.Medal", b =>
@@ -1158,15 +1164,6 @@ namespace Persistence.Migrations
                     b.Navigation("Cart");
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("ConsoleApp1.Models.Seller", b =>
-                {
-                    b.HasOne("ConsoleApp1.Models.Image", "Image")
-                        .WithOne("Seller")
-                        .HasForeignKey("ConsoleApp1.Models.Seller", "ImageId");
-
-                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -1261,11 +1258,6 @@ namespace Persistence.Migrations
                     b.Navigation("Comments");
                 });
 
-            modelBuilder.Entity("ConsoleApp1.Models.Image", b =>
-                {
-                    b.Navigation("Seller");
-                });
-
             modelBuilder.Entity("ConsoleApp1.Models.Product", b =>
                 {
                     b.Navigation("Auction");
@@ -1286,6 +1278,8 @@ namespace Persistence.Migrations
                     b.Navigation("Carts");
 
                     b.Navigation("Files");
+
+                    b.Navigation("Image");
 
                     b.Navigation("Medals");
                 });

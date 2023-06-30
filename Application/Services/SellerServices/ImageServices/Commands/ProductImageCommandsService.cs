@@ -31,7 +31,7 @@ namespace Application.Services.SellerServices.ImageServices.Commands
             {
                 Url = imageUrl,
                 ProductId = productId,
-                //Product = product
+                //sellerId=
             };
 
         await    _imageForProductRepository.AddAsync(image);

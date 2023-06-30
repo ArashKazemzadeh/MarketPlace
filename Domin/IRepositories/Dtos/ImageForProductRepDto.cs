@@ -10,7 +10,7 @@ namespace Domin.IRepositories.Dtos
         public string? Url { get; set; }
 
         public int? ProductId { get; set; }
-
+        public int? SellerId { get; set; }
         public virtual Product? Product { get; set; }
     }
 }

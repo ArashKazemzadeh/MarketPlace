@@ -1,4 +1,5 @@
-﻿using Application.IServices.SellerServices.ImageServices.Queries;
+﻿using Application.IServices.AdminServices.UserService.Commands;
+using Application.IServices.SellerServices.ImageServices.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebSite.EndPoint.Areas.Seller.Controllers
@@ -8,7 +9,7 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IProductImageCommandsService _productImageCommandsService;
-
+        //private readonly IAccountService
         public ImageController(IWebHostEnvironment webHostEnvironment, IProductImageCommandsService productImageCommandsService)
         {
             _webHostEnvironment = webHostEnvironment;

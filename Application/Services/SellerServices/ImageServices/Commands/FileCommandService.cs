@@ -1,4 +1,5 @@
 ﻿using Application.IServices.SellerServices.ImageServices.Commands;
+using Domin.IRepositories.Dtos;
 using Domin.IRepositories.Dtos.File;
 using Domin.IRepositories.IseparationRepository;
 
@@ -8,11 +9,13 @@ namespace Application.Services.SellerServices.ImageServices.Commands
     {
         private readonly IFileRepository _fileRepository;
         private readonly ISellerRepository _sellerRepository;
+       
 
         public FileCommandService(IFileRepository fileRepository, ISellerRepository sellerRepository)
         {
             _fileRepository = fileRepository;
             _sellerRepository = sellerRepository;
+            
         }
         public async Task<string> DeleteFile(int fileId)
         {
@@ -37,5 +40,8 @@ namespace Application.Services.SellerServices.ImageServices.Commands
                 return "عملیات با موفقیت انجام شد.";
             return "عملیات با مشکل مواجه شد.";
         }
+       
     }
+
+
 }

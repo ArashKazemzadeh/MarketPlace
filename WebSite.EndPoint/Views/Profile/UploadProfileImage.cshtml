@@ -1,0 +1,39 @@
+﻿@model Domin.IRepositories.Dtos.ImageUserDto
+@{
+    ViewData["Title"] = "UploadProfileImage";
+}
+
+
+<style>
+    .upload-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 2px solid #ccc;
+        padding: 20px;
+        width: 300px;
+        margin: 0 auto;
+    }
+
+    .upload-form input[type="file"] {
+        margin-bottom: 10px;
+    }
+
+    .upload-form input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        cursor: pointer;
+    }
+</style>
+
+<div class="upload-form">
+    <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadProfileImage" asp-area="">
+        <input type="hidden" asp-for="SellerId"  />
+        <input type="file" name="file" />
+        <input type="submit" value="Upload" asp-route-sellerId="@Model.SellerId" />
+    </form>
+</div>
+
+

@@ -69,6 +69,7 @@ using Application.IServices.CustomerServices.CommentServices.Commands;
 using Application.Services.CustomerServices.CommentServices.Commands;
 using Application.IServices.CustomerServices.CommentServices.Queries;
 using Application.Services.CustomerServices.CommentServices.Queries;
+using Application.Services.Visitors.ProfileImageService;
 
 namespace Infrustracture.IocConfiguration
 {
@@ -124,6 +125,7 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped < IFileCommandService,FileCommandService>();
             services.AddScoped< IFilesQueryService, FilesQueryService>();
             services.AddScoped< IFileRepository, FileRepository>();
+            services.AddTransient < IProfileImageService, ProfileImageService>();
             // ---------------------Customer-----------------------------------------------------------
             services.AddScoped<IGetBoothsByCategoryId, GetBoothsByCategoryId>();
             services.AddScoped<ICategoryCustomerQueryService, CategoryCustomerQueryService>();

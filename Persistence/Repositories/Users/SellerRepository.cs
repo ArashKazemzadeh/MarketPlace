@@ -17,28 +17,32 @@ namespace Persistence.Repositories.Users
             _context = context;
             _dbSet = _context.Set<Seller>();
         }
-        
+
         public async Task<Seller> GetByIdAsync(int id)
         {
-            return await _dbSet.AsNoTracking()
-                .Include(b=>b.Booth).
-                FirstOrDefaultAsync(x => x.Id == id);
+          var result=  await _dbSet
+                .Include(b => b.Booth)
+                /*.Include(i => i.Image)*/
+                .FirstOrDefaultAsync(x => x.Id == id);
+          if (result == null)
+              return null;
+          return result;
         }
         public async Task<AddSellerDto> GetByIdWithNavigationAsync(int id)
         {
-         var result=   await _dbSet.AsNoTracking().Select(s=>new AddSellerDto
-                {
-                  SellerId = s.Id,
-                  CompanyName = s.CompanyName,
-                  City=s.Address.City,
-                  Street = s.Address.Street,
-                  AddressDescription = s.Address.Description,
-                  BoothName = s.Booth.Name,
-                  BoothDescription = s.Booth.Description,
-                  BoothId = s.Booth.Id,
-                  AddressId = s.Address.Id
-                })
-                .FirstOrDefaultAsync(x => x.SellerId == id);
+            var result = await _dbSet.AsNoTracking().Select(s => new AddSellerDto
+            {
+                SellerId = s.Id,
+                CompanyName = s.CompanyName,
+                City = s.Address.City,
+                Street = s.Address.Street,
+                AddressDescription = s.Address.Description,
+                BoothName = s.Booth.Name,
+                BoothDescription = s.Booth.Description,
+                BoothId = s.Booth.Id,
+                AddressId = s.Address.Id
+            })
+                   .FirstOrDefaultAsync(x => x.SellerId == id);
             return result;
         }
 
@@ -70,14 +74,14 @@ namespace Persistence.Repositories.Users
             seller.CompanyName = sellerDto.CompanyName;
             seller.IsActive = sellerDto.IsActive;
             seller.CommissionPercentage = sellerDto.CommissionPercentage;
-           _context.Entry(seller).State = EntityState.Modified;
+            _context.Entry(seller).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return true;
         }
         public async Task<bool> UpdateProfileAsync(AddSellerDto updatesellerDto)
         {
             var seller = await _dbSet.Include(x => x.Address)
-                .Include(b=>b.Booth)
+                .Include(b => b.Booth)
                 .FirstOrDefaultAsync(x => x.Id == updatesellerDto.SellerId);
 
             if (seller == null)
@@ -112,7 +116,7 @@ namespace Persistence.Repositories.Users
                 var booth = new Booth()
                 {
                     Name = updatesellerDto.BoothName,
-                    SellerId  = updatesellerDto.SellerId,
+                    SellerId = updatesellerDto.SellerId,
                     Description = updatesellerDto.BoothDescription
                 };
 

@@ -1,4 +1,5 @@
 ﻿using Application.IServices.AdminServices.UserService.Commands;
+using Application.IServices.SellerServices.ImageServices.Commands;
 using Application.IServices.SellerServices.ProfileServices.Commands;
 using Application.IServices.SellerServices.ProfileServices.Queries;
 using Application.IServices.Visitors;
@@ -13,32 +14,38 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
     [Area("Seller")]
     public class HomeController : Controller
     {
-       
+
         private readonly IUpdateSellerByIdService _updateSellerByIdService;
         private readonly IGetSellerByIdService _getSellerByIdService;
         private readonly IAccountService _accountService;
+        private readonly IProductImageQueriesService _imageQueriesService;
 
-        private readonly IGetToDayReportService _getTodayReportService;
 
         public HomeController(
-            IUpdateSellerByIdService updateSellerByIdService, 
-            IAccountService accountService, 
-            IGetSellerByIdService getSellerByIdService, IGetToDayReportService getTodayReportService)
+            IUpdateSellerByIdService updateSellerByIdService,
+            IAccountService accountService,
+            IGetSellerByIdService getSellerByIdService, IProductImageQueriesService imageQueriesService)
         {
             _updateSellerByIdService = updateSellerByIdService;
             _accountService = accountService;
             _getSellerByIdService = getSellerByIdService;
-            _getTodayReportService = getTodayReportService;
+            _imageQueriesService = imageQueriesService;
         }
-        
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
-            return View(_getTodayReportService.Execute());
+            var sellerStringId = await _accountService.GetLoggedInUserId();
+            if (sellerStringId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            var result = await _imageQueriesService.GetAllImageProductBySellerId(int.Parse(sellerStringId));
+            return View(result);
         }
-        public async Task<IActionResult>  EditProfile()
+        public async Task<IActionResult> EditProfile()
         {
             var sellerId = Convert.ToInt32(await _accountService.GetLoggedInUserId());
-            var seller =await _getSellerByIdService.Execute(sellerId);
+            var seller = await _getSellerByIdService.Execute(sellerId);
             var model = new BoothSellerVM
             {
                 SellerId = seller.SellerId,

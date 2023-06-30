@@ -68,7 +68,7 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
             return View(result);
         }
 
-        public async Task<IActionResult> Detail(int id)
+        public async Task<IActionResult> Detail(int id) //productId
         {
             var product = await _getProductSellerService.FindByIdAsync(id);
             var urls = await _productImageQueriesService.GetImageUrlForProduct(product.Data.Id);

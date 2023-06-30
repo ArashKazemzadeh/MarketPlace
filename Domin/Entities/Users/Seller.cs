@@ -13,7 +13,6 @@ public class Seller
     public int? SalesAmount { get; set; }
     public Address? Address { get; set; }
     public virtual Booth? Booth { get; set; }
-    public int?  ImageId { get; set; }
     public virtual Image? Image { get; set; }
     public virtual ICollection<File>? Files { get; set; } = new List<File>();
     public virtual ICollection<Medal>? Medals { get; set; } = new List<Medal>();
