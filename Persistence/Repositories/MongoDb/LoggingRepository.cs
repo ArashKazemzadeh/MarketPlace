@@ -28,7 +28,7 @@ namespace Persistence.Repositories.MongoDb
                 Timestamp = DateTime.Now
             };
 
-          _logger.Information("Logging information: {@LogInformation}", logInformation.Message);
+          _logger.Information("Logging information: {@LogInformation}", $"{logInformation.Message } - {logInformation.Title}");
           _mongoDbContext.GetCollection().InsertOne(logInformation);
 
         }
@@ -42,7 +42,7 @@ namespace Persistence.Repositories.MongoDb
                 Timestamp = DateTime.Now
             };
 
-            _logger.Warning("Logging warning: {@LogInformation}", logInformation.Message);
+            _logger.Warning("Logging warning: {@LogInformation}", $"{logInformation.Message} - {logInformation.Title}");
 
             _mongoDbContext.GetCollection().InsertOne(logInformation);
 
@@ -59,7 +59,7 @@ namespace Persistence.Repositories.MongoDb
                 Timestamp = DateTime.Now
             };
 
-            _logger.Error("Logging error: {@LogInformation}", logInformation.Message);
+            _logger.Error("Logging error: {@LogInformation}", $"{logInformation.Message} - {logInformation.Title}");
 
             _mongoDbContext.GetCollection().InsertOne(logInformation);
 

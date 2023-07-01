@@ -4,9 +4,9 @@ namespace Domin.IRepositories.IseparationRepository.SqlServer
 {
     public interface IAutomaticTasksOfTheApplicationRepository
     {
-        Task ProcessCompletedAuctions();
-
+        Task<string> ProcessCompletedAuctions();
     }
+    
 }
 
 

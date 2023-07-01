@@ -1,21 +1,23 @@
 ﻿using Application.IServices.AutoServices;
+using Application.IServices.LogServices;
 using Domin.IRepositories.IseparationRepository.SqlServer;
-using Microsoft.Extensions.Logging;
-
 namespace Application.Services.AutoServices;
 
 public class ProcessCompletedAuctionsAndAddToWinnerCart : IProcessCompletedAuctionsAndAddToWinnerCart
 {
     private readonly IAutomaticTasksOfTheApplicationRepository _automaticTasksOfTheApplicationRepository;
-  
-    public ProcessCompletedAuctionsAndAddToWinnerCart(IAutomaticTasksOfTheApplicationRepository automaticTasksOfTheApplicationRepository)
+    private readonly ILogingService _logingService;
+    public ProcessCompletedAuctionsAndAddToWinnerCart(
+        IAutomaticTasksOfTheApplicationRepository automaticTasksOfTheApplicationRepository,
+        ILogingService logingService)
     {
         _automaticTasksOfTheApplicationRepository = automaticTasksOfTheApplicationRepository;
-       
+        _logingService = logingService;
     }
     public async Task Execute()
     {
-        await _automaticTasksOfTheApplicationRepository.ProcessCompletedAuctions();
+      var result=  await _automaticTasksOfTheApplicationRepository.ProcessCompletedAuctions();
+    await  _logingService.LogInformation(result, "Auction Result" );
     }
 }
 

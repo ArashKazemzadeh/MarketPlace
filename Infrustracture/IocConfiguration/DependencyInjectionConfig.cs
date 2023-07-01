@@ -66,8 +66,6 @@ using Application.IServices.CustomerServices.CommentServices.Queries;
 using Application.Services.CustomerServices.CommentServices.Queries;
 using Application.Services.Visitors.ProfileImageService;
 using Domin.IRepositories.IseparationRepository.Dapper;
-using Persistence.DapperRepositories;
-using Microsoft.Extensions.Logging;
 using Serilog;
 using MongoDB.Driver;
 using Persistence.Repositories.SqlServer.Users;
@@ -172,6 +170,10 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<ILoggingRepository, LoggingRepository>();
 
             services.AddLogging();
+            // In your startup or configuration code
+           
+
+           
 
             var mongoDbConnectionString = "mongodb://localhost:27017"; // آدرس اتصال به دیتابیس
             var mongoDbDatabaseName = "LogsDb"; // نام دیتابیس
@@ -179,15 +181,12 @@ namespace Infrustracture.IocConfiguration
             var client = new MongoClient(mongoDbConnectionString);
             var database = client.GetDatabase(mongoDbDatabaseName);
             // پیکربندی سری لاگ
-            Log.Logger = new LoggerConfiguration()
+          var  logger = new LoggerConfiguration()
                 .MinimumLevel.Information() // حداقل سطح لاگ‌ها
                 .WriteTo.MongoDB(database, collectionName: "Logs") // اتصال به دیتابیس و نام کالکشن برای ثبت لاگ‌ها
+                .WriteTo.Console()
                 .CreateLogger();
-
-
-
-
-
+            services.AddSingleton<ILogger>(logger);
 
             return services;
         }

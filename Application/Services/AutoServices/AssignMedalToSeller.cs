@@ -1,5 +1,6 @@
 ﻿using Application.Dtos;
 using Application.IServices.AutoServices;
+using Application.IServices.LogServices;
 using ConsoleApp1.Models;
 using Domin.Enums;
 using Domin.IRepositories.Dtos;
@@ -15,11 +16,12 @@ public class AssignMedalToSeller : IAssignMedalToSeller
 {
     private readonly ISellerRepository _sellerRepository;
     private readonly IMedalRepository _medalRepository;
-
-    public AssignMedalToSeller(ISellerRepository sellerRepository, IMedalRepository medalRepository)
+    private readonly ILogingService _logingService;
+    public AssignMedalToSeller(ISellerRepository sellerRepository, IMedalRepository medalRepository, ILogingService logingService)
     {
         _sellerRepository = sellerRepository;
         _medalRepository = medalRepository;
+        _logingService = logingService;
     }
 
 
@@ -68,6 +70,7 @@ public class AssignMedalToSeller : IAssignMedalToSeller
 
                 seller.Medals.Add(goldMedal);
                 seller.CommissionPercentage = 0.05;
+             await   _logingService.LogInformation(seller.CompanyName, MedalEnum.Gold.ToString());
             }
             var sellerDto = new SellerUpdateRepositoryDto
             {
@@ -78,6 +81,7 @@ public class AssignMedalToSeller : IAssignMedalToSeller
                 IsRemoved = seller.IsRemoved,
             };
             await _sellerRepository.UpdateAsync(sellerDto);
+            
         }
     }
 }
