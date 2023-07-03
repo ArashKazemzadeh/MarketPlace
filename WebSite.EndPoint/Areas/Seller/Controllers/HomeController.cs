@@ -6,6 +6,7 @@ using Application.IServices.Visitors;
 using Application.Services.AdminServices.UserServices.SellerService.Queries;
 using ConsoleApp1.Models;
 using Domin.IRepositories.Dtos;
+using Domin.IRepositories.Dtos.Seller;
 using Microsoft.AspNetCore.Mvc;
 using WebSite.EndPoint.Areas.Seller.Models;
 

@@ -1,6 +1,6 @@
 ﻿using ConsoleApp.Models;
 using ConsoleApp1.Models;
-using Domin.IRepositories.Dtos;
+using Domin.IRepositories.Dtos.Booth;
 using Domin.IRepositories.IseparationRepository.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contexts.SqlServer;

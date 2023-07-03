@@ -1,4 +1,4 @@
-﻿using Domin.IRepositories.Dtos;
+﻿using Domin.IRepositories.Dtos.Bid;
 
 namespace Application.IServices.CustomerServices.BidServices.Queries;
 

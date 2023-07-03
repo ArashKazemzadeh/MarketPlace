@@ -1,5 +1,5 @@
 ﻿using Application.Dtos;
-using Domin.IRepositories.Dtos;
+using Domin.IRepositories.Dtos.Image;
 
 namespace Application.IServices.Visitors;
 

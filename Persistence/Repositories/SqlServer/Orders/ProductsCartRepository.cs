@@ -17,37 +17,44 @@ namespace Persistence.Repositories.SqlServer.Orders
             _context = context;
             _dbSet = _context.Set<ProductsCart>();
         }
-        public async Task AddProductToCartAsync(int cartId, int productId)
+        public async Task AddProductToOldCartAsync(int cartId, int productId)
         {
-            var cart = await _context.Carts.Include(pc => pc.ProductsCarts)
-                .ThenInclude(p => p.Product)
+            var cart = await _context.Carts
+                .Include(pc => pc.ProductsCarts)
                 .FirstOrDefaultAsync(c => c.Id == cartId);
-            if (cart == null)
-                return;
-            var existingProductsCart = cart.ProductsCarts.FirstOrDefault(pc => pc.ProductId == productId);
+
+            if (cart == null) return;
+
+            var existingProductsCart = cart.ProductsCarts
+                .FirstOrDefault(pc => pc.ProductId == productId);
+
             if (existingProductsCart != null)
             {
-
-                // کالای با ایدی مشترک در کارت وجود دارد، تعداد آن را افزایش دهید
-                existingProductsCart.Quantity = 1 + existingProductsCart.Quantity;
-                existingProductsCart.Cart.TotalPrices = existingProductsCart.Quantity * existingProductsCart.Product.BasePrice;
-                cart.TotalPrices = existingProductsCart.Quantity * existingProductsCart.Product.BasePrice;
-                _context.Entry(cart).State = EntityState.Modified;
+                existingProductsCart.Quantity++;
+                existingProductsCart.Cart.TotalPrices += existingProductsCart.Product.BasePrice;
                 _context.Entry(existingProductsCart).State = EntityState.Modified;
             }
             else
             {
-                // کالای با ایدی مشترک در کارت وجود ندارد، کالای جدیدی را به کارت اضافه کنید
+                var product = await _context.Products.FindAsync(productId);
+                if (product == null) return;
+
                 var productsCart = new ProductsCart
                 {
                     CartId = cart.Id,
                     ProductId = productId,
-                    Quantity = 1
+                    Quantity = 1,
+                    OrderDate = DateTime.Now
                 };
-                await _context.ProductsCarts.AddAsync(productsCart);
+
+                cart.ProductsCarts.Add(productsCart);
+                cart.TotalPrices += product.BasePrice;
             }
-            var result = await _context.SaveChangesAsync();
+
+            _context.Entry(cart).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
+
 
         public async Task<ProductsCart> GetByIdAsync(int id)
         {

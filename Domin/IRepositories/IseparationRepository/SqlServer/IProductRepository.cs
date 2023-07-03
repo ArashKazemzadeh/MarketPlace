@@ -1,10 +1,12 @@
 ﻿using ConsoleApp1.Models;
-using Domin.IRepositories.Dtos;
+using Domin.IRepositories.Dtos.Auction;
+using Domin.IRepositories.Dtos.Product;
 
 namespace Domin.IRepositories.IseparationRepository.SqlServer;
 
 public interface IProductRepository
 {
+    Task<List<ProductGetDto>> GetAllProductsForView();
     Task UpdateAsync(ProductDto productDto, List<int> categoryIds);
     Task<List<ProductCustomerDto>> GetProductByBoothIdAsync(int boothId);
     Task<List<AuctionProductDto>> GetProductsWithTrueAuctions(int sellerId);

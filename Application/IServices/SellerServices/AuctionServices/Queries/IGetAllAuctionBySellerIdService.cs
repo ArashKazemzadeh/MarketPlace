@@ -1,6 +1,6 @@
 ﻿using Application.Dtos;
 using ConsoleApp.Models;
-using Domin.IRepositories.Dtos;
+using Domin.IRepositories.Dtos.Auction;
 
 namespace Application.IServices.SellerServices.AuctionServices.Queries
 {

@@ -2,15 +2,32 @@
 @{
     ViewData["Title"] = "GetAllCategories";
 }
-<div class="row ">
+<style>
+    .responsive-image {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+<div class="row m-4 justify-content-center flex flex-wrap">
     @foreach (var c in Model)
     {
-        <div class="card component-card_2 col-3 m-5 text-center">
-            <h3> @c.Name</h3>
-            <p>توضیحات:  @c.Description</p>
-            <div class="card-body">
-                <a asp-controller="Booth" asp-action="GetBoothByCategoryId" asp-route-categoryid="@c.Id">مشاهده ی غرفه ها</a>
-            </div>
+        <div class="col-12 col-sm-6 col-md-4 m-4 mx-auto">
+            <a asp-controller="Booth" asp-action="GetBoothByCategoryId" asp-route-categoryid="@c.Id" class="d-block">
+                <div class="card component-card_2 text-center">
+                    <img src="~/category/@(c.Id).jpg" class="img-fluid" alt="Category Image">
+                    <div class="card-header">
+                        <h1 style="font-family: Vazir;"> @c.Name</h1>
+                    </div>
+                    <div class="card-body">
+                        <p class="m-2">توضیحات: @c.Description</p>
+                    </div>
+                </div>
+            </a>
         </div>
     }
 </div>
+
+
+
+    
+

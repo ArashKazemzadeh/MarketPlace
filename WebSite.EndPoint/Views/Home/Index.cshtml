@@ -1,8 +1,32 @@
-﻿@{
+﻿@model List<WebSite.EndPoint.Models.ViewModels.ProductGetVM>
+
+@{
     ViewData["Title"] = "Home Page";
 }
-<div class="">
-    <img src="~/templatestore/images/eagle-png-logo.png" style="width: 700px; margin: 0 auto; display: block;" />
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 section-title text-center mt-2">
+            <h2>جدیدترین ها</h2>
+        </div>
+    </div>
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-3 col-sm-6">
+                <div class="product-item">
+                    <div class="product-thumb">
+                        <img src="@product.ImageUrl" class="img-fluid" style="height: 200px; width: auto;" />
+                    </div>
+                    <div class="product-content">
+                        <h5><a href="">@product.Name</a></h5>
+                        <span class="price"> قیمت : @product.BasePrice</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
-
-

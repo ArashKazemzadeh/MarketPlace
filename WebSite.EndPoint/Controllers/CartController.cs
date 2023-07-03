@@ -4,6 +4,7 @@ using Application.IServices.CustomerServices.CartService.Commands;
 using Application.IServices.CustomerServices.CartService.Queries;
 using Application.IServices.CustomerServices.CommentServices.Commands;
 using Domin.IRepositories.Dtos;
+using Domin.IRepositories.Dtos.Comment;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebSite.EndPoint.Areas.Seller.Models;
@@ -31,7 +32,17 @@ namespace WebSite.EndPoint.Controllers
         public async Task<IActionResult> GetProductsInCart(int cartId)
         {
             var products = await _cartQueryService.GetProductByCartId(cartId);
-            return View(products);
+            var model = products
+                    .Select(p => new ProductInCartVM()
+                    {
+                        ProductId=p.ProductId,
+                        BasePrice=p.BasePrice,
+                        Name = p.Name,
+                        TotalPrice = p.TotalPrice,
+                    Quantity = p.Quantity,
+                    }).ToList();
+
+            return View(model);
         }
 
         public async Task<IActionResult> AddCommentForCart(int ProductId)
@@ -49,16 +60,16 @@ namespace WebSite.EndPoint.Controllers
             {
                 return View(model);
             }
-            var userId =await _accountService.GetLoggedInUserId();
+            var userId = await _accountService.GetLoggedInUserId();
             var dto = new CommentAddDto
             {
-                userId =userId,
+                userId = userId,
                 productId = model.productId,
                 title = model.title,
                 describtion = model.describtion
             };
             var result = await _addCommentForProductService.Execute(dto);
-            if (result== "دیدگاه با موفقیت ثبت شد")
+            if (result == "دیدگاه با موفقیت ثبت شد")
             {
                 return RedirectToAction("MyCartsRegistered");
             }
@@ -99,12 +110,9 @@ namespace WebSite.EndPoint.Controllers
             {
                 Id = c.Id,
                 TotalPrices = c.TotalPrices,
-                CustomerId = c.CustomerId,
-                IsRegistrationFinalized = c.IsRegistrationFinalized,
                 BoothName = c.BoothName,
-                boothId = c.boothId,
                 ProductsNames = c.ProductsNames,
-                RegisterDate=c.RegisterDate
+                RegisterDate = c.RegisterDate,
             }).ToList();
             return View(model);
         }
@@ -121,17 +129,17 @@ namespace WebSite.EndPoint.Controllers
             return RedirectToAction("MyCartsUnRegistered");
         }
         //افزودن به سبد خرید
-        public async Task<IActionResult> AddToCartBasePrice(int productId,int boothId)  
+        public async Task<IActionResult> AddToCartBasePrice(int productId, int boothId)
         {
             var userId = await _accountService.GetLoggedInUserId();
-            var result=   await _cartCommandService.AddProductToCart(Convert.ToInt32(userId), productId, boothId);
-            
+            var result = await _cartCommandService.AddProductToCart(Convert.ToInt32(userId), productId, boothId);
+
             TempData["AddToCartBasePrice"] = result;
             if (true)
             {
-                return RedirectToAction("EnterToBooth","Booth",new{ boothId= boothId } );
+                return RedirectToAction("EnterToBooth", "Booth", new { boothId = boothId });
             }
-         
+
         }
     }
 }

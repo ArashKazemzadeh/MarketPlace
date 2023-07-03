@@ -1,6 +1,5 @@
-﻿using Application.Services.SellerServices.ProfileServices.Queries;
-using ConsoleApp1.Models;
-using Domin.IRepositories.Dtos;
+﻿using ConsoleApp1.Models;
+using Domin.IRepositories.Dtos.Seller;
 
 namespace Domin.IRepositories.IseparationRepository.SqlServer;
 

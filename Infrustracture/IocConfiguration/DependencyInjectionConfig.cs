@@ -152,6 +152,8 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<IMedalRepository, MedalRepository>();
             services.AddScoped<IAddCommentForProductService, AddCommentForProductService>();
             services.AddScoped<ICommentQueryService, CommentQueryService>();
+            services.AddScoped < IGetLatestProductsService, GetLatestProductsService>();
+            services.AddScoped < IGetProductDetailByIdService, GetProductDetailByIdService>();
             //-----------------------------------------------hangfire--------------------
             services.AddScoped<IAutomaticTasksOfTheApplicationRepository, AutomaticTasksOfTheApplicationRepository>();
             services.AddScoped<IProcessCompletedAuctionsAndAddToWinnerCart, ProcessCompletedAuctionsAndAddToWinnerCart>();

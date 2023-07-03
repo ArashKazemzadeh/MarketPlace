@@ -1,5 +1,6 @@
 ﻿using Application.IServices.CustomerServices.BidServices.Commands;
 using Domin.IRepositories.Dtos;
+using Domin.IRepositories.Dtos.Bid;
 using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.CustomerServices.BidServices.Commands;

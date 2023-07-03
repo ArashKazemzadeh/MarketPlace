@@ -1,5 +1,6 @@
 ﻿using ConsoleApp1.Models;
-using Domin.IRepositories.Dtos;
+using Domin.IRepositories.Dtos.Auction;
+using Domin.IRepositories.Dtos.Bid;
 
 namespace Domin.IRepositories.IseparationRepository.SqlServer;
 

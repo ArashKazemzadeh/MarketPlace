@@ -1,15 +1,15 @@
-﻿using ConsoleApp1.Models;
-using Domin.IRepositories.Dtos;
+﻿
+using ConsoleApp1.Models;
 using Domin.IRepositories.Dtos.Cart;
 
 namespace Domin.IRepositories.IseparationRepository.SqlServer;
 
 public interface ICartRepository
 {
-
+    Task<int> GetTotalPrices(int cartId);
     Task<List<CartGetDto>> GetfinalizedCartsByCustomerId(int customerId);
     Task<List<CartGetDto>> GetUnfinalizedCartsByCustomerId(int customerId);
-    Task<List<ProductDto>> GetProductByCartId(int cartId);
+    Task<List<ProductInCartRepDto>> GetProductsByCartIdAsync(int cartId);
     Task<bool> FinalizeCartAsync(int cartId);//
     Task<List<Cart>> GetOpenCartsForCustomerIdByBoothIdAsync(int boothId, int cudtomerId);
     Task<Cart> GetByIdAsync(int id);

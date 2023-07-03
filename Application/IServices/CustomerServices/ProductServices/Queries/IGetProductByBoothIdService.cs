@@ -1,4 +1,4 @@
-﻿using Domin.IRepositories.Dtos;
+﻿using Domin.IRepositories.Dtos.Product;
 
 namespace Application.IServices.CustomerServices.ProductServices.Queries
 {

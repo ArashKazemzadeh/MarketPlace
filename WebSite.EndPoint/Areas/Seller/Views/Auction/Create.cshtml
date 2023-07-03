@@ -2,26 +2,183 @@
 @{
     ViewData["Title"] = "Create";
 }
+@if (ViewBag.Message != null)
+{
+    <div id="my-heading" class="alert alert-danger text-center m-1">
+        <p>@ViewBag.Message</p>
+    </div>
+}
 <div class="row m-5 p-5 form-group d-flex justify-content-center">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post">
             <input asp-for="ProductId" type="hidden" class="form-control" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="StartDeadTime" class="control-label"></label>
-                <input type="date" asp-for="StartDeadTime" class="form-control" />
-                <span asp-validation-for="StartDeadTime" class="text-danger"></span>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="YearStartSelected">آغاز مزایده</label>
+                        <select asp-for="YearStartSelected" class="form-control">
+                            <option value="">سال</option>
+                            @foreach (var year in (string[])TempData["Years"] ?? Enumerable.Empty<string>())
+                            {
+                                <option value="@year">@year</option>
+                            }
+                        </select>
+                        <span asp-validation-for="YearStartSelected" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="MonthStartSelected"></label>
+                        <select asp-for="MonthStartSelected" class="form-control">
+                            <option value="">ماه</option>
+                            @foreach (var month in (string[])TempData["Months"] ?? Enumerable.Empty<string>())
+                            {
+                                <option value="@month">@month</option>
+                            }
+                        </select>
+                        <span asp-validation-for="MonthStartSelected" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="EndDeadTime" class="control-label"></label>
-                <input type="date" asp-for="EndDeadTime" class="form-control" />
-                <span asp-validation-for="EndDeadTime" class="text-danger"></span>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="DayStartSelected"></label>
+                        <select asp-for="DayStartSelected" class="form-control">
+                            <option value="">روز</option>
+                            @foreach (var day in (string[])TempData["Days"] ?? Enumerable.Empty<string>())
+                            {
+                                <option value="@day">@day</option>
+                            }
+                        </select>
+                        <span asp-validation-for="DayStartSelected" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="HourStartSelected"></label>
+                        <select asp-for="HourStartSelected" class="form-control">
+                            <option value="">ساعت</option>
+                            @foreach (var hour in (string[])TempData["Hours"] ?? Enumerable.Empty<string>())
+                            {
+                                <option value="@hour">@hour</option>
+                            }
+                        </select>
+                        <span asp-validation-for="HourStartSelected" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="MinuteStartSelected"></label>
+                        <select asp-for="MinuteStartSelected" class="form-control">
+                            <option value="">دقیقه</option>
+                            @foreach (var minute in (string[])TempData["Minutes"] ?? Enumerable.Empty<string>())
+                            {
+                                <option value="@minute">@minute</option>
+                            }
+                        </select>
+                        <span asp-validation-for="MinuteStartSelected" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="YearEndSelected">پایان مزایده</label>
+                        <select asp-for="YearEndSelected" class="form-control">
+                            <option value="">سال</option>
+                            @foreach (var year in (string[])TempData["Years"] ?? Enumerable.Empty<string>())
+                            {
+                                <option value="@year">@year</option>
+                            }
+                        </select>
+                        <span asp-validation-for="YearEndSelected" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="MonthEndSelected"></label>
+                        <select asp-for="MonthEndSelected" class="form-control">
+                            <option value="">ماه</option>
+                            @foreach (var month in (string[])TempData["Months"] ?? Enumerable.Empty<string>())
+                            {
+                                <option value="@month">@month</option>
+                            }
+                        </select>
+                        <span asp-validation-for="MonthEndSelected" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="DayEndSelected"></label>
+                        <select asp-for="DayEndSelected" class="form-control">
+                            <option value="">روز</option>
+                            @foreach (var day in (string[]) TempData["Days"] ?? Enumerable.Empty<string>())
+                            {
+                                <option value="@day">@day</option>
+                            }
+                        </select>
+                        <span asp-validation-for="DayEndSelected" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="HourEndSelected"></label>
+                        <select asp-for="HourEndSelected" class="form-control">
+                            <option value="">ساعت</option>
+                            @foreach (var hour in (string[])TempData["Hours"] ?? Enumerable.Empty<string>())
+                            {
+                                <option value="@hour">@hour</option>
+                            }
+                        </select>
+                        <span asp-validation-for="HourEndSelected" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="MinuteEndSelected"></label>
+                        <select asp-for="MinuteEndSelected" class="form-control">
+                            <option value="">دقیقه</option>
+                            @foreach (var minute in (string[])TempData["Minutes"] ?? Enumerable.Empty<string>())
+                            {
+                                <option value="@minute">@minute</option>
+                            }
+                        </select>
+                        <span asp-validation-for="MinuteEndSelected" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
-                <input type="submit" value="ثبت مزایده جدید" class="btn btn-primary btn-block" />
+                <input type="submit" value="ایجاد مزایده" class="btn btn-primary btn-block" />
             </div>
         </form>
     </div>
 </div>
 
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+@section scripts
+    {
 
+    <script>
+        setTimeout(function () {
+            document.getElementById("my-heading").style.display = "none";
+        }, 2000); // مقدار 2000 برابر با دو ثانیه است.
+    </script>
+
+}

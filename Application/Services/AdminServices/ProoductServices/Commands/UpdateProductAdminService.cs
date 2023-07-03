@@ -1,7 +1,6 @@
 ﻿using Application.Dtos;
 using Application.Dtos.ProductDto;
 using Application.IServices.AdminServices.ProoductServices.Commands;
-using ConsoleApp1.Models;
 using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.AdminServices.ProoductServices.Commands
@@ -24,7 +23,7 @@ namespace Application.Services.AdminServices.ProoductServices.Commands
                     message = "کالا موجود نیست"
                 };
 
-            var result = new Domin.IRepositories.Dtos.ProductDto
+            var result = new Domin.IRepositories.Dtos.Product.ProductDto
             {
                 Id = product.Id,
                 Name = product.Name,

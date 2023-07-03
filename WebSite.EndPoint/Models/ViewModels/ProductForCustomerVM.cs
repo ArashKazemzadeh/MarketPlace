@@ -8,7 +8,7 @@
         public string? Description { get; set; }
         public int? Id { get; set; }
         public bool? IsActive { get; set; }
-
+        public bool IsAuction { get; set; }
         public int? BoothId { get; set; }
         public string BoothName { get; set; }
         public List<string> ImagesUrls { get; set; }

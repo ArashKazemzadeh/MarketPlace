@@ -4,6 +4,7 @@ using Application.IServices.LogServices;
 using ConsoleApp1.Models;
 using Domin.Enums;
 using Domin.IRepositories.Dtos;
+using Domin.IRepositories.Dtos.Seller;
 using Domin.IRepositories.IseparationRepository.SqlServer;
 using Microsoft.Extensions.Configuration;
 using ZstdSharp;

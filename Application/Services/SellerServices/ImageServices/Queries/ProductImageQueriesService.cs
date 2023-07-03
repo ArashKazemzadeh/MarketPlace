@@ -1,7 +1,7 @@
 ﻿
 using Application.IServices.SellerServices.ImageServices.Commands;
 using ConsoleApp1.Models;
-using Domin.IRepositories.Dtos;
+using Domin.IRepositories.Dtos.Image;
 using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.SellerServices.ImageServices.Queries

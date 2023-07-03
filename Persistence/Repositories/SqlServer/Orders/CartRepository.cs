@@ -1,9 +1,9 @@
-﻿using Castle.Core.Resource;
-using ConsoleApp1.Models;
+﻿using ConsoleApp1.Models;
 using Domin.IRepositories.Dtos;
 using Domin.IRepositories.Dtos.Cart;
 using Domin.IRepositories.IseparationRepository.SqlServer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Persistence.Contexts.SqlServer;
 
 namespace Persistence.Repositories.SqlServer.Orders
@@ -18,9 +18,20 @@ namespace Persistence.Repositories.SqlServer.Orders
             _context = context;
             _dbSet = _context.Set<Cart>();
         }
+        public async Task<int> GetTotalPrices(int cartId)
+        {
+            var products = await _context.ProductsCarts
+                .Where(pc => pc.CartId == cartId)
+                .Include(pc => pc.Product)
+                .ToListAsync();
+
+            var amount = (int)products.Sum(pc => pc.Product.BasePrice * pc.Quantity);
+            return amount;
+        }
+
         public async Task<List<Cart>> GetOpenCartsForCustomerIdByBoothIdAsync(int boothId, int cudtomerId)
         {
-            //لست کارت های باز یک مشتری که مربوط به یک غرفه است
+            //A list of open cards of a customer that is related to a booth
             var carts = await _dbSet
                 .Where(c => !c.IsRegistrationFinalized && c.Customer.Id == cudtomerId)
                 .Include(s => s.Seller)
@@ -53,9 +64,12 @@ namespace Persistence.Repositories.SqlServer.Orders
 
             cart.IsRegistrationFinalized = true;
             cart.RegisterDate = DateTime.Now;
-            var sellerresult = _context.Entry(seller).State = EntityState.Modified;
+            _context.Entry(seller).State = EntityState.Modified;
+            _context.Entry(cart).State = EntityState.Modified;
             var e = await _context.SaveChangesAsync();
-            return true;
+            if (e != 0)
+                return true;
+            return false;
         }
         public async Task<List<CartGetDto>> GetUnfinalizedCartsByCustomerId(int customerId)
         {
@@ -68,10 +82,10 @@ namespace Persistence.Repositories.SqlServer.Orders
                        CustomerId = customerId,
                        boothId = c.Seller.Booth.Id,
                        BoothName = c.Seller.Booth.Name,
-                       TotalPrices = c.TotalPrices,
+                       TotalPrices = c.TotalPrices,//
                        IsRegistrationFinalized = c.IsRegistrationFinalized,
                        ProductsNames = c.ProductsCarts.Select(p => p.Product.Name).ToList(),
-                       QuantityFromOne = c.ProductsCarts.Select(c => c.Quantity.Value).Sum()
+                       QuantityFromOne = c.ProductsCarts.Select(c => c.Quantity.Value).Sum() //
                    })
                    .ToListAsync();
 
@@ -139,28 +153,23 @@ namespace Persistence.Repositories.SqlServer.Orders
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<ProductDto>> GetProductByCartId(int cartId)
+        public async Task<List<ProductInCartRepDto>> GetProductsByCartIdAsync(int cartId)
         {
-            var cart = await _dbSet.Include(c => c.ProductsCarts).ThenInclude(pc => pc.Product).FirstOrDefaultAsync(c => c.Id == cartId);
-            if (cart == null)
-                return new List<ProductDto>();
-            var products = cart.ProductsCarts.Select(pc => pc.Product).ToList();
+            var productsInfo = await _context.Carts
+                .Where(c => c.Id == cartId && c.IsRegistrationFinalized)
+                .SelectMany(c => c.ProductsCarts)
+                .Select(pc => new ProductInCartRepDto
+                {
+                    ProductId = pc.ProductId,
+                    BasePrice= Convert.ToInt32(pc.Product.BasePrice),
+                    Name = pc.Product.Name,
+                    TotalPrice =Convert.ToInt32(pc.Quantity * pc.Product.BasePrice) ,
+                    Quantity = Convert.ToInt32(pc.Quantity),
 
-            var result = products.Select(p => new ProductDto
-            {
-                Id = p.Id,
-                Name = p.Name,
-                BasePrice = p.BasePrice,
-                IsActive = p.IsActive,
-                IsConfirm = p.IsConfirm,
-                Image = p.Images,
-                IsAuction = p.IsAuction,
-                Availability = p.Availability,
-                Auction = p.Auction,
-                Description = p.Description,
-                Categories = p.Categories
-            }).ToList();
-            return result;
+                })
+                .ToListAsync();
+            
+            return productsInfo;
         }
     }
 }

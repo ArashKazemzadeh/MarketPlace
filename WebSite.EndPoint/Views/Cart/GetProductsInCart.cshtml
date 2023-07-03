@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Domin.IRepositories.Dtos.ProductDto>
+﻿@model IEnumerable<WebSite.EndPoint.Models.ViewModels.ProductInCartVM>
 
 @{
     ViewData["Title"] = "GetProductsInCart";
@@ -17,7 +17,7 @@
                         نام کالا
                     </th>
                     <th>
-                        قیمت کل
+                        قیمت پایه
                     </th>
                     <th>
                         توضیحات کالا
@@ -38,13 +38,14 @@
                         @Html.DisplayFor(modelItem => item.BasePrice)
                     </td>
 
-
                     <td>
-                        @Html.DisplayFor(modelItem => item.Description)
+                        @Html.DisplayFor(modelItem => item.Quantity)
                     </td>
-                       
                     <td>
-                        @Html.ActionLink("ثبت دیدگاه", "AddCommentForCart", new {  productId=item.Id  })
+                        @Html.DisplayFor(modelItem => item.TotalPrice)
+                    </td>
+                    <td>
+                        @Html.ActionLink("ثبت دیدگاه", "AddCommentForCart", new {  productId=item.ProductId  })
 
                     </td>
                 </tr>
@@ -55,12 +56,12 @@
                 }
             @foreach (var item in Model)
             {
-                a += item.BasePrice;
+                a += item.BasePrice*item.Quantity;
             }
             <tr>
                 <th scope="row">جمع کل</th>
                 <td colspan="2" class="table-active text-right">@a</td>
-                <td>دلار</td>
+                <td>تومان</td>
             </tr>
             </tbody>
            

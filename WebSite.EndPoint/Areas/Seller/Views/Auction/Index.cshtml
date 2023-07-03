@@ -2,6 +2,12 @@
 @{
     ViewData["Title"] = "کالا ها";
 }
+@if (ViewBag.Message != null)
+{
+    <div id="my-heading" class="alert alert-success text-center m-1">
+        <p>@ViewBag.Message</p>
+    </div>
+}
 <div class="m-5">
     <a asp-area="Seller" asp-controller="Product" asp-action="Create" type="button" class="btn btn-secondary">ثبت کالا جدید</a>
 </div>
@@ -10,23 +16,23 @@
         <table class="table table-bordered table-hover table-condensed mb-4">
             <thead>
                 <tr>
-                    <th>
+                    <th style="font-family: Vazir;">
                         نام کالا
                     </th>
-                    <th>
+                    <th style="font-family: Vazir;">
                         زمان شروع
                     </th>
-                    <th>
+                    <th style="font-family: Vazir;">
                         زمان پایان
                     </th>
-                    <th>
+                    <th style="font-family: Vazir;">
                         بالاترین پیشنهاد
                     </th>
-                    <th>
+                    @*<th>
                         جزییات
                     </th>
+*@
 
-                   
 
                 </tr>
             </thead>
@@ -50,16 +56,14 @@
                             @item.HighestPrice
                         </td>
 
-                        <td class="text-center">
+                        @*<td class="text-center">
                             <ul class="table-controls row">
                                 <li>
-                                    <a asp-action="Detail" asp-route-id="@item.ProductId" class="col-6" data-toggle="tooltip" data-placement="top" title="مشاهده ی جزییات">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 text-success">
-                                            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                                        </svg>
+                                    <a asp-action="ُAuctionBids" asp-route-id="@item.ProductId" class="btn btn-primary">
+                                        مشاهده ی پیشنهاد ها
                                     </a>
                                 </li>
-                            </ul>
+                            </ul>*@
                     </tr>
                 }
             </tbody>
@@ -67,3 +71,13 @@
     </div>
 </div>
 
+@section scripts
+    {
+
+    <script>
+        setTimeout(function () {
+            document.getElementById("my-heading").style.display = "none";
+        }, 4000); // مقدار 2000 برابر با دو ثانیه است.
+    </script>
+
+}

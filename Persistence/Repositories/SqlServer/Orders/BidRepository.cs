@@ -1,9 +1,9 @@
 ﻿using ConsoleApp1.Models;
 using Microsoft.EntityFrameworkCore;
-using Domin.IRepositories.Dtos;
 using Persistence.Contexts.SqlServer;
 using Domin.Entities.Users;
 using Domin.IRepositories.IseparationRepository.SqlServer;
+using Domin.IRepositories.Dtos.Bid;
 
 namespace Persistence.Repositories.SqlServer.Orders
 {

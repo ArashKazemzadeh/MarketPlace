@@ -1,9 +1,9 @@
-﻿using Application.Services.SellerServices.ProfileServices.Queries;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using System.Data;
 using ConsoleApp1.Models;
 using Dapper;
 using Domin.IRepositories.IseparationRepository.Dapper;
+using Domin.IRepositories.Dtos.Seller;
 
 namespace Persistence.Repositories.DapperRepositories
 {

@@ -1,6 +1,5 @@
 ﻿using Application.Dtos;
-using Domin.IRepositories.Dtos;
-
+using Domin.IRepositories.Dtos.Comment;
 
 namespace Application.IServices.CustomerServices.CommentServices.Commands
 {

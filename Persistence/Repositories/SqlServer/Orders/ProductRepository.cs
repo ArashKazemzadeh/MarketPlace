@@ -1,5 +1,6 @@
 ﻿using ConsoleApp1.Models;
-using Domin.IRepositories.Dtos;
+using Domin.IRepositories.Dtos.Auction;
+using Domin.IRepositories.Dtos.Product;
 using Domin.IRepositories.IseparationRepository.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contexts.SqlServer;
@@ -18,7 +19,18 @@ namespace Persistence.Repositories.SqlServer.Orders
             _dbSet = _context.Set<Product>();
         }
 
-
+        public async Task<List<ProductGetDto>> GetAllProductsForView()
+        {
+            var products = await _dbSet.OrderByDescending(i => i.Id)
+                .Select(p => new ProductGetDto
+                {
+                        Id = p.Id,
+                        Name = p.Name,
+                        BasePrice =(int) p.BasePrice,
+                        ImageUrl = p.Images.Select(i=>i.Url).FirstOrDefault()
+                }).Take(12).ToListAsync();
+            return products;
+        }
 
         public async Task<List<ProductCustomerDto>> GetProductByBoothIdAsync(int boothId)
         {
@@ -37,10 +49,15 @@ namespace Persistence.Repositories.SqlServer.Orders
             }).ToListAsync();
             return dto;
         }
-
+       
         public async Task<List<AuctionProductDto>> GetProductsWithTrueAuctions(int sellerId)
         {
-            var result = await _dbSet.Where(a => a.IsAuction == true && a.IsActive == true && a.Booth.Seller.Id == sellerId)
+            var result = await _dbSet.
+                Where(a =>
+                    a.IsAuction == true &&
+                    a.IsActive == true &&
+                    a.Auction.EndDeadTime>DateTime.Now&&
+                    a.Booth.Seller.Id == sellerId)
                 .Select(p => new AuctionProductDto
                 {
                     ProductId = p.Id,
@@ -60,7 +77,7 @@ namespace Persistence.Repositories.SqlServer.Orders
         {
             var product = await _dbSet.AsNoTracking().Where(x => x.Id == id)
                     .Include(b => b.Auction)
-
+                    .Include(i=>i.Images)
                     .Include(c => c.Categories)
                     .FirstOrDefaultAsync();
             return new ProductDto
@@ -69,12 +86,11 @@ namespace Persistence.Repositories.SqlServer.Orders
                 Name = product.Name,
                 BasePrice = product.BasePrice,
                 IsAuction = product.IsAuction,
-                IsConfirm = product.IsConfirm,
                 Availability = product.Availability,
                 Description = product.Description,
-                IsActive = product.IsActive,
                 Auction = product.Auction,
-                Categories = product.Categories
+                Categories = product.Categories,
+                Image = product.Images
             };
         }
         public async Task<List<Product>> GetProductsWithSellerNameConfirmAsync()

@@ -1,21 +1,24 @@
-﻿@model IEnumerable<Domin.IRepositories.Dtos.CommentGetDto>
-
+﻿@using Application.IServices.AdminServices.UserService.Commands
+@model List<WebSite.EndPoint.Models.ViewModels.GetCommentVM>
+@inject IAccountService _accountService;
 @{
     ViewData["Title"] = "GetCommentByProductId";
 }
-<div class="row m-3">
-    
-    @foreach (var item in Model)
-    {
 
-        <div class="card col-3 m-3 p-1" style="width: 18rem;">
+<div class="row m-4 justify-content-center">
+@foreach (var item in Model)
+{
+    var user = await _accountService.FindUserByIdAsync(item.UserName);
+
+        <div class="card component-card_2 text-center col-4 m-4 mx-auto">
+            <p style="font-family: Vazir;">@Html.DisplayFor(modelItem => user.UserName)</p>
+            <h4 style="font-family: Vazir;">عنوان :<b> @Html.DisplayFor(modelItem => item.Title)</b></h4>
+            <p style="color: black">نام محصول: @Html.DisplayFor(modelItem => item.ProductName)</p>
+            <p class="card-text"> @Html.DisplayFor(modelItem => item.Description)</p>
+            <p style="color: dodgerblue"> @Html.DisplayFor(modelItem => item.RegisterDate)</p>
             <div class="card-body">
-                <p style="color: dodgerblue"> @Html.DisplayFor(modelItem => item.RegisterDate)</p>
-                <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Title)</h5>
-                <p class="card-text"> @Html.DisplayFor(modelItem => item.Description)</p>
             </div>
         </div>
-
-    }
-
+    
+}
 </div>

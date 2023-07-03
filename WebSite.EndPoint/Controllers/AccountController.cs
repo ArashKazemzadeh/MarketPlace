@@ -5,6 +5,7 @@ using Application.IServices.SellerServices.ProfileServices.Commands;
 using Castle.Core.Resource;
 using ConsoleApp1.Models;
 using Domin.IRepositories.Dtos;
+using Domin.IRepositories.Dtos.Seller;
 using Microsoft.AspNetCore.Mvc;
 using WebSite.EndPoint.Areas.Admin.Models;
 using WebSite.EndPoint.Areas.Seller.Models;

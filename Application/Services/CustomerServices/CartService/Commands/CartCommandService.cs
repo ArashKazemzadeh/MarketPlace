@@ -37,23 +37,27 @@ namespace Application.Services.CustomerServices.CartService.Commands
         }
         public async Task<string> AddProductToCart(int customerId, int productId, int boothId)
         {
-            // بررسی وجود کالا و موجودی آن
+            #region Checking the nullity of the data
+
             var product = await _productRepository.GetByIdAsync(productId);
             var customer = await _customerRepository.GetByIdAsync(customerId);
             var booth = await _boothRepository.GetByIdAsync(boothId);
             if (product == null)
-                return "کالا موجود نیست!" ;
-            if (product.Availability <1)
+                return "کالا موجود نیست!";
+            if (product.Availability < 1)
                 return "موجودی کالا به اتمام رسیده است!";
             if (booth == null)
                 return "غرفه موجود نیست!";
-            if ( customer == null)
+            if (customer == null)
                 return "کاربری شما موجود نیست . ابتدا خارج و دوباره وارد شوید.";
-            // بررسی کارت های یک مشتری با IsRegistrationFinalized=false که دارای boothId مورد نظر هستند
+
+            #endregion
+
             var openCartsOneCustomerInOneBooth = await _cartRepository.GetOpenCartsForCustomerIdByBoothIdAsync(boothId, customerId);
             if (openCartsOneCustomerInOneBooth.Count == 0)
             {
-                // ایجاد کارت جدید
+                #region Add to New Cart
+
                 var newCart = new CartAddDto
                 {
                     CustomerId = customerId,
@@ -61,25 +65,29 @@ namespace Application.Services.CustomerServices.CartService.Commands
                     TotalPrices = product.BasePrice,
                 };
                 var result = await _cartRepository.AddAsync(newCart);
-                if (result==null)
+                if (result == null)
                     throw new InvalidOperationException("SAVECHANGEASYNC() has encountered a problem and the card could not be registered in the database");
-                 
-                // افزودن کالا به کارت
+
                 var productsCart = new ProductsCartDto
                 {
                     CartId = result.Id,
                     ProductId = productId,
                     Quantity = 1
                 };
-              await  _productsCartRepository.AddAsync(productsCart);
+                await _productsCartRepository.AddAsync(productsCart);
+
+                #endregion
             }
             else
             {
-                // افزودن کالا به کارتی که پیدا شده است
+                #region Add To Exist Cart 
+
                 var cart = openCartsOneCustomerInOneBooth.First();
-                await _productsCartRepository.AddProductToCartAsync(cart.Id, productId);
+                await _productsCartRepository.AddProductToOldCartAsync(cart.Id, productId);
+
+                #endregion
+
             }
-            // کم کردن تعداد کالا از دیتابیس
             product.Availability--;
             await _productRepository.UpdateAsync(product);
             return "کالا با موفقیت افزوده شد.";

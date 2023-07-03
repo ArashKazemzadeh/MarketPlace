@@ -2,6 +2,7 @@
 using Application.IServices.Visitors;
 using Application.Services.AdminServices.UserServices.AllUserService;
 using Domin.IRepositories.Dtos;
+using Domin.IRepositories.Dtos.Image;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebSite.EndPoint.Controllers

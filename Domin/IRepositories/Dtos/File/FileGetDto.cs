@@ -13,5 +13,5 @@ public class FileGetDto
 
     public int? SellerId { get; set; }
 
-    public virtual Seller? Seller { get; set; }
+    public virtual ConsoleApp1.Models.Seller? Seller { get; set; }
 }

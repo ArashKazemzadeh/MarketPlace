@@ -1,0 +1,49 @@
+﻿@model WebSite.EndPoint.Models.ViewModels.ProductForCustomerVM
+@{
+    ViewData["Title"] = "ProductDetail";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="product-image">
+               <img src="@Model.ImagesUrls.FirstOrDefault()" style="width: 1000px;height: 450px"/>
+            </div> <!-- /.product-image -->
+            <div class="product-information">
+                <h2 style="font-family: Vazir;">@Model.Name</h2>
+                <p> @Model.Description</p>
+                <p class="product-infos">
+                   
+                    <span>قیمت : @Model.BasePrice</span>
+                    <span>تعداد موجود : @Model.Availability</span>
+                </p>
+                <div class="product-buttons row">
+                    <div class="col-5">
+                        <a asp-controller="Cart" asp-action="AddToCartBasePrice" asp-route-boothId="@Model.BoothId" asp-route-productId="@Model.Id" class="btn btn-success btn-block">افزودن به سبد خرید</a>
+                    </div>
+                    <div class="col-5">
+                        <a asp-controller="Booth" asp-action="EnterToBooth" asp-route-boothId="@Model.BoothId" class="btn btn-danger btn-block">بازگشت به فروشگاه</a>
+                    </div>
+                </div>
+            </div> <!-- /.product-information -->
+        </div> <!-- /.col-md-8 -->
+        <div class="col-md-4 col-sm-8">
+        @foreach (var url in Model.ImagesUrls)
+        {
+          
+                <div class="product-item-2">
+                    <div class="product-thumb">
+                        <img src="@url" style="width: 350px;height: 125px"/>
+                    </div> <!-- /.product-thumb -->
+                    <div class="product-content overlay">
+                        <h5>@Model.Name</h5>
+                        <span class="price">@Model.BasePrice</span>
+                    </div> <!-- /.product-content -->
+                </div> <!-- /.product-item-2 -->
+           
+           
+        }
+        </div>
+    </div>
+</div>
+

@@ -25,45 +25,7 @@ namespace Persistence.ModelConfigurations.EntitiesConfiguration
                 .HasForeignKey(d => d.BoothId)
                 .HasConstraintName("FK__Product__BoothID__3C69FB99");
             entity.HasQueryFilter(p=>p.IsRemove==false);
-            entity.HasData(
-                new Product
-                {
-                    Id = 1,
-                    Name = "لپ تاپ",
-                    BasePrice = 5000000,
-                    IsAuction = false,
-                    IsConfirm = null,
-                    Availability = 10,
-                    Description = "لپ تاپ جدید و بسیار کارآمد",
-                    IsActive = true,
-
-                },
-                new Product
-                {
-                    Id = 2,
-                    Name = "گوشی هوشمند",
-                    BasePrice = 2000000,
-                    IsAuction = false,
-                    IsConfirm = null,
-                    Availability = 5,
-                    Description = "گوشی هوشمند با قابلیت‌های فراوان",
-                    IsActive = true,
-
-                },
-
-                new Product
-                {
-                    Id = 20,
-                    Name = "کتاب برنامه نویسی",
-                    BasePrice = 100000,
-                    IsAuction = false,
-                    IsConfirm = null,
-                    Availability = 50,
-                    Description = "بهترین کتاب برای یادگیری برنامه‌نویسی",
-                    IsActive = true,
-
-                }
-            );
+            
         }
     }
 }

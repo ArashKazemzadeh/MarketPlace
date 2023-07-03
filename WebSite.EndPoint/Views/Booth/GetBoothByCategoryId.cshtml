@@ -3,17 +3,22 @@
     ViewData["Title"] = "GetBoothByCategoryId";
 }
 
-<div class="row ">
+<div class="row m-4 justify-content-center flex flex-wrap">
     @foreach (var booth in Model)
     {
-        <div class="card component-card_2 col-2 m-5 text-center">
-            <h3>نام غرفه: @booth.Name</h3>
-            <h5>نام دارنده غرفه: @booth.Seller</h5>
-            <p>معرفی غرفه:  @booth.Description</p>
-            <div class="card-body">
-                <a asp-controller="Booth" asp-action="EnterToBooth" asp-route-boothId="@booth.Id" class="btn btn-primary btn-block">ورود به غرفه</a>
+        <a asp-controller="Booth" asp-action="EnterToBooth" asp-route-boothId="@booth.Id" class="col-12 col-sm-6 col-md-4 m-4 mx-auto">
+            <div class="card component-card_2 text-center">
+                <img src="~/Shop/@(booth.Id).jpg" class="img-fluid" style="height: 250px" />
+                <div class="card-header">
+                    <h4 style="font-family: Vazir;">فروشگاهِ : @booth.Name</h4>
+                </div>
+                <div class="card-body">
+                    <p>@booth.Description</p>
+                </div>
+                <div class="card-footer">
+                    <p style="color: grey"> غرفه دار : @booth.Seller</p>
+                </div>
             </div>
-        </div>
+        </a>
     }
 </div>
-

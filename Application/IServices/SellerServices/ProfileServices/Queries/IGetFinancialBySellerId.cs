@@ -1,5 +1,5 @@
 ﻿using Application.Dtos;
-using Application.Services.SellerServices.ProfileServices.Queries;
+using Domin.IRepositories.Dtos.Seller;
 
 namespace Application.IServices.SellerServices.ProfileServices.Queries;
 

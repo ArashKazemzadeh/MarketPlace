@@ -1,5 +1,4 @@
-﻿using Domin.IRepositories.Dtos;
-
+﻿using Domin.IRepositories.Dtos.Comment;
 
 namespace Application.IServices.CustomerServices.ProfileServices.Queries
 {

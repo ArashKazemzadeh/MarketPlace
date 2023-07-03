@@ -1,4 +1,5 @@
 ﻿using Application.IServices.SellerServices.AuctionServices.Commands;
+using Common;
 using ConsoleApp.Models;
 using ConsoleApp1.Models;
 using Domin.IRepositories.IseparationRepository.SqlServer;
@@ -18,9 +19,9 @@ public class AddAuctionForProductService : IAddAuctionForProductService
         _productRepository = productRepository;
         _auctionRepository = auctionRepository;
     }
-    public async Task<string> Execute(AuctionDto auctionDto, int productId)
+    public async Task<string> Execute(AuctionDto auctionDto)
     {
-        var product = await _productRepository.GetByIdAsync(productId);
+        var product = await _productRepository.GetByIdAsync(auctionDto.ProductId);
         if (product == null)
             return "کالایافت نشد.";
         if (product.IsAuction)
@@ -29,18 +30,20 @@ public class AddAuctionForProductService : IAddAuctionForProductService
             return "مزایده ی این کالا تمام شده و کالا به حالت غیرفعال در آمده است.";
         if (product.Availability<1)
             return "برای شرکت در مزایده تعداد کافی کالا موجود نیست.";
+        var startDateTime = DateConvert.ConvertPersianToGregorian(auctionDto.StartDeadTime.ToString());
+        var endDateTime = DateConvert.ConvertPersianToGregorian(auctionDto.EndDeadTime.ToString());
         var auction = new Auction
         {
-            StartDeadTime = auctionDto.StartDeadTime,
-            EndDeadTime = auctionDto.EndDeadTime,
+            StartDeadTime = startDateTime,
+            EndDeadTime = endDateTime,
             HighestPrice = auctionDto.HighestPrice,
-            ProductId = productId,
+            ProductId = auctionDto.ProductId,
         };
         product.IsAuction = true;
         await _auctionRepository.AddAsync(auction);
         product.Auction = auction;
         await _productRepository.UpdateAsync(product);
-        return "مزایده با موفقیت ایجاد شد.";
+        return "مزایده با موفقیت ایجاد شد";
     }
 }
 

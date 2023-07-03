@@ -41,9 +41,9 @@ namespace Application.Services.CustomerServices.CartService.Queries
             return result;
         }
 
-        public async Task<List<ProductDto>> GetProductByCartId(int cartId)
+        public async Task<List<ProductInCartRepDto>> GetProductByCartId(int cartId)
         {
-            var result = await _cartRepository.GetProductByCartId(cartId);
+            var result = await _cartRepository.GetProductsByCartIdAsync(cartId);
             return result;
         }
     }

@@ -1,5 +1,8 @@
 ﻿using Application.IServices.SellerServices.ProfileServices.Commands;
 using Domin.IRepositories.Dtos;
+using Domin.IRepositories.Dtos.Address;
+using Domin.IRepositories.Dtos.Booth;
+using Domin.IRepositories.Dtos.Seller;
 using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.SellerServices.ProfileServices.Commands;

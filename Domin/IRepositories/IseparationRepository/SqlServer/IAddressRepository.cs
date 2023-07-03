@@ -1,5 +1,5 @@
 ﻿using ConsoleApp1.Models;
-using Domin.IRepositories.Dtos;
+using Domin.IRepositories.Dtos.Address;
 
 namespace Domin.IRepositories.IseparationRepository.SqlServer;
 

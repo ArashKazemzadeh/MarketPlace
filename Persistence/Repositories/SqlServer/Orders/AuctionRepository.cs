@@ -1,6 +1,7 @@
 ﻿using Castle.Core.Resource;
 using ConsoleApp1.Models;
-using Domin.IRepositories.Dtos;
+using Domin.IRepositories.Dtos.Auction;
+using Domin.IRepositories.Dtos.Bid;
 using Domin.IRepositories.IseparationRepository.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contexts.SqlServer;

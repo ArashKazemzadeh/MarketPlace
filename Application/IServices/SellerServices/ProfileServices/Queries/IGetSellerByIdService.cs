@@ -1,4 +1,4 @@
-﻿using Domin.IRepositories.Dtos;
+﻿using Domin.IRepositories.Dtos.Seller;
 
 namespace Application.IServices.SellerServices.ProfileServices.Queries;
 

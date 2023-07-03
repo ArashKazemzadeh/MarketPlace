@@ -1,5 +1,6 @@
 ﻿using Application.Dtos;
 using Application.IServices.SellerServices.ProfileServices.Queries;
+using Domin.IRepositories.Dtos.Seller;
 using Domin.IRepositories.IseparationRepository.Dapper;
 
 namespace Application.Services.SellerServices.ProfileServices.Queries

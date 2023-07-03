@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Domin.IRepositories.Dtos;
 using Persistence.Contexts.SqlServer;
 using ConsoleApp.Models;
 using Domin.IRepositories.IseparationRepository.SqlServer;
+using Domin.IRepositories.Dtos.Bid;
 
 namespace Persistence.Repositories.SqlServer.Users
 {

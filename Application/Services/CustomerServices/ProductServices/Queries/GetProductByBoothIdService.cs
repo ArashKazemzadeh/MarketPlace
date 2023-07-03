@@ -1,11 +1,11 @@
 ﻿using Application.IServices.CustomerServices.ProductServices.Queries;
-using Domin.IRepositories.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domin.IRepositories.IseparationRepository.SqlServer;
+using Domin.IRepositories.Dtos.Product;
 
 namespace Application.Services.CustomerServices.ProductServices.Queries
 {

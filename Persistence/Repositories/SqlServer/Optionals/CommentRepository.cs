@@ -1,5 +1,5 @@
 ﻿using ConsoleApp1.Models;
-using Domin.IRepositories.Dtos;
+using Domin.IRepositories.Dtos.Comment;
 using Domin.IRepositories.IseparationRepository.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contexts.SqlServer;
@@ -32,13 +32,11 @@ namespace Persistence.Repositories.SqlServer.Optionals
             var result = comments.Select(c => new CommentGetDto
             {
                 Id = c.Id,
-                IsConfirm = c.IsConfirm,
-                CustomertId = c.CustomertId,
-                ProductId = c.ProductId,
+                Title = c.Title,
                 Description = c.Description,
                 RegisterDate = c.RegisterDate,
                 Product = c.Product,
-                Customer = c.Customer
+                CustomerId = c.CustomertId
             }).ToList();
             return result;
         }

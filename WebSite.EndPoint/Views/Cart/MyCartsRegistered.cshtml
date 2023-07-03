@@ -23,6 +23,9 @@
                         کالاها
                     </th>
                     <th>
+                        جمع کل
+                    </th>
+                    <th>
                         تاریخ ثبت 
                     </th>
                     <th>
@@ -43,6 +46,9 @@
                             {
                                 @Html.DisplayFor(modelItem => product) <i>,</i>
                             }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalPrices)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.RegisterDate)

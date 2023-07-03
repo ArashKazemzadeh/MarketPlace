@@ -257,26 +257,38 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "تجهیزات رایانه ",
+                            Description = "لورم ایپسوم یک متن مجازی است که در صنعت چاپ و طراحی گرافیک استفاده می‌شود. لورم ایپسوم به طور معمول برای نمایش نمونه‌های طراحی و چاپ، پر کردن فضاهای خالی در متون و برای تست قلم‌ها و طرح‌های گرافیکی استفاده می‌شود. لورم ایپسوم در واقع به جای متن واقعی، کلمات و عبارات بی‌معنی و بی‌هدف را نشان می‌دهد. تا حدی که حتی به تولید متن‌هایی که هیچ ربطی به یکدیگر ندارند هم می‌پردازد.",
                             Name = "تکنولوژی"
                         },
                         new
                         {
                             Id = 2,
-                            Description = "انواع ساز و تابلو های نقاشی",
-                            Name = "هنری"
+                            Description = "لورم ایپسوم یک متن مجازی است که در صنعت چاپ و طراحی گرافیک استفاده می‌شود. لورم ایپسوم به طور معمول برای نمایش نمونه‌های طراحی و چاپ، پر کردن فضاهای خالی در متون و برای تست قلم‌ها و طرح‌های گرافیکی استفاده می‌شود. لورم ایپسوم در واقع به جای متن واقعی، کلمات و عبارات بی‌معنی و بی‌هدف را نشان می‌دهد. تا حدی که حتی به تولید متن‌هایی که هیچ ربطی به یکدیگر ندارند هم می‌پردازد.",
+                            Name = "موسیقی"
                         },
                         new
                         {
                             Id = 3,
-                            Description = "همه ی لوازم مورد نیاز در منزل",
+                            Description = "لورم ایپسوم یک متن مجازی است که در صنعت چاپ و طراحی گرافیک استفاده می‌شود. لورم ایپسوم به طور معمول برای نمایش نمونه‌های طراحی و چاپ، پر کردن فضاهای خالی در متون و برای تست قلم‌ها و طرح‌های گرافیکی استفاده می‌شود. لورم ایپسوم در واقع به جای متن واقعی، کلمات و عبارات بی‌معنی و بی‌هدف را نشان می‌دهد. تا حدی که حتی به تولید متن‌هایی که هیچ ربطی به یکدیگر ندارند هم می‌پردازد.",
                             Name = "لوازم منزل"
                         },
                         new
                         {
                             Id = 4,
-                            Description = "شامل همه ی کالاهایی که در دسته باندی بالا موجود نیست.",
-                            Name = "سایر"
+                            Description = "لورم ایپسوم یک متن مجازی است که در صنعت چاپ و طراحی گرافیک استفاده می‌شود. لورم ایپسوم به طور معمول برای نمایش نمونه‌های طراحی و چاپ، پر کردن فضاهای خالی در متون و برای تست قلم‌ها و طرح‌های گرافیکی استفاده می‌شود. لورم ایپسوم در واقع به جای متن واقعی، کلمات و عبارات بی‌معنی و بی‌هدف را نشان می‌دهد. تا حدی که حتی به تولید متن‌هایی که هیچ ربطی به یکدیگر ندارند هم می‌پردازد.",
+                            Name = "نقاشی"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "لورم ایپسوم یک متن مجازی است که در صنعت چاپ و طراحی گرافیک استفاده می‌شود. لورم ایپسوم به طور معمول برای نمایش نمونه‌های طراحی و چاپ، پر کردن فضاهای خالی در متون و برای تست قلم‌ها و طرح‌های گرافیکی استفاده می‌شود. لورم ایپسوم در واقع به جای متن واقعی، کلمات و عبارات بی‌معنی و بی‌هدف را نشان می‌دهد. تا حدی که حتی به تولید متن‌هایی که هیچ ربطی به یکدیگر ندارند هم می‌پردازد.",
+                            Name = "عتیقه"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "لورم ایپسوم یک متن مجازی است که در صنعت چاپ و طراحی گرافیک استفاده می‌شود. لورم ایپسوم به طور معمول برای نمایش نمونه‌های طراحی و چاپ، پر کردن فضاهای خالی در متون و برای تست قلم‌ها و طرح‌های گرافیکی استفاده می‌شود. لورم ایپسوم در واقع به جای متن واقعی، کلمات و عبارات بی‌معنی و بی‌هدف را نشان می‌دهد. تا حدی که حتی به تولید متن‌هایی که هیچ ربطی به یکدیگر ندارند هم می‌پردازد.",
+                            Name = "فرهنگی"
                         });
                 });
 
@@ -334,7 +346,7 @@ namespace Persistence.Migrations
                             CustomertId = 1,
                             Description = "این محصول عالی است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 30, 2, 14, 54, 316, DateTimeKind.Local).AddTicks(5720),
+                            RegisterDate = new DateTime(2023, 7, 3, 4, 0, 7, 790, DateTimeKind.Local).AddTicks(7255),
                             Title = "عالی"
                         },
                         new
@@ -343,7 +355,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول بد است.",
                             ProductId = 1,
-                            RegisterDate = new DateTime(2023, 6, 30, 2, 14, 54, 316, DateTimeKind.Local).AddTicks(5739),
+                            RegisterDate = new DateTime(2023, 7, 3, 4, 0, 7, 790, DateTimeKind.Local).AddTicks(7281),
                             Title = "بد"
                         },
                         new
@@ -352,7 +364,7 @@ namespace Persistence.Migrations
                             CustomertId = 2,
                             Description = "این محصول خوب است.",
                             ProductId = 2,
-                            RegisterDate = new DateTime(2023, 6, 30, 2, 14, 54, 316, DateTimeKind.Local).AddTicks(5741),
+                            RegisterDate = new DateTime(2023, 7, 3, 4, 0, 7, 790, DateTimeKind.Local).AddTicks(7283),
                             Title = "خوب"
                         });
                 });
@@ -542,41 +554,6 @@ namespace Persistence.Migrations
                     b.HasIndex("BoothId");
 
                     b.ToTable("Product", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Availability = 10,
-                            BasePrice = 5000000,
-                            Description = "لپ تاپ جدید و بسیار کارآمد",
-                            IsActive = true,
-                            IsAuction = false,
-                            IsRemove = false,
-                            Name = "لپ تاپ"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Availability = 5,
-                            BasePrice = 2000000,
-                            Description = "گوشی هوشمند با قابلیت‌های فراوان",
-                            IsActive = true,
-                            IsAuction = false,
-                            IsRemove = false,
-                            Name = "گوشی هوشمند"
-                        },
-                        new
-                        {
-                            Id = 20,
-                            Availability = 50,
-                            BasePrice = 100000,
-                            Description = "بهترین کتاب برای یادگیری برنامه‌نویسی",
-                            IsActive = true,
-                            IsAuction = false,
-                            IsRemove = false,
-                            Name = "کتاب برنامه نویسی"
-                        });
                 });
 
             modelBuilder.Entity("ConsoleApp1.Models.ProductsCart", b =>
@@ -764,60 +741,6 @@ namespace Persistence.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "a101513c-84f9-4b8f-a1c9-a7c39cf41e4b",
-                            Email = "userone@gmail.com",
-                            EmailConfirmed = false,
-                            FullName = "کاربر یک",
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "userone@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "27dcff0e-cbe8-4733-ae44-6d22653eecd9",
-                            Email = "userofour@gmail.com",
-                            EmailConfirmed = false,
-                            FullName = "کاربر چهار",
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "userfour@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "9f4cb459-41de-4dcd-9c62-c32bf78fa1d1",
-                            Email = "userotow@gmail.com",
-                            EmailConfirmed = false,
-                            FullName = "کاربر دو",
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "userotow@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "0e9313f0-c078-49a7-b64e-33dbbb699b3d",
-                            Email = "userothree@gmail.com",
-                            EmailConfirmed = false,
-                            FullName = "کاربر سه",
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "userothree@gmail.com"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>

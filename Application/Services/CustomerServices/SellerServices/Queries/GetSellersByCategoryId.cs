@@ -1,5 +1,5 @@
 ﻿using Application.IServices.CustomerServices.SellerServices.Queries;
-using Domin.IRepositories.Dtos;
+using Domin.IRepositories.Dtos.Booth;
 using Domin.IRepositories.IseparationRepository.SqlServer;
 
 namespace Application.Services.CustomerServices.SellerServices.Queries
