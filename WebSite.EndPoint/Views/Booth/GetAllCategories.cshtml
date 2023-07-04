@@ -4,8 +4,8 @@
 }
 <style>
     .responsive-image {
-        max-width: 100%;
-        height: auto;
+        width: 100%;
+        height: 250px;
     }
 </style>
 <div class="row m-4 justify-content-center flex flex-wrap">
@@ -14,7 +14,7 @@
         <div class="col-12 col-sm-6 col-md-4 m-4 mx-auto">
             <a asp-controller="Booth" asp-action="GetBoothByCategoryId" asp-route-categoryid="@c.Id" class="d-block">
                 <div class="card component-card_2 text-center">
-                    <img src="~/category/@(c.Id).jpg" class="img-fluid" alt="Category Image">
+                    <img src="~/category/@(c.Id).jpg" class="img-fluid responsive-image" alt="Category Image">
                     <div class="card-header">
                         <h1 style="font-family: Vazir;"> @c.Name</h1>
                     </div>

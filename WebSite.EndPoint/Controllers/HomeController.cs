@@ -25,7 +25,8 @@ namespace WebSite.EndPoint.Controllers
                 Id = p.Id,
                 Name = p.Name,
                 BasePrice = p.BasePrice,
-                ImageUrl = p.ImageUrl
+                ImageUrl = p.ImageUrl,
+                BoothId = p.BoothId
             }).ToList();
             return View(model);
         }

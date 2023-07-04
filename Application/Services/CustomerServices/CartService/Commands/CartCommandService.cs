@@ -1,6 +1,8 @@
 ﻿using Application.IServices.CustomerServices.CartService.Commands;
+using ConsoleApp1.Models;
 using Domin.IRepositories.Dtos.Cart;
 using Domin.IRepositories.IseparationRepository.SqlServer;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Application.Services.CustomerServices.CartService.Commands
 {
@@ -35,6 +37,7 @@ namespace Application.Services.CustomerServices.CartService.Commands
                 return true;
             return false;
         }
+       
         public async Task<string> AddProductToCart(int customerId, int productId, int boothId)
         {
             #region Checking the nullity of the data
@@ -91,6 +94,20 @@ namespace Application.Services.CustomerServices.CartService.Commands
             product.Availability--;
             await _productRepository.UpdateAsync(product);
             return "کالا با موفقیت افزوده شد.";
+        }
+
+        public async Task<string> DeleteProductFromCart(string userId, int productId)
+        {
+            var customerId = Convert.ToInt32(userId);
+            var result = await _productRepository.RemoveFromCartByProductId(productId, customerId);
+            return result;
+        }
+
+        public async Task<string> DeleteOpenCart(string userId, int cartId)
+        {
+            var customerId = Convert.ToInt32(userId);
+            var result = await _cartRepository.DeleteOpenCartAsync(customerId, cartId);
+            return result;
         }
     }
 }

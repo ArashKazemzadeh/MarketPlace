@@ -46,6 +46,8 @@ public class AssignMedalToSeller : IAssignMedalToSeller
 
                 seller.Medals.Add(bronzeMedal);
                 seller.CommissionPercentage = 0.09;
+                await _logingService.LogInformation(seller.Id.ToString(), MedalEnum.Bronze.ToString());
+
             }
             else if (!seller.Medals.Any(m => m.Type == MedalEnum.Silver) && saleAmount >= 5000)
             {
@@ -58,6 +60,8 @@ public class AssignMedalToSeller : IAssignMedalToSeller
                 }
                 seller.Medals.Add(silverMedal);
                 seller.CommissionPercentage = 0.07;
+                await _logingService.LogInformation(seller.Id.ToString(), MedalEnum.Silver.ToString());
+
             }
             else if (!seller.Medals.Any(m => m.Type == MedalEnum.Gold) && saleAmount >= 10000)
             {

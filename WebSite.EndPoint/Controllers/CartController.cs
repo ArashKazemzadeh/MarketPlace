@@ -19,6 +19,7 @@ namespace WebSite.EndPoint.Controllers
         private readonly ICartCommandService _cartCommandService;
         private readonly IAccountService _accountService;
         private readonly IAddCommentForProductService _addCommentForProductService;
+
         public CartController(ICartQueryService cartQueryService,
             IAccountService accountService,
             ICartCommandService cartCommandService, IAddCommentForProductService addCommentForProductService)
@@ -29,22 +30,38 @@ namespace WebSite.EndPoint.Controllers
             _addCommentForProductService = addCommentForProductService;
         }
 
-        public async Task<IActionResult> GetProductsInCart(int cartId)
+        public async Task<IActionResult> GetProductsInCloseCart(int cartId)
         {
             var products = await _cartQueryService.GetProductByCartId(cartId);
             var model = products
-                    .Select(p => new ProductInCartVM()
-                    {
-                        ProductId=p.ProductId,
-                        BasePrice=p.BasePrice,
-                        Name = p.Name,
-                        TotalPrice = p.TotalPrice,
+                .Select(p => new ProductInCartVM()
+                {
+                    ProductId = p.ProductId,
+                    BasePrice = p.BasePrice,
+                    Name = p.Name,
+                    TotalPrice = p.TotalPrice,
                     Quantity = p.Quantity,
-                    }).ToList();
+                }).ToList();
 
             return View(model);
         }
-
+        public async Task<IActionResult> GetProductsInOpenCart(int cartId)
+        {
+            var products = await _cartQueryService.GetProductByCartId(cartId);
+            var model = products
+                .Select(p => new ProductInCartVM()
+                {
+                    ProductId = p.ProductId,
+                    BasePrice = p.BasePrice,
+                    Name = p.Name,
+                    TotalPrice = p.TotalPrice,
+                    Quantity = p.Quantity,
+                  BoothId = p.BoothId,
+                  CartId=cartId
+                }).ToList();
+            ViewBag.Message = TempData["DeleteProductFromCart"];
+            return View(model);
+        }
         public async Task<IActionResult> AddCommentForCart(int ProductId)
         {
             var model = new CommentAddVm
@@ -53,6 +70,7 @@ namespace WebSite.EndPoint.Controllers
             };
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> AddCommentForCart(CommentAddVm model)
         {
@@ -60,6 +78,7 @@ namespace WebSite.EndPoint.Controllers
             {
                 return View(model);
             }
+
             var userId = await _accountService.GetLoggedInUserId();
             var dto = new CommentAddDto
             {
@@ -77,14 +96,14 @@ namespace WebSite.EndPoint.Controllers
             ViewBag.Message = result;
             return View(model);
         }
-
         public async Task<IActionResult> MyCartsUnRegistered()
         {
             var errorMessage = TempData["errorDoRegisteringCart"] as string;
-            if (!string.IsNullOrEmpty(errorMessage))
-            {
+          
                 ViewBag.ErrorMessage = errorMessage;
-            }
+            var deleteMessage = TempData["DeleteProductFromCart"] as string;
+            
+                ViewBag.deleteMessage = deleteMessage;
 
             var userId = await _accountService.GetLoggedInUserId();
             var dto = await _cartQueryService.GetUnfinalizedCartsByCustomerId(Convert.ToInt32(userId));
@@ -101,7 +120,6 @@ namespace WebSite.EndPoint.Controllers
             }).ToList();
             return View(model);
         }
-
         public async Task<IActionResult> MyCartsRegistered()
         {
             var userId = await _accountService.GetLoggedInUserId();
@@ -116,7 +134,6 @@ namespace WebSite.EndPoint.Controllers
             }).ToList();
             return View(model);
         }
-
         public async Task<IActionResult> DoRegisteringCart(int cartId)
         {
             var dto = await _cartCommandService.FinalizeCartAsync(cartId);
@@ -128,7 +145,6 @@ namespace WebSite.EndPoint.Controllers
             TempData["errorDoRegisteringCart"] = "سبد خرید یافت نشد";
             return RedirectToAction("MyCartsUnRegistered");
         }
-        //افزودن به سبد خرید
         public async Task<IActionResult> AddToCartBasePrice(int productId, int boothId)
         {
             var userId = await _accountService.GetLoggedInUserId();
@@ -137,9 +153,48 @@ namespace WebSite.EndPoint.Controllers
             TempData["AddToCartBasePrice"] = result;
             if (true)
             {
-                return RedirectToAction("EnterToBooth", "Booth", new { boothId = boothId });
+                return RedirectToAction("EnterToBooth", "Booth", new {boothId = boothId});
             }
 
+        }
+        public async Task<IActionResult> RemoveOneByOne(int productId,int cartId)
+        {
+            var UserId = await _accountService.GetLoggedInUserId();
+            var result = await _cartCommandService.DeleteProductFromCart(UserId, productId);
+            if (result == "عملیات با موفقیت انجام شد")
+            {
+                TempData["RemoveOneByOne"] = result;
+                return RedirectToAction("GetProductsInOpenCart",new {cartId=cartId});
+            }
+
+            TempData["RemoveOneByOne"] = result;
+            return RedirectToAction("GetProductsInOpenCart",new {cartId=cartId});
+        }
+        public async Task<IActionResult> AddOneByOne(int productId,int boothId ,int cartId)
+        {
+            var UserId = await _accountService.GetLoggedInUserId();
+            var result = await _cartCommandService.AddProductToCart(Convert.ToInt32(UserId), productId, boothId);
+            if (result == "عملیات با موفقیت انجام شد")
+            {
+                TempData["AddOneByOne"] = result;
+                return RedirectToAction("GetProductsInOpenCart");
+            }
+
+            TempData["AddOneByOne"] = result;
+            return RedirectToAction("GetProductsInOpenCart", new { cartId = cartId });
+        }
+        public async Task<IActionResult> DeleteOprnCart(int cartId)
+        {
+            var UserId = await _accountService.GetLoggedInUserId();
+            var result = await _cartCommandService.DeleteOpenCart(UserId, cartId);
+            if (result == "عملیات با موفقیت انجام شد")
+            {
+                TempData["DeleteProductFromCart"] = result;
+                return RedirectToAction("MyCartsUnRegistered");
+            }
+
+            TempData["DeleteProductFromCart"] = result;
+            return RedirectToAction("MyCartsUnRegistered");
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Domin.IRepositories.Dtos.Auction
         public DateTime? StartDeadTime { get; set; }
         public DateTime? EndDeadTime { get; set; }
         public int HighestPrice { get; set; }
-        public List<string> ImagesUrls { get; set; }
+        public string ImagesUrl { get; set; }
+        public int? TotalPrice { get; set; }
     }
 }

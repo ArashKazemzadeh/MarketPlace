@@ -16,12 +16,12 @@ public class GetAllAuctionsService : IGetAllAuctionsService
 
     public async Task<List<AuctionProductDto>> Execute()
     {
-        var auctions = await _auctionRepository.GetAllAsync();
+        var auctions = await _auctionRepository.GetAllTrueAsync();
         if (auctions==null || auctions.Count==0)
         {
             return new List<AuctionProductDto>();
         }
-
+     
         return auctions;
     }
 }

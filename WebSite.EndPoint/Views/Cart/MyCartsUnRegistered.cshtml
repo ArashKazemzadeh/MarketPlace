@@ -4,7 +4,15 @@
     ViewData["Title"] = "MyCartsUnRegistered";
     Layout = "/Areas/Customer/Views/Shared/_Layout.cshtml";
 }
-<div class="alert alert-secondary m-5 text-center"> سبد خریدهای پرداخت نشده</div>
+<h4 class=" m-5 text-center" style="color: blue"> سبد خریدهای پرداخت نشده</h4>
+@if (ViewBag.deleteMessage!=null)
+{
+    <div class="alert alert-danger mx-5 text-center " id="my-heading">
+        <p>
+            @ViewBag.deleteMessage
+        </p>
+    </div>
+}
 <div class="row">
 
     <div class="table-responsive m-5 col-10">
@@ -49,7 +57,9 @@
 
                         </td>
                         <td>
-                            @Html.ActionLink("پرداخت", "DoRegisteringCart", new {  cartId=item.Id  })
+                            <a class="btn btn-success" asp-action="DoRegisteringCart" asp-route-cartId="@item.Id">پرداخت </a>
+                            <a class="btn btn-primary" asp-action="GetProductsInOpenCart" asp-route-cartId="@item.Id"> جزییات سبد </a>
+                            <a class="btn btn-danger" asp-action="DeleteOprnCart" asp-route-cartId="@item.Id">حذف سبد خرید</a>
                         </td>
                     </tr>
                 }
@@ -58,3 +68,13 @@
     </div>
 
 </div>
+@section scripts
+    {
+
+    <script>
+        setTimeout(function () {
+            document.getElementById("my-heading").style.display = "none";
+        }, 4000); // مقدار 2000 برابر با دو ثانیه است.
+    </script>
+
+}

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<WebSite.EndPoint.Models.ViewModels.ProductInCartVM>
+@{
+    ViewData["Title"] = "GetProductsInOpenCart";
+}
+
+<div class="row">
+    <div class="table-responsive m-5 col-10">
+        <table class="table table-bordered table-hover table-condensed mb-4">
+            <thead>
+            <tr>
+
+                <th>
+                    نام کالا
+                </th>
+                <th>
+                    قیمت پایه
+                </th>
+                <th>
+                    تعداد
+                </th>
+                    <th>
+                        جمع ردیف
+                    </th>
+                <th>عملیات</th>
+            </tr>
+            </thead>
+            <tbody>
+                @{
+                    int? a = 0;
+                }
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BasePrice)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalPrice)
+                    </td>
+                    <td>
+                        <a class="btn btn-success" asp-action="RemoveOneByOne" asp-route-ProductId="@item.ProductId " asp-route-cartId="@item.CartId ">-</a>
+                        <a class="btn btn-danger" asp-route-ProductId="@item.ProductId "
+                           asp-action="AddOneByOne" asp-route-BoothId="@item.BoothId"
+                           asp-route-cartId="@item.CartId ">+</a>
+
+                    </td>
+                </tr>
+
+                a += item.TotalPrice;
+
+
+            }
+
+            <tr>
+                <th scope="row">جمع کل</th>
+                <td colspan="2" class="table-active text-right">@a</td>
+                <td>تومان</td>
+            </tr>
+            </tbody>
+           
+        </table>
+    </div>
+</div>
+

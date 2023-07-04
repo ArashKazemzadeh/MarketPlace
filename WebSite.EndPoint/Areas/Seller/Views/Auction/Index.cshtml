@@ -1,4 +1,5 @@
-﻿@model List<WebSite.EndPoint.Areas.Seller.Models.AuctionGetVM>
+﻿@using Common
+@model List<WebSite.EndPoint.Areas.Seller.Models.AuctionGetVM>
 @{
     ViewData["Title"] = "کالا ها";
 }
@@ -47,10 +48,10 @@
                             @item.ProductName
                         </td>
                         <td>
-                            @item.StartDeadTime
+                            @DateConvert.ConvertGregorianToPersian(item.StartDeadTime.Value)
                         </td>
                         <td>
-                            @item.EndDeadTime
+                             @DateConvert.ConvertGregorianToPersian(item.EndDeadTime.Value) 
                         </td>
                         <td>
                             @item.HighestPrice

@@ -6,6 +6,8 @@ namespace Domin.IRepositories.IseparationRepository.SqlServer;
 
 public interface ICartRepository
 {
+    Task<List<ProductInCartRepDto>> GetProductsOpenCartByCartIdAsync(int cartId);
+    Task<string> DeleteOpenCartAsync(int customerId, int cartId);
     Task<int> GetTotalPrices(int cartId);
     Task<List<CartGetDto>> GetfinalizedCartsByCustomerId(int customerId);
     Task<List<CartGetDto>> GetUnfinalizedCartsByCustomerId(int customerId);

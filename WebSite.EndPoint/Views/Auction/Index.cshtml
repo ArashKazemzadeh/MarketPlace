@@ -1,46 +1,46 @@
-﻿@model List<WebSite.EndPoint.Areas.Seller.Models.AuctionGetVM>
+﻿@using Common
+@model List<WebSite.EndPoint.Areas.Seller.Models.AuctionGetVM>
 @{
     ViewData["Title"] = "Index";
 }
 
-<div class="row ">
+
+
+
+
+<div class="row m-4 justify-content-center flex flex-wrap">
     @foreach (var p in Model)
     {
-        <div class="card component-card_2 col-3 m-5 text-center">
-            <div class="row m-1">
-                @foreach (var i in p.ImagesUrls)
-                {  
-                    <img src="@i" class="col-6 img-fluid " />
-                }
-            </div>
+        <div class="col-md-4 ">
+            <!-- اضافه کردن دیو با کلاس col-md-4 برای قرار دادن سه کارت در هر ردیف -->
+            <div class="card component-card_2 text-center mt-3">
+                <img src="@p.ImagesUrl" class="img-fluid" style="height: 250px" />
+                <div class="card-header">
+                    <h4 style="font-family: Vazir;">@p.ProductName</h4>
+                   
+                </div>
 
-            <h3> @p.ProductName</h3>
-            <p>قیمت پایه: @p.BasePrice</p>
-            <p>بالاترین قیمت تا اکنون: @p.HighestPrice</p>
-            <p>تعداد : @p.Availability</p>
-            <p>زمان آغاز مزایده: @p.StartDeadTime</p>
-            <p>زمان پایان مزایده: @p.EndDeadTime</p>
-            @if (p.IsActive == true)
-            {
                 <div class="card-body">
-                    <a asp-controller="Bid" asp-action="AddBid" asp-area="" asp-route-auctionId="@p.Id">شرکت در مزایده</a>
+                    
+                    <p>تعداد: @p.Availability</p>
+                    <p>قیمت پایه هر عدد: @p.BasePrice</p>
+                    <p>قیمت پایه کل: @p.TotalPrice</p>
+                    <hr/>
+                    <p>بالاترین پیشنهاد  برای هر عدد تا اکنون: @p.HighestPrice</p>
+                    <hr />
+                    <p>زمان آغاز مزایده: @DateConvert.ConvertGregorianToPersian(p.StartDeadTime.Value) </p>
+                    <p>زمان پایان مزایده: @DateConvert.ConvertGregorianToPersian(p.EndDeadTime.Value) </p>
                 </div>
-            }
-            @if (p.IsActive == false)
-            {
-                <div class="card-body">
-                    <a class="btn btn-block btn-danger">زمان مزایده به اتمام رسید و کالا  به فروش نرفت</a>
+                <div class="card-footer">
+                    @if (p.IsActive == true)
+                    {
+                        <div class="card-body">
+                            <a class="btn  btn-success btn-block" asp-controller="Bid" asp-action="AddBid" asp-area="" asp-route-auctionId="@p.Id">شرکت در مزایده</a>
+                        </div>
+                    }
+                    
                 </div>
-            }
-            @if (p.EndDeadTime<DateTime.Now)
-            {
-                <div class="card-body">
-                    <a class="btn btn-block btn-danger">زمان مزایده به اتمام رسیده است</a>
-                </div>
-            }
+            </div>
         </div>
     }
 </div>
-
-
-

@@ -28,7 +28,9 @@ namespace Persistence.Repositories.SqlServer.Orders
 
         public async Task<Auction> GetByIdAsync(int id)
         {
-            return await _dbSet.FindAsync(id);
+         var action=   await _dbSet.Include(p=>p.Product)
+                .FirstOrDefaultAsync(a=>a.Id==id);
+         return action;
         }
         public async Task<List<AuctionProductDto>> GetAllAsync()//
         {
@@ -41,9 +43,30 @@ namespace Persistence.Repositories.SqlServer.Orders
                 HighestPrice = a.HighestPrice,
                 StartDeadTime = a.StartDeadTime,
                 EndDeadTime = a.EndDeadTime,
-                ImagesUrls = a.Product.Images.Select(i => i.Url).ToList(),
+                ImagesUrl = a.Product.Images.Select(i => i.Url).Take(1).First(),
                 Availability = a.Product.Availability,
-                IsActive = a.Product.IsActive
+                IsActive = a.Product.IsActive,
+                TotalPrice = a.Product.BasePrice * a.Product.Availability
+            }).ToListAsync();
+            return result;
+        }
+        public async Task<List<AuctionProductDto>> GetAllTrueAsync()//
+        {
+            var result = await _dbSet.AsNoTracking()
+                .Where(x=>x.Product.IsAuction)
+                .Select(a => new AuctionProductDto
+            {
+                AuctionId = a.Id,
+                ProductId = a.Product.Id,
+                ProductName = a.Product.Name,
+                BasePrice = a.Product.BasePrice,
+                HighestPrice = a.HighestPrice,
+                StartDeadTime = a.StartDeadTime,
+                EndDeadTime = a.EndDeadTime,
+                ImagesUrl = a.Product.Images.Select(i => i.Url).Take(1).First(),
+                Availability = a.Product.Availability,
+                IsActive = a.Product.IsActive,
+                TotalPrice = a.Product.BasePrice * a.Product.Availability
             }).ToListAsync();
             return result;
         }
@@ -78,6 +101,13 @@ namespace Persistence.Repositories.SqlServer.Orders
             await _context.SaveChangesAsync();
         }
 
-
+        public async Task<bool> HasOwnedAction(int userId, int auctionId)
+        {
+            var action = await _dbSet.Where(s => s.Product.Booth.SellerId == userId)
+                .FirstOrDefaultAsync(a=>a.Id==auctionId);
+            if (action==null)
+                return false;
+            return true;
+        }
     }
 }

@@ -3,6 +3,7 @@
 public class ProductGetVM
 {
     public int Id { get; set; }
+    public int BoothId { get; set; }
     public string Name { get; set; }
     public int BasePrice { get; set; }
     public string? ImageUrl { get; set; }

@@ -1,4 +1,5 @@
-﻿@model List<WebSite.EndPoint.Models.ViewModels.Bids.BidGetVm>
+﻿@using Common
+@model List<WebSite.EndPoint.Models.ViewModels.Bids.BidGetVm>
 @{
     ViewData["Title"] = "MyBids";
     Layout = "/Areas/Customer/Views/Shared/_Layout.cshtml";
@@ -38,6 +39,7 @@
             <tbody>
             @foreach (var item in Model)
             {
+               
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.ProductName)
@@ -50,14 +52,15 @@
                     </td>
                     
                     <td>
-                        @Html.DisplayFor(modelItem => item.RegisterDate)
+
+                           @DateConvert.ConvertGregorianToPersian(item.RegisterDate.Value) 
                     </td>
                     
                     <td>
-                        @Html.DisplayFor(modelItem => item.StartDateAuction)
+                            @DateConvert.ConvertGregorianToPersian(item.StartDateAuction.Value)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.EndDateAuction)
+                            @DateConvert.ConvertGregorianToPersian(item.EndDateAuction.Value)
                     </td>
 
                 </tr>

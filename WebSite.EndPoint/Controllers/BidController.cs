@@ -36,6 +36,7 @@ namespace WebSite.EndPoint.Controllers
             if (!ModelState.IsValid)
                 return View(model);
             var userId = await _accountService.GetLoggedInUserId();
+
             var success = await _addBidForAuctionService.Execute(Convert.ToInt32(userId) , model.AuctionId, model.Price);
             if (success!= "پیشنهاد با موفقیت ثبت شد.")
             {

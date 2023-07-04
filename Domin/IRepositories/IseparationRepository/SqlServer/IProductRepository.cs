@@ -6,6 +6,8 @@ namespace Domin.IRepositories.IseparationRepository.SqlServer;
 
 public interface IProductRepository
 {
+   
+    Task<string> RemoveFromCartByProductId(int productId, int customerId);
     Task<List<ProductGetDto>> GetAllProductsForView();
     Task UpdateAsync(ProductDto productDto, List<int> categoryIds);
     Task<List<ProductCustomerDto>> GetProductByBoothIdAsync(int boothId);

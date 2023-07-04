@@ -24,8 +24,9 @@ namespace WebSite.EndPoint.Controllers
                 StartDeadTime = a.StartDeadTime,
                 EndDeadTime = a.EndDeadTime,
                 BasePrice=a.BasePrice,
-                ImagesUrls = a.ImagesUrls,
+                ImagesUrl = a.ImagesUrl,
                 Availability = a.Availability,
+                TotalPrice=a.TotalPrice,
                 IsActive = a.IsActive
             }).ToList();
             return View(model);

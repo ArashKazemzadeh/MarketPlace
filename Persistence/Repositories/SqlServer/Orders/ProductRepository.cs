@@ -21,13 +21,15 @@ namespace Persistence.Repositories.SqlServer.Orders
 
         public async Task<List<ProductGetDto>> GetAllProductsForView()
         {
-            var products = await _dbSet.OrderByDescending(i => i.Id)
+            var products = await _dbSet.Where(p => p.IsAuction == false).OrderByDescending(i => i.Id)
                 .Select(p => new ProductGetDto
                 {
-                        Id = p.Id,
-                        Name = p.Name,
-                        BasePrice =(int) p.BasePrice,
-                        ImageUrl = p.Images.Select(i=>i.Url).FirstOrDefault()
+                    Id = p.Id,
+                    Name = p.Name,
+                    BasePrice = (int)p.BasePrice,
+                    ImageUrl = p.Images.Select(i => i.Url).FirstOrDefault(),
+                    BoothId = (int)p.BoothId
+
                 }).Take(12).ToListAsync();
             return products;
         }
@@ -49,14 +51,14 @@ namespace Persistence.Repositories.SqlServer.Orders
             }).ToListAsync();
             return dto;
         }
-       
+
         public async Task<List<AuctionProductDto>> GetProductsWithTrueAuctions(int sellerId)
         {
             var result = await _dbSet.
                 Where(a =>
                     a.IsAuction == true &&
                     a.IsActive == true &&
-                    a.Auction.EndDeadTime>DateTime.Now&&
+                    a.Auction.EndDeadTime >= DateTime.Now &&
                     a.Booth.Seller.Id == sellerId)
                 .Select(p => new AuctionProductDto
                 {
@@ -77,7 +79,7 @@ namespace Persistence.Repositories.SqlServer.Orders
         {
             var product = await _dbSet.AsNoTracking().Where(x => x.Id == id)
                     .Include(b => b.Auction)
-                    .Include(i=>i.Images)
+                    .Include(i => i.Images)
                     .Include(c => c.Categories)
                     .FirstOrDefaultAsync();
             return new ProductDto
@@ -204,6 +206,61 @@ namespace Persistence.Repositories.SqlServer.Orders
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task<string> RemoveFromCartByProductId(int productId, int customerId)
+        {
 
+            // دریافت سبد خرید مشتری
+            var customerCart = await _context.Carts
+                .Include(c => c.ProductsCarts)
+                .FirstOrDefaultAsync(c => c.CustomerId == customerId && !c.IsRegistrationFinalized);
+
+            if (customerCart == null)
+                return "سبد خرید مشتری یافت نشد";
+          
+
+            // یافتن کالای مورد نظر
+            var product = await _context.Products
+                .FirstOrDefaultAsync(p => p.Id == productId  && !p.IsRemove);
+           
+            if (product == null)
+                return "کالای مورد نظر یافت نشد";
+      
+
+            if (product.IsAuction)
+                return "برای حذف این کالا با پشتیبانی تماس بگیرید";
+        
+            // یافتن مورد کالا در سبد خرید مشتری
+            var cartItem = customerCart.ProductsCarts
+                .FirstOrDefault(pc => pc.ProductId == productId);
+
+            if (cartItem == null)
+                return "کالای مورد نظر در سبد خرید یافت نشد";
+
+            if (cartItem.Product.Auction.Bids != null && cartItem.Product.Auction.Bids.Any(b => b.IsAccepted == true && b.CustomerId == customerId))
+            {
+                return "شما مجاز به حذف کالای مزایده‌ای که پیشنهاد آن توسط مزایده پذیرفته شده است نمی‌باشید";
+            }
+
+
+
+            if (cartItem.Quantity > 1)
+            {
+                cartItem.Quantity--;
+                product.Availability++;
+            }
+
+
+            else
+            {
+                _context.ProductsCarts.Remove(cartItem);
+                product.Availability++;
+            }
+
+          
+            await _context.SaveChangesAsync();
+            return "عملیات با موفقیت انجام شد";
+        }
+
+        
     }
 }

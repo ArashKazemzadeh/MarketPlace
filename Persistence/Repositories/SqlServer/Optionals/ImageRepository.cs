@@ -34,9 +34,7 @@ namespace Persistence.Repositories.SqlServer.Optionals
                     Url = i.Url,
                     ProductId = i.ProductId,
                     Product = i.Product
-                })
-                .Take(1)
-                .ToListAsync();
+                }).ToListAsync();
 
             return images;
         }

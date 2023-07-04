@@ -3,9 +3,6 @@ using Application.IServices.SellerServices.ImageServices.Commands;
 using Application.IServices.SellerServices.ProfileServices.Commands;
 using Application.IServices.SellerServices.ProfileServices.Queries;
 using Application.IServices.Visitors;
-using Application.Services.AdminServices.UserServices.SellerService.Queries;
-using ConsoleApp1.Models;
-using Domin.IRepositories.Dtos;
 using Domin.IRepositories.Dtos.Seller;
 using Microsoft.AspNetCore.Mvc;
 using WebSite.EndPoint.Areas.Seller.Models;
@@ -21,31 +18,26 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
         private readonly IAccountService _accountService;
         private readonly IProductImageQueriesService _imageQueriesService;
         private readonly IConfiguration _configuration;
-
+        private readonly IGetToDayReportService _getTodayReportService;
         public HomeController(
             IUpdateSellerByIdService updateSellerByIdService,
             IAccountService accountService,
             IGetSellerByIdService getSellerByIdService,
             IProductImageQueriesService imageQueriesService, 
-            IConfiguration configuration
-            )
+            IConfiguration configuration,
+            IGetToDayReportService getTodayReportService)
         {
             _updateSellerByIdService = updateSellerByIdService;
             _accountService = accountService;
             _getSellerByIdService = getSellerByIdService;
             _imageQueriesService = imageQueriesService;
             _configuration = configuration;
+            _getTodayReportService = getTodayReportService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var sellerStringId = await _accountService.GetLoggedInUserId();
-            if (sellerStringId == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
-            var result = await _imageQueriesService.GetAllImageProductBySellerId(int.Parse(sellerStringId));
-            return View(result);
+            return View(_getTodayReportService.Execute());
         }
         public async Task<IActionResult> EditProfile()
         {

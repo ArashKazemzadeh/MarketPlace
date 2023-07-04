@@ -6,8 +6,10 @@ namespace Domin.IRepositories.IseparationRepository.SqlServer;
 
 public interface IAuctionRepository
 {
+  Task<bool> HasOwnedAction(int userId, int auctionId);
     Task<List<Auction>> GetCompletedsAsync();
     Task<int> UpdateWithBidAsync(Auction auction, BidRepDto bidDto);
+    Task<List<AuctionProductDto>> GetAllTrueAsync();
     Task<Auction> GetByIdAsync(int id);
     Task<List<AuctionProductDto>> GetAllAsync();
     Task AddAsync(Auction auction);

@@ -3,30 +3,52 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<style>
+    h1 {
+        font-family: Vazir;
+        color: deepskyblue;
+       text-align: center
+    }
+   
+</style>
 
 
 
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 section-title text-center mt-2">
-            <h2>جدیدترین ها</h2>
-        </div>
-    </div>
-    <div class="row">
-        @foreach (var product in Model)
-        {
-            <div class="col-md-3 col-sm-6">
-                <div class="product-item">
-                    <div class="product-thumb">
-                        <img src="@product.ImageUrl" class="img-fluid" style="height: 200px; width: auto;" />
+<div class="row m-4 justify-content-center flex flex-wrap">
+    <h1 id="flashing-text">جدیدترین ها </h1>
+    @foreach (var product in Model)
+    {
+        <div class="col-md-4 ">
+            <a asp-controller="Booth" asp-action="EnterToBooth" asp-route-boothId="@product.BoothId" >
+                <!-- اضافه کردن دیو با کلاس col-md-4 برای قرار دادن سه کارت در هر ردیف -->
+                <div class="card component-card_2 text-center mt-3">
+                    <img src="@product.ImageUrl" class="img-fluid" style="height: 250px"/>
+                    <div class="card-body">
+                        <h4 style="font-family: Vazir;">@product.Name</h4>
+
                     </div>
-                    <div class="product-content">
-                        <h5><a href="">@product.Name</a></h5>
-                        <span class="price"> قیمت : @product.BasePrice</span>
+
+                    <div class="card-footer">
+
+                        <p>قیمت : @product.BasePrice ریال</p>
                     </div>
+
                 </div>
-            </div>
-        }
-    </div>
+            </a>
+            
+        </div>
+    }
 </div>
+@section scripts
+{
+    
+    <script>
+        function toggleVisibility() {
+            var flashingText = document.getElementById('flashing-text');
+            flashingText.style.visibility = (flashingText.style.visibility === 'hidden') ? 'visible' : 'hidden';
+        }
+
+        setInterval(toggleVisibility, 1500); // 1000 میلی‌ثانیه معادل یک ثانیه است
+    </script>
+}
