@@ -1,17 +1,18 @@
 ﻿@using Application.IServices.AdminServices.UserService.Commands
 @model List<WebSite.EndPoint.Models.ViewModels.GetCommentVM>
-@inject IAccountService _accountService;
+@inject IAccountService _accountService
 @{
     ViewData["Title"] = "GetCommentByProductId";
+  
 }
 
-<div class="row m-4 justify-content-center">
-@foreach (var item in Model)
-{
-    var user = await _accountService.FindUserByIdAsync(item.UserName);
+<div class="row m-4 ">
+    @foreach (var item in Model)
+    {
+       var name= await _accountService.FindUserByIdAsync(item.UserId);
 
         <div class="card component-card_2 text-center col-4 m-4 mx-auto">
-            <p style="font-family: Vazir;">@Html.DisplayFor(modelItem => user.UserName)</p>
+            <p style="font-family: Vazir;">@Html.DisplayFor(modelItem => name.FullName)</p>
             <h4 style="font-family: Vazir;">عنوان :<b> @Html.DisplayFor(modelItem => item.Title)</b></h4>
             <p style="color: black">نام محصول: @Html.DisplayFor(modelItem => item.ProductName)</p>
             <p class="card-text"> @Html.DisplayFor(modelItem => item.Description)</p>
@@ -20,5 +21,5 @@
             </div>
         </div>
     
-}
+    }
 </div>

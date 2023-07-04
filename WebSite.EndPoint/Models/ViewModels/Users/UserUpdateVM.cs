@@ -4,6 +4,7 @@ namespace WebSite.EndPoint.Models.ViewModels.Users;
 
 public class UserUpdateVM
 {
+    public int Id { get; set; }
     [Display(Name = "پست الکترونیکی")]
     [Required (ErrorMessage = "این فیلد حتما باید پرشود")]
     public string Email { get; set; }

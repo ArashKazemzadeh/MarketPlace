@@ -3,15 +3,20 @@
     ViewData["Title"] = "Detail";
 }
 <input type="hidden"  value=" @Model.Id" />
-<div class="card text-center m-5 p-5 " style="width: 18rem;">
-    <div class="card-header">
-       مشخصات کاربری 
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card mx-auto d-block text-center m-5 p-5" style="width: 18rem;">
+                <div class="card-header">
+                    مشخصات کاربری
+                </div>
+                <ul class="list-group list-group-flush text-center">
+                    <li class="list-group-item">نام و نام خانوادگی: @Model.FullName</li>
+                    <li class="list-group-item">پست الکترونیکی: @Model.Email</li>
+                    <li class="list-group-item">نام کاربری: @Model.UserName</li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <ul class="list-group list-group-flush ">
-
-     
-        <li class="list-group-item">نام و نام خانوادگی: @Model.FullName</li>
-        <li class="list-group-item">پست الکترونیکی: @Model.Email</li>
-        <li class="list-group-item">نام کاربری: @Model.UserName</li>
-    </ul>
 </div>
+

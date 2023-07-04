@@ -20,7 +20,7 @@
     @foreach (var product in Model)
     {
         <div class="col-md-4 ">
-            <a asp-controller="Booth" asp-action="EnterToBooth" asp-route-boothId="@product.BoothId" >
+            <a asp-controller="Booth" asp-action="ProductDetail" asp-route-boothId="@product.BoothId" asp-route-productId="@product.Id">
                 <!-- اضافه کردن دیو با کلاس col-md-4 برای قرار دادن سه کارت در هر ردیف -->
                 <div class="card component-card_2 text-center mt-3">
                     <img src="@product.ImageUrl" class="img-fluid" style="height: 250px"/>
@@ -40,7 +40,7 @@
         </div>
     }
 </div>
-@section scripts
+@*@section scripts
 {
     
     <script>
@@ -52,3 +52,4 @@
         setInterval(toggleVisibility, 1500); // 1000 میلی‌ثانیه معادل یک ثانیه است
     </script>
 }
+*@

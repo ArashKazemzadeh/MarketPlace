@@ -6,18 +6,19 @@
 }
 @if (ViewBag.Error!=null)
 {
-    <div class="alert alert-danger text-center mx-5">
-        <p>@ViewBag.Error</p>
+    <div id="my-heading" class="alert alert-danger text-center mx-5 mt-1">
+        <p >@ViewBag.Error</p>
     </div>
 }
+<h4 class="text-center m-5 " style="color: cornflowerblue"> لطفا مبلغ پیشنهادی خود را وارد کنید </h4>
 <div class="row m-5 p-5 form-group d-flex justify-content-center border-3">
     <div class="col-md-4">
         <form asp-action="AddBid" asp-controller="Bid" asp-area="" method="post">
             <input asp-for="AuctionId" type="hidden" class="form-control" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input  asp-for="Price" class="form-control" />
+                @*<label asp-for="Price" class="control-label"></label>*@
+                <input  asp-for="Price" class="form-control" required="لطفا مبلغ پیشنهادی خود را وارد کنید"/>
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -27,3 +28,13 @@
     </div>
 </div>
 
+@section scripts
+    {
+
+    <script>
+        setTimeout(function () {
+            document.getElementById("my-heading").style.display = "none";
+        }, 2000); 
+    </script>
+
+}

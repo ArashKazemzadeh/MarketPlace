@@ -41,6 +41,8 @@ namespace WebSite.EndPoint.Controllers
                     Name = p.Name,
                     TotalPrice = p.TotalPrice,
                     Quantity = p.Quantity,
+                    BoothId = p.BoothId,
+                    CartId = cartId
                 }).ToList();
 
             return View(model);
@@ -62,6 +64,7 @@ namespace WebSite.EndPoint.Controllers
             ViewBag.Message = TempData["DeleteProductFromCart"];
             return View(model);
         }
+       
         public async Task<IActionResult> AddCommentForCart(int ProductId)
         {
             var model = new CommentAddVm

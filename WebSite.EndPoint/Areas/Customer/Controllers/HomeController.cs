@@ -1,5 +1,6 @@
 ﻿using Application.Dtos.UserDto;
 using Application.IServices.AdminServices.UserService.Commands;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebSite.EndPoint.Areas.Admin.Models;
 using WebSite.EndPoint.Areas.Customer.Models;
@@ -8,6 +9,7 @@ using WebSite.EndPoint.Models.ViewModels.Users;
 namespace WebSite.EndPoint.Areas.Customer.Controllers
 {
     [Area("Customer")]
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IAccountService _accountService;
@@ -30,6 +32,7 @@ namespace WebSite.EndPoint.Areas.Customer.Controllers
         }
         public async Task<IActionResult> UpdateUserPassWord()
         {
+          
             return View();
         }
         [HttpPost]
@@ -42,15 +45,23 @@ namespace WebSite.EndPoint.Areas.Customer.Controllers
         }
         public async Task<IActionResult> UpdateUser()
         {
-            return View();
+            var userId = await _accountService.GetLoggedInUserId();
+            var model = await _accountService.FindUserByIdAsync(userId);
+            var sendId = new UserUpdateVM
+            {
+                Id = Convert.ToInt32(userId),
+                Email = model.Email,
+                UserName = model.UserName,
+            };
+            return View(sendId);
         }
         [HttpPost]
         public async Task<IActionResult> UpdateUser(UserUpdateVM model)
         {
-            var userId = await _accountService.GetLoggedInUserId();
+         
             var dto = new UserDto
             {
-                Id = Convert.ToInt32(userId),
+                Id = model.Id,
                 Email = model.Email,
                 UserName = model.UserName,
                 FullName = $"{model.FirstName} {model.LastName}"

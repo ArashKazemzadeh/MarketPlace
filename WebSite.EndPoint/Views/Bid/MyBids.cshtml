@@ -5,7 +5,7 @@
     Layout = "/Areas/Customer/Views/Shared/_Layout.cshtml";
 }
 
-<div class="alert alert-secondary m-5 text-center"> پیشنهاد های ثبت شده</div>
+<div class="alert alert-secondary m-5 text-center"><p>پیشنهاد های ثبت شده</p> </div>
 
 
 
@@ -22,7 +22,7 @@
                     پذیرفته شده/نشده
                 </th>
                 <th>
-                    مبلغ پبسنهادی
+                    مبلغ پبشنهادی
                 </th>
                 <th>
                     تاریخ ثبت
@@ -44,9 +44,20 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.ProductName)
                     </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IsAccepted)
-                        </td>
+                    <td>
+                            @if (item.IsAccepted==true)
+                            {
+                                <p style="color: green">برنده شدید </p>
+                            }
+                            else if (item.IsAccepted == false)
+                            {
+                                <p style="color: red"> برنده نشدید</p>
+                                    }
+                            else
+                            {
+                                <p > تعیین وضعیت نشده</p>
+                            }
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>

@@ -1,9 +1,10 @@
 ﻿@model WebSite.EndPoint.Areas.Seller.Models.CommentAddVm
 @{
     ViewData["Title"] = "Create";
+    Layout = "/Areas/Customer/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row m-5 p-5 form-group d-flex justify-content-center">
+<div class="row m-5 p-5 form-group d-flex justify-content-center" >
     <div class="col-md-4">
         <form asp-action="AddCommentForCart">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -15,7 +16,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="describtion" class="control-label"></label>
-                <input asp-for="describtion" class="form-control" required="پرشود" />
+                <textarea asp-for="describtion" class="form-control" required="پرشود"></textarea>
                 <span asp-validation-for="describtion" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -24,3 +25,4 @@
         </form>
     </div>
 </div>
+

@@ -3,10 +3,13 @@ using Application.IServices.Visitors;
 using Application.Services.AdminServices.UserServices.AllUserService;
 using Domin.IRepositories.Dtos;
 using Domin.IRepositories.Dtos.Image;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebSite.EndPoint.Controllers
 {
+
+    [Authorize]
     public class ProfileController : Controller
     {
         private readonly IProfileImageService _imageService;

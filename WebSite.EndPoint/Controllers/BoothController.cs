@@ -3,6 +3,7 @@ using Application.IServices.CustomerServices.CategoryServices;
 using Application.IServices.CustomerServices.CommentServices.Queries;
 using Application.IServices.CustomerServices.ProductServices.Queries;
 using Application.IServices.CustomerServices.SellerServices.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Protocol;
 using WebSite.EndPoint.Areas.Admin.Models;
@@ -10,6 +11,7 @@ using WebSite.EndPoint.Models.ViewModels;
 
 namespace WebSite.EndPoint.Controllers
 {
+   
     public class BoothController : Controller
     {
         private readonly IGetBoothsByCategoryId _getBoothsByCategoryId;
@@ -30,20 +32,20 @@ namespace WebSite.EndPoint.Controllers
             _commentQueryService = commentQueryService;
             _getProductDetailById = getProductDetailById;
         }
-        public async Task<IActionResult> GetCommentByProductId(int productId)
-        {
-            var result = await _commentQueryService.GetCommentByProductId(productId);
-            var model = result.Select(c => new GetCommentVM
-            {
-                Id = c.Id,
-                ProductName = c.Product.Name,
-                Title = c.Title,
-                Description = c.Description,
-                RegisterDate = c.RegisterDate,
-                UserName =  c.CustomerId.ToString()
-            }).ToList();
-            return View(model);
-        }
+        //public async Task<IActionResult> GetCommentByProductId(int productId)
+        //{
+        //    var result = await _commentQueryService.GetCommentByProductId(productId);
+        //    var model = result.Select(c => new GetCommentVM
+        //    {
+        //        Id = c.Id,
+        //        ProductName = c.Product.Name,
+        //        Title = c.Title,
+        //        Description = c.Description,
+        //        RegisterDate = c.RegisterDate,
+        //        UserName =  c.CustomerId.ToString()
+        //    }).ToList();
+        //    return View(model);
+        //}
         public async Task<IActionResult> GetBoothByCategoryId(int categoryid)
         {
             var dto = await _getBoothsByCategoryId.Execute(categoryid);

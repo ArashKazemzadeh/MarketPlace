@@ -43,7 +43,7 @@ namespace Application.Services.CustomerServices.CartService.Queries
 
         public async Task<List<ProductInCartRepDto>> GetProductByCartId(int cartId)
         {
-            var result = await _cartRepository.GetProductsOpenCartByCartIdAsync(cartId);
+            var result = await _cartRepository.GetProductsByCartIdAsync(cartId);
             return result;
         }
        
