@@ -18,6 +18,7 @@ namespace Persistence.ModelConfigurations.EntitiesConfiguration
             entity.HasOne(d => d.Product).WithOne(p => p.Auction)
                 .HasForeignKey<Auction>(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+           
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Persistence.ModelConfigurations.EntitiesConfiguration
             entity.Property(e => e.ProductId).ValueGeneratedNever();
             entity.Property(e => e.CartId).ValueGeneratedNever();
             entity.HasKey(e => new { e.CartId, e.ProductId });
-
+           
             entity.HasOne(d => d.Cart).WithMany(p => p.ProductsCarts)
                 .HasForeignKey(d => d.CartId)
                 .OnDelete(DeleteBehavior.ClientSetNull)

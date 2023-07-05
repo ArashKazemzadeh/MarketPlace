@@ -10,5 +10,5 @@ public interface IBoothRepository
     Task<List<BoothRepositoryDto>> GetAllAsync();
     Task AddAsync(BoothRepDto booth);
     Task<bool> UpdateBoothAsync(BoothRepDto boothRepDto);
-    Task DeleteAsync(Booth booth);
+    Task<bool> DeleteAsync(int id);
 }

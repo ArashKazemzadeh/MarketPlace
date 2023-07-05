@@ -2,6 +2,10 @@
 @{
     ViewData["Title"] = "Index";
 }
+@if (ViewBag.Message!=null)
+{
+    <div class="alert alert-light-primary text-center">@ViewBag.Message</div>
+}
 <div class="row">
     <div class="statbox widget box box-shadow m-5 col-10">
         <div class="widget-header">

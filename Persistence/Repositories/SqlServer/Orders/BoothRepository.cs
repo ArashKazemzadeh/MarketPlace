@@ -66,10 +66,15 @@ namespace Persistence.Repositories.SqlServer.Orders
             await _context.SaveChangesAsync();
             return true;
         }
-        public async Task DeleteAsync(Booth booth)
+        public async Task<bool> DeleteAsync(int id)
         {
-            _dbSet.Remove(booth);
-            await _context.SaveChangesAsync();
+            var booth = await _dbSet.FindAsync(id);
+            booth.IsRemoved = true;
+            _context.Entry(booth).State = EntityState.Modified;
+           var result= await _context.SaveChangesAsync();
+           if (result == 0)
+               return false;
+           return true;
         }
     }
 }

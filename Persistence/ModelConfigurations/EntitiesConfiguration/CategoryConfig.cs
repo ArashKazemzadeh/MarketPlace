@@ -14,7 +14,7 @@ namespace Persistence.ModelConfigurations.EntitiesConfiguration
             entity.ToTable("Categories");
 
             entity.Property(e => e.Name).HasMaxLength(100);
-
+           
 
             entity.HasMany(d => d.Products).WithMany(p => p.Categories)
                 .UsingEntity<Dictionary<string, object>>(

@@ -20,16 +20,8 @@ namespace Persistence.ModelConfigurations.EntitiesConfiguration
             entity.HasOne(d => d.Seller).WithOne(p => p.Booth)
                 .HasForeignKey<Booth>(d => d.SellerId)
                 .OnDelete(DeleteBehavior.SetNull);
-            entity.HasData(
-                new Booth
-                {
-                    Id = 1,
-                    Name = "شماره یک مواد غذایی",
-                    Description = "فروشگاه غذایی",
-                    SellerId = 1
-                }
-            );
-
+           
+            entity.HasQueryFilter(e => !e.IsRemoved);
         }
     }
 }

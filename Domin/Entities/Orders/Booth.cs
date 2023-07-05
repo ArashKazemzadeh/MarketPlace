@@ -1,6 +1,5 @@
 ﻿using Domin.Attributes;
-using System;
-using System.Collections.Generic;
+
 
 namespace ConsoleApp1.Models;
 [Auditable]
@@ -12,6 +11,7 @@ public class Booth
     public string? Name { get; set; }
 
     public string? Description { get; set; }
+    public bool IsRemoved { get; set; } = false;
 
     public int? SellerId { get; set; }
     public Seller? Seller { get; set; }

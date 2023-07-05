@@ -12,16 +12,7 @@ namespace Persistence.ModelConfigurations.EntitiesConfiguration
             entity.HasKey(e => e.Id).HasName("PK__Buyer__4B81C1CA60F39982");
             entity.ToTable("Customer");
             entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.HasData(
-                new Customer
-                {
-                    Id = 1,
-                },
-                new Customer
-                {
-                    Id = 3,
-                }
-            );
+           
         }
     }
 }

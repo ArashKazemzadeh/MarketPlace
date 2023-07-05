@@ -33,22 +33,26 @@ namespace WebSite.EndPoint.Areas.Admin.Controllers
                Description = b.Description,
                Seller = b.Seller
            }).ToList();
+           ViewBag.Message = TempData["Oper"];
             return View(veiwModel);
         }
         public async Task<IActionResult> Delete(int id)
         {
-            var booths = await _deleteBoothAdminService.Execute(id);
+            var result = await _deleteBoothAdminService.Execute(id);
+            TempData["Oper"] = result.message;
             return RedirectToAction("Index");
         }
         public async Task<IActionResult> Edit(int id)
         {
             var booth = await _getBoothByIdService.Execute(id);
+            TempData["Oper"] = booth.message;
             return View(booth.Data);
         }
         [HttpPost]
         public async Task<IActionResult> Edit(BoothDto model)
         {
            var result=await    _updateBoothAdminService.Execute(model);
+           TempData["Oper"] = result.message;
             return RedirectToAction("Index");
         }
     }

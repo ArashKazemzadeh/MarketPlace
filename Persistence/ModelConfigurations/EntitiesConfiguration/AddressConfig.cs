@@ -1,6 +1,7 @@
 ﻿using ConsoleApp1.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 namespace Persistence.ModelConfigurations.EntitiesConfiguration
 {
@@ -16,7 +17,7 @@ namespace Persistence.ModelConfigurations.EntitiesConfiguration
                 .HasForeignKey<Address>(d => d.SellerId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-
+           
 
 
         }

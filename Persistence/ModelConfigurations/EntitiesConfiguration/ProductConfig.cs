@@ -16,7 +16,7 @@ namespace Persistence.ModelConfigurations.EntitiesConfiguration
         public void Configure(EntityTypeBuilder<Product> entity)
         {
             entity.HasKey(e => e.Id).HasName("PK__Product__B40CC6EDE2FD57A1");
-
+          
             entity.ToTable("Product");
 
             entity.Property(e => e.Name).HasMaxLength(100);

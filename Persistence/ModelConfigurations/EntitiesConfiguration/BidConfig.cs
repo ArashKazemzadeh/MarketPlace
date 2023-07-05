@@ -13,6 +13,7 @@ namespace Persistence.ModelConfigurations.EntitiesConfiguration
 
             entity.HasOne(d => d.Customer).WithMany(p => p.Bids)
                 .HasForeignKey(d => d.CustomerId);
+        
         }
     }
 }
