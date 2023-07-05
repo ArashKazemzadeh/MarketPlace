@@ -6,29 +6,28 @@ using WebSite.EndPoint.Models.ViewModels;
 
 namespace WebSite.EndPoint.ViewComponents
 {
-    public class CommentViewComponent:ViewComponent
+    public class CommentViewComponent : ViewComponent
     {
         private readonly ICommentQueryService _commentQueryService;
-        private readonly IAccountService _accountService;
+    
 
-
-        public CommentViewComponent(ICommentQueryService commentQueryService, IAccountService accountService)
+        public CommentViewComponent(ICommentQueryService commentQueryService)
         {
             _commentQueryService = commentQueryService;
-            _accountService = accountService;
+          
         }
 
         public async Task<IViewComponentResult> InvokeAsync(int productId)
         {
-           
             var comments = await _commentQueryService.GetCommentByProductId(productId);
-            var model = comments.Select( c => new GetCommentVM
+            var model = comments.Select(c => new GetCommentVM
             {
                 Id = productId,
                 Description = c.Description,
                 Title = c.Title,
                 RegisterDate = c.RegisterDate,
-           UserId = c.CustomerId.ToString()
+                ProductName = c.Product.Name,
+                UserId = c.CustomerId.ToString()
             }).ToList();
             return View(model);
         }

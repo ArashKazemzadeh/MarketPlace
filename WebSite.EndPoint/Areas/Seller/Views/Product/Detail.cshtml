@@ -62,7 +62,8 @@
         <div class="card component-card_2 col-4 m-5">
             <img src="@imageUrl" class="img-fluid">
             <div class="card-body">
-                <a href="@Url.Action("DeleteImage", "Image", new { imageUrl = imageUrl })" class="btn btn-primary btn-block">حذف عکس</a>
+                @*<a href="@Url.Action("DeleteImage", "Image", new { imageUrl = imageUrl })" class="btn btn-primary btn-block">حذف عکس</a>*@
+                <a asp-controller="Image" asp-action="DeleteImage" asp-route-imageUrl="@imageUrl" asp-route-productId="@Model.ProductId"> حذف عکس</a>
             </div>
         </div>
     }

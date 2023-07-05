@@ -55,7 +55,7 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
             }
         }
 
-        public async Task<IActionResult> DeleteImage(string imageUrl)
+        public async Task<IActionResult> DeleteImage(string imageUrl,int productId)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace WebSite.EndPoint.Areas.Seller.Controllers
                 {
                     System.IO.File.Delete(imagePath);
 
-                return RedirectToAction("Detail","Product");
+                return RedirectToAction("Detail","Product",new{id=productId});
                 }
 
                 return NotFound();

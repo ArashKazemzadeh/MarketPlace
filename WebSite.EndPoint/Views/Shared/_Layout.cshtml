@@ -39,8 +39,8 @@
 
                                 var userId = await accountService.GetLoggedInUserId();
                                 var user = await accountService.FindUserByIdAsync(userId);
-
-                                <a style="color: aqua">@user.FullName خوش آمدی!</a>
+                              
+                              
                                 <a asp-controller="Account" asp-action="Logout">خروج</a>
                                 @if (HttpContextAccessor.HttpContext.User.IsInRole("Seller"))
                                 {
@@ -50,6 +50,7 @@
                                 {
                                     <a asp-controller="Account" asp-action="RegisterSeller">ایجاد فروشگاه</a>
                                 }
+                                <span class="mx-2" style="color: dodgerblue">@user.FullName خوش آمدی!</span> 
                             }
                             else
                             {
@@ -67,8 +68,8 @@
 
                                 @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
                                 {
-                                    <li><a title="پروفایل" asp-area="Customer" asp-controller="Home" asp-action="Detail"> </a></li>
-                                    <li><a title="سبد خرید" asp-area="" asp-controller="Cart" asp-action="MyCartsUnRegistered" ><img src="~/templatestore/images/cart.png" width="90%" /></a></li>
+                                    <li><a title="پروفایل" asp-area="Customer" asp-controller="Home" asp-action="Detail"><img src="~/templatestore/images/profile.png" width="110%" /> </a></li>
+                                    <li><a title="سبد خرید" asp-area="" asp-controller="Cart" asp-action="MyCartsUnRegistered"><img src="~/templatestore/images/cart.png" width="110%" /></a></li>
 
                                 }
                             </ul>
