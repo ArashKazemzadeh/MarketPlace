@@ -9,12 +9,16 @@
   <ItemGroup>
     <Compile Remove="Areas\Admin\Data\**" />
     <Compile Remove="Areas\Seller\Data\**" />
+    <Compile Remove="wwwroot\Theme\**" />
     <Content Remove="Areas\Admin\Data\**" />
     <Content Remove="Areas\Seller\Data\**" />
+    <Content Remove="wwwroot\Theme\**" />
     <EmbeddedResource Remove="Areas\Admin\Data\**" />
     <EmbeddedResource Remove="Areas\Seller\Data\**" />
+    <EmbeddedResource Remove="wwwroot\Theme\**" />
     <None Remove="Areas\Admin\Data\**" />
     <None Remove="Areas\Seller\Data\**" />
+    <None Remove="wwwroot\Theme\**" />
   </ItemGroup>
 
   <ItemGroup>
