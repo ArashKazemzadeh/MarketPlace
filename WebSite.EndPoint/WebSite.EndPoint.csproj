@@ -51,10 +51,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\uploads\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\Theme\assets\fonts\BZiba0.svg" />
     <None Include="wwwroot\Theme\assets\fonts\BZiba0.woff2" />
     <None Include="wwwroot\Theme\assets\fonts\Dirooz-FD.svg" />
@@ -612,6 +608,10 @@
     <None Include="wwwroot\Theme\sass\plugins\table\datatable\dt-global_style-dark.scss" />
     <None Include="wwwroot\Theme\sass\plugins\table\datatable\dt-global_style.scss" />
     <None Include="wwwroot\Theme\sass\plugins\tagInput\tags-input.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\sellerFiles\" />
   </ItemGroup>
 
 </Project>

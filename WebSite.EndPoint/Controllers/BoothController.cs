@@ -32,20 +32,7 @@ namespace WebSite.EndPoint.Controllers
             _commentQueryService = commentQueryService;
             _getProductDetailById = getProductDetailById;
         }
-        //public async Task<IActionResult> GetCommentByProductId(int productId)
-        //{
-        //    var result = await _commentQueryService.GetCommentByProductId(productId);
-        //    var model = result.Select(c => new GetCommentVM
-        //    {
-        //        Id = c.Id,
-        //        ProductName = c.Product.Name,
-        //        Title = c.Title,
-        //        Description = c.Description,
-        //        RegisterDate = c.RegisterDate,
-        //        UserName =  c.CustomerId.ToString()
-        //    }).ToList();
-        //    return View(model);
-        //}
+       
         public async Task<IActionResult> GetBoothByCategoryId(int categoryid)
         {
             var dto = await _getBoothsByCategoryId.Execute(categoryid);
@@ -66,7 +53,7 @@ namespace WebSite.EndPoint.Controllers
             return View(dto);
         }
 
-        public async Task<IActionResult> EnterToBooth(int boothId)
+        public async Task<IActionResult> EnterToBooth(int boothId)//IsConfirm==true
         {
             var dto = await _allProductsByBoothIdService.Execute(boothId);
             var model = dto.Select(p => new ProductForCustomerVM

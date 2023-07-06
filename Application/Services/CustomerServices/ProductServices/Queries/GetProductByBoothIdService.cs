@@ -19,7 +19,7 @@ namespace Application.Services.CustomerServices.ProductServices.Queries
             _boothRepository = boothRepository;
             _productRepository = productRepository;
         }
-        public async Task<List<ProductCustomerDto>> Execute(int boothId)
+        public async Task<List<ProductCustomerDto>> Execute(int boothId)//IsConfirm==true
         {
             var booth = await _boothRepository.GetByIdAsync(boothId);
             if (booth == null)

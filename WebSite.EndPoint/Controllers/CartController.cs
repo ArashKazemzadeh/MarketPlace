@@ -32,7 +32,7 @@ namespace WebSite.EndPoint.Controllers
 
         public async Task<IActionResult> GetProductsInCloseCart(int cartId)
         {
-            var products = await _cartQueryService.GetProductByCartId(cartId);
+            var products = await _cartQueryService.GetProductByCloseCartId(cartId);
             var model = products
                 .Select(p => new ProductInCartVM()
                 {
@@ -49,7 +49,7 @@ namespace WebSite.EndPoint.Controllers
         }
         public async Task<IActionResult> GetProductsInOpenCart(int cartId)
         {
-            var products = await _cartQueryService.GetProductByCartId(cartId);
+            var products = await _cartQueryService.GetProductByOpenCartId(cartId);
             var model = products
                 .Select(p => new ProductInCartVM()
                 {

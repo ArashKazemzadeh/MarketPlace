@@ -21,7 +21,9 @@ namespace Persistence.Repositories.SqlServer.Orders
 
         public async Task<List<ProductGetDto>> GetAllProductsForView()
         {
-            var products = await _dbSet.Where(p => p.IsAuction == false).OrderByDescending(i => i.Id)
+            var products = await _dbSet
+                .Where(p => p.IsAuction == false && p.IsConfirm==true)
+                .OrderByDescending(i => i.Id)
                 .Select(p => new ProductGetDto
                 {
                     Id = p.Id,
@@ -34,9 +36,11 @@ namespace Persistence.Repositories.SqlServer.Orders
             return products;
         }
 
-        public async Task<List<ProductCustomerDto>> GetProductByBoothIdAsync(int boothId)
+        public async Task<List<ProductCustomerDto>> GetProductByBoothIdAsync(int boothId)//IsConfirm==true
         {
-            var dto = await _dbSet.Where(x => x.Booth.Id == boothId && x.IsAuction == false).Select(p => new ProductCustomerDto
+            var dto = await _dbSet
+                .Where(x => x.Booth.Id == boothId && x.IsAuction == false && x.IsConfirm==true)
+                .Select(p => new ProductCustomerDto
             {
                 BoothId = p.Booth.Id,
                 Name = p.Name,
@@ -227,7 +231,7 @@ namespace Persistence.Repositories.SqlServer.Orders
       
 
             if (product.IsAuction)
-                return "برای حذف این کالا با پشتیبانی تماس بگیرید";
+                return " کالا در مزایده است . برای حذف این کالا با پشتیبانی تماس بگیرید";
         
             // یافتن مورد کالا در سبد خرید مشتری
             var cartItem = customerCart.ProductsCarts
@@ -236,9 +240,13 @@ namespace Persistence.Repositories.SqlServer.Orders
             if (cartItem == null)
                 return "کالای مورد نظر در سبد خرید یافت نشد";
 
-            if (cartItem.Product.Auction.Bids != null && cartItem.Product.Auction.Bids.Any(b => b.IsAccepted == true && b.CustomerId == customerId))
+            var isAuctionProductAddedByCustomer = customerCart.ProductsCarts
+                .Any(pc => pc.Product?.Auction?.Bids?.FirstOrDefault(b => b != null && b.CustomerId == customerId && b.IsAccepted == true) != null);
+
+
+            if (isAuctionProductAddedByCustomer)
             {
-                return "شما مجاز به حذف کالای مزایده‌ای که پیشنهاد آن توسط مزایده پذیرفته شده است نمی‌باشید";
+                return "شما مجاز به حذف سبد مزایده‌ای که پیشنهاد آن توسط مزایده پذیرفته شده است نمی‌باشید";
             }
 
 

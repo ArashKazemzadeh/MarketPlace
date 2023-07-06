@@ -11,9 +11,12 @@
     }
    
 </style>
-
-
-
+@if (ViewBag.Message != null)
+{
+    <div class="m-5 pt-5 pb-5">
+        <h1 class="alert alert-success text-center">@ViewBag.Message</h1>
+    </div>
+}
 
 <div class="row m-4 justify-content-center flex flex-wrap">
     <h1 id="flashing-text">جدیدترین ها </h1>
@@ -40,16 +43,3 @@
         </div>
     }
 </div>
-@*@section scripts
-{
-    
-    <script>
-        function toggleVisibility() {
-            var flashingText = document.getElementById('flashing-text');
-            flashingText.style.visibility = (flashingText.style.visibility === 'hidden') ? 'visible' : 'hidden';
-        }
-
-        setInterval(toggleVisibility, 1500); // 1000 میلی‌ثانیه معادل یک ثانیه است
-    </script>
-}
-*@

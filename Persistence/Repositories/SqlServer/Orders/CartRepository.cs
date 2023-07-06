@@ -213,9 +213,9 @@ namespace Persistence.Repositories.SqlServer.Orders
                 return "در سبد خرید مشتری کالاهایی با قابلیت حراجی وجود دارد. لطفاً برای حذف این سبد خرید با پشتیبانی تماس بگیرید.";
             }
 
-
             var isAuctionProductAddedByCustomer = customerCart.ProductsCarts
-                .Any(pc => pc.Product.Auction.Bids.Any(b => b.CustomerId == customerId && b.IsAccepted == true));
+                .Any(pc => pc.Product?.Auction?.Bids?.FirstOrDefault(b => b != null && b.CustomerId == customerId && b.IsAccepted == true) != null);
+
 
             if (isAuctionProductAddedByCustomer)
             {

@@ -55,9 +55,9 @@ namespace WebSite.EndPoint.Controllers
                 ViewBag.Message = "نام کاربری یافت نشد. لطفا  از سیستم خارج شوید و دوباره وارد شوید.";
                 return View(model);
             }
-            var newrole = "Seller";
-            await _accountService.CreateRoleIfNotExists(newrole);
-            await _accountService.AssignUserToRoleByUserId(userId, newrole);
+            var seller = "Seller";
+            await _accountService.CreateRoleIfNotExists(seller);
+            await _accountService.AssignUserToRoleByUserId(userId, seller);
             var addSellerDto = new AddSellerDto
             {
                 SellerId = Convert.ToInt32(userId),
@@ -68,6 +68,7 @@ namespace WebSite.EndPoint.Controllers
                 BoothName = model.BoothName,
                 BoothDescription = model.BoothDescription
             };
+            
             var result = await _addSellerService.Execute(addSellerDto);
             return Redirect("/seller/home/index");
         }
@@ -104,7 +105,7 @@ namespace WebSite.EndPoint.Controllers
                 await _addUserIdToCustomerForRegisterService.Execute(newCustomer);
                 var user = await _accountService.FindUserByEmailAsync(model.Email);
                 await _accountService.SignInUserAsync(user, model.Password, true, true);
-                return RedirectToAction(nameof(Profile));
+                return RedirectToAction("Index","Home");
             }
             foreach (var item in result.Errors)
             {
@@ -162,11 +163,6 @@ namespace WebSite.EndPoint.Controllers
         }
 
     }
-    public class YourEntity
-    {
-        public string UserName { get; set; }
-        public string Message { get; set; }
-        public DateTime Timestamp { get; set; }
-    }
+  
 
 }

@@ -6,5 +6,6 @@ public interface ICartQueryService
 {
     Task<List<CartGetDto>> GetUnfinalizedCartsByCustomerId(int customerId);
     Task<List<CartGetDto>> GetfinalizedCartsByCustomerId(int customerId);
-    Task<List<ProductInCartRepDto>> GetProductByCartId(int cartId);
+    Task<List<ProductInCartRepDto>> GetProductByOpenCartId(int cartId);
+    Task<List<ProductInCartRepDto>> GetProductByCloseCartId(int cartId);
 }

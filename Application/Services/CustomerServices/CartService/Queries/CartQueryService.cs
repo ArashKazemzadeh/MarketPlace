@@ -41,11 +41,15 @@ namespace Application.Services.CustomerServices.CartService.Queries
             return result;
         }
 
-        public async Task<List<ProductInCartRepDto>> GetProductByCartId(int cartId)
+        public async Task<List<ProductInCartRepDto>> GetProductByOpenCartId(int cartId)
+        {
+            var result = await _cartRepository.GetProductsOpenCartByCartIdAsync(cartId);
+            return result;
+        }
+        public async Task<List<ProductInCartRepDto>> GetProductByCloseCartId(int cartId)
         {
             var result = await _cartRepository.GetProductsByCartIdAsync(cartId);
             return result;
         }
-       
     }
 }

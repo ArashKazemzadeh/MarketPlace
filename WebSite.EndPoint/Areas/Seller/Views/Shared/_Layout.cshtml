@@ -151,7 +151,7 @@
                             if (!string.IsNullOrEmpty(sellerId))
                             {
                                 var profileImage = await _profileImageService.GetProfileImage(int.Parse(sellerId));
-                                if (profileImage != null)
+                                if (profileImage.Data != null)
                                 {
                                     <img src="@profileImage.Data.Url" alt="Profile Image" class="profile-image" />
                                 }

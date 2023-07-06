@@ -64,7 +64,7 @@ namespace Persistence.Repositories.SqlServer.Users
 
         public async Task<List<Seller>> GetAllAsync()
         {
-            return await _dbSet.Where(x => x.IsRemoved == false).ToListAsync();
+            return await _dbSet.ToListAsync();
         }
 
         public async Task AddAsync(SellerRepDto sellerRepDto)
