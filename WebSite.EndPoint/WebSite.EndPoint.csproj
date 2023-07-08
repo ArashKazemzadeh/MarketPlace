@@ -51,6 +51,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\CryingBabyNotFound-Page%28Webrubik.com%29\fonts\IRANSansWeb%28FaNum%29_UltraLight.woff2" />
     <None Include="wwwroot\Theme\assets\fonts\BZiba0.svg" />
     <None Include="wwwroot\Theme\assets\fonts\BZiba0.woff2" />
     <None Include="wwwroot\Theme\assets\fonts\Dirooz-FD.svg" />

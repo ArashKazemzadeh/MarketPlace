@@ -5,9 +5,8 @@ using Infrustracture.appsettingConfiguration;
 using Infrustracture.CookiesConfiguration;
 using Infrustracture.HangFireConfiguration;
 using Infrustracture.IocConfiguration;
-using MongoDB.Driver;
-using Serilog;
 using WebSite.EndPoint.Utilities.Filters;
+using WebSite.EndPoint.Utilities.Middlewares;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,21 +32,20 @@ builder.Services.AddScopeMongoDbDocuments(builder.Configuration);
 #endregion
 
 var app = builder.Build();
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-   app.UseHsts();
-}
-#region HangFires
-app.UseHangfireServer();
-RecurringJob.AddOrUpdate<IProcessCompletedAuctionsAndAddToWinnerCart>
-    ("Add product to winner of cart", x => x.Execute(), Cron.Minutely);
-RecurringJob.AddOrUpdate<IAssignMedalToSeller>
-    ("create medal for sellers", x => x.Execute(), Cron.Minutely);
 
-#endregion
+// Configure the HTTP request pipeline.
+//if (!app.Environment.IsDevelopment())
+//{
+//    app.UseExceptionHandler("/Home/Error");
+//    app.UseHsts();
+//}
+
+
+
+
 #region middlewares
+app.UseErrorHandling();
+app.UseHangfireServer();
 app.UseHangfireDashboard();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -55,16 +53,21 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 #endregion
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "areaAdmin",
-        pattern: "{area:exists}/{controller=ForVisitor}/{action=Index}/{id?}"
-    );
+#region HangFires
 
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}"
-    );
-});
+
+#endregion
+app.MapControllerRoute(
+    name: "areaAdmin",
+    pattern: "{area:exists}/{controller=ForVisitor}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+RecurringJob.AddOrUpdate<IProcessCompletedAuctionsAndAddToWinnerCart>
+    ("Add product to winner of cart", x => x.Execute(), Cron.Daily);
+RecurringJob.AddOrUpdate<IAssignMedalToSeller>
+    ("create medal for sellers", x => x.Execute(), Cron.Daily);
+
 app.Run();

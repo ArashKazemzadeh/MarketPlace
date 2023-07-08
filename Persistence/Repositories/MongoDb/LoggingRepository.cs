@@ -56,8 +56,8 @@ public class LoggingRepository : ILoggingRepository
                 Timestamp = DateTime.Now
             };
 
-            _logger.Error("Logging error: {LogWarning}", $"{logInformation.Message} - {logInformation.Title}");
-
+          _logger.Error("Logging error: {LogError}",
+                $"{logInformation.Message} - {logInformation.Title}");
             _mongoDbContext.GetCollection().InsertOne(logInformation);
 
 

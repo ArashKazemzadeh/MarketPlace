@@ -25,10 +25,8 @@ public class AddBidForAuctionService : IAddBidForAuctionService
         var auctionByCustomer = await _bidRepository.HasPlacedBid(userId, auctionId);
         if (auctionByCustomer)
             return "شما قبلا در این مزایده شرکت کرده اید.";
-
         if (price == 0)
             return "با صفر ریال وجدانا؟ ";
-
         var auction = await _auctionRepository.GetByIdAsync(auctionId);
         if (auction == null)
             return "مزایده موجود نیست.";
@@ -36,19 +34,12 @@ public class AddBidForAuctionService : IAddBidForAuctionService
             return "زمان مزایده به اتمام رسیده است";
         if (auction.HighestPrice > price)
             return "مبلغ پیشنهادی باید از بالانریت پیشنهاد بیشتر باشد.";
-
         var BaseTotalPrice = auction.Product.Availability * auction.Product.BasePrice;
         if (BaseTotalPrice > price)
             return "مبلغ پیشنهادی باید از قیمت پایه کل بیشتر باشد.";
-
         var customer = await _customerRepository.GetByIdAsync(userId);
         if (customer == null)
             return "کاربر موجود نیست.";
-
-       
-
-       
-        
         var bidDto = new BidRepDto
         {
             Price = price ,
@@ -57,8 +48,6 @@ public class AddBidForAuctionService : IAddBidForAuctionService
             Customer = customer,
             Auction = auction,
         };
-
-
         if (price > auction.HighestPrice)
         {
             auction.HighestPrice = price;
@@ -71,6 +60,5 @@ public class AddBidForAuctionService : IAddBidForAuctionService
             return "خطا هنگام ذخیره ی اطلاعات رخ داد";
         return "پیشنهاد با موفقیت ثبت شد.";
     }
-
 }
 

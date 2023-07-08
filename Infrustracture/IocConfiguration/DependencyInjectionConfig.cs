@@ -167,10 +167,8 @@ namespace Infrustracture.IocConfiguration
             services.AddScoped<ISaveVisitorInfoService, SaveVisitorInfoService>();
             services.AddTransient<IGetToDayReportService, GetToDayReportService>();
             services.AddTransient(typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
-
-            services.AddScoped<ILogingService, LogingService>();
-            services.AddScoped<ILoggingRepository, LoggingRepository>();
-
+            services.AddTransient<ILogingService, LogingService>();
+            services.AddTransient<ILoggingRepository, LoggingRepository>();
             services.AddLogging();
             // In your startup or configuration code
            

@@ -84,39 +84,7 @@ namespace Persistence.Contexts.SqlServer
 
 
 
-        //public override int SaveChanges()
-        //{
-        //    #region Set the value to the Shadow property
-
-        //    //در جایی که انتیتی ها در حال تغییر وضعیت بودند
-        //    var modifiedEntries = ChangeTracker.Entries()
-        //        .Where(p => p.State == EntityState.Added ||
-        //                    p.State == EntityState.Modified ||
-        //                    p.State == EntityState.Deleted);
-        //    foreach (var item in modifiedEntries)  //به ازای هر انتیتی که تغییر وضعیت  داده است
-        //    {
-        //        var entityType = item.Context.Model.FindEntityType(item.Entity.GetType());
-        //        var inserted = entityType.FindProperty("InsertTime");
-        //        var updated = entityType.FindProperty("UpdateTime");
-        //        var removed = entityType.FindProperty("RemoveTime");
-        //        if (item.State == EntityState.Added && inserted != null)
-        //        {
-        //            item.Property("InsertTime").CurrentValue = DateTime.Now;
-        //        }
-        //        if (item.State == EntityState.Added && inserted != null)
-        //        {
-        //            item.Property("UpdateTime").CurrentValue = DateTime.Now;
-        //        }
-        //        if (item.State == EntityState.Added && inserted != null)
-        //        {
-        //            item.Property("RemoveTime").CurrentValue = DateTime.Now;
-        //        }
-        //    }
-
-        //    #endregion
-
-        //    return base.SaveChanges();
-        //}
+       
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             //#region Set the value to the Shadow property

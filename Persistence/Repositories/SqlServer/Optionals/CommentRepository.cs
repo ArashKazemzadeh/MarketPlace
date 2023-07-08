@@ -47,7 +47,7 @@ namespace Persistence.Repositories.SqlServer.Optionals
         }
         public async Task<List<Comment>> GetAllCommentsWithSellerNameConfirmAsync()
         {
-            var comments = await _dbSet.Where(x => x.IsConfirm == null)
+            var comments = await _dbSet.Where(x => x.IsConfirm == null )
                 .Include(c => c.Product)
                 .ThenInclude(p => p.Booth)
                 .ThenInclude(b => b.Seller)
