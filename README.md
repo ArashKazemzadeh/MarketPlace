@@ -14,6 +14,7 @@ The admin role verifies and approves products uploaded by sellers and feedback l
 - JavaScript
 - HTML/CSS
 - SQL Server
+- SeriLog
 
 ## Installation
 1. Clone the repository.
